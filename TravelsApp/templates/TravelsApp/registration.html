@@ -1,0 +1,76 @@
+{% extends "TravelsApp/base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+      {% if registered %}
+
+        <div class="w3-container w3-blue">
+          <h2>Thank you for registering!</h2>
+          <h2>You are now logged in </h2>
+        </div>
+
+      {% else %}
+
+
+        {% if user_form.errors or profile_form.errors%}
+
+          <div class="w3-container w3-blue">
+            <h2>Something went wrong in your data</h2>
+            <h2>Please correct the errors below:</h2>
+          </div>
+
+        {% else %}
+
+          <div class="w3-container w3-blue">
+            <h2>Please register here</h2>
+          </div>
+
+        {% endif %}
+
+        <form class="w3-container" enctype="multipart/form-data" method="POST">
+
+          {% csrf_token %}
+          {{ user_form.as_p }}
+          {{ profile_form.as_p }}
+          <input type="submit" class="w3-btn w3-blue w3-center" name="" value="Register">
+
+        </form>
+        <br>
+      <!---
+      <form class="w3-container" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+
+        <p>
+          <label>Username:</label>
+          <input class="w3-input" type="text" name="username" maxlength="150"  id="id_username" required>
+        </p>
+        <p>
+          <label>Email:</label>
+          <input class="w3-input" type="email" name="email" maxlength="254" id="id_email" required>
+        </p>
+
+        <p>
+          <label>Phone Number:</label>
+          <input class="w3-input" type="text" name="phone_number" maxlength="254" id="id_email" required>
+        </p>
+
+        <p>
+          <label>Password:</label>
+          <input class="w3-input" type="password" name="password" required="" id="id_password" required>
+        </p>
+
+        <p>
+          <label>Profile picture:</label>
+          <input class="w3-input" type="file" name="profile_pic" accept="image/*" id="id_profile_pic">
+        </p>
+
+        <p></p>
+          <button class="w3-btn w3-black" type="submit">Submit</button>
+        <p></p>
+      </form>
+      -->
+      {% endif %}
+
+
+{% endblock %}

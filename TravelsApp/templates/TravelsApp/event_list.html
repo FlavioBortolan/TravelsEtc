@@ -1,0 +1,157 @@
+{% extends "TravelsApp/base.html" %}
+
+{% block body_block %}
+{% load static %}
+  <div class="container">
+    <div class="bg-light">
+
+      {% if user.is_authenticated %}
+
+        <div class="centerstage">
+          <div class="w3-container w3-blue">
+            <h2>Hallo {{user.username}}</h2>
+          </div>
+
+        {% if filter_mode == "current_user" %}
+
+          <div class="w3-container w3-blue">
+            <h2>Here is the list of your current events:</h2>
+          </div>
+
+        {% elif filter_mode == "all" %}
+
+          <div class="w3-container w3-blue">
+            <h2>Here is the list of all events available, please choose one or select filter parameters!</h2>
+          </div>
+
+        {% elif filter_mode == "apply_filter" %}
+
+          {% if activity_list %}
+
+          <div class="w3-container w3-blue">
+            <h2>Here's a list of events that match your search criteria:</h2>
+          </div>
+
+          {% else %}
+
+          <div class="w3-container w3-blue">
+            <h2>No event matches  your search criteria:</h2>
+          </div>
+
+          {% endif %}
+
+        {% endif %}
+
+        <!--Filters form-->
+        {% if filter_mode != "current_user" %}
+          <form action="{% url 'TravelsApp:events' filter_mode='apply_filter' %}" method="POST">
+            {% csrf_token %}
+
+            <div class="w3-row w3-border">
+
+              <div class="w3-quarter w3-container">
+
+                <p>
+                  <label>City:</label>
+                  <input class="w3-input" type="text" name="city"  value={{city}}>
+                </p>
+
+              </div>
+
+              <div class="w3-quarter w3-container">
+                <p>
+                  <label>Start Date:</label>
+
+                  {% if start_date %}
+
+                    <input class="w3-input" type="date" name="start_date" value={{ start_date }}>
+
+                  {% else %}
+
+                    <input class="w3-input" type="date" name="start_date" value="2021-01-01">
+
+                  {% endif %}
+
+                </p>
+
+              </div>
+
+              <div class="w3-quarter w3-container">
+
+                <p>
+                  <label>End Date:</label>
+                  <input class="w3-input" type="date" name="end_date" value="2021-12-31"}>
+                </p>
+
+              </div>
+
+              <div class="w3-quarter w3-container">
+
+                <p>
+                  <label>Type:</label>
+                    <!--<input class="w3-input" type="text" name="type" value={{type}}>  -->
+                  <select class="w3-input" name="type">
+
+                    <option value="NoSelection" {% if type == "No Selection" %} selected="selected"{% endif %}></option>
+                    <option value="Aperitivo" {% if type == "Aperitivo" %} selected="selected"{% endif %}>Aperitivo</option>
+                    <option value="Trekking" {% if type == "Trekking" %} selected="selected"{% endif %}>Trekking</option>
+                    <option value="Museo" {% if type == "Museo" %} selected="selected"{% endif %}>Museo</option>
+                    <option value="Caccia al tesoro" {% if type == "Caccia al tesoro" %} selected="selected"{% endif %}>Caccia al tesoro</option>
+                    <option value="Sport a squadre" {% if type == "Sport a squadre" %} selected="selected"{% endif %}>Sport a squadre</option>
+
+                  </select>
+                </p>
+
+              </div>
+
+            </div>
+            <br>
+            <div class="w3-center">
+              <button class="w3-btn w3-blue w3-center" type="filter">Apply filter</button>
+            </div>
+            <br>
+
+          </form>
+
+        {% endif %}
+
+        <!-- List of events -->
+        <div class="w3-row w3-border  ">
+
+          {% for event in event_list %}
+            <div class="w3-container w3-col s12 m6 l4  w3-round-xxlarge  w3-margin-bottom" >
+
+                <a style="text-decoration: none" href="{% url 'TravelsApp:single' pk=event.pk %}">
+                  <div class="w3-card-4  w3-round-xxlarge w3-pale-blue" >
+
+                    <img src="{% static 'Images/b.jpg' %}"  class="w3-hover-shadow w3-round-xxlarge" alt="Alps" style="width:100%">
+
+                    <div class="w3-container w3-center " >
+                      <h4><b>{{ event.activity.name }}</b></h4>
+
+                      {{ event.dateTime               }} <br>
+                      {{ event.activity.place         }} <br>
+                      Partecipants:  {{ event.partecipants.all.count }}<br>
+                      Price:         {{ event.activity.price         }}<br>
+                    </div>
+                  </div>
+                </a>
+            </div>
+
+          {% endfor %}
+
+        </div>
+
+      {% else %}
+
+        <h1>You need to register in order to see this</h1>
+
+      {% endif %}
+
+    </div>
+
+  </div>
+
+</div>
+
+{% endblock %}

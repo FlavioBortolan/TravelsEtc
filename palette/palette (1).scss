@@ -1,0 +1,47 @@
+/* Coolors Exported Palette - https://coolors.co/f18f01-99c24d-4b644a-5bc0eb-511c29 */
+
+/* CSS HEX */
+--carrot-orange: #f18f01ff;
+--android-green: #99c24dff;
+--hunter-green: #4b644aff;
+--cyan-process: #5bc0ebff;
+--dark-sienna: #511c29ff;
+
+/* CSS HSL */
+--carrot-orange: hsla(36, 99%, 47%, 1);
+--android-green: hsla(81, 49%, 53%, 1);
+--hunter-green: hsla(118, 15%, 34%, 1);
+--cyan-process: hsla(198, 78%, 64%, 1);
+--dark-sienna: hsla(345, 49%, 21%, 1);
+
+/* SCSS HEX */
+$carrot-orange: #f18f01ff;
+$android-green: #99c24dff;
+$hunter-green: #4b644aff;
+$cyan-process: #5bc0ebff;
+$dark-sienna: #511c29ff;
+
+/* SCSS HSL */
+$carrot-orange: hsla(36, 99%, 47%, 1);
+$android-green: hsla(81, 49%, 53%, 1);
+$hunter-green: hsla(118, 15%, 34%, 1);
+$cyan-process: hsla(198, 78%, 64%, 1);
+$dark-sienna: hsla(345, 49%, 21%, 1);
+
+/* SCSS RGB */
+$carrot-orange: rgba(241, 143, 1, 1);
+$android-green: rgba(153, 194, 77, 1);
+$hunter-green: rgba(75, 100, 74, 1);
+$cyan-process: rgba(91, 192, 235, 1);
+$dark-sienna: rgba(81, 28, 41, 1);
+
+/* SCSS Gradient */
+$gradient-top: linear-gradient(0deg, #f18f01ff, #99c24dff, #4b644aff, #5bc0ebff, #511c29ff);
+$gradient-right: linear-gradient(90deg, #f18f01ff, #99c24dff, #4b644aff, #5bc0ebff, #511c29ff);
+$gradient-bottom: linear-gradient(180deg, #f18f01ff, #99c24dff, #4b644aff, #5bc0ebff, #511c29ff);
+$gradient-left: linear-gradient(270deg, #f18f01ff, #99c24dff, #4b644aff, #5bc0ebff, #511c29ff);
+$gradient-top-right: linear-gradient(45deg, #f18f01ff, #99c24dff, #4b644aff, #5bc0ebff, #511c29ff);
+$gradient-bottom-right: linear-gradient(135deg, #f18f01ff, #99c24dff, #4b644aff, #5bc0ebff, #511c29ff);
+$gradient-top-left: linear-gradient(225deg, #f18f01ff, #99c24dff, #4b644aff, #5bc0ebff, #511c29ff);
+$gradient-bottom-left: linear-gradient(315deg, #f18f01ff, #99c24dff, #4b644aff, #5bc0ebff, #511c29ff);
+$gradient-radial: radial-gradient(#f18f01ff, #99c24dff, #4b644aff, #5bc0ebff, #511c29ff);

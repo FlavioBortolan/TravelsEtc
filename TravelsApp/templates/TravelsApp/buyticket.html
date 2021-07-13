@@ -1,0 +1,35 @@
+{% extends "TravelsApp/base.html" %}
+
+{% block body_block %}
+
+<div class="container">
+  <div class="jumbotron">
+    <div class="centerstage">
+
+      <h1>Ticket purchase confirmation</h1>
+      <br>
+
+      {% if buy_step == 'confirmation' %}
+        <h2>You are about to buy this ticket</h2>
+        <h2>Press confirm to proceed!</h2>
+
+        <form action="{% url 'TravelsApp:buyticket' pk=Event_pk buy_step='confirmed' %}" method="get">
+
+          <div class="w3-center">
+            <button class="w3-btn w3-blue w3-center" type="submit">Buy ticket!</button>
+          </div>
+
+          <br>
+
+        </form>
+
+      {% else %}
+        <h2>Congratulation your ticket is confirmed!</h2>
+
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

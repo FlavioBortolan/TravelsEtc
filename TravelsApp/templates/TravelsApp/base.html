@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+  <title>TravelsEtc.</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- FONTS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sophia">
+
+  <style>
+    html,body,h1,h2,h3,h4 {font-family:"Lato", sans-serif}
+    .w3-sofia {font-family: Sofia, cursive;}
+  </style>
+
+<body>
+
+  <!-- Links (sit on top) -->
+  <div class="w3-top">
+    <div class="w3-bar w3-light-grey">
+
+        <a href="{% url 'index' %}" class="w3-bar-item w3-button">
+          <i class="fa fa-home w3-large w3-text-light-blue">  </i>
+          TravelsPeopleEtcetera
+        </a>
+
+
+      <!---ACCESS MENU -->
+      <div class="w3-dropdown-hover">
+
+        <button class="w3-button">
+          <i class="fa fa-sign-in w3-large"></i>
+          Access
+        </button>
+
+        <div class="w3-dropdown-content w3-bar-block w3-card-4">
+          {% if user.is_authenticated %}
+
+          <a class="w3-button w3-block" href="{% url 'logout' %}">Logout</a>
+
+          {% else %}
+
+          <a class="w3-button w3-block"href="{% url 'TravelsApp:register' %}">Register</a>
+          <a class="w3-button w3-block" href="{% url 'TravelsApp:user_login' %}">Login</a>
+
+          {% endif %}
+
+          <a class="w3-button w3-block" href="{% url 'admin:index' %}">Admin</a>
+        </div>
+      </div>
+
+      <!---EVENTS MENU -->
+      <div class="w3-dropdown-hover">
+
+        <button class="w3-button">
+
+          <i class="fa fa-calendar w3-large"></i>
+          Events
+
+        </button>
+
+        <div class="w3-dropdown-content w3-bar-block w3-card-4">
+          {% if user.is_authenticated %}
+
+          <a class="w3-button w3-block" href="{% url 'TravelsApp:events' filter_mode='current_user' %}">My Events</a>
+          <a class="w3-button w3-block" href="{% url 'TravelsApp:events' filter_mode='all' %}">Events</a>
+          {% endif %}
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+
+<!-- Content -->
+<!--<div class="w3-center w3-sand w3-grayscale w3-large w3-content" style="max-width:1100px;margin-top:80px;margin-bottom:80px">
+-->
+<div class=" w3-content w3-light-blue" style="max-width:1100px">
+  <br>
+  <br>
+  {% block body_block %}
+  {% endblock %}
+
+</div>
+
+<!-- Footer -->
+
+<footer class="w3-container w3-padding-32 w3-light-grey w3-center">
+  <h4>Footer</h4>
+  <a href="#" class="w3-button w3-black w3-margin"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+  <div class="w3-xlarge w3-section">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+  </div>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+</footer>
+
+
+<script>
+// Slideshow
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demodots");
+  if (n > x.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = x.length} ;
+  for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" w3-white", "");
+  }
+  x[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " w3-white";
+}
+</script>
+
+</body>
+</html>

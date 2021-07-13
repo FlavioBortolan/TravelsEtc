@@ -1,0 +1,26 @@
+{% extends 'TravelsApp/base.html' %}
+{% block body_block %}
+
+  <div class="w3-container w3-blue">
+    <h2>Please login</h2>
+  </div>
+
+  <form class="w3-container" method="post" action="{% url 'TravelsApp:user_login' %}">
+    {% csrf_token %}
+
+    <p>
+      <label>Username:</label>
+      <input class="w3-input" type="text" name="username">
+    </p>
+
+    <p>
+      <label>Password:</label>
+      <input class="w3-input" type="password" name="password">
+    </p>
+
+    <p></p>
+    <button class="w3-btn w3-black" type="submit">Submit</button>
+    <p></p>
+  </form>
+
+{% endblock %}
