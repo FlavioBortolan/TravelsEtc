@@ -19,8 +19,7 @@ from django.contrib.auth import views
 from TravelsApp import views
 
 
-#test commit
-#test edit 
+
 urlpatterns = [
     path('', views.index,name='index'),
     path('admin/clearcache/', include('clearcache.urls')),
