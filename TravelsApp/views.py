@@ -59,44 +59,64 @@ def register(request):
         # Check to see both forms are valid
         if user_form.is_valid() and profile_form.is_valid():
 
-            # Save User Form to Database
-            user = user_form.save()
+            #get the email supplied trough the form
+            supplied_email = user_form.cleaned_data['email']
+            print("Supplied mail is:" + supplied_email)
+            #check if someone else in the database used that email
+            duplicate_users = User.objects.filter(email__iexact = supplied_email).count()
 
-            # Hash the password
-            user.set_password(user.password)
+            if duplicate_users == 0:
 
-            # Update with Hashed password
-            user.save()
+                print("No duplicate users found")
 
-            # Now we deal with the extra info!
 
-            # Can't commit yet because we still need to manipulate
-            profile = profile_form.save(commit=False)
+                # Save User Form to Database
+                user = user_form.save(commit=False)
 
-            # Set One to One relationship between
-            # UserForm and UserProfileInfoForm
-            profile.user = user
+                #assign username to be equal to email
+                user.username = supplied_email
 
-            # Check if they provided a profile picture
-            if 'profile_pic' in request.FILES:
-                print('found it')
-                # If yes, then grab it from the POST form reply
-                profile.profile_pic = request.FILES['profile_pic']
+                user.save()
 
-            # Now save model
-            profile.save()
+                # Hash the password
+                user.set_password(user.password)
 
-            # Registration Successful!
-            registered = True
+                # Update with Hashed password
+                user.save()
 
-            user = authenticate(username=user_form.cleaned_data['username'],
-                                password=user_form.cleaned_data['password'],
-                                )
-            login(request, user)
+                # Now we deal with the extra info!
 
+                # Can't commit yet because we still need to manipulate
+                profile = profile_form.save(commit=False)
+
+                # Set One to One relationship between
+                # UserForm and UserProfileInfoForm
+                profile.user = user
+
+                # Check if they provided a profile picture
+                if 'profile_pic' in request.FILES:
+                    print('found it')
+                    # If yes, then grab it from the POST form reply
+                    profile.profile_pic = request.FILES['profile_pic']
+
+                # Now save model
+                profile.save()
+
+                # Registration Successful!
+                registered = True
+
+                user = authenticate(username=supplied_email,
+                                    password=user_form.cleaned_data['password'],
+                                    )
+                login(request, user)
+
+            else:
+                # One of the forms was invalid if this else gets called.
+                print("Duplicate users where found: There are " + str(duplicate_users) + " users with email " + supplied_email)
         else:
             # One of the forms was invalid if this else gets called.
             print(user_form.errors,profile_form.errors)
+
     #GET
     else:
         # Just render the forms as blank.
@@ -113,13 +133,15 @@ def register(request):
 
 def user_login(request):
 
+    #change this to login with a username=mail
+
     if request.method == 'POST':
         # First get the username and password supplied
-        username = request.POST.get('username')
+        email = request.POST.get('email')
         password = request.POST.get('password')
 
         # Django's built-in authentication function:
-        user = authenticate(username=username, password=password)
+        user = authenticate(username=email, password=password)
 
         # If we have a user
         if user:
@@ -135,7 +157,7 @@ def user_login(request):
                 return HttpResponse("Your account is not active.")
         else:
             print("Someone tried to login and failed.")
-            print("They used username: {} and password: {}".format(username,password))
+            print("They used email: {} and password: {}".format(email,password))
             return HttpResponse("Invalid login details supplied.")
 
     else:

@@ -35,11 +35,23 @@ class UserForm(forms.ModelForm):
             raise forms.ValidationError("Your passwords do not match")
         return p2
 
+    def clean_email(self):
+        #get the email supplied trough the form
+        supplied_email = self.cleaned_data['email']
+
+        #check if someone else in the database used that email
+        duplicate_users = User.objects.filter(email__iexact = supplied_email).count()
+
+        if duplicate_users != 0:
+            raise forms.ValidationError("This email is already in use.")
+        return supplied_email
+
     class Meta():
         model = User
-        fields = ('username','email','password')
+        #fields = ('username','email','password')
+        fields = ('email','password')
         widgets = {
-            'username':         forms.TextInput(attrs={'class': "w3-input"}),
+            #'username':         forms.TextInput(attrs={'class': "w3-input"}),
             'password':         forms.PasswordInput(attrs={'class': "w3-input"}),
             'email':            forms.EmailInput(attrs={'class': "w3-input"}),
         }
