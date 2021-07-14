@@ -13,10 +13,6 @@ class UserProfileInfo(models.Model):
 
     # Create relationship (don't inherit from User!)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-
-    name    = models.CharField(max_length=100)
-    surname = models.CharField(max_length=100)
-
     # pip install pillow to use this!
     # Optional: pip install pillow --global-option="build_ext" --global-option="--disable-jpeg"
     profile_pic = models.ImageField(upload_to='TravelsApp/profile_pics',blank=True)

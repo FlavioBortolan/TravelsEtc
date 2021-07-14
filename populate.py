@@ -18,11 +18,8 @@ User = get_user_model()
 import random
 from TravelsApp.models import Activity
 from TravelsApp.models import Event
-
-
-
+from TravelsApp.models import UserProfileInfo
 from faker import Faker
-
 
 fakegen = Faker('it_IT')
 
@@ -33,10 +30,24 @@ def populate_users(users_count = 5):
         fake_first_name = fake_name[0]
         fake_last_name = fake_name[1]
         fake_email= fakegen.email()
-        
+        fake_number = fakegen.phone_number()
+
         #new entry
-        user = User.objects.get_or_create(username = fake_first_name + " " + fake_last_name, first_name = fake_last_name,last_name= fake_last_name,email = fake_email)[0]
-        user.save()
+        u    = User           .objects.get_or_create(username = fake_email, first_name = fake_last_name,last_name= fake_last_name,email = fake_email)[0]
+        print('Created User:' + str(u) )
+
+        pi   = UserProfileInfo.objects.get_or_create(user=u, phone_number = fake_number, credits = randint(15, 40))[0]
+        print('Created UserProfileInfo:' + str(pi) )
+
+        u.save()
+        print('user saved')
+
+        pi.user = u
+        print('UserProfileInfo assigned to user')
+
+        pi.save()
+        print('UserProfileInfo saved')
+
 
 def populate_activities(activities_count = 5):
 
@@ -72,7 +83,6 @@ def populate_events(events_count = 5 ):
         e = Event.objects.get_or_create(
         activity = Activity.objects.all()[randint(0, Activity.objects.count()-1)],
         dateTime = fakegen.date_between_dates(date_start=datetime(2021,3,1), date_end=datetime(2021,12,31)),
-        #partecipants = models.ManyToManyField(User)
 
         confirmed = random.choice([0,1]),
         )[0]
@@ -92,8 +102,8 @@ if __name__=="__main__" :
     print(sys.argv[3] + " events.")
     print("Please wait....")
 
-    populate_users(int(sys.argv[1]))
-    populate_activities(int(sys.argv[2]))
-    populate_events(int(sys.argv[3]))
+    populate_users      (int(sys.argv[1]))
+    populate_activities (int(sys.argv[2]))
+    populate_events     (int(sys.argv[3]))
 
     print('Populating Complete!')

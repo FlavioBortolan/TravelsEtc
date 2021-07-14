@@ -49,33 +49,22 @@ class UserForm(forms.ModelForm):
     class Meta():
         model = User
         #fields = ('username','email','password')
-        fields = ('email','password')
+        fields = ('first_name', 'last_name', 'email','password')
         widgets = {
-            #'username':         forms.TextInput(attrs={'class': "w3-input"}),
+
+            'first_name':       forms.TextInput(attrs={'class': "w3-input", 'required':'True'}),
+            'last_name':        forms.TextInput(attrs={'class': "w3-input", 'required':'True'}),
             'password':         forms.PasswordInput(attrs={'class': "w3-input"}),
             'email':            forms.EmailInput(attrs={'class': "w3-input"}),
         }
 
 class UserProfileInfoForm(forms.ModelForm):
 
-    def clean_name(self):
-        n = self.cleaned_data.get('name')
-        if len(n)<3:
-            raise forms.ValidationError("Name is too short")
-        return n
-
-    def clean_surname(self):
-        n = self.cleaned_data.get('surname')
-        if len(n)<3:
-            raise forms.ValidationError("Surname is too short")
-        return n
-
     class Meta():
+
         model = UserProfileInfo
-        fields = ('name', 'surname', 'profile_pic', 'phone_number' )
+        fields = ('profile_pic', 'phone_number' )
         widgets = {
-            'name':forms.TextInput(attrs={'class': "w3-input", 'required':'True'}),
-            'surname':forms.TextInput(attrs={'class': "w3-input", 'required':'True'}),
             'phone_number': forms.TextInput(attrs={'class': "w3-input", 'required':'True'}),
             'profile_pic': forms.ClearableFileInput(attrs={'class': "w3-btn w3-blue w3-center"}),
         }
