@@ -158,7 +158,9 @@ def user_login(request):
         else:
             print("Someone tried to login and failed.")
             print("They used email: {} and password: {}".format(email,password))
-            return HttpResponse("Invalid login details supplied.")
+            #return HttpResponse("Invalid login details supplied.")
+
+            return render(request, 'TravelsApp/login.html', {'post_response': 'failed login', 'err_message': 'Invalid email or password, please try again'})
 
     else:
         #Nothing has been provided for username or password.
