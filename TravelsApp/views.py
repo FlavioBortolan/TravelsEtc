@@ -158,24 +158,11 @@ def user_login(request):
         else:
             print("Someone tried to login and failed.")
             print("They used email: {} and password: {}".format(email,password))
-            #return HttpResponse("Invalid login details supplied.")
 
             return render(request, 'TravelsApp/login.html', {'post_response': 'failed login', 'err_message': 'Invalid email or password, please try again'})
-
     else:
         #Nothing has been provided for username or password.
         return render(request, 'TravelsApp/login.html', {})
-
-#class ActivityListView(LoginRequiredMixin, ListView):
-
-    #login_url = '/login/'
-#    redirect_field_name = 'activities'
-
-    #model = Activity
-
-    #def get_queryset(self):
-    #    return Activity.objects.order_by('date')
-
 
 class EventListView(LoginRequiredMixin, ListView):
 

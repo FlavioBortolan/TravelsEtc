@@ -58,10 +58,24 @@ class UserForm(forms.ModelForm):
 
 class UserProfileInfoForm(forms.ModelForm):
 
+    def clean_name(self):
+        n = self.cleaned_data.get('name')
+        if len(n)<3:
+            raise forms.ValidationError("Name is too short")
+        return n
+
+    def clean_surname(self):
+        n = self.cleaned_data.get('surname')
+        if len(n)<3:
+            raise forms.ValidationError("Surname is too short")
+        return n
+
     class Meta():
         model = UserProfileInfo
-        fields = ('profile_pic', 'phone_number' )
+        fields = ('name', 'surname', 'profile_pic', 'phone_number' )
         widgets = {
-            'phone_number': forms.TextInput(attrs={'class': "w3-input"}),
+            'name':forms.TextInput(attrs={'class': "w3-input", 'required':'True'}),
+            'surname':forms.TextInput(attrs={'class': "w3-input", 'required':'True'}),
+            'phone_number': forms.TextInput(attrs={'class': "w3-input", 'required':'True'}),
             'profile_pic': forms.ClearableFileInput(attrs={'class': "w3-btn w3-blue w3-center"}),
         }
