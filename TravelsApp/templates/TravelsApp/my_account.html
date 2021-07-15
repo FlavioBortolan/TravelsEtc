@@ -1,0 +1,20 @@
+{% extends "TravelsApp/base.html" %}
+{% load staticfiles %}
+
+{% block body_block %}
+
+      <div class="w3-container w3-blue">
+        <h2>Account data</h2>
+      </div>
+
+      <form class="w3-container" enctype="multipart/form-data" method="POST">
+
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <input type="submit" class="w3-btn w3-blue w3-center" name="" value="Save">
+        <input type="submit" class="w3-btn w3-blue w3-center" name="" value="Discard">
+      </form>
+      <br>
+
+{% endblock %}

@@ -131,6 +131,48 @@ def register(request):
                            'registered':registered,
                            'post_response': post_response })
 
+#***********************
+
+
+def my_account(request):
+
+    if request.method == 'POST':
+
+        # Just render the forms as blank.
+        user_form = UserForm()
+        profile_form = UserProfileInfoForm()
+
+    #GET
+    else:
+        # Just render the forms as blank.
+        user_form = UserForm(initial = {'first_name': request.user.first_name,
+                                        'last_name': request.user.last_name,
+                                        'email': request.user.email,
+                                        })
+        profile_form = UserProfileInfoForm(initial = {'phone_number': request.user.userprofileinfo.phone_number,})
+
+        #print(str(request.user.userprofileinfo.phone_number))
+
+        user_form.fields['email'].widget.attrs['disabled'] = True
+        user_form.fields['email'].widget.attrs['value'] = "dddddd"
+
+        user_form.fields['password'].widget = user_form.fields['email'].hidden_widget()
+        user_form.fields['repeat_password'].widget = user_form.fields['repeat_password'].hidden_widget()
+
+        
+
+
+
+    # This is the render and context dictionary to feed
+    # back to the registration.html file page.
+    return render(request,'TravelsApp/my_account.html',
+                          {'user_form':user_form,
+                           'profile_form':profile_form,
+                            })
+
+
+#************************
+
 def user_login(request):
 
     #change this to login with a username=mail
