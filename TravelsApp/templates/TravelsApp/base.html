@@ -2,8 +2,11 @@
 <!DOCTYPE html>
 <html>
 {% load static %}
+  <head>
+    <title>TravelsEtc.</title>
+    <script src="https://kit.fontawesome.com/0eb3328522.js" crossorigin="anonymous"></script>
+  </head>
 
-  <title>TravelsEtc.</title>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,16 +45,22 @@
         <div class="w3-dropdown-content w3-bar-block w3-card-4">
           {% if user.is_authenticated %}
 
-          <a class="w3-button w3-block" href="{% url 'logout' %}">Logout</a>
+          <a class="w3-button w3-block   w3-left-align" href="{% url 'logout' %}">
+            <i class="fa fa-sign-out w3-large"></i> Logout</a>
+          <a class="w3-button w3-block w3-left-align" href="{% url 'logout' %}">
+            <i class="far fa-address-book"></i> My Account</a>
 
           {% else %}
 
-          <a class="w3-button w3-block"href="{% url 'TravelsApp:register' %}">Register</a>
-          <a class="w3-button w3-block" href="{% url 'TravelsApp:user_login' %}">Login</a>
+          <a class="w3-button w3-block w3-left-align"href="{% url 'TravelsApp:register' %}">
+            <i class="fas fa-fingerprint"></i> Register</a>
+          <a class="w3-button w3-block w3-left-align" href="{% url 'TravelsApp:user_login' %}">
+            <i class="fas fa-sign-in-alt"></i> Login</a>
 
           {% endif %}
 
-          <a class="w3-button w3-block" href="{% url 'admin:index' %}">Admin</a>
+          <a class="w3-button w3-block w3-left-align" href="{% url 'admin:index' %}">
+            <i class="fas fa-wrench"></i> Admin</a>
         </div>
       </div>
 
@@ -68,8 +77,10 @@
         <div class="w3-dropdown-content w3-bar-block w3-card-4">
           {% if user.is_authenticated %}
 
-          <a class="w3-button w3-block" href="{% url 'TravelsApp:events' filter_mode='current_user' %}">My Events</a>
-          <a class="w3-button w3-block" href="{% url 'TravelsApp:events' filter_mode='all' %}">Events</a>
+          <a class="w3-button w3-block w3-left-align" href="{% url 'TravelsApp:events' filter_mode='current_user' %}">
+            <i class="fas fa-calendar-check"></i> My Events</a>
+          <a class="w3-button w3-block w3-left-align" href="{% url 'TravelsApp:events' filter_mode='all' %}">
+            <i class="far fa-calendar-alt"></i> Events</a>
           {% endif %}
 
         </div>
