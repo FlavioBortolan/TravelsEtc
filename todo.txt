@@ -1,0 +1,28 @@
+
+-pagina di gestione account - salvataggio dati - visualizza crediti -
+
+-FILTRI: inizializzare a qualche default i campi   
+
+- gestione utente di tipo guida / ambassador etc vedere se si puo utilizzare i django groups
+
+-gestire meccanismo di richiesta rimborso
+-gestire annullamento dell'iscrizione
+-gestire acquisto del biglietto per un altro iscritto.
+
+-gestire prospetto di fatturazione mensile per le guide
+
+
+- test su schermo formato cellulare 
+
+-gestione payment
+-deploy su digital ocean
+
+
+GESTIONE
+-Creare associazione culturale
+ (chiedere commercialista, enrico, martina)
+
+-verificare come assicurare le uscite.
+-cominciare a contattare le guide naturalische.
+
+
