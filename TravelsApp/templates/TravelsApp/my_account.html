@@ -3,6 +3,14 @@
 
 {% block body_block %}
 
+  {% if data_change_successful %}
+
+  <div class="w3-container w3-blue">
+    <h2>Your account data has been updated!</h2>
+  </div>
+
+  {% else %}
+
       <div class="w3-container w3-blue">
         <h2>Account data</h2>
       </div>
@@ -17,5 +25,7 @@
 
       </form>
       <br>
+
+{% endif %}
 
 {% endblock %}

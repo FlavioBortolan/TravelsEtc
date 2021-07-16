@@ -133,16 +133,43 @@ def register(request):
                            'registered':registered,
                            'post_response': post_response })
 
-#***********************
-
-
 def my_account(request):
 
+    data_change_successful = False
     if request.method == 'POST':
 
-        # Just render the forms as blank.
-        user_form = UserForm()
-        profile_form = UserProfileInfoForm()
+        # Get info from "both" forms
+        # It appears as one form to the user on the .html page
+        user_form = UserForm(data=request.POST, error_class=DivErrorList)
+        profile_form = UserProfileInfoForm(data=request.POST, error_class=DivErrorList)
+
+        #disable editing email
+        user_form.fields['email'].widget.attrs['disabled'] = True
+
+        #Hide password
+        user_form.fields['password'].widget = user_form.fields['email'].hidden_widget()
+        user_form.fields['repeat_password'].widget = user_form.fields['repeat_password'].hidden_widget()
+
+        #check if data is valid
+        user_form.is_valid()
+        profile_form.is_valid()
+
+        # check if fields we care about are clean. a field is clean if it has been put in the 'cleaned_data' dict
+        if 'first_name' in user_form.cleaned_data and 'last_name' in user_form.cleaned_data and 'phone_number' in profile_form.cleaned_data :
+
+            request.user.first_name = user_form.cleaned_data['first_name']
+            request.user.last_name = user_form.cleaned_data['last_name']
+
+            request.user.userprofileinfo.phone_number = profile_form.cleaned_data['phone_number']
+            request.user.userprofileinfo.profile_pic = profile_form.cleaned_data['profile_pic']
+
+            request.user.save()
+            request.user.userprofileinfo.save()
+            data_change_successful = True
+
+        else:
+            # One of the forms was invalid if this else gets called.
+            print(user_form.errors,profile_form.errors)
 
     #GET
     else:
@@ -153,27 +180,24 @@ def my_account(request):
                                         })
         profile_form = UserProfileInfoForm(initial = {'phone_number': request.user.userprofileinfo.phone_number,})
 
-        #print(str(request.user.userprofileinfo.phone_number))
-
+        #disable editing email
         user_form.fields['email'].widget.attrs['disabled'] = True
-        user_form.fields['email'].widget.attrs['value'] = "dddddd"
 
+        #Hide password
         user_form.fields['password'].widget = user_form.fields['email'].hidden_widget()
         user_form.fields['repeat_password'].widget = user_form.fields['repeat_password'].hidden_widget()
 
 
+    #Discard errors on the password as we do not edit it here
+    user_form.errors['password'] = None
+    user_form.errors['repeat_password'] = None
 
-
-
-    # This is the render and context dictionary to feed
-    # back to the registration.html file page.
     return render(request,'TravelsApp/my_account.html',
                           {'user_form':user_form,
                            'profile_form':profile_form,
-                            })
+                            'data_change_successful':data_change_successful})
 
 
-#************************
 
 def user_login(request):
 
