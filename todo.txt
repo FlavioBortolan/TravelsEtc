@@ -1,7 +1,7 @@
 
 -pagina di gestione account -
-  visualizza crediti -
-  aggiungere pulsante ritorno pagina principale da pagina data change ok
+
+
   Aggiungere gestione cambio password: in fondo
 
 -FILTRI: inizializzare a qualche default i campi

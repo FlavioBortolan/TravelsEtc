@@ -9,6 +9,7 @@ urlpatterns=[
     path('index/',views.index,name='index'),
     path('register/',views.register,name='register'),
     path('my_account/',views.my_account,name='my_account'),
+    path('change_password/',views.change_password,name='change_password'),
     path('user_login/',views.user_login,name='user_login'),
     #path('activities/',views.ActivityListView.as_view(), name='activities'),
     path('events/<str:filter_mode>/',views.EventListView.as_view(), name='events'),

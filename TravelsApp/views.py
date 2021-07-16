@@ -200,7 +200,51 @@ def my_account(request):
                            'data_change_successful':data_change_successful,
                            'credits': credits,})
 
+def change_password(request):
 
+    data_change_successful = False
+
+
+    #handle POST, in case of GET we just return the forms created above
+    if request.method == 'POST':
+
+        user_form = UserForm(data=request.POST, error_class=DivErrorList)
+
+        #Hide
+        user_form.fields['first_name'].widget = user_form.fields['first_name'].hidden_widget()
+        user_form.fields['last_name'].widget = user_form.fields['last_name'].hidden_widget()
+        user_form.fields['email'].widget = user_form.fields['email'].hidden_widget()
+
+        #check if data is valid
+        user_form.is_valid()
+
+        # check if fields we care about are clean. a field is clean if it has been put in the 'cleaned_data' dict
+        if 'password' in user_form.cleaned_data and 'repeat_password' in user_form.cleaned_data :
+
+            request.user.set_password(user_form.cleaned_data['password'])
+            request.user.save()
+            data_change_successful = True
+
+        else:
+            # One of the forms was invalid if this else gets called.
+            print(user_form.errors)
+    else:
+        user_form = UserForm()
+
+        #Hide
+        user_form.fields['first_name'].widget = user_form.fields['first_name'].hidden_widget()
+        user_form.fields['last_name'].widget = user_form.fields['last_name'].hidden_widget()
+        user_form.fields['email'].widget = user_form.fields['email'].hidden_widget()
+
+
+    #Discard errors on the password as we do not edit it here
+    user_form.errors['first_name'] = None
+    user_form.errors['last_name'] = None
+    user_form.errors['email'] = None
+
+    return render(request,'TravelsApp/change_password.html',
+                          {'user_form':user_form,
+                           'data_change_successful': data_change_successful})
 
 def user_login(request):
 
