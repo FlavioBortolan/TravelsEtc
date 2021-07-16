@@ -1,7 +1,10 @@
 
--pagina di gestione account - salvataggio dati - visualizza crediti -
+-pagina di gestione account -
+  visualizza crediti -
+  aggiungere pulsante ritorno pagina principale da pagina data change ok
+  Aggiungere gestione cambio password: in fondo
 
--FILTRI: inizializzare a qualche default i campi   
+-FILTRI: inizializzare a qualche default i campi
 
 - gestione utente di tipo guida / ambassador etc vedere se si puo utilizzare i django groups
 
@@ -12,7 +15,7 @@
 -gestire prospetto di fatturazione mensile per le guide
 
 
-- test su schermo formato cellulare 
+- test su schermo formato cellulare
 
 -gestione payment
 -deploy su digital ocean
@@ -24,5 +27,3 @@ GESTIONE
 
 -verificare come assicurare le uscite.
 -cominciare a contattare le guide naturalische.
-
-

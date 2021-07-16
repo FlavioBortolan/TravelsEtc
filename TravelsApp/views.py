@@ -136,6 +136,8 @@ def register(request):
 def my_account(request):
 
     data_change_successful = False
+    credits = request.user.userprofileinfo.credits
+
     if request.method == 'POST':
 
         # Get info from "both" forms
@@ -195,7 +197,8 @@ def my_account(request):
     return render(request,'TravelsApp/my_account.html',
                           {'user_form':user_form,
                            'profile_form':profile_form,
-                            'data_change_successful':data_change_successful})
+                           'data_change_successful':data_change_successful,
+                           'credits': credits,})
 
 
 
