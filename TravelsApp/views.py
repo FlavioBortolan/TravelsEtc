@@ -24,7 +24,9 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 def index(request):
+    print("this is the index page")
     return render(request,'TravelsApp/index.html')
+
 
 @login_required
 def special(request):
@@ -159,7 +161,7 @@ def my_account(request):
         user_form.fields['password'].widget = user_form.fields['email'].hidden_widget()
         user_form.fields['repeat_password'].widget = user_form.fields['repeat_password'].hidden_widget()
 
-        
+
 
 
 
