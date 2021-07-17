@@ -321,12 +321,24 @@ class EventListView(LoginRequiredMixin, ListView):
         logger.error('City:' + city)
         logger.error('StartDate:' + str(start_date))
         logger.error('EndDate:' + str(end_date))
+        query = {}
+
+        filtered_events = Event.objects.all()
+        if city:
+            filtered_events = filtered_events.filter(activity__place = city)
+
+        if type!='NoSelection':
+            print('filtering events with type =*' + type + '*')
+            filtered_events = filtered_events.filter(activity__type = type)
+
+        #filtered_events = Event.objects.filter(activity__place__iexact = iregex=r'',
+
 
         #Retrive the events filtered by selected criteria
-        filtered_events = Event.objects.filter(activity__place__iexact = city,
-                                               dateTime__gte = start_date,
-                                               dateTime__lte = end_date,
-                                               activity__type__iexact = type )
+    #    filtered_events = Event.objects.filter(activity__place__iexact = city,
+    #                                           dateTime__gte = start_date,
+    #                                           dateTime__lte = end_date,
+    #                                           activity__type__iexact = type )
 
         #renders the page with the context dictionary elements set to the values
         #previously calculated

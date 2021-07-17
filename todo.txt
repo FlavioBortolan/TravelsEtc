@@ -1,10 +1,7 @@
 
--pagina di gestione account -
 
-
-  Aggiungere gestione cambio password: in fondo
-
--FILTRI: inizializzare a qualche default i campi
+-FILTRI: sistemare filtraggio per database
+          inizializzare a qualche default i campi
 
 - gestione utente di tipo guida / ambassador etc vedere se si puo utilizzare i django groups
 
