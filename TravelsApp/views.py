@@ -323,13 +323,22 @@ class EventListView(LoginRequiredMixin, ListView):
         logger.error('EndDate:' + str(end_date))
         query = {}
 
+        #filter by active fields
         filtered_events = Event.objects.all()
         if city:
-            filtered_events = filtered_events.filter(activity__place = city)
+            filtered_events = filtered_events.filter(activity__place__iexact = city)
 
-        if type!='NoSelection':
+        if type!='NoSelection' and type !='':
             print('filtering events with type =*' + type + '*')
             filtered_events = filtered_events.filter(activity__type = type)
+
+        if start_date:
+            print('filtering events with start date >' + start_date )
+            filtered_events = filtered_events.filter(dateTime__gte = start_date)
+
+        if end_date:
+            print('filtering events with end date >' + end_date)
+            filtered_events = filtered_events.filter(dateTime__lte = end_date)
 
         #filtered_events = Event.objects.filter(activity__place__iexact = iregex=r'',
 

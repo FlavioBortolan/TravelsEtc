@@ -1,6 +1,6 @@
 
 
--FILTRI: sistemare filtraggio per database
+-FILTRI: sistemare filtraggio per data
           inizializzare a qualche default i campi
 
 - gestione utente di tipo guida / ambassador etc vedere se si puo utilizzare i django groups
