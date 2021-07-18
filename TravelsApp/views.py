@@ -14,8 +14,11 @@ from .models import Activity
 from .models import Event
 
 from django.contrib.auth import get_user_model
-from datetime import date
+from datetime import *
 import time
+from dateutil.relativedelta import *
+from dateutil.rrule import *
+from datetime import datetime
 
 User = get_user_model()
 
@@ -303,6 +306,17 @@ class EventListView(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context  = super().get_context_data(**kwargs)
         context['filter_mode'] = self.kwargs['filter_mode']
+
+        delta_months = 2
+        start_date = time.strftime("%Y-%M-%d", time.strptime(str(date.today()), '%Y-%M-%d'))
+        context['start_date'] = start_date
+
+        end_date = time.strftime("%Y-%M-%d", time.strptime(str(date.today() + relativedelta(months=+delta_months)), '%Y-%M-%d'))
+        context['end_date'] = end_date
+
+        print('GET:start_date: ' + start_date)
+        print('GET:end_date: ' + end_date)
+
         return context
 
     #Handles the 'POST' request from the client browser
@@ -340,14 +354,6 @@ class EventListView(LoginRequiredMixin, ListView):
             print('filtering events with end date >' + end_date)
             filtered_events = filtered_events.filter(dateTime__lte = end_date)
 
-        #filtered_events = Event.objects.filter(activity__place__iexact = iregex=r'',
-
-
-        #Retrive the events filtered by selected criteria
-    #    filtered_events = Event.objects.filter(activity__place__iexact = city,
-    #                                           dateTime__gte = start_date,
-    #                                           dateTime__lte = end_date,
-    #                                           activity__type__iexact = type )
 
         #renders the page with the context dictionary elements set to the values
         #previously calculated

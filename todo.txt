@@ -1,8 +1,9 @@
 
 
--FILTRI: sistemare filtraggio per data
-          inizializzare a qualche default i campi
-
+-FILTRI:inizializzare a qualche default i campi data:
+        start=today
+        end=today+2mesi
+      
 - gestione utente di tipo guida / ambassador etc vedere se si puo utilizzare i django groups
 
 -gestire meccanismo di richiesta rimborso
