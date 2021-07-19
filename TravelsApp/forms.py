@@ -60,11 +60,13 @@ class UserForm(forms.ModelForm):
 
 class UserProfileInfoForm(forms.ModelForm):
 
+    #subscription_exp_date = forms.CharField(widget=forms.DateInput(attrs={'name': 'subscription_exp_date', 'class': "w3-input", 'disabled':'True'}))
     class Meta():
 
         model = UserProfileInfo
-        fields = ('profile_pic', 'phone_number' )
+        fields = ('profile_pic', 'phone_number', 'subscription_exp_date' )
         widgets = {
             'phone_number': forms.TextInput(attrs={'class': "w3-input", 'required':'True'}),
-            'profile_pic': forms.ClearableFileInput(attrs={'class': "w3-btn w3-blue w3-center"}),
+            'subscription_exp_date': forms.DateInput(attrs={'name': 'gino', 'class': "w3-input", 'disabled':'True'}),
+            'profile_pic': forms.ClearableFileInput(attrs={'class': "w3-btn w3-blue w3-center", 'label':'ggg'}),
         }

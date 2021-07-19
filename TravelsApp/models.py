@@ -18,7 +18,8 @@ class UserProfileInfo(models.Model):
     profile_pic = models.ImageField(upload_to='TravelsApp/profile_pics',blank=True)
     phone_number = models.CharField(validators=[RegexValidator(regex=r'^(( *0 *0 *| *\+) *3 *9 *)?((\d *){3})((\d *){6,7})$', message="Phone number must be entered like: 340 1461538. Up to 10 digits allowed. Only digits, no other character allowed.")], max_length=64, blank=True)
     credits = models.PositiveIntegerField(default=10)
-
+    subscription_exp_date = models.DateField(default = timezone.now)
+    
     USER_TYPE_CHOICES = [
         ('Std', 'Standard'),
         ('Amb', 'Ambassador'),

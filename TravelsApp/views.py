@@ -104,6 +104,9 @@ def register(request):
                     # If yes, then grab it from the POST form reply
                     profile.profile_pic = request.FILES['profile_pic']
 
+                #subscription expires after one year, when payment is implemented this will shitf after payment....
+                profile.subscription_exp_date = datetime.today() + relativedelta(months=+12)
+
                 # Now save model
                 profile.save()
 
