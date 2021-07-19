@@ -350,11 +350,11 @@ class EventListView(LoginRequiredMixin, ListView):
 
         if start_date:
             print('filtering events with start date >' + start_date )
-            filtered_events = filtered_events.filter(dateTime__gte = start_date)
+            filtered_events = filtered_events.filter(date__gte = start_date)
 
         if end_date:
             print('filtering events with end date >' + end_date)
-            filtered_events = filtered_events.filter(dateTime__lte = end_date)
+            filtered_events = filtered_events.filter(date__lte = end_date)
 
 
         #renders the page with the context dictionary elements set to the values
@@ -388,9 +388,13 @@ class SingleEvent(DetailView):
             context['user_already_has_this_ticket'] = 'false'
             logger.error('The user does not have this ticket')
 
+        event = Event.objects.filter(id=self.kwargs['pk'])[0]
         #inject the name of the image of the event
-        context['event_image_name'] = 'Images/' + Event.objects.filter(id=self.kwargs['pk'])[0].activity.name + '.jpg'
+        context['event_image_name'] = 'Images/' + event.activity.name + '.jpg'
 
+        #inject the tour start time calculated from meet time + 30 mins
+        dt = datetime.combine(date.today(), event.time) + timedelta(minutes=30)
+        context['start_time'] = dt.time
         return context
 
 class BuyTicketView(TemplateView):

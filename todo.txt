@@ -1,7 +1,16 @@
 
 
+-gestione orario: aggiunta del tempo nel  modello
+ visualizzazione nella pagina di dettaglio evento
 
 - gestione iscrizione annuale
+  aggiungere subscription_exp_date
+  impostata a today+1 year al momento dell'iscrizione.
+
+  >nella pagina myprofile viene mostarta la data di scadenza(in rosso se scaduta)
+
+  Se un utente tenta di comprare un biglietto con sottoscrizione scaduta gli viene proposto di
+  comprare biglietto + rinnovo.
 
 - gestire meccanismo di richiesta rimborso
 

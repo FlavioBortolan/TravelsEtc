@@ -38,7 +38,7 @@ class Activity(models.Model):
 
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=600)
-    #dateTime
+
     place = models.CharField(max_length=100)
     #partecipants
     type = models.CharField(max_length=100)
@@ -66,9 +66,10 @@ class Activity(models.Model):
 class Event(models.Model):
 
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
-    dateTime = models.DateField(default = timezone.now)
+    date = models.DateField(default = timezone.now)
+    time = models.TimeField(default = timezone.now)
     partecipants = models.ManyToManyField(User)
     confirmed = models.BooleanField(default=0)
 
     def __str__(self):
-        return "ID: " + str(self.id) + ", Date: " + str(self.dateTime) + str(self.activity)
+        return "ID: " + str(self.id) + ", Date: " + str(self.date) + str(self.activity)

@@ -29,7 +29,7 @@
               </div>
               <!-- Disply date on bottom right of image -->
               <div class="w3-display-bottomright w3-container w3-round-xxlarge w3-brown w3-opacity-min">
-                <h2 >{{ event.dateTime }}</h2>
+                <h2 >{{ event.date }}</h2>
               </div>
               <!-- Disply type on top right of image -->
               <div class="w3-display-topright w3-container w3-round-xxlarge w3-orange w3-opacity-min">
@@ -52,7 +52,7 @@
         <div class="w3-container  w3-card-4 w3-third  w3-pale-blue w3-mobile w3-round-xxlarge">
 
           <p><b>Description: </b>{{ event.activity.description }}</p>
-          <p><b>Date: </b>{{ event.dateTime }}</p>
+          <p><b>Date: </b>{{ event.date }}</p>
           <p><b>Place: </b>{{ event.activity.place }}</p>
           <p><b>Partecipants: </b>{{ event.partecipants.all.count }}</p>
           <p><b>Type: </b>{{ event.activity.type }}</p>
@@ -103,6 +103,8 @@
               <p><b>Meet place: </b>
                 <a href="{{ event.activity.meetPlaceLink }}">Click to see on Google Maps</a>
               </p>
+              <p><b>Meet time: </b>{{ event.time }}</p>
+              <p><b>Start time: </b>{{ start_time }}</p>
               <p><b>Directions: </b>{{ event.activity.meetPlaceDirections }}</p>
               <p><b>Leader: </b>{{ event.activity.leader }}</p>
               <p><b>What To Bring: </b>{{ event.activity.whatToBring }}</p>
