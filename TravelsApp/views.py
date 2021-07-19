@@ -314,6 +314,8 @@ class EventListView(LoginRequiredMixin, ListView):
         end_date = time.strftime("%Y-%M-%d", time.strptime(str(date.today() + relativedelta(months=+delta_months)), '%Y-%M-%d'))
         context['end_date'] = end_date
 
+        context['delta_months'] = delta_months
+
         print('GET:start_date: ' + start_date)
         print('GET:end_date: ' + end_date)
 

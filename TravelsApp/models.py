@@ -19,6 +19,17 @@ class UserProfileInfo(models.Model):
     phone_number = models.CharField(validators=[RegexValidator(regex=r'^(( *0 *0 *| *\+) *3 *9 *)?((\d *){3})((\d *){6,7})$', message="Phone number must be entered like: 340 1461538. Up to 10 digits allowed. Only digits, no other character allowed.")], max_length=64, blank=True)
     credits = models.PositiveIntegerField(default=10)
 
+    USER_TYPE_CHOICES = [
+        ('Std', 'Standard'),
+        ('Amb', 'Ambassador'),
+        ('Lead', 'Leader'),
+        ('Emp', 'Employee'),
+    ]
+    user_type = models.CharField(
+        max_length=4,
+        choices=USER_TYPE_CHOICES,
+        default='Std',)
+
     def __str__(self):
         # Built-in attribute of django.contrib.auth.models.User !
         return self.user.username
