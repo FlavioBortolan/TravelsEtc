@@ -61,6 +61,8 @@ def register(request):
         user_form = UserForm(data=request.POST, error_class=DivErrorList)
         profile_form = UserProfileInfoForm(data=request.POST, error_class=DivErrorList)
 
+        #profile_form.is_valid()
+        #print('POST:' + profile_form.cleaned_data['subscription_exp_date'])
         # Check to see both forms are valid
         if user_form.is_valid() and profile_form.is_valid():
 
@@ -73,7 +75,6 @@ def register(request):
             if duplicate_users == 0:
 
                 print("No duplicate users found")
-
 
                 # Save User Form to Database
                 user = user_form.save(commit=False)
@@ -104,8 +105,10 @@ def register(request):
                     # If yes, then grab it from the POST form reply
                     profile.profile_pic = request.FILES['profile_pic']
 
+                subscription_duration_months = 12
+
                 #subscription expires after one year, when payment is implemented this will shitf after payment....
-                profile.subscription_exp_date = datetime.today() + relativedelta(months=+12)
+                profile.exp_date = datetime.today() + relativedelta(months=+subscription_duration_months)
 
                 # Now save model
                 profile.save()
@@ -127,6 +130,8 @@ def register(request):
 
     #GET
     else:
+
+        print('register:GET')
         # Just render the forms as blank.
         user_form = UserForm()
         profile_form = UserProfileInfoForm()
@@ -186,7 +191,7 @@ def my_account(request):
                                         'last_name': request.user.last_name,
                                         'email': request.user.email,
                                         })
-        profile_form = UserProfileInfoForm(initial = {'phone_number': request.user.userprofileinfo.phone_number,})
+        profile_form = UserProfileInfoForm(initial = {'phone_number': request.user.userprofileinfo.phone_number, 'exp_date': request.user.userprofileinfo.exp_date})
 
         #disable editing email
         user_form.fields['email'].widget.attrs['disabled'] = True

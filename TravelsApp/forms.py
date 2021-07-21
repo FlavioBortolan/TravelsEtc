@@ -48,6 +48,7 @@ class UserForm(forms.ModelForm):
 
     class Meta():
         model = User
+
         #fields = ('username','email','password')
         fields = ('first_name', 'last_name', 'email','password')
         widgets = {
@@ -60,13 +61,14 @@ class UserForm(forms.ModelForm):
 
 class UserProfileInfoForm(forms.ModelForm):
 
-    #subscription_exp_date = forms.CharField(widget=forms.DateInput(attrs={'name': 'subscription_exp_date', 'class': "w3-input", 'disabled':'True'}))
+    exp_date = forms.DateField(required=False, widget = forms.DateInput(attrs={'class': "w3-input", 'disabled': 'True', 'required': 'False'}))
+
     class Meta():
 
         model = UserProfileInfo
-        fields = ('profile_pic', 'phone_number', 'subscription_exp_date' )
+        fields = ('profile_pic', 'phone_number')
         widgets = {
-            'phone_number': forms.TextInput(attrs={'class': "w3-input", 'required':'True'}),
-            'subscription_exp_date': forms.DateInput(attrs={'name': 'gino', 'class': "w3-input", 'disabled':'True'}),
-            'profile_pic': forms.ClearableFileInput(attrs={'class': "w3-btn w3-blue w3-center", 'label':'ggg'}),
+            'profile_pic':              forms.ClearableFileInput(attrs={'class': "w3-btn w3-blue w3-center"}),
+            'phone_number':             forms.TextInput(attrs={'class': "w3-input", 'required':'True'}),
+            
         }

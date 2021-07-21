@@ -1,6 +1,8 @@
 
 
 
+- inserire tabella settings 
+
 - gestire meccanismo di richiesta rimborso
 
 - capire come sovrascrivere la label del widget per le traduzioni in italiano
