@@ -1,17 +1,12 @@
 
+-limitare il filtro data agli eventi futuri (quelli del passato non si devono poter selezionare)
 
-
-- inserire tabella settings 
-
-- gestire meccanismo di richiesta rimborso
+-add difficulty filtering
 
 - capire come sovrascrivere la label del widget per le traduzioni in italiano
 
   Se un utente tenta di comprare un biglietto con sottoscrizione scaduta gli viene proposto di
   comprare biglietto + rinnovo.
-
-
-- gestire annullamento dell'iscrizione ad un evento
 
 - gestire acquisto del biglietto per un altro iscritto.
 

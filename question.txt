@@ -51,9 +51,11 @@ VIEW:
 
 When register() gets called and the code after #GET is executed the 'exp_date' UserProfileInfoForm is not rendered properly :
 
-xxxxx
-the attribute 'required' is present (hence meaning required = true) while it should be set to false
+<p><label for="id_exp_date">Exp date:</label> <input type="text" name="exp_date" value="2021-07-21" class="w3-input" disabled="True" required id="id_exp_date">
+<input type="hidden" name="initial-exp_date" value="2021-07-21 20:06:53+00:00" id="initial-id_exp_date"></p>
 
+The attribute 'required' is present (hence meaning required = true) while it should be set to false
+(It also generates this 'initial-exp-date' which is hidden and I think it's added just for security reasons)
 
 I tried to play around for one long evening then I noticed that if I change the form definition removing the 'exp_date' from the 'fields' list and adding it as a Field before the 'Meta' then the result is correct:
 
@@ -70,7 +72,9 @@ class UserProfileInfoForm(forms.ModelForm):
             'phone_number':             forms.TextInput(attrs={'class': "w3-input", 'required':'True'}), 
         }
 
-xxxxx
-I dont' understand why.
+<p><label for="id_exp_date">Exp date:</label> <input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></p>
+
+
+But I dont' understand why.
 In the docs it seems that to insert a Field in the 'fields' list or directly as a class member (outside the 'Meta') should be quite equivalent but in my case the behaviour is totally different...
 

@@ -113,7 +113,26 @@
           <br>
           <br>
 
-          {% if user_already_has_this_ticket == 'false' %}
+          {% if user_already_has_this_ticket  %}
+            {% if can_ask_refund %}
+              <form action="{% url 'TravelsApp:ask_refund' pk=event.id refund_step=1%}" method="get">
+
+                <div class="w3-center">
+                  <button class="w3-btn w3-blue w3-center" type="submit">Ask refund</button>
+                </div>
+
+                <br>
+
+              </form>
+            {% else %}
+            <!--
+            <div class="w3-center">
+              <p>Te toca nare!</p>
+            </div>
+            -->
+            {% endif %}
+
+          {% else %}
           <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='confirmation' %}" method="get">
 
             <div class="w3-center">

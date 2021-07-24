@@ -12,6 +12,7 @@ from django.views.generic import (TemplateView,ListView,
                                   UpdateView,DeleteView)
 from .models import Activity
 from .models import Event
+from .models import Setting
 
 from django.contrib.auth import get_user_model
 from datetime import *
@@ -105,7 +106,7 @@ def register(request):
                     # If yes, then grab it from the POST form reply
                     profile.profile_pic = request.FILES['profile_pic']
 
-                subscription_duration_months = 12
+                subscription_duration_months = int(get_setting('subscription_duration_months'))
 
                 #subscription expires after one year, when payment is implemented this will shitf after payment....
                 profile.exp_date = datetime.today() + relativedelta(months=+subscription_duration_months)
@@ -215,7 +216,6 @@ def change_password(request):
 
     data_change_successful = False
 
-
     #handle POST, in case of GET we just return the forms created above
     if request.method == 'POST':
 
@@ -301,7 +301,7 @@ class EventListView(LoginRequiredMixin, ListView):
     #note: *args    = positional arguments in the url call
     #      **kwargs = name-based arguments in the url call
     def get_queryset(self,*args, **kwargs):
-
+        print('***get_queryset: kwargs' + str(**kwargs) + '***')
         if self.kwargs['filter_mode']=='current_user':
             logger.error('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate solo le attivita dell utente attuale')
             return(self.request.user.event_set.all())
@@ -312,6 +312,7 @@ class EventListView(LoginRequiredMixin, ListView):
 
     #defines the context dictionary to be used to render page during GET
     def get_context_data(self, **kwargs):
+        print('***get_context_data: kwargs' + str(kwargs) + '***')
         context  = super().get_context_data(**kwargs)
         context['filter_mode'] = self.kwargs['filter_mode']
 
@@ -326,6 +327,9 @@ class EventListView(LoginRequiredMixin, ListView):
 
         print('GET:start_date: ' + start_date)
         print('GET:end_date: ' + end_date)
+
+
+
 
         return context
 
@@ -390,19 +394,30 @@ class SingleEvent(DetailView):
         context  = super().get_context_data(**kwargs)
 
         if self.request.user.event_set.filter(id=self.kwargs['pk']).count()>0:
-            context['user_already_has_this_ticket'] = 'true'
+            context['user_already_has_this_ticket'] = True
             logger.error('The user already has this ticket')
         else:
-            context['user_already_has_this_ticket'] = 'false'
+            context['user_already_has_this_ticket'] = False
             logger.error('The user does not have this ticket')
 
         event = Event.objects.filter(id=self.kwargs['pk'])[0]
+
         #inject the name of the image of the event
         context['event_image_name'] = 'Images/' + event.activity.name + '.jpg'
 
         #inject the tour start time calculated from meet time + 30 mins
-        dt = datetime.combine(date.today(), event.time) + timedelta(minutes=30)
+        dt = datetime.combine(event.date, event.time) + timedelta(minutes=30)
         context['start_time'] = dt.time
+
+        #detect if it is possible to ask for refund
+        refund_limit_time = dt - timedelta(hours=48)
+        if  refund_limit_time > datetime.now():
+            context['can_ask_refund'] = True
+            print('The guy can have his money back as:' + str(refund_limit_time) + '>' + str(datetime.now()))
+        else:
+            context['can_ask_refund'] = False
+            print('The guy cannot have his money back as:' + str(refund_limit_time) + '<' + str(datetime.now()))
+
         return context
 
 class BuyTicketView(TemplateView):
@@ -419,3 +434,61 @@ class BuyTicketView(TemplateView):
             a.partecipants.add(self.request.user)
 
         return context
+
+class AskRefundView(TemplateView):
+    template_name = "TravelsApp/ask_refund.html"
+
+    def get_context_data(self,**kwargs):
+        context  = super().get_context_data(**kwargs)
+        context['event'] = Event.objects.get(id=kwargs['pk'])
+        context['refund_step'] =  kwargs['refund_step']
+
+        #second step is refund Successful
+        #if context['refund_step'] == 2:
+
+        return context
+
+    #Handles the 'POST' request from the client browser
+    def post(self, request, *args, **kwargs):
+
+        refund = request.POST.get("refund")
+        print('Post: refund requested: ' + str(refund))
+
+        context  = super().get_context_data(**kwargs)
+        context['event'] = Event.objects.get(id=kwargs['pk'])
+        context['refund_step'] =  2
+
+        #check if user is subscribed, this is to avoid a user arrives here with the 'back' button after having already unsubscribed
+        if request.user in context['event'].partecipants.all():
+
+            context['user_subscribed'] = True
+
+            if refund == 'Credits':
+                #add value of the event to user's Credits
+                request.user.userprofileinfo.credits += context['event'].activity.price
+                print ('refunding Credits...')
+                request.user.userprofileinfo.save()
+                context['event'].partecipants.remove(request.user)
+                context['event'].save()
+                print ('done')
+            else:
+                #bank transfer to Card
+                print ('Connecting to bank...')
+                print ('Refund done')
+        else:
+            print ('user is not subscibed...')
+            context['user_subscribed'] = False
+
+        return render(request,
+                      self.template_name,
+                      context)
+
+def get_setting(name):
+    r = Setting.objects.get(name=name).value
+    return r
+
+def save_setting(name, value, description):
+    s = Setting.objects.get_or_create( name=name)[0]
+    s.value = value
+    s.description = description
+    s.save()

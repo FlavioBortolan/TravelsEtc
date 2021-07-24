@@ -1,0 +1,54 @@
+{% extends "TravelsApp/base.html" %}
+
+{% block body_block %}
+{% load static %}
+
+  <div class="w3-container">
+
+    <div class="w3-container">
+      <h1>Refund request </h1>
+      <h3>Event: {{ event.activity.name }}</h3>
+      <h3>Date: {{ event.date }}</h3>
+      <h3>Price: {{ event.activity.price }}</h3>
+    </div>
+
+    {% if refund_step == '1' %}
+
+        <form class="w3-container" enctype="multipart/form-data" method="POST">
+          {% csrf_token %}
+          <h3>Please choose refund mode:</h3>
+          <div class="w3-card w3-padding w3-border w3-border-black">
+
+            <input class="w3-radio" type="radio" name="refund" value="Card" >
+            <label>Credit Card (1 euro commission)</label>
+            <br>
+            <input class="w3-radio" type="radio" name="refund" value="Credits" checked>
+            <label>Credits</label>
+            <br>
+            <br>
+
+            <input type="submit" class="w3-btn w3-blue w3-center" name="" value="Proceed">
+            <a href="{% url 'TravelsApp:ask_refund' pk=event.id refund_step=2%}" class="w3-btn w3-blue w3-center">Discard</a>
+            <br>
+            <br>
+          </div>
+        </form>
+        <br>
+        <br>
+    {% else %}
+
+    <div class="w3-container">
+      {% if user_subscribed %}
+        <h3><i class="fas fa-check"></i>Refund done!</h3>
+      {% else %}
+        <h3><i class="fas fa-times"></i>Refund impossible - you are not subscibed to this event!</h3> 
+
+      {% endif %}
+    </div>
+
+    {% endif %}
+
+
+  </div>
+
+{% endblock %}

@@ -15,5 +15,6 @@ urlpatterns=[
     path('events/<str:filter_mode>/',views.EventListView.as_view(), name='events'),
     path("SingleActivity/<int:pk>/",views.SingleEvent.as_view(),name="single"),
     path('buyticket/<int:pk>/<str:buy_step>',views.BuyTicketView.as_view(),name="buyticket"),
+    path('ask_refund/<int:pk>/<str:refund_step>',views.AskRefundView.as_view(),name="ask_refund"),
 
 ]
