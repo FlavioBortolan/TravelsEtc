@@ -1,5 +1,4 @@
 
--limitare il filtro data agli eventi futuri (quelli del passato non si devono poter selezionare)
 
 -add difficulty filtering
 

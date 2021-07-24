@@ -48,7 +48,7 @@
         {% endif %}
 
         <!--Filters form-->
-        {% if filter_mode == "all" %}
+        {% if filter_mode == "all" or filter_mode == "apply_filter" %}
           <form action="{% url 'TravelsApp:events' filter_mode='apply_filter' %}" method="POST">
             {% csrf_token %}
 
@@ -69,7 +69,7 @@
 
                   {% if start_date %}
 
-                    <input class="w3-input" type="date" name="start_date" value={{ start_date }}>
+                    <input class="w3-input" type="date"  name="start_date" value={{ start_date }}>
 
                   {% else %}
 
@@ -129,7 +129,7 @@
                 <a style="text-decoration: none" href="{% url 'TravelsApp:single' pk=event.pk %}">
                   <div class="w3-card-4  w3-round-xxlarge w3-pale-blue" >
 
-                    <img src="{% static 'Images/b.jpg' %}"  
+                    <img src="{% static 'Images/b.jpg' %}"
                         class="{% if filter_mode == 'current_user_past' %} w3-grayscale-max  {% endif %} w3-hover-shadow w3-round-xxlarge" alt="Alps" style="width:100%">
 
                     <div class="w3-container w3-center " >

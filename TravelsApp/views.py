@@ -321,7 +321,7 @@ class EventListView(LoginRequiredMixin, ListView):
 
             user_events = self.request.user.event_set.all()
             context['event_list']       = user_events.filter(date__gte = date.today())
-            context['past_event_list']  = user_events.filter(date__lt = date.today())
+
 
         elif self.kwargs['filter_mode']=='current_user_past':
             logger.error('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate solo le attivita passate dell utente attuale')
@@ -331,7 +331,9 @@ class EventListView(LoginRequiredMixin, ListView):
 
         elif self.kwargs['filter_mode']=='all':
             logger.error('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate tutte le attivita')
-            context['event_list'] = Event.objects.all()
+
+            #exclude past events
+            context['event_list'] = Event.objects.filter(date__gte = date.today())
 
         delta_months = 2
         start_date = time.strftime("%Y-%M-%d", time.strptime(str(date.today()), '%Y-%M-%d'))
@@ -344,7 +346,6 @@ class EventListView(LoginRequiredMixin, ListView):
 
         print('GET:start_date: ' + start_date)
         print('GET:end_date: ' + end_date)
-
 
         return context
 
@@ -366,8 +367,12 @@ class EventListView(LoginRequiredMixin, ListView):
         logger.error('EndDate:' + str(end_date))
         query = {}
 
-        #filter by active fields
+        #incremental filter by active fields
         filtered_events = Event.objects.all()
+
+        #exclude past events
+        filtered_events = filtered_events.filter(date__gte = date.today())
+
         if city:
             filtered_events = filtered_events.filter(activity__place__iexact = city)
 
