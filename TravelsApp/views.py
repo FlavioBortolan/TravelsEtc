@@ -316,6 +316,23 @@ class EventListView(LoginRequiredMixin, ListView):
         context  = super().get_context_data(**kwargs)
         context['filter_mode'] = self.kwargs['filter_mode']
 
+        if self.kwargs['filter_mode']=='current_user':
+            logger.error('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate solo le attivita dell utente attuale')
+
+            user_events = self.request.user.event_set.all()
+            context['event_list']       = user_events.filter(date__gte = date.today())
+            context['past_event_list']  = user_events.filter(date__lt = date.today())
+
+        elif self.kwargs['filter_mode']=='current_user_past':
+            logger.error('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate solo le attivita passate dell utente attuale')
+
+            user_events = self.request.user.event_set.all()
+            context['event_list']  = user_events.filter(date__lt = date.today())
+
+        elif self.kwargs['filter_mode']=='all':
+            logger.error('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate tutte le attivita')
+            context['event_list'] = Event.objects.all()
+
         delta_months = 2
         start_date = time.strftime("%Y-%M-%d", time.strptime(str(date.today()), '%Y-%M-%d'))
         context['start_date'] = start_date
@@ -327,8 +344,6 @@ class EventListView(LoginRequiredMixin, ListView):
 
         print('GET:start_date: ' + start_date)
         print('GET:end_date: ' + end_date)
-
-
 
 
         return context

@@ -15,8 +15,13 @@
         {% if filter_mode == "current_user" %}
 
           <div class="w3-container w3-blue">
-            <h2>Here is the list of your current events:</h2>
+            <h2>Here is the list of your incoming events:</h2>
           </div>
+        {% elif filter_mode == "current_user_past" %}
+
+            <div class="w3-container w3-blue">
+              <h2>Here is the list of your past events:</h2>
+            </div>
 
         {% elif filter_mode == "all" %}
 
@@ -43,7 +48,7 @@
         {% endif %}
 
         <!--Filters form-->
-        {% if filter_mode != "current_user" %}
+        {% if filter_mode == "all" %}
           <form action="{% url 'TravelsApp:events' filter_mode='apply_filter' %}" method="POST">
             {% csrf_token %}
 
@@ -124,7 +129,8 @@
                 <a style="text-decoration: none" href="{% url 'TravelsApp:single' pk=event.pk %}">
                   <div class="w3-card-4  w3-round-xxlarge w3-pale-blue" >
 
-                    <img src="{% static 'Images/b.jpg' %}"  class="w3-hover-shadow w3-round-xxlarge" alt="Alps" style="width:100%">
+                    <img src="{% static 'Images/b.jpg' %}"  
+                        class="{% if filter_mode == 'current_user_past' %} w3-grayscale-max  {% endif %} w3-hover-shadow w3-round-xxlarge" alt="Alps" style="width:100%">
 
                     <div class="w3-container w3-center " >
                       <h4><b>{{ event.activity.name }}</b></h4>
@@ -139,6 +145,8 @@
             </div>
 
           {% endfor %}
+
+
 
         </div>
 
