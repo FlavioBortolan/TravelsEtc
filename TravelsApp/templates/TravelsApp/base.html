@@ -5,6 +5,7 @@
   <head>
     <title>TravelsEtc.</title>
     <script src="https://kit.fontawesome.com/0eb3328522.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
   </head>
 
 
@@ -84,7 +85,7 @@
             <i class="fas fa-calendar-check"></i> My Events</a>
 
           <a class="w3-button w3-block w3-left-align" href="{% url 'TravelsApp:events' filter_mode='current_user_past' %}">
-            <i class="far fa-calendar-alt"></i> My past Events</a>
+            <i class="far fa-calendar-times"></i> My past Events</a>
 
           {% endif %}
 
@@ -152,6 +153,12 @@ function showDivs(n) {
   x[slideIndex-1].style.display = "block";
   dots[slideIndex-1].className += " w3-white";
 }
+
+
+function triggerPost() {  
+  $('#event_filter_form').trigger( "submit" );
+};
+
 </script>
 
 </body>

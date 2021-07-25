@@ -1,10 +1,11 @@
 
 
--add difficulty filtering
+
+-sistemare layout. triggerare post nei filtri al cambiamento di un elemento
 
 - capire come sovrascrivere la label del widget per le traduzioni in italiano
 
-  Se un utente tenta di comprare un biglietto con sottoscrizione scaduta gli viene proposto di
+-  Se un utente tenta di comprare un biglietto con sottoscrizione scaduta gli viene proposto di
   comprare biglietto + rinnovo.
 
 - gestire acquisto del biglietto per un altro iscritto.

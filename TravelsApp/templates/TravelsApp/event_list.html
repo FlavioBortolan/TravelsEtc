@@ -2,7 +2,7 @@
 
 {% block body_block %}
 {% load static %}
-  <div class="container">
+  <div class="w3-container">
     <div class="bg-light">
 
       {% if user.is_authenticated %}
@@ -47,33 +47,34 @@
 
         {% endif %}
 
+        <br>
         <!--Filters form-->
         {% if filter_mode == "all" or filter_mode == "apply_filter" %}
-          <form action="{% url 'TravelsApp:events' filter_mode='apply_filter' %}" method="POST">
+          <form id = "event_filter_form" action="{% url 'TravelsApp:events' filter_mode='apply_filter' %}" method="POST">
             {% csrf_token %}
 
             <div class="w3-row w3-border">
 
-              <div class="w3-quarter w3-container">
+              <div class="w3-col s12 m4 l2 w3-container">
 
                 <p>
                   <label>City:</label>
-                  <input class="w3-input" type="text" name="city"  value={{city}}>
+                  <input id = "city" onchange="triggerPost()" class="w3-input" type="text" name="city"  value={{city}}>
                 </p>
 
               </div>
 
-              <div class="w3-quarter w3-container">
+              <div class="w3-col s12 m4 l2 w3-container">
                 <p>
                   <label>Start Date:</label>
 
                   {% if start_date %}
 
-                    <input class="w3-input" type="date"  name="start_date" value={{ start_date }}>
+                    <input id ="start_date" onchange="triggerPost()" class="w3-input" type="date"  name="start_date" value={{ start_date }}>
 
                   {% else %}
 
-                    <input class="w3-input" type="date" name="start_date" value="2021-01-01">
+                    <input id ="start_date" onchange="triggerPost()" class="w3-input" type="date" name="start_date" value="2021-01-01">
 
                   {% endif %}
 
@@ -81,21 +82,21 @@
 
               </div>
 
-              <div class="w3-quarter w3-container">
+              <div class="w3-col s12 m4 l2 w3-container">
 
                 <p>
                   <label>End Date:</label>
-                  <input class="w3-input" type="date" name="end_date" value={{ end_date }}>
+                  <input onchange="triggerPost()" class="w3-input" type="date" name="end_date" value={{ end_date }}>
                 </p>
 
               </div>
 
-              <div class="w3-quarter w3-container">
+              <div class="w3-col s12 m4 l2 w3-container">
 
                 <p>
                   <label>Type:</label>
                     <!--<input class="w3-input" type="text" name="type" value={{type}}>  -->
-                  <select class="w3-input" name="type">
+                  <select oninput="triggerPost()" class="w3-input" name="type">
 
                     <option value="NoSelection" {% if type == "No Selection" %} selected="selected"{% endif %}></option>
                     <option value="Aperitivo" {% if type == "Aperitivo" %} selected="selected"{% endif %}>Aperitivo</option>
@@ -109,12 +110,42 @@
 
               </div>
 
+              <div class="w3-col s12 m4 l2 w3-container">
+
+                <p>
+                  <label>Difficulty Level:</label>
+                    <!--<input class="w3-input" type="text" name="type" value={{type}}>  -->
+                  <select onchange="triggerPost()" class="w3-input" name="difficultyLevel">
+
+                    <option value="NoSelection" {% if difficultyLevel == "No Selection" %} selected="selected"{% endif %}></option>
+                    <option value="Nessuna" {% if difficultyLevel == "Nessuna" %} selected="selected"{% endif %}>Nessuna</option>
+                    <option value="T" {% if difficultyLevel == "T" %} selected="selected"{% endif %}>T</option>
+                    <option value="E" {% if difficultyLevel == "E" %} selected="selected"{% endif %}>E</option>
+                    <option value="EE" {% if difficultyLevel == "EE" %} selected="selected"{% endif %}>EE</option>
+                    <option value="EEA" {% if difficultyLevel == "EEA" %} selected="selected"{% endif %}>EEA</option>
+
+                  </select>
+                </p>
+
+              </div>
+
+              <div class="w3-col s12 m4 l2 w3-container">
+
+                <p>
+                  <label>Confirmation:</label>
+                    <!--<input class="w3-input" type="text" name="type" value={{type}}>  -->
+                  <select onchange="triggerPost()" class="w3-input" name="confirmed">
+
+                    <option value="NoSelection" {% if confirmed == "No Selection" %} selected="selected"{% endif %}></option>
+                    <option value="confirmed" {% if confirmed == "confirmed" %} selected="selected"{% endif %}>confirmed</option>
+                    <option value="all" {% if confirmed == "all" %} selected="selected"{% endif %}>all</option>
+
+                  </select>
+                </p>
+
+              </div>
+
             </div>
-            <br>
-            <div class="w3-center">
-              <button class="w3-btn w3-blue w3-center" type="filter">Apply filter</button>
-            </div>
-            <br>
 
           </form>
 

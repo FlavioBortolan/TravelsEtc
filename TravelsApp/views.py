@@ -359,6 +359,8 @@ class EventListView(LoginRequiredMixin, ListView):
         start_date = request.POST.get("start_date")
         end_date = request.POST.get("end_date")
         type = request.POST.get("type")
+        difficultyLevel = request.POST.get("difficultyLevel")
+        confirmed = request.POST.get("confirmed")
 
         #Log filter values for debug purposes
         logger.error('POST data:')
@@ -380,6 +382,15 @@ class EventListView(LoginRequiredMixin, ListView):
             print('filtering events with type =*' + type + '*')
             filtered_events = filtered_events.filter(activity__type = type)
 
+        if confirmed!='NoSelection' and confirmed !='':
+            print('filtering events with confirmed =*' + str(confirmed) + '*')
+            if confirmed == 'confirmed':
+                filtered_events = filtered_events.filter(confirmed = True)
+
+        if difficultyLevel!='NoSelection' and difficultyLevel !='':
+            print('filtering events with difficultyLevel =*' + difficultyLevel + '*')
+            filtered_events = filtered_events.filter(activity__difficultyLevel = difficultyLevel)
+
         if start_date:
             print('filtering events with start date >' + start_date )
             filtered_events = filtered_events.filter(date__gte = start_date)
@@ -387,6 +398,7 @@ class EventListView(LoginRequiredMixin, ListView):
         if end_date:
             print('filtering events with end date >' + end_date)
             filtered_events = filtered_events.filter(date__lte = end_date)
+
 
 
         #renders the page with the context dictionary elements set to the values
@@ -398,7 +410,9 @@ class EventListView(LoginRequiredMixin, ListView):
                        'city': city,
                        'start_date': time.strftime("%Y-%M-%d", time.strptime(start_date, '%Y-%M-%d')),
                        'end_date': end_date,
-                       'type': type
+                       'type': type,
+                       'difficultyLevel': difficultyLevel,
+                       'confirmed': confirmed
 
                        })
 
