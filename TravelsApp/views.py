@@ -434,6 +434,14 @@ class SingleEvent(DetailView):
             context['user_already_has_this_ticket'] = False
             logger.error('The user does not have this ticket')
 
+        if self.request.user.my_queued_events.filter(id=self.kwargs['pk']).count()>0:
+            context['queued_to_this_event'] = True
+            logger.error('The user is queued to the event')
+        else:
+            context['queued_to_this_event']  = False
+            logger.error('The user is not queued to the event')
+
+
         event = Event.objects.filter(id=self.kwargs['pk'])[0]
 
         #inject the name of the image of the event
@@ -445,7 +453,7 @@ class SingleEvent(DetailView):
 
         #detect if it is possible to ask for refund
         refund_limit_time = dt - timedelta(hours=48)
-        if  refund_limit_time > datetime.now():
+        if  refund_limit_time > datetime.now() and context['user_already_has_this_ticket']:
             context['can_ask_refund'] = True
             print('The guy can have his money back as:' + str(refund_limit_time) + '>' + str(datetime.now()))
         else:
@@ -476,9 +484,6 @@ class AskRefundView(TemplateView):
         context  = super().get_context_data(**kwargs)
         context['event'] = Event.objects.get(id=kwargs['pk'])
         context['refund_step'] =  kwargs['refund_step']
-
-        #second step is refund Successful
-        #if context['refund_step'] == 2:
 
         return context
 
@@ -512,6 +517,45 @@ class AskRefundView(TemplateView):
         else:
             print ('user is not subscibed...')
             context['user_subscribed'] = False
+
+        return render(request,
+                      self.template_name,
+                      context)
+
+class QueueToEventView(TemplateView):
+    template_name = "TravelsApp/queue_to_event.html"
+
+    #Handles the 'POST' request from the client browser
+    def get(self, request, *args, **kwargs):
+
+        print('QueueToEventView.POST')
+        context  = super().get_context_data(**kwargs)
+        context['event'] = Event.objects.get(id=kwargs['pk'])
+
+        #Is the user queued to this event
+        if context['event'].queued_partecipants.filter(username=request.user.username).count()>0 :
+            context['user_queued'] = True
+        else:
+            context['user_queued'] = False
+
+        #Gestire il caso in cui l'utente è già in coda ma chiede di essere accodato nel html
+
+
+        if kwargs['command'] == 'add_me':
+            #add current user to the queue
+            context['event'].queued_partecipants.add(request.user)
+            context['event'].save()
+            context['cmd']  ='add_me'
+            print ('user added to queue')
+
+
+        elif kwargs['command'] == 'remove_me':
+            #remove current user to the queue
+            context['event'].queued_partecipants.remove(request.user)
+            context['event'].save()
+            context['cmd']  = 'remove_me'
+            print ('user removed from queue')
+
 
         return render(request,
                       self.template_name,

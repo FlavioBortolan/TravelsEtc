@@ -70,6 +70,7 @@ class Event(models.Model):
     date = models.DateField(default = timezone.now)
     time = models.TimeField(default = timezone.now)
     partecipants = models.ManyToManyField(User)
+    queued_partecipants = models.ManyToManyField(User, related_name='my_queued_events')
     confirmed = models.BooleanField(default=0)
 
     def __str__(self):

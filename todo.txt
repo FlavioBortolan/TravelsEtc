@@ -1,10 +1,9 @@
 
 
 
--sistemare layout. triggerare post nei filtri al cambiamento di un elemento
-
-- capire come sovrascrivere la label del widget per le traduzioni in italiano
-
+- se un utente si toglie dal evento viene inviata mail al primo della lista...o a tutti??
+  aggiungere questa operazione ad un task periodico ogni 5 mins.
+  
 -  Se un utente tenta di comprare un biglietto con sottoscrizione scaduta gli viene proposto di
   comprare biglietto + rinnovo.
 

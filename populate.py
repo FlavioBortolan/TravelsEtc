@@ -1,5 +1,10 @@
 import os
+from datetime import *
+import time
+from dateutil.relativedelta import *
+from dateutil.rrule import *
 from datetime import datetime
+
 from random import seed
 from random import randint
 import sys
@@ -82,7 +87,7 @@ def populate_events(events_count = 5 ):
     for entry in range(events_count):
         e = Event.objects.get_or_create(
         activity = Activity.objects.all()[randint(0, Activity.objects.count()-1)],
-        date = fakegen.date_between_dates(date_start=datetime(2021,3,1), date_end=datetime(2021,12,31)),
+        date = fakegen.date_between_dates(date_start=datetime.now(), date_end=datetime.now() + timedelta(hours=24*30*6)),
 
         confirmed = random.choice([0,1]),
         )[0]

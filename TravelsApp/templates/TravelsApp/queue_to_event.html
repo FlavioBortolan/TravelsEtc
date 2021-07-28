@@ -1,0 +1,39 @@
+{% extends "TravelsApp/base.html" %}
+
+{% block body_block %}
+{% load static %}
+
+  <div class="w3-container">
+
+    {% if command == 'add_me' %}
+
+      {% if user_queued %}
+        <div class="w3-container">
+          <h3>You are already in the queue for this event and will be notified if a ticket will be available</h3>
+        </div>
+      {% else %}
+        <div class="w3-container">
+          <h3>You have been added to the queue for this event and will be notified if a ticket will be available</h3>
+        </div>
+      {% endif %}
+
+
+    {% elif command == 'remove_me'%}
+      <div class="w3-container">
+
+      {% if user_queued %}
+          <h3>You have been removed from the queue for this event.</h3>
+      {% else %}
+          <h3>You are not queued to this event.</h3>
+      {% endif %}
+
+      </div>
+    {% endif %}
+      <div class="w3-container">
+        <h3><b>Event:</b> {{ event.activity.name }}</h3>
+        <h3><b>Date:</b> {{ event.date }}</h3>
+        <h3><b>Price:</b> {{ event.activity.price }}</h3>
+      </div>
+  </div>
+
+{% endblock %}

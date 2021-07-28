@@ -59,6 +59,11 @@ class UserForm(forms.ModelForm):
             'email':            forms.EmailInput(attrs={'class': "w3-input"}),
         }
 
+        #labels = {
+        #    'first_name': 'Nome',
+        #    'last_name': 'Cognome',
+        #}
+
 class UserProfileInfoForm(forms.ModelForm):
 
     exp_date = forms.DateField(required=False, widget = forms.DateInput(attrs={'class': "w3-input", 'disabled': 'True', 'required': 'False'}))
@@ -70,5 +75,5 @@ class UserProfileInfoForm(forms.ModelForm):
         widgets = {
             'profile_pic':              forms.ClearableFileInput(attrs={'class': "w3-btn w3-blue w3-center"}),
             'phone_number':             forms.TextInput(attrs={'class': "w3-input", 'required':'True'}),
-            
+
         }
