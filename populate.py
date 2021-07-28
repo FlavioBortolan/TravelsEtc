@@ -38,7 +38,7 @@ def populate_users(users_count = 5):
         fake_number = fakegen.phone_number()
 
         #new entry
-        u    = User           .objects.get_or_create(username = fake_email, first_name = fake_last_name,last_name= fake_last_name,email = fake_email)[0]
+        u    = User           .objects.get_or_create(username = fake_email, first_name = fake_first_name,last_name= fake_last_name,email = fake_email)[0]
         print('Created User:' + str(u) )
 
         pi   = UserProfileInfo.objects.get_or_create(user=u, phone_number = fake_number, credits = randint(15, 40))[0]
