@@ -2,10 +2,13 @@
 <html >
 
   <body>
-    <p>Hallo {{ name }}!</p>
+    <p>Hallo {{ user.first_name }}!</p>
     <p>
-    There is a free ticket for event <b>{{ event }}</b> on <b>{{ date }}</b> <br>
+    There is a free ticket for event <b>{{ event.activity.name }}</b> on <b>{{ event.date }}</b> <br>
     Get it from the site before it disappears!
+
+    <a href="{% url 'TravelsApp:single' pk=event.id %}"> Click here to go to the event!</a>
+
     <br>
     You are receving this email because you are on the queue for this event. <br>
     You can cancel this from the event's page by pressing the 'Remove me from the queue' button

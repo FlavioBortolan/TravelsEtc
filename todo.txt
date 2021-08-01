@@ -1,19 +1,17 @@
 
 
 
-- se un utente si toglie dal evento viene inviata mail al primo della lista...o a tutti??
-  aggiungere questa operazione ad un task periodico ogni 5 mins.
-  
--  Se un utente tenta di comprare un biglietto con sottoscrizione scaduta gli viene proposto di
+- Se un utente tenta di comprare un biglietto con sottoscrizione scaduta gli viene proposto di
   comprare biglietto + rinnovo.
 
-- gestire acquisto del biglietto per un altro iscritto.
+- Gestire acquisto del biglietto per un altro iscritto.
 
-- gestire prospetto di fatturazione mensile per le guide
+- Gestire prospetto di fatturazione mensile per le guide
 
-- test su schermo formato cellulare
+- Test su schermo formato cellulare
 
-- gestione payment
+- Gestione payment
+
 - deploy su digital ocean
 
 

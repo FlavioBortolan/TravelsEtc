@@ -472,8 +472,13 @@ class BuyTicketView(TemplateView):
 
         #if the purchase is confirmed add this activity to user's Activities
         if kwargs['buy_step']=='confirmed':
-            a = Event.objects.get(id=kwargs['pk'])
-            a.partecipants.add(self.request.user)
+            e = Event.objects.get(id=kwargs['pk'])
+            e.partecipants.add(self.request.user)
+
+            #remove him from the queue if he was queued_partecipants
+            if e.queued_partecipants.filter(email=self.request.user.email).count()>0:
+                e.queued_partecipants.remove(self.request.user)
+                print('removed user ' + self.request.user.email + 'from the queue of event ' + e.activity.name)
 
         return context
 
