@@ -3,25 +3,43 @@
 {% block body_block %}
 
 <div class="container">
-  <div class="jumbotron">
-    <div class="centerstage">
-
+  <div class="w3-container">
       <h1>Ticket purchase confirmation</h1>
       <br>
 
       {% if buy_step == 'confirmation' %}
-        <h2>You are about to buy this ticket</h2>
+
+        <h3><b>Event: </b>{{ event.activity.name }}</h3>
+        <h3><b>Date: </b>{{ event.date }}</h3>
+        <h3><b>Ticket Price: </b>{{ event.activity.price }}</h3>
+
+        {% if subscription_expired %}
+          <h3><b>+1 Year Subscription Price*: </b>{{ year_subscription_price }}</h3>
+        {% endif %}
+
+        {% if credits_to_use > 0 %}
+          <h3><b>-Credits: </b>{{ credits_to_use }}</h3><br>
+        {% endif %}
+
+        <br>
+        <h3><b>TOTAL: {{  total }}</b></h3>
+
         <h2>Press confirm to proceed!</h2>
 
-        <form action="{% url 'TravelsApp:buyticket' pk=Event_pk buy_step='confirmed' %}" method="get">
+      <form action="{% url 'TravelsApp:buyticket' pk=pk buy_step='confirmed' total=total credits_to_use=credits_to_use%}" method="get">
 
-          <div class="w3-center">
-            <button class="w3-btn w3-blue w3-center" type="submit">Buy ticket!</button>
-          </div>
+        <div class="w3-center">
+          <button class="w3-btn w3-blue w3-center" type="submit">Buy ticket!</button>
+        </div>
 
-          <br>
+        <br>
+        {% if subscription_expired %}
 
-        </form>
+          <h5>* Your subscription expired on: {{ subs_exp_date }}</h5>
+
+        {% endif %}
+
+      </form>
 
       {% else %}
         <h2>Congratulation your ticket is confirmed!</h2>
@@ -29,7 +47,7 @@
       {% endif %}
 
     </div>
-  </div>
 </div>
+
 
 {% endblock %}

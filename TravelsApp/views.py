@@ -21,6 +21,13 @@ from dateutil.relativedelta import *
 from dateutil.rrule import *
 from datetime import datetime
 
+import json
+import os
+
+import stripe
+# This is a sample test API key. Sign in to see examples pre-filled with your key.
+stripe.api_key = "sk_test_9W1R4v0cz6AtC9PVwHFzywti"
+
 User = get_user_model()
 
 import logging
@@ -44,6 +51,20 @@ def user_logout(request):
     logout(request)
     # Return to homepage.
     return HttpResponseRedirect(reverse('index'))
+
+def create_payment():
+    try:
+        data = json.loads(request.data)
+        intent = stripe.PaymentIntent.create(
+            amount=calculate_order_amount(data['items']),
+            currency='usd'
+        )
+        return jsonify({
+          'clientSecret': intent['client_secret']
+        })
+    except Exception as e:
+        return jsonify(error=str(e)), 403
+
 
 def register(request):
 
@@ -467,12 +488,43 @@ class BuyTicketView(TemplateView):
 
     def get_context_data(self,**kwargs):
         context  = super().get_context_data(**kwargs)
-        context['Event_pk'] =  kwargs['pk']
+        #context['Event_pk'] =  kwargs['pk']
+        context['pk'] =  kwargs['pk']
+
         context['buy_step'] =  kwargs['buy_step']
+        context['subs_exp_date'] = self.request.user.userprofileinfo.exp_date
+        context['subscription_expired'] = context['subs_exp_date'] < datetime.now().date()
+        context['year_subscription_price'] = get_setting('year_subscription_price')
+        e = Event.objects.get(id=kwargs['pk'])
+        context['sub_total'] = e.activity.price + int(context['year_subscription_price'])
+
+        credits = self.request.user.userprofileinfo.credits
+
+        #total sum is partially  paid with credits
+        if context['sub_total'] > credits:
+             context['total'] = context['sub_total'] - credits
+             context['credits_to_use'] = credits
+
+        #total sum is paid with credits
+        else:
+            context['credits_to_use'] = context['sub_total']
+            context['total'] = 0
+
+        context['event'] =  e
 
         #if the purchase is confirmed add this activity to user's Activities
         if kwargs['buy_step']=='confirmed':
-            e = Event.objects.get(id=kwargs['pk'])
+
+            if(int(kwargs['total'])>0):
+                Payment.mock_request_payment(self,int(kwargs['total']))
+
+            #subtract used credits
+            if kwargs['credits_to_use']>0:
+                print('user has used ' + str(kwargs['credits_to_use']) + ' credits')
+                print('user had ' + str(self.request.user.userprofileinfo.credits) + ' credits')
+                self.request.user.userprofileinfo.credits-=kwargs['credits_to_use']
+                print('user now has: ' + str(self.request.user.userprofileinfo.credits) + ' credits')
+
             e.partecipants.add(self.request.user)
 
             #remove him from the queue if he was queued_partecipants
@@ -512,13 +564,19 @@ class AskRefundView(TemplateView):
                 request.user.userprofileinfo.credits += context['event'].activity.price
                 print ('refunding Credits...')
                 request.user.userprofileinfo.save()
-                context['event'].partecipants.remove(request.user)
-                context['event'].save()
                 print ('done')
             else:
                 #bank transfer to Card
-                print ('Connecting to bank...')
-                print ('Refund done')
+                card_refund_cost = int(get_setting('card_refund_cost'))
+                price = context['event'].activity.price
+                refund = price - card_refund_cost
+                Payment.mock_do_payment(self,  refund)
+
+                print ('Refund of ' + str(refund) + 'euros done (' + str(price) + '-' + str(card_refund_cost) +')')
+
+            context['event'].partecipants.remove(request.user)
+            context['event'].save()
+
         else:
             print ('user is not subscibed...')
             context['user_subscribed'] = False
@@ -526,6 +584,18 @@ class AskRefundView(TemplateView):
         return render(request,
                       self.template_name,
                       context)
+class Payment:
+
+    def mock_request_payment(self, sum):
+        print('connecting to bank.....')
+        time.sleep(3)
+        print('request for payment of ' + str(sum)  + ' euros successful')
+
+    def mock_do_payment(self, sum):
+        print('connecting to bank.....')
+        time.sleep(3)
+        print('payment of ' + str(sum)  + ' euros successful')
+
 
 class QueueToEventView(TemplateView):
     template_name = "TravelsApp/queue_to_event.html"

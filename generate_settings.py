@@ -23,5 +23,11 @@ if __name__=="__main__" :
 
     print("Genrating settings table: ")
 
-    s = Setting.objects.get_or_create( name="subscription_duration_months", value = '12', description='duration of a renewed subscription in months')[0]
+    s = Setting.objects.get_or_create( name="subscription_duration_months", value = '12', description='Duration of a renewed subscription in months.')[0]
+    s.save()
+
+    s = Setting.objects.get_or_create( name="year_subscription_price", value = '20', description='Price for the yearly subscription.')[0]
+    s.save()
+
+    s = Setting.objects.get_or_create( name="card_refund_cost", value = '1', description='Cost of the refund by card')[0]
     s.save()

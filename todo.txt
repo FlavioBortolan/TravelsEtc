@@ -1,10 +1,13 @@
 
 
 
-- Se un utente tenta di comprare un biglietto con sottoscrizione scaduta gli viene proposto di
-  comprare biglietto + rinnovo.
+- fare debugh acquisto Ticket
+- fare debug rimborso con carta
+
+
 
 - Gestire acquisto del biglietto per un altro iscritto.
+- deploy su digital ocean
 
 - Gestire prospetto di fatturazione mensile per le guide
 
@@ -12,7 +15,7 @@
 
 - Gestione payment
 
-- deploy su digital ocean
+
 
 
 GESTIONE

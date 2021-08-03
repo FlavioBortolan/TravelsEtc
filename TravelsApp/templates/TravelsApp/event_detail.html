@@ -131,7 +131,7 @@
 
           {% elif queued_to_this_event %}
             <form action="{% url 'TravelsApp:queue_to_event' pk=event.id command='remove_me' %}" method="get">
-            
+
               <div class="w3-center">
                 <h2>You are queued to this event. Press the button below to be removed from the queue. </h2>
                 <button class="w3-btn w3-blue w3-center" type="submit">Remove me from queue!</button>
@@ -141,8 +141,8 @@
 
             </form>
           {% elif event.partecipants.count < event.activity.maxNumPartecipants %}
-          <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='confirmation' %}" method="get">
 
+          <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='confirmation' total=0 credits_to_use=0 %}" method="get">
             <div class="w3-center">
               <button class="w3-btn w3-blue w3-center" type="submit">Buy ticket!</button>
             </div>
