@@ -1,10 +1,16 @@
 
 
 
-- fare debugh acquisto Ticket
-- fare debug rimborso con carta
+!! su GET buyticket ->viene creato l'order e salvato sul Database {items:[{'type':ticket, 'pk':343 }, {'type':"subscription"} ], credits_to_use:"33"}
+!! vengono inviati i dati come di consueto per la visualizzazione del totale ecc nella BuyTicket + id ordine
+!!quando si preme paga nella buyticket viene attivata la card_pay
+!! alla card_pay buyticket viene passato come parametro l'id dell'ordine in base a questo il server passa indietro il totale da visualizzare.
+!!la card_pay passa al server con fetch l'order_id e questo fa creare al server un payment intent di conseguenza
+!!quando stripe chiama il webhook il server confronta la chiave della conferma con gli orders presenti a database e attribuisce il biglietto e la eventuale sottoscrizione a chi di dovere
+> testare che il webhook funzioni.
 
-
+-capire come mai i queued partecipants viene considerato cme reqiured
+-si deve proporre di acquistare subscription se la data dell'evento supera la expiri, non se è scaduta oggi
 
 - Gestire acquisto del biglietto per un altro iscritto.
 - deploy su digital ocean

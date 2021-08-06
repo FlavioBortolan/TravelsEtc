@@ -1,0 +1,35 @@
+{% extends "TravelsApp/base.html" %}
+
+{% block body_block %}
+{% load staticfiles  %}
+<script src="https://js.stripe.com/v3/"></script>
+<label id="payment_intent_address">{{ payment_intent_address }}</label>
+
+{{ payment_intent_address|json_script:"payment_intent_address" }}
+<script src="{% static 'js/client.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/payment.css' %}" />
+
+
+  <div class="w3-container">
+      <h1>Card Payment</h1>
+      <br>
+      <h3><b>TOTAL: </b></h3> <h3><b>{{ total }}</b></h3>
+
+        <!-- Display a payment form -->
+        <form id="payment-form">
+          <div id="card-element"><!--Stripe.js injects the Card Element--></div>
+          <button id="submit">
+            <div class="spinner hidden" id="spinner"></div>
+            <span id="button-text">Pay now</span>
+          </button>
+          <p id="card-error" role="alert"></p>
+          <p class="result-message hidden">
+            Payment succeeded, see the result in your
+            <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
+          </p>
+        </form>
+
+    </div>
+
+
+{% endblock %}

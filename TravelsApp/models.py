@@ -64,6 +64,20 @@ class Activity(models.Model):
     # Built-in attribute of django.contrib.auth.models.User !
         return "ID: " + str(self.id) + ", Place: " + self.place + ", Leader: " + self.leader
 
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    date = models.DateField(default = timezone.now)
+    time = models.TimeField(default = timezone.now)
+    status = models.CharField(max_length=24, default="chart")
+    items = models.CharField(max_length=600, default="")
+    total = models.PositiveIntegerField(default=0)
+    credits_to_use = models.PositiveIntegerField(default=0)
+    payment_id = models.CharField(max_length=200, default="xxx")
+
+    def __str__(self):
+    # Built-in attribute of django.contrib.auth.models.User !
+        return "ID: " + str(self.id) + ", Total: " + str(self.total) + ", credits_to_use: " + str(self.credits_to_use) + ", items: " + str(self.items)
+
 class Event(models.Model):
 
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)

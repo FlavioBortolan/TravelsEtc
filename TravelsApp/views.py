@@ -13,6 +13,8 @@ from django.views.generic import (TemplateView,ListView,
 from .models import Activity
 from .models import Event
 from .models import Setting
+from .models import Order
+
 
 from django.contrib.auth import get_user_model
 from datetime import *
@@ -22,11 +24,16 @@ from dateutil.rrule import *
 from datetime import datetime
 
 import json
+import ast
+
+from django.http import JsonResponse
 import os
 
 import stripe
+from django.views.decorators.csrf import csrf_exempt
+
 # This is a sample test API key. Sign in to see examples pre-filled with your key.
-stripe.api_key = "sk_test_9W1R4v0cz6AtC9PVwHFzywti"
+stripe.api_key = "sk_test_51JKVSWC9NPB01a0ntYHt93lawC5fmkYHcghlD3ZOwnbScemvFjxC6rfbbHWOsXkuyvdMBfe5C4tpEeRklxMkrBQZ00SfVNyeyW"
 
 User = get_user_model()
 
@@ -52,18 +59,6 @@ def user_logout(request):
     # Return to homepage.
     return HttpResponseRedirect(reverse('index'))
 
-def create_payment():
-    try:
-        data = json.loads(request.data)
-        intent = stripe.PaymentIntent.create(
-            amount=calculate_order_amount(data['items']),
-            currency='usd'
-        )
-        return jsonify({
-          'clientSecret': intent['client_secret']
-        })
-    except Exception as e:
-        return jsonify(error=str(e)), 403
 
 
 def register(request):
@@ -483,40 +478,107 @@ class SingleEvent(DetailView):
 
         return context
 
+def open_order(tickets_pks, user):
+
+   year_subscription_price = int(get_setting('year_subscription_price'))
+
+   sub_total=0
+   max_exp_date = date.today()
+   for pk in tickets_pks:
+      e = Event.objects.get(id=pk)
+      sub_total += e.activity.price
+      #check if an event requires subscription to be renewed
+      if e.date > max_exp_date:
+           max_exp_date = e.date
+
+   subscription_expired = max_exp_date > user.userprofileinfo.exp_date
+
+   print('cost of tickets:' + str(sub_total))
+
+   if subscription_expired:
+      sub_total += year_subscription_price
+      print('with subscription:' + str(sub_total))
+
+   #check user credits
+   credits = user.userprofileinfo.credits
+   print('user credits:' + str(credits))
+
+   if sub_total > credits:
+       print('#total sum is partially  paid with credits')
+       total = sub_total - credits
+       credits_to_use = credits
+   else:
+      print('total sum is paid with credits')
+      credits_to_use = sub_total
+      total = 0
+
+   print('Total to be paid with card:' + str(total))
+
+   items=[]
+   for pk in tickets_pks:
+      items.append({'type':'ticket', 'pk': pk})
+
+   if subscription_expired:
+      items.append({'type':"subscription"} )
+
+    #Create the order
+   o = Order.objects.create(user=user, date=date.today(), time=datetime.now(), status="chart", items=items, total=total, credits_to_use=credits_to_use )
+   o.save()
+   print('Order saved:' + str(o))
+
 class BuyTicketView(TemplateView):
     template_name = "TravelsApp/buyticket.html"
 
     def get_context_data(self,**kwargs):
+
         context  = super().get_context_data(**kwargs)
         #context['Event_pk'] =  kwargs['pk']
         context['pk'] =  kwargs['pk']
 
         context['buy_step'] =  kwargs['buy_step']
-        context['subs_exp_date'] = self.request.user.userprofileinfo.exp_date
-        context['subscription_expired'] = context['subs_exp_date'] < datetime.now().date()
-        context['year_subscription_price'] = get_setting('year_subscription_price')
-        e = Event.objects.get(id=kwargs['pk'])
-        context['sub_total'] = e.activity.price + int(context['year_subscription_price'])
 
-        credits = self.request.user.userprofileinfo.credits
+        if kwargs['buy_step']=='confirmation':
 
-        #total sum is partially  paid with credits
-        if context['sub_total'] > credits:
-             context['total'] = context['sub_total'] - credits
-             context['credits_to_use'] = credits
+            context['subs_exp_date'] = self.request.user.userprofileinfo.exp_date
+            context['subscription_expired'] = context['subs_exp_date'] < datetime.now().date()
+            context['year_subscription_price'] = get_setting('year_subscription_price')
+            e = Event.objects.get(id=kwargs['pk'])
+            context['sub_total'] = e.activity.price + int(context['year_subscription_price'])
 
-        #total sum is paid with credits
-        else:
-            context['credits_to_use'] = context['sub_total']
-            context['total'] = 0
+            #check user credits
+            credits = self.request.user.userprofileinfo.credits
 
-        context['event'] =  e
+            if context['sub_total'] > credits:
+                print('#total sum is partially  paid with credits')
+                context['total'] = context['sub_total'] - credits
+                context['credits_to_use'] = credits
+            else:
+                print('total sum is paid with credits')
+                context['credits_to_use'] = context['sub_total']
+                context['total'] = 0
+
+            context['event'] =  e
+            print(context)
+
+            total = int(context['total'])
+            credits_to_use=int(context['credits_to_use'])
+            print('Total to be paid with card:' + str(total))
+
+
+            #create items list for the order
+            items =str([{'type':'ticket', 'pk':context['pk'] }, {'type':"subscription"} ] )
+
+            #Create the order
+            o = Order.objects.create(user=self.request.user, date=date.today(), time=datetime.now(), status="chart", items=items, total=total, credits_to_use=credits_to_use )
+            o.save()
+
+            context['order_id'] = o.id
+
+            print('Saved order: ' + str(o))
 
         #if the purchase is confirmed add this activity to user's Activities
-        if kwargs['buy_step']=='confirmed':
-
-            if(int(kwargs['total'])>0):
-                Payment.mock_request_payment(self,int(kwargs['total']))
+        elif kwargs['buy_step']=='confirmed':
+            Payment.mock_request_payment(self,int(kwargs['total']))
 
             #subtract used credits
             if kwargs['credits_to_use']>0:
@@ -533,6 +595,11 @@ class BuyTicketView(TemplateView):
                 print('removed user ' + self.request.user.email + 'from the queue of event ' + e.activity.name)
 
         return context
+
+    def post(self, request, *args, **kwargs):
+        print('BuyTicket POST was called')
+
+
 
 class AskRefundView(TemplateView):
     template_name = "TravelsApp/ask_refund.html"
@@ -635,6 +702,146 @@ class QueueToEventView(TemplateView):
         return render(request,
                       self.template_name,
                       context)
+
+class CardPayView(TemplateView):
+    template_name = "TravelsApp/card_pay.html"
+
+    def get_context_data(self,**kwargs):
+        context  = super().get_context_data(**kwargs)
+        context['total'] = kwargs['amount']
+        context['payment_intent_address'] = reverse('TravelsApp:create_payment_intent')
+
+        return context
+
+    #Handles the 'POST' request from the client browser
+    def post(self, request, *args, **kwargs):
+        print ('post called, useless')
+
+def create_payment_intent(request):
+
+    eur_cents = 100
+    if request.method == "POST":
+
+        total=int(json.loads(request.body)['total'])
+        order_id=int(json.loads(request.body)['order_id'])
+
+        print('Creating payment intent for order_id:' + str(order_id) + ' ,total: ' + str(total) )
+        print('request:' + str(request.body))
+        try:
+            intent = stripe.PaymentIntent.create(
+                amount = total*eur_cents,
+                currency='eur' #move to settings
+            )
+
+            print('intent' + str(intent))
+            print('************ intent id:' + str(intent['id']) + '************')
+
+            #update the order
+            o = Order.objects.get(id=order_id)
+            #o.payment_id = intent['id']
+            o.payment_id = 'this is just a dummy id'
+            o.save()
+
+            return JsonResponse({
+              'clientSecret': intent['client_secret']
+            })
+        except Exception as e:
+            print('error creting intent:' + str(e))
+            return JsonResponse({'error':str(e), })
+
+
+#closes a specific order
+def close_order(o):
+
+    #retrive the user
+    user = o.user
+    print('User: ' + user.email)
+    #retrive the articles in the orders
+    items = ast.literal_eval(o.items)
+
+    print('User had: ' + str(user.userprofileinfo.credits) + 'credits')
+    #subtract credits used
+    if o.credits_to_use>0:
+        user.userprofileinfo.credits-=o.credits_to_use
+
+    print('User now has: ' + str(user.userprofileinfo.credits) + 'credits')
+
+    for i in items:
+        if i['type'] == 'ticket':
+
+            e=Event.objects.get(id=int(i['pk']))
+
+            print('Order contains ticket for event : ' + str(e.activity.name) +' on date:' + str(e.date))
+            print('credits to be used : ' + str(o.credits_to_use))
+            print('order total:' + str(o.total))
+
+            #add user to event
+            e.partecipants.add(user)
+
+            #remove him from the queue if he was in the queued_partecipants
+            if e.queued_partecipants.filter(email=user.email).count()>0:
+                e.queued_partecipants.remove(user)
+                print('removed user ' + self.request.user.email + 'from the queue of event ' + e.activity.name)
+
+        elif i['type'] == 'subscription':
+            subscription_duration_months = int(get_setting('subscription_duration_months'))
+            user.userprofileinfo.exp_date = datetime.today() + relativedelta(months=+subscription_duration_months)
+            user.save()
+            print('Order contains subscription, user subscription now expires on ' + str(user.userprofileinfo.exp_date) )
+
+    e.save()
+    o.status = "completed"
+    o.save()
+    user.userprofileinfo.save()
+
+    return True
+
+# Using Django
+@csrf_exempt
+def stripe_webhook(request):
+    payload = request.body
+    event = None
+
+    try:
+        event = stripe.Event.construct_from(
+          json.loads(payload), stripe.api_key
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+
+    # Handle the event
+    event_dict = event.to_dict()
+    if event_dict['type'] == "payment_intent.succeeded":
+        intent = event_dict['data']['object']
+
+        print ("Succeeded: ", intent['id'])
+
+        #fetch order based on intent id and update database accordingly ->events, credits, queue etc
+        try:
+            #retrive the order correspondig to the intent id
+            #o = Order.objects.filter(status='chart', payment_id = intent['id'])[0]
+            o = Order.objects.filter(status__iexact='chart', payment_id__iexact = 'this is just a dummy id')[0]
+            print('Payment receved for order id: ' + str(o.id))
+
+        except Exception as ex:
+            print('Receved stripe hook call for unexisting intent with id:' + intent['id'])
+            print(str(ex))
+            return HttpResponse(status=400)
+
+        ret = close_order(o)
+
+        if ret:
+            return HttpResponse(status=200)
+
+    elif event_dict['type'] == "payment_intent.payment_failed":
+        intent = event_dict['data']['object']
+        error_message = intent['last_payment_error']['message'] if intent.get('last_payment_error') else None
+        print ("Failed: ", intent['id'], error_message)
+        # Notify the customer that payment failed
+        return HttpResponse(status=400)
+    else:
+        return HttpResponse(status=400)
 
 def get_setting(name):
     r = Setting.objects.get(name=name).value
