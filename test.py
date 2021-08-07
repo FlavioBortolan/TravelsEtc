@@ -25,7 +25,15 @@ from TravelsApp.models import Setting
 #print(int(subscription_duration_months))
 #views.save_setting(name='cancel_interval_hours', description = 'How many hours before the event can be refund', value=48)
 
+#create an order
+print('#create an order')
 user = User.objects.get(email ="flavio.bortolan@gmail.com")
-pks=[335, 330]
+pk=330
 
-views.open_order(pks, user)
+res, context, order = views.open_order(pk, user)
+
+#close the order
+print('#close the order')
+views.close_order(order)
+
+print(context)
