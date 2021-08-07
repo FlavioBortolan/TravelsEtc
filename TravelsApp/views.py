@@ -487,47 +487,12 @@ class BuyTicketView(TemplateView):
         context  = super().get_context_data(**kwargs)
         #context['Event_pk'] =  kwargs['pk']
         context['pk'] =  kwargs['pk']
-
         context['buy_step'] =  kwargs['buy_step']
 
         if kwargs['buy_step']=='confirmation':
 
-            context['subs_exp_date'] = self.request.user.userprofileinfo.exp_date
-            context['subscription_expired'] = context['subs_exp_date'] < datetime.now().date()
-            context['year_subscription_price'] = get_setting('year_subscription_price')
-            e = Event.objects.get(id=kwargs['pk'])
-            context['sub_total'] = e.activity.price + int(context['year_subscription_price'])
-
-            #check user credits
-            credits = self.request.user.userprofileinfo.credits
-
-            if context['sub_total'] > credits:
-                print('#total sum is partially  paid with credits')
-                context['total'] = context['sub_total'] - credits
-                context['credits_to_use'] = credits
-            else:
-                print('total sum is paid with credits')
-                context['credits_to_use'] = context['sub_total']
-                context['total'] = 0
-
-            context['event'] =  e
-            print(context)
-
-            total = int(context['total'])
-            credits_to_use=int(context['credits_to_use'])
-            print('Total to be paid with card:' + str(total))
-
-
-            #create items list for the order
-            items =str([{'type':'ticket', 'pk':context['pk'] }, {'type':"subscription"} ] )
-
-            #Create the order
-            o = Order.objects.create(user=self.request.user, date=date.today(), time=datetime.now(), status="chart", items=items, total=total, credits_to_use=credits_to_use )
-            o.save()
-
-            context['order_id'] = o.id
-
-            print('Saved order: ' + str(o))
+            res, context_out, order = open_order(context['pk'], self.request.user)
+            context = { **context,  **context_out}
 
         #if the purchase is confirmed add this activity to user's Activities
         elif kwargs['buy_step']=='confirmed':
