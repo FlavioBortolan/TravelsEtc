@@ -478,6 +478,113 @@ class SingleEvent(DetailView):
 
         return context
 
+def open_order(pk, user):
+
+   year_subscription_price = int(get_setting('year_subscription_price'))
+
+   sub_total=0
+   max_exp_date = date.today()
+
+   e = Event.objects.get(id=pk)
+   sub_total += e.activity.price
+
+   #check if an event requires subscription to be renewed
+   subscription_expired = e.date > user.userprofileinfo.exp_date
+
+   print('cost of tickets:' + str(sub_total))
+
+   if subscription_expired:
+      sub_total += year_subscription_price
+      print('with subscription:' + str(sub_total))
+
+   #check user credits
+   credits = user.userprofileinfo.credits
+   print('user credits:' + str(credits))
+
+   if sub_total > credits:
+       print('#total sum is partially  paid with credits')
+       total = sub_total
+       credits_to_use = 0
+   else:
+      print('total sum is paid with credits')
+      credits_to_use = sub_total
+      total = 0
+
+   print('Total to be paid with card:' + str(total))
+
+   items=[]
+   items.append({'type':'ticket', 'pk': pk})
+
+   if subscription_expired:
+      items.append({'type':"subscription"} )
+
+    #Create the order
+   o = Order.objects.create(user=user, date=date.today(), time=datetime.now(), status="chart", items=str(items), total=total, credits_to_use=credits_to_use )
+   o.save()
+   print('Order saved:' + str(o))
+
+   e = Event.objects.get(id=pk)
+
+   context = {}
+   context['subs_exp_date'] = user.userprofileinfo.exp_date
+   context['subscription_expired'] = subscription_expired
+   context['year_subscription_price'] = year_subscription_price
+   context['sub_total'] = sub_total
+   context['total'] = total
+   context['credits_to_use'] = credits_to_use
+   context['event'] =  e
+   context['order_id'] = o.id
+
+   return (True, context, o)
+
+#closes a specific order
+def close_order(o):
+
+    if o.status=="completed":
+        return False
+
+    #retrive the user
+    user = o.user
+    print('User: ' + user.email)
+    #retrive the articles in the orders
+    items = ast.literal_eval(o.items)
+
+    print('User had: ' + str(user.userprofileinfo.credits) + 'credits')
+    #subtract credits used
+    if o.credits_to_use>0:
+        user.userprofileinfo.credits-=o.credits_to_use
+
+    print('User now has: ' + str(user.userprofileinfo.credits) + 'credits')
+
+    for i in items:
+        if i['type'] == 'ticket':
+
+            e=Event.objects.get(id=int(i['pk']))
+
+            print('Order contains ticket for event : ' + str(e.activity.name) +' on date:' + str(e.date))
+            print('credits to be used : ' + str(o.credits_to_use))
+            print('order total:' + str(o.total))
+
+            #add user to event
+            e.partecipants.add(user)
+
+            #remove him from the queue if he was in the queued_partecipants
+            if e.queued_partecipants.filter(email=user.email).count()>0:
+                e.queued_partecipants.remove(user)
+                print('removed user ' + user.email + ' from the queue of event ' + e.activity.name)
+
+        elif i['type'] == 'subscription':
+            subscription_duration_months = int(get_setting('subscription_duration_months'))
+            user.userprofileinfo.exp_date = datetime.today() + relativedelta(months=+subscription_duration_months)
+            user.save()
+            print('Order contains subscription, user subscription now expires on ' + str(user.userprofileinfo.exp_date) )
+
+    e.save()
+    o.status = "completed"
+    o.save()
+    user.userprofileinfo.save()
+
+    return True
 
 class BuyTicketView(TemplateView):
     template_name = "TravelsApp/buyticket.html"
@@ -496,21 +603,8 @@ class BuyTicketView(TemplateView):
 
         #if the purchase is confirmed add this activity to user's Activities
         elif kwargs['buy_step']=='confirmed':
-            Payment.mock_request_payment(self,int(kwargs['total']))
 
-            #subtract used credits
-            if kwargs['credits_to_use']>0:
-                print('user has used ' + str(kwargs['credits_to_use']) + ' credits')
-                print('user had ' + str(self.request.user.userprofileinfo.credits) + ' credits')
-                self.request.user.userprofileinfo.credits-=kwargs['credits_to_use']
-                print('user now has: ' + str(self.request.user.userprofileinfo.credits) + ' credits')
-
-            e.partecipants.add(self.request.user)
-
-            #remove him from the queue if he was queued_partecipants
-            if e.queued_partecipants.filter(email=self.request.user.email).count()>0:
-                e.queued_partecipants.remove(self.request.user)
-                print('removed user ' + self.request.user.email + 'from the queue of event ' + e.activity.name)
+            close_order(Order.objects.get(id=kwargs['order_id']))
 
         return context
 
@@ -600,7 +694,6 @@ class QueueToEventView(TemplateView):
 
         #Gestire il caso in cui l'utente è già in coda ma chiede di essere accodato nel html
 
-
         if kwargs['command'] == 'add_me':
             #add current user to the queue
             context['event'].queued_partecipants.add(request.user)
@@ -608,14 +701,12 @@ class QueueToEventView(TemplateView):
             context['cmd']  ='add_me'
             print ('user added to queue')
 
-
         elif kwargs['command'] == 'remove_me':
             #remove current user to the queue
             context['event'].queued_partecipants.remove(request.user)
             context['event'].save()
             context['cmd']  = 'remove_me'
             print ('user removed from queue')
-
 
         return render(request,
                       self.template_name,
@@ -645,6 +736,7 @@ def create_payment_intent(request):
 
         print('Creating payment intent for order_id:' + str(order_id) + ' ,total: ' + str(total) )
         print('request:' + str(request.body))
+
         try:
             intent = stripe.PaymentIntent.create(
                 amount = total*eur_cents,
@@ -663,115 +755,10 @@ def create_payment_intent(request):
             return JsonResponse({
               'clientSecret': intent['client_secret']
             })
+
         except Exception as e:
             print('error creting intent:' + str(e))
             return JsonResponse({'error':str(e), })
-
-
-def open_order(pk, user):
-
-   year_subscription_price = int(get_setting('year_subscription_price'))
-
-   sub_total=0
-   max_exp_date = date.today()
-
-   e = Event.objects.get(id=pk)
-   sub_total += e.activity.price
-
-   #check if an event requires subscription to be renewed
-   subscription_expired = e.date > user.userprofileinfo.exp_date
-
-   print('cost of tickets:' + str(sub_total))
-
-   if subscription_expired:
-      sub_total += year_subscription_price
-      print('with subscription:' + str(sub_total))
-
-   #check user credits
-   credits = user.userprofileinfo.credits
-   print('user credits:' + str(credits))
-
-   if sub_total > credits:
-       print('#total sum is partially  paid with credits')
-       total = sub_total
-       credits_to_use = 0
-   else:
-      print('total sum is paid with credits')
-      credits_to_use = sub_total
-      total = 0
-
-   print('Total to be paid with card:' + str(total))
-
-   items=[]
-   items.append({'type':'ticket', 'pk': pk})
-
-   if subscription_expired:
-      items.append({'type':"subscription"} )
-
-    #Create the order
-   o = Order.objects.create(user=user, date=date.today(), time=datetime.now(), status="chart", items=str(items), total=total, credits_to_use=credits_to_use )
-   o.save()
-   print('Order saved:' + str(o))
-
-   e = Event.objects.get(id=pk)
-
-   context = {}
-   context['subs_exp_date'] = user.userprofileinfo.exp_date
-   context['subscription_expired'] = subscription_expired
-   context['year_subscription_price'] = year_subscription_price
-   context['sub_total'] = sub_total
-   context['total'] = total
-   context['credits_to_use'] = credits_to_use
-   context['event'] =  e
-   context['order_id'] = o.id
-
-   return (True, context, o)
-
-#closes a specific order
-def close_order(o):
-
-    #retrive the user
-    user = o.user
-    print('User: ' + user.email)
-    #retrive the articles in the orders
-    items = ast.literal_eval(o.items)
-
-    print('User had: ' + str(user.userprofileinfo.credits) + 'credits')
-    #subtract credits used
-    if o.credits_to_use>0:
-        user.userprofileinfo.credits-=o.credits_to_use
-
-    print('User now has: ' + str(user.userprofileinfo.credits) + 'credits')
-
-    for i in items:
-        if i['type'] == 'ticket':
-
-            e=Event.objects.get(id=int(i['pk']))
-
-            print('Order contains ticket for event : ' + str(e.activity.name) +' on date:' + str(e.date))
-            print('credits to be used : ' + str(o.credits_to_use))
-            print('order total:' + str(o.total))
-
-            #add user to event
-            e.partecipants.add(user)
-
-            #remove him from the queue if he was in the queued_partecipants
-            if e.queued_partecipants.filter(email=user.email).count()>0:
-                e.queued_partecipants.remove(user)
-                print('removed user ' + user.email + ' from the queue of event ' + e.activity.name)
-
-        elif i['type'] == 'subscription':
-            subscription_duration_months = int(get_setting('subscription_duration_months'))
-            user.userprofileinfo.exp_date = datetime.today() + relativedelta(months=+subscription_duration_months)
-            user.save()
-            print('Order contains subscription, user subscription now expires on ' + str(user.userprofileinfo.exp_date) )
-
-    e.save()
-    o.status = "completed"
-    o.save()
-    user.userprofileinfo.save()
-
-    return True
 
 # Using Django
 @csrf_exempt

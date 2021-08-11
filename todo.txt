@@ -1,8 +1,8 @@
 
 
 
-completare/testare chusura ordine in caso di crediti
-                   chiusura ordine in caso di carta
+
+-implememtare refund con carta
 
 -capire come mai i queued partecipants viene considerato cme reqiured
 -si deve proporre di acquistare subscription se la data dell'evento supera la expiri, non se è scaduta oggi

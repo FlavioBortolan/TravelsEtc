@@ -27,6 +27,7 @@
 
         <h2>Press confirm to proceed!</h2>
 
+        <!-- Payment with card -->
         {% if total > 0 %}
 
           <form action="{% url 'TravelsApp:card_pay' amount=total order_id=order_id %}" method="get">
@@ -35,8 +36,9 @@
             </div>
           </form>
 
+        <!-- Payment with credits -->
         {% else %}
-        <form action="{% url 'TravelsApp:buyticket' pk=pk buy_step='confirmed' total=total credits_to_use=credits_to_use%}" method="get">
+        <form action="{% url 'TravelsApp:buyticket' pk=pk buy_step='confirmed' total=total credits_to_use=credits_to_use order_id=order_id %}" method="get">
 
 
         <div class="w3-center">
@@ -53,7 +55,7 @@
         </form>
         {% endif       %}
 
-      {% else %}
+      {% elif  buy_step == 'confirmed' %}
         <h2>Congratulation your ticket is confirmed!</h2>
 
       {% endif %}

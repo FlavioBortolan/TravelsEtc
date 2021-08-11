@@ -11,28 +11,6 @@
 
     {% csrf_token %}
     <input type="hidden" id="total" value="{{ total }}">
-
-  <div class="w3-container">
-      <h1>Card Payment</h1>
-      <br>
-      <h3><b>TOTAL: </b></h3> <h3><b>{{ total }}</b></h3>
-
-      <link rel="stylesheet" href="{% static 'css/payment.css' %}" />
-        <!-- Display a payment form -->
-        <form id="payment-form">
-          <div id="card-element"><!--Stripe.js injects the Card Element--></div>
-          <button id="submit">
-            <div class="spinner hidden" id="spinner"></div>
-            <span id="button-text">Pay now</span>
-          </button>
-          <p id="card-error" role="alert"></p>
-          <p class="result-message hidden">
-            Payment succeeded, see the result in your
-            <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
-          </p>
-        </form>
-
-    </div>
     <script>
         // A reference to Stripe.js initialized with a fake API key.
         // Sign in to see examples pre-filled with your key.
@@ -139,7 +117,6 @@
             );
           document.querySelector(".result-message").classList.remove("hidden");
           document.querySelector("button").disabled = true;
-          window.location.replace("{% url 'TravelsApp:buyticket' pk=0 buy_step='confirmed' total=0 credits_to_use=0 order_id=0 %}");
         };
 
         // Show the customer the error from Stripe if their card fails to charge
@@ -170,5 +147,26 @@
 
 
 
+  <div class="w3-container">
+      <h1>Card Payment</h1>
+      <br>
+      <h3><b>TOTAL: </b></h3> <h3><b>{{ total }}</b></h3>
+
+      <link rel="stylesheet" href="{% static 'css/payment.css' %}" />
+        <!-- Display a payment form -->
+        <form id="payment-form">
+          <div id="card-element"><!--Stripe.js injects the Card Element--></div>
+          <button id="submit">
+            <div class="spinner hidden" id="spinner"></div>
+            <span id="button-text">Pay now</span>
+          </button>
+          <p id="card-error" role="alert"></p>
+          <p class="result-message hidden">
+            Payment succeeded, see the result in your
+            <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
+          </p>
+        </form>
+
+    </div>
   </body>
 </html>
