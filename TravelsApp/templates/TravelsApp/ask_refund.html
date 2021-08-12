@@ -41,10 +41,20 @@
       {% if user_subscribed %}
         <h3><i class="fas fa-check"></i>Refund done!</h3>
       {% else %}
-        <h3><i class="fas fa-times"></i>Refund impossible - you are not subscibed to this event!</h3> 
+        <h3><i class="fas fa-times"></i>Refund impossible - you are not subscibed to this event!</h3>
 
       {% endif %}
     </div>
+
+    <form action="{% url 'TravelsApp:events' filter_mode='all' %}" method = "get">
+      <br>
+      <div class="w3-center">
+        <button class="w3-btn w3-blue w3-center" type="submit">Back to events</button>
+      </div>
+
+      <br>
+
+   </form>
 
     {% endif %}
 

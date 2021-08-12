@@ -58,6 +58,17 @@
       {% elif  buy_step == 'confirmed' %}
         <h2>Congratulation your ticket is confirmed!</h2>
 
+        <form action="{% url 'TravelsApp:events' filter_mode='all' %}" method = "get">
+          <br>
+          <div class="w3-center">
+            <button class="w3-btn w3-blue w3-center" type="submit">Back to events</button>
+          </div>
+
+          <br>
+
+       </form>
+
+
       {% endif %}
 
     </div>
