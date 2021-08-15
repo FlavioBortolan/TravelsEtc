@@ -16,16 +16,34 @@
 
         <form class="w3-container" enctype="multipart/form-data" method="POST">
           {% csrf_token %}
-          <h3>Please choose refund mode:</h3>
+
           <div class="w3-card w3-padding w3-border w3-border-black">
 
-            <input class="w3-radio" type="radio" name="refund" value="Card" >
-            <label>Credit Card (1 euro commission)</label>
-            <br>
-            <input class="w3-radio" type="radio" name="refund" value="Credits" checked>
-            <label>Credits</label>
-            <br>
-            <br>
+            {% if choices == 'credits' %}
+              <h3>Refund will be done in credits as in the initial purchase:</h3>
+              <input class="w3-radio" type="radio" name="refund" value="credits" checked>
+              <label>Credits</label>
+              <br>
+              <br>
+            {% elif choices == 'card_or_credits' %}
+              <h3>Please choose refund mode:</h3>
+              <input class="w3-radio" type="radio" name="refund" value="card" >
+              <label>Credit Card (1 euro commission)</label>
+              <br>
+              <input class="w3-radio" type="radio" name="refund" value="credits" checked>
+              <label>Credits</label>
+              <br>
+              <br>
+            {% elif choices == 'card_plus_credit_or_credits' %}
+              <h3>Please choose refund mode:</h3>
+              <input class="w3-radio" type="radio" name="refund" value="card_plus_credits" >
+              <label>Credit Card (1 euro commission) for the maximum amount possible {{ max_amount_card }}, the rest in credits</label>
+              <br>
+              <input class="w3-radio" type="radio" name="refund" value="credits" checked>
+              <label>Credits</label>
+              <br>
+              <br>
+            {% endif %}
 
             <input type="submit" class="w3-btn w3-blue w3-center" name="" value="Proceed">
             <a href="{% url 'TravelsApp:ask_refund' pk=event.id refund_step=2%}" class="w3-btn w3-blue w3-center">Discard</a>

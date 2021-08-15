@@ -1,10 +1,54 @@
 
 
+TESTARE TUTTA STA ROBA:
+ -ordine in crediti e rimborso in crediti
+ -ordine con carta e rimbordo con carta
+ -ordine con carta e rimborso in crediti
+ -ordine misto e rimborso in crediti
+ -ordine misto e rimborso con carta
+
+ 
+**-acquisto misto:
+  **>se utente ha crediti in automatico vengono scalati e si paga in card solo la
+   differenza.
+  **>all'emissione di un ordine è presente quindi un total che rappresenta la
+  parte pagata con la carta e un credits_to_use che rappresenta la parte con i
+  crediti (logica già presente)
+
+-**rimborso
+ >**il sistema deve in automatico capire la possibilità di rimborso e
+ proporla in base alle seguenti regole:
+
+ >**acquisto effettutato in crediti->rimborso in crediti
+  **acquisto  effettutato con carta -> rimborso con carta o crediti.
+  **acquisto misto-> rimborso parte carta su carta e parte crediti su crediti.
 
 
--gestire acquisto con carta crediti e relativo rimborso.
 
-- Gestire acquisto del biglietto per un altro iscritto.
+- Gestire acquisto del biglietto per un altro iscritto:
+ Nella buy ticket deve comparire la possibilità di acquistarlo per me o per un altro.
+
+ >se per me si procede come ora
+ >Se per un altro:
+
+    inserire email->se già iscritta:->
+
+   a) la persona è gia iscritta:
+    a1) con sottoscrizione valida: pago solo il biglietto
+    a2) con sottoscrizione scaduta: devo pagare anche rinnovo.
+   b)persona nuova:
+    inserire dati
+    compra biglietto (primo anno iscrizione gratuita)
+
+ il biglietto viene assegnato alla persona per cui ho comprato.
+ -lui se lo vedrà tra i suoi biglietti.
+- se chiederà rimborso potra farlo con le stesse regole del biglietto per me stesso.
+  i crediti, cosi come il rimborso via carta vengono accreditati al compratore.
+
+
+
+
+
 -print dei log in una funzione a aprte un po piu strutturata
 
 -capire come mai i queued partecipants viene considerato cme reqiured

@@ -505,9 +505,9 @@ def open_order(pk, user):
    print('user credits:' + str(credits))
 
    if sub_total > credits:
-       #print('#total sum is partially  paid with credits')
-       total = sub_total
-       credits_to_use = 0
+       print('#total sum is partially  paid with credits')
+       credits_to_use = credits
+       total = sub_total - credits_to_use
    else:
       print('total sum is paid with credits')
       credits_to_use = sub_total
@@ -521,7 +521,7 @@ def open_order(pk, user):
    if subscription_expired:
       items.append({'type':"subscription"} )
 
-    #Create the order
+   #Create the order
    o = Order.objects.create(user=user, date=date.today(), time=datetime.now(), status="chart", items=str(items), total=total, credits_to_use=credits_to_use )
    o.save()
    print('Order saved:' + str(o))
@@ -623,28 +623,68 @@ class BuyTicketView(TemplateView):
 class AskRefundView(TemplateView):
     template_name = "TravelsApp/ask_refund.html"
 
+    def get_refund_coices(self, event, user):
+
+        print('*** get_refund_coices ***')
+        r_context={}
+
+        price = event.activity.price
+        #get ticket id from event, user,
+        ticket = Ticket.objects.filter(user=user, event = event )[0]
+        tot_card = ticket.order.total
+
+        print('price = ' + str(price) + ', tot_card = ' + str(tot_card))
+
+        #define which refund options there are
+        if tot_card == 0:
+
+            r_context['choices'] = "credits"
+            r_context['max_amount_card'] = 0
+
+        elif price <= tot_card:
+            #card or credits
+            r_context['choices'] = "card_or_credits"
+            #if card is chosen, maximim amount for card is the price of the ticket.
+            r_context['max_amount_card'] = price
+
+        elif price > tot_card:
+            #mixed card and credits refund or credits only
+            r_context['choices'] ="card_plus_credit_or_credits"
+            #the maximum that can be refunded to card is the total paid with card in the order
+            r_context['max_amount_card'] = tot_card
+
+        r_context['price'] = price
+
+        print(str(r_context))
+        return r_context
+
     def get_context_data(self,**kwargs):
         context  = super().get_context_data(**kwargs)
         context['event'] = Event.objects.get(id=kwargs['pk'])
         context['refund_step'] =  kwargs['refund_step']
 
+        r_context = self.get_refund_coices(context['event'], self.request.user)
+
+        context = {**context , **r_context}
+
         return context
 
-    def refund_ticket(self, user, event):
+    def refund_ticket_with_card(self, user, event, amount):
 
-        print('*** refund_ricket ***: user = ' + user.email + ', event = ' + event.activity.name )
+        print('*** refund_ticket ***: user = ' + user.email + ', event = ' + event.activity.name + ', amount = ' + str(amount) )
         #get ticket id from event, user,
         ticket = Ticket.objects.filter(user=user, event = event )[0]
 
         #get order id from ticket id
         order = ticket.order
 
-        #refund the price of  the ticket (excluding other items in the same order)
+        #refund for the amount given
 
         try:
             print('refunding payment_intent:' + order.payment_id)
             r = stripe.Refund.create(
-            payment_intent = order.payment_id,)
+            payment_intent = order.payment_id,
+            amount = amount)
             print(str(r))
 
             return True, None
@@ -663,32 +703,45 @@ class AskRefundView(TemplateView):
         context['event'] = Event.objects.get(id=kwargs['pk'])
         context['refund_step'] =  2
 
-        #check if user is subscribed, this is to avoid a user arrives here with the 'back' button after having already unsubscribed
+        #check if user is subscribed to the event , this is to avoid a user arrives here with the 'back' button after having already unsubscribed
         if request.user in context['event'].partecipants.all():
 
             context['user_subscribed'] = True
 
-            if refund == 'Credits':
-                #add value of the event to user's Credits
-                request.user.userprofileinfo.credits += context['event'].activity.price
-                print ('refunding Credits...')
-                request.user.userprofileinfo.save()
-                context['event'].partecipants.remove(request.user)
-                context['event'].save()
-                context['refund_result'] = "success"
-                print ('done')
+            refund_dict = self.get_refund_coices(context['event'], self.request.user)
 
-            #bank refund
-            else:
+            #how much to refund in credits
+            credits_refund = 0
+            #how much to refund with card
+            card_refund = 0
 
+            if refund == 'credits':
+
+                credits_refund = refund_dict['price']
+                card_refund = 0
+
+            elif refund == 'card':
+
+                credits_refund = 0
+                card_refund = refund_dict['price']
+
+            elif refund == 'card_plus_credits':
+
+                credits_refund = refund_dict['price'] - refund_dict['max_amount_card']
+                card_refund = refund_dict['max_amount_card']
+
+            #successful card payment
+            ret_card = True
+            if card_refund > 0:
+
+                #bank refund
                 card_refund_cost = int(get_setting('card_refund_cost'))
-                price = context['event'].activity.price
-                refund = price - card_refund_cost
+                net_refund = card_refund - card_refund_cost
 
-                ret, e = self.refund_ticket(request.user, context['event'])
+                ret_card, e = self.refund_ticket_with_card(request.user, context['event'], card_refund)
 
-                if ret:
-                    print ('Refund of ' + str(refund) + 'euros done (' + str(price) + '-' + str(card_refund_cost) +')')
+                if ret_card:
+                    print ('Refund of ' + str(net_refund) + 'euros done (' + str(price) + '-' + str(card_refund_cost) +')')
                     context['event'].partecipants.remove(request.user)
                     context['event'].save()
                     context['refund_result'] = "success"
@@ -696,6 +749,19 @@ class AskRefundView(TemplateView):
                     print ('Error refunding payment: ' + str(e))
                     context['refund_result'] = str(e)
 
+            #refund credits
+            ret_cred = True
+            if credits_refund>0 and ret_card:#do not proceed refunding credits if there was issue with card
+                request.user.userprofileinfo.credits += credits_refund
+                print ('refunding Credits...')
+                request.user.userprofileinfo.save()
+                ret_cred = True
+
+            if ret_cred and ret_card:
+                #remove user from partecipants
+                context['event'].partecipants.remove(request.user)
+                context['event'].save()
+                context['refund_result'] = "success"
 
         else:
             print ('user is not subscibed...')
