@@ -1,6 +1,9 @@
 
 
 
+
+-gestire acquisto con carta crediti e relativo rimborso.
+
 - Gestire acquisto del biglietto per un altro iscritto.
 -print dei log in una funzione a aprte un po piu strutturata
 

@@ -505,7 +505,7 @@ def open_order(pk, user):
    print('user credits:' + str(credits))
 
    if sub_total > credits:
-       print('#total sum is partially  paid with credits')
+       #print('#total sum is partially  paid with credits')
        total = sub_total
        credits_to_use = 0
    else:
@@ -675,7 +675,7 @@ class AskRefundView(TemplateView):
                 request.user.userprofileinfo.save()
                 context['event'].partecipants.remove(request.user)
                 context['event'].save()
-
+                context['refund_result'] = "success"
                 print ('done')
 
             #bank refund

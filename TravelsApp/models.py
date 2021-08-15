@@ -39,7 +39,6 @@ class Activity(models.Model):
 
     name = models.CharField(max_length=100)
     description = models.CharField(max_length=600)
-
     place = models.CharField(max_length=100)
     #partecipants
     type = models.CharField(max_length=100)
@@ -65,6 +64,7 @@ class Activity(models.Model):
         return "ID: " + str(self.id) + ", Place: " + self.place + ", Leader: " + self.leader
 
 class Order(models.Model):
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(default = timezone.now)
     time = models.TimeField(default = timezone.now)
