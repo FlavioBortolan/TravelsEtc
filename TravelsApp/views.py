@@ -543,6 +543,7 @@ def open_order(pk, user):
 #closes a specific order after payment is completed
 def close_order(o):
 
+    print('*** close_order ***')
     if o.status=="completed":
         return False
 
@@ -631,6 +632,7 @@ class AskRefundView(TemplateView):
 
     def refund_ticket(self, user, event):
 
+        print('*** refund_ricket ***: user = ' + user.email + ', event = ' + event.activity.name )
         #get ticket id from event, user,
         ticket = Ticket.objects.filter(user=user, event = event )[0]
 
@@ -640,8 +642,11 @@ class AskRefundView(TemplateView):
         #refund the price of  the ticket (excluding other items in the same order)
 
         try:
-            stripe.Refund.create(
+            print('refunding payment_intent:' + order.payment_id)
+            r = stripe.Refund.create(
             payment_intent = order.payment_id,)
+            print(str(r))
+
             return True, None
 
         except Exception as e:
@@ -755,6 +760,7 @@ class CardPayView(TemplateView):
         context  = super().get_context_data(**kwargs)
         context['total'] = kwargs['amount']
         context['payment_intent_address'] = reverse('TravelsApp:create_payment_intent')
+        context['order_id'] = kwargs['order_id']
 
         return context
 

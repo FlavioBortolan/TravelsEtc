@@ -1,15 +1,12 @@
 
 
 
--sistemare bug: quando si paga con carda viene richiamato buyticket/confirmed ma con oreder id =0 questo impedisce poiu di eseguire corretammtne close_order
- implementare passaggio di order_id da qualche parte
- 
--implememtare refund con carta
+- Gestire acquisto del biglietto per un altro iscritto.
+-print dei log in una funzione a aprte un po piu strutturata
 
 -capire come mai i queued partecipants viene considerato cme reqiured
 -si deve proporre di acquistare subscription se la data dell'evento supera la expiri, non se è scaduta oggi
 
-- Gestire acquisto del biglietto per un altro iscritto.
 - deploy su digital ocean
 
 
@@ -17,7 +14,7 @@
 
 - Test su schermo formato cellulare
 
-- Gestione payment
+
 
 
 

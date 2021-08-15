@@ -40,7 +40,7 @@
     <div class="w3-container">
       {% if user_subscribed %}
 
-        {% if refund_result == success %}
+        {% if refund_result == 'success' %}
         <h3><i class="fas fa-check"></i>Refund done!</h3>
         {% else %}
         <h3><i class="fas fa-times"></i>There was a problem in the refund: {{ refund_result }}</h3>
