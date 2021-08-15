@@ -14,6 +14,7 @@ from .models import Activity
 from .models import Event
 from .models import Setting
 from .models import Order
+from .models import Ticket
 
 
 from django.contrib.auth import get_user_model
@@ -35,6 +36,8 @@ from django.views.decorators.csrf import csrf_exempt
 # This is a sample test API key. Sign in to see examples pre-filled with your key.
 stripe.api_key = "sk_test_51JKVSWC9NPB01a0ntYHt93lawC5fmkYHcghlD3ZOwnbScemvFjxC6rfbbHWOsXkuyvdMBfe5C4tpEeRklxMkrBQZ00SfVNyeyW"
 
+#used to simulate payments for debug
+stripe_simulate_for_debug = False
 User = get_user_model()
 
 import logging
@@ -537,7 +540,7 @@ def open_order(pk, user):
 
    return (True, context, o)
 
-#closes a specific order
+#closes a specific order after payment is completed
 def close_order(o):
 
     if o.status=="completed":
@@ -573,16 +576,21 @@ def close_order(o):
                 e.queued_partecipants.remove(user)
                 print('removed user ' + user.email + ' from the queue of event ' + e.activity.name)
 
+            #Create the ticket
+            #!!!!handle the case where the user is NOT the current user as he as bougth tickets for someone else
+            t=Ticket.objects.create(user=user, event=e, order=o)
+            t.save()
+            e.save()
+            user.userprofileinfo.save()
+
         elif i['type'] == 'subscription':
             subscription_duration_months = int(get_setting('subscription_duration_months'))
             user.userprofileinfo.exp_date = datetime.today() + relativedelta(months=+subscription_duration_months)
-            user.save()
+            user.userprofileinfo.save()
             print('Order contains subscription, user subscription now expires on ' + str(user.userprofileinfo.exp_date) )
 
-    e.save()
     o.status = "completed"
     o.save()
-    user.userprofileinfo.save()
 
     return True
 
@@ -600,7 +608,7 @@ class BuyTicketView(TemplateView):
 
             res, context_out, order = open_order(context['pk'], self.request.user)
             context = { **context,  **context_out}
-
+            print('BuyTicketView: confirmation, context = ' + str(context))
         #if the purchase is confirmed add this activity to user's Activities
         elif kwargs['buy_step']=='confirmed':
 
@@ -611,8 +619,6 @@ class BuyTicketView(TemplateView):
     def post(self, request, *args, **kwargs):
         print('BuyTicket POST was called')
 
-
-
 class AskRefundView(TemplateView):
     template_name = "TravelsApp/ask_refund.html"
 
@@ -622,6 +628,25 @@ class AskRefundView(TemplateView):
         context['refund_step'] =  kwargs['refund_step']
 
         return context
+
+    def refund_ticket(self, user, event):
+
+        #get ticket id from event, user,
+        ticket = Ticket.objects.filter(user=user, event = event )[0]
+
+        #get order id from ticket id
+        order = ticket.order
+
+        #refund the price of  the ticket (excluding other items in the same order)
+
+        try:
+            stripe.Refund.create(
+            payment_intent = order.payment_id,)
+            return True, None
+
+        except Exception as e:
+            print('error refund payment intent:' + str(e))
+            return False, e
 
     #Handles the 'POST' request from the client browser
     def post(self, request, *args, **kwargs):
@@ -643,18 +668,29 @@ class AskRefundView(TemplateView):
                 request.user.userprofileinfo.credits += context['event'].activity.price
                 print ('refunding Credits...')
                 request.user.userprofileinfo.save()
+                context['event'].partecipants.remove(request.user)
+                context['event'].save()
+
                 print ('done')
+
+            #bank refund
             else:
-                #bank transfer to Card
+
                 card_refund_cost = int(get_setting('card_refund_cost'))
                 price = context['event'].activity.price
                 refund = price - card_refund_cost
-                Payment.mock_do_payment(self,  refund)
 
-                print ('Refund of ' + str(refund) + 'euros done (' + str(price) + '-' + str(card_refund_cost) +')')
+                ret, e = self.refund_ticket(request.user, context['event'])
 
-            context['event'].partecipants.remove(request.user)
-            context['event'].save()
+                if ret:
+                    print ('Refund of ' + str(refund) + 'euros done (' + str(price) + '-' + str(card_refund_cost) +')')
+                    context['event'].partecipants.remove(request.user)
+                    context['event'].save()
+                    context['refund_result'] = "success"
+                else:
+                    print ('Error refunding payment: ' + str(e))
+                    context['refund_result'] = str(e)
+
 
         else:
             print ('user is not subscibed...')
@@ -726,6 +762,8 @@ class CardPayView(TemplateView):
     def post(self, request, *args, **kwargs):
         print ('post called, useless')
 
+
+
 def create_payment_intent(request):
 
     eur_cents = 100
@@ -748,8 +786,12 @@ def create_payment_intent(request):
 
             #update the order
             o = Order.objects.get(id=order_id)
-            #o.payment_id = intent['id']
-            o.payment_id = 'this is just a dummy id'
+            o.payment_id = intent['id']
+
+            #for debug purposes
+            if stripe_simulate_for_debug == True:
+                o.payment_id = 'this is just a dummy id'
+
             o.save()
 
             return JsonResponse({
@@ -785,7 +827,11 @@ def stripe_webhook(request):
         try:
             #retrive the order correspondig to the intent id
             #o = Order.objects.filter(status='chart', payment_id = intent['id'])[0]
-            o = Order.objects.filter(status__iexact='chart', payment_id__iexact = 'this is just a dummy id')[0]
+
+            #overwrite for debug purposes
+            if stripe_simulate_for_debug == True:
+                o = Order.objects.filter(status__iexact='chart', payment_id__iexact = 'this is just a dummy id')[0]
+
             print('Payment receved for order id: ' + str(o.id))
 
         except Exception as ex:

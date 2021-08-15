@@ -1,7 +1,9 @@
 
 
 
-
+-sistemare bug: quando si paga con carda viene richiamato buyticket/confirmed ma con oreder id =0 questo impedisce poiu di eseguire corretammtne close_order
+ implementare passaggio di order_id da qualche parte
+ 
 -implememtare refund con carta
 
 -capire come mai i queued partecipants viene considerato cme reqiured

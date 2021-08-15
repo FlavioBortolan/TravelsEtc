@@ -90,6 +90,12 @@ class Event(models.Model):
     def __str__(self):
         return "ID: " + str(self.id) + ", Date: " + str(self.date) + str(self.activity)
 
+class Ticket(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+
 class Setting(models.Model):
 
     name  = models.CharField(max_length=128)
