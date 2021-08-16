@@ -481,18 +481,20 @@ class SingleEvent(DetailView):
 
         return context
 
-def open_order(pk, user):
+#opens an order for one single event and for the specified user
+def open_order(pk, payer, partecipant):
 
+   print('*** open order ***: payer = ' + payer.email + ', partecipant = ' + partecipant.email)
    year_subscription_price = int(get_setting('year_subscription_price'))
 
-   sub_total=0
+   sub_total = 0
    max_exp_date = date.today()
 
-   e = Event.objects.get(id=pk)
+   e = Event.objects.get( id = pk )
    sub_total += e.activity.price
 
    #check if an event requires subscription to be renewed
-   subscription_expired = e.date > user.userprofileinfo.exp_date
+   subscription_expired = e.date > partecipant.userprofileinfo.exp_date
 
    print('cost of tickets:' + str(sub_total))
 
@@ -501,8 +503,8 @@ def open_order(pk, user):
       print('with subscription:' + str(sub_total))
 
    #check user credits
-   credits = user.userprofileinfo.credits
-   print('user credits:' + str(credits))
+   credits = payer.userprofileinfo.credits
+   print('payer credits:' + str(credits))
 
    if sub_total > credits:
        print('#total sum is partially  paid with credits')
@@ -516,20 +518,20 @@ def open_order(pk, user):
    print('Total to be paid with card:' + str(total))
 
    items=[]
-   items.append({'type':'ticket', 'pk': pk})
+   items.append({'type':'event_ticket_purchase', 'pk': pk, 'partecipant': partecipant.email})
 
    if subscription_expired:
-      items.append({'type':"subscription"} )
+      items.append({'type':"subscription", 'partecipant': partecipant.email} )
 
    #Create the order
-   o = Order.objects.create(user=user, date=date.today(), time=datetime.now(), status="chart", items=str(items), total=total, credits_to_use=credits_to_use )
+   o = Order.objects.create(user=payer, date=date.today(), time=datetime.now(), status="chart", items=str(items), total=total, credits_to_use=credits_to_use )
    o.save()
    print('Order saved:' + str(o))
 
    e = Event.objects.get(id=pk)
 
    context = {}
-   context['subs_exp_date'] = user.userprofileinfo.exp_date
+   context['subs_exp_date'] = partecipant.userprofileinfo.exp_date
    context['subscription_expired'] = subscription_expired
    context['year_subscription_price'] = year_subscription_price
    context['sub_total'] = sub_total
@@ -557,37 +559,41 @@ def close_order(o):
     #subtract credits used
     if o.credits_to_use>0:
         user.userprofileinfo.credits-=o.credits_to_use
+        user.userprofileinfo.save()
 
     print('User now has: ' + str(user.userprofileinfo.credits) + 'credits')
 
     for i in items:
-        if i['type'] == 'ticket':
+
+        partecipant = User.objects.get(email=i['partecipant'])
+
+        if i['type'] == 'event_ticket_purchase':
 
             e=Event.objects.get(id=int(i['pk']))
 
             print('Order contains ticket for event : ' + str(e.activity.name) +' on date:' + str(e.date))
+            print('The target partecipant is:' + i['partecipant'])
             print('credits to be used : ' + str(o.credits_to_use))
             print('order total:' + str(o.total))
 
+
             #add user to event
-            e.partecipants.add(user)
+            e.partecipants.add(partecipant)
 
             #remove him from the queue if he was in the queued_partecipants
-            if e.queued_partecipants.filter(email=user.email).count()>0:
-                e.queued_partecipants.remove(user)
-                print('removed user ' + user.email + ' from the queue of event ' + e.activity.name)
+            if e.queued_partecipants.filter(email=partecipant.email).count()>0:
+                e.queued_partecipants.remove(partecipant)
+                print('removed user ' + partecipant.email + ' from the queue of event ' + e.activity.name)
 
             #Create the ticket
-            #!!!!handle the case where the user is NOT the current user as he as bougth tickets for someone else
-            t=Ticket.objects.create(user=user, event=e, order=o, status = 'valid')
+            t = Ticket.objects.create(user=partecipant, event=e, order=o, status = 'valid')
             t.save()
             e.save()
-            user.userprofileinfo.save()
 
         elif i['type'] == 'subscription':
             subscription_duration_months = int(get_setting('subscription_duration_months'))
-            user.userprofileinfo.exp_date = datetime.today() + relativedelta(months=+subscription_duration_months)
-            user.userprofileinfo.save()
+            partecipant.userprofileinfo.exp_date = datetime.today() + relativedelta(months=+subscription_duration_months)
+            partecipant.userprofileinfo.save()
             print('Order contains subscription, user subscription now expires on ' + str(user.userprofileinfo.exp_date) )
 
     o.status = "completed"
@@ -607,7 +613,7 @@ class BuyTicketView(TemplateView):
 
         if kwargs['buy_step']=='confirmation':
 
-            res, context_out, order = open_order(context['pk'], self.request.user)
+            res, context_out, order = open_order(context['pk'], self.request.user, self.request.user)
             context = { **context,  **context_out}
             print('BuyTicketView: confirmation, context = ' + str(context))
         #if the purchase is confirmed add this activity to user's Activities
