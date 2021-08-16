@@ -31,3 +31,6 @@ if __name__=="__main__" :
 
     s = Setting.objects.get_or_create( name="card_refund_cost", value = '1', description='Cost of the refund by card')[0]
     s.save()
+
+    s = Setting.objects.get_or_create( name="smallest_currency_ratio", value = '100', description='Ratio between one currency unit and its smallest value. Exp 1 euro = 100 euro cents.')[0]
+    s.save()

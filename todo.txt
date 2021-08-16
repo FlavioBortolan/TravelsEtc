@@ -1,13 +1,13 @@
 
 
 TESTARE TUTTA STA ROBA:
- -ordine in crediti e rimborso in crediti
- -ordine con carta e rimbordo con carta
- -ordine con carta e rimborso in crediti
- -ordine misto e rimborso in crediti
- -ordine misto e rimborso con carta
+ *-ordine in crediti e rimborso in crediti
+ *-ordine con carta e rimbordo con carta
+ *-ordine con carta e rimborso in crediti
+ *-ordine misto e rimborso in crediti
+ *-ordine misto e rimborso con carta
 
- 
+
 **-acquisto misto:
   **>se utente ha crediti in automatico vengono scalati e si paga in card solo la
    differenza.
@@ -22,7 +22,6 @@ TESTARE TUTTA STA ROBA:
  >**acquisto effettutato in crediti->rimborso in crediti
   **acquisto  effettutato con carta -> rimborso con carta o crediti.
   **acquisto misto-> rimborso parte carta su carta e parte crediti su crediti.
-
 
 
 - Gestire acquisto del biglietto per un altro iscritto:

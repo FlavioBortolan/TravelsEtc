@@ -579,7 +579,7 @@ def close_order(o):
 
             #Create the ticket
             #!!!!handle the case where the user is NOT the current user as he as bougth tickets for someone else
-            t=Ticket.objects.create(user=user, event=e, order=o)
+            t=Ticket.objects.create(user=user, event=e, order=o, status = 'valid')
             t.save()
             e.save()
             user.userprofileinfo.save()
@@ -623,17 +623,16 @@ class BuyTicketView(TemplateView):
 class AskRefundView(TemplateView):
     template_name = "TravelsApp/ask_refund.html"
 
-    def get_refund_coices(self, event, user):
+    def get_refund_coices(self, ticket):
 
         print('*** get_refund_coices ***')
         r_context={}
 
-        price = event.activity.price
+        price = ticket.event.activity.price
         #get ticket id from event, user,
-        ticket = Ticket.objects.filter(user=user, event = event )[0]
         tot_card = ticket.order.total
 
-        print('price = ' + str(price) + ', tot_card = ' + str(tot_card))
+        print('Ticket id = ' + str(ticket.id) + ', price = ' + str(price) + ', tot_card = ' + str(tot_card))
 
         #define which refund options there are
         if tot_card == 0:
@@ -663,28 +662,27 @@ class AskRefundView(TemplateView):
         context['event'] = Event.objects.get(id=kwargs['pk'])
         context['refund_step'] =  kwargs['refund_step']
 
-        r_context = self.get_refund_coices(context['event'], self.request.user)
+        ticket = Ticket.objects.filter(user=self.request.user, event = context['event'], status = 'valid' )[0]
+        r_context = self.get_refund_coices(ticket)
 
         context = {**context , **r_context}
 
         return context
 
-    def refund_ticket_with_card(self, user, event, amount):
+    def refund_ticket_with_card(self, ticket, amount):
 
-        print('*** refund_ticket ***: user = ' + user.email + ', event = ' + event.activity.name + ', amount = ' + str(amount) )
-        #get ticket id from event, user,
-        ticket = Ticket.objects.filter(user=user, event = event )[0]
+        print('*** refund_ticket ***: user = ' + ticket.user.email + ', event = ' + ticket.event.activity.name + ', amount = ' + str(amount) )
 
         #get order id from ticket id
         order = ticket.order
 
         #refund for the amount given
-
+        smallest_currency_ratio = int(get_setting('smallest_currency_ratio'))
         try:
             print('refunding payment_intent:' + order.payment_id)
             r = stripe.Refund.create(
             payment_intent = order.payment_id,
-            amount = amount)
+            amount = amount*smallest_currency_ratio)
             print(str(r))
 
             return True, None
@@ -708,7 +706,10 @@ class AskRefundView(TemplateView):
 
             context['user_subscribed'] = True
 
-            refund_dict = self.get_refund_coices(context['event'], self.request.user)
+            #get ticket id from event, user,
+            ticket = Ticket.objects.filter(user=self.request.user, event = context['event'], status = 'valid' )[0]
+
+            refund_dict = self.get_refund_coices(ticket)
 
             #how much to refund in credits
             credits_refund = 0
@@ -738,10 +739,10 @@ class AskRefundView(TemplateView):
                 card_refund_cost = int(get_setting('card_refund_cost'))
                 net_refund = card_refund - card_refund_cost
 
-                ret_card, e = self.refund_ticket_with_card(request.user, context['event'], card_refund)
+                ret_card, e = self.refund_ticket_with_card(ticket, card_refund)
 
                 if ret_card:
-                    print ('Refund of ' + str(net_refund) + 'euros done (' + str(price) + '-' + str(card_refund_cost) +')')
+                    print ('Refund of ' + str(net_refund) + 'euros done (' + str(card_refund) + '-' + str(card_refund_cost) +')')
                     context['event'].partecipants.remove(request.user)
                     context['event'].save()
                     context['refund_result'] = "success"
@@ -762,6 +763,8 @@ class AskRefundView(TemplateView):
                 context['event'].partecipants.remove(request.user)
                 context['event'].save()
                 context['refund_result'] = "success"
+                ticket.status='refunded'
+                ticket.save()
 
         else:
             print ('user is not subscibed...')

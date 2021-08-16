@@ -95,6 +95,7 @@ class Ticket(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    status = models.CharField(max_length=30, default="valid")
 
 class Setting(models.Model):
 
