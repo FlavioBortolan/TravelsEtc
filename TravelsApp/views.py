@@ -604,6 +604,7 @@ def close_order(o):
 class BuyTicketView(TemplateView):
     template_name = "TravelsApp/buyticket.html"
 
+    '''
     def get_context_data(self,**kwargs):
 
         context  = super().get_context_data(**kwargs)
@@ -622,9 +623,42 @@ class BuyTicketView(TemplateView):
             close_order(Order.objects.get(id=kwargs['order_id']))
 
         return context
+    '''
+    def get(self, request, *args, **kwargs):
+
+        print('BuyTicket GET was called')
+        context  = super().get_context_data(**kwargs)
+        context  = super().get_context_data(**kwargs)
+        #context['Event_pk'] =  kwargs['pk']
+        context['pk'] =  kwargs['pk']
+        context['buy_step'] =  kwargs['buy_step']
+
+        if kwargs['buy_step']=='confirmed':
+
+            close_order(Order.objects.get(id=kwargs['order_id']))
+
+        return render(request,
+                      self.template_name,
+                      context)
 
     def post(self, request, *args, **kwargs):
         print('BuyTicket POST was called')
+
+        context  = super().get_context_data(**kwargs)
+        #context['Event_pk'] =  kwargs['pk']
+        context['pk'] =  kwargs['pk']
+        context['buy_step'] =  kwargs['buy_step']
+
+        if kwargs['buy_step']=='confirmation':
+
+            res, context_out, order = open_order(context['pk'], self.request.user, self.request.user)
+            context = { **context,  **context_out}
+            print('BuyTicketView: confirmation, context = ' + str(context))
+        #if the purchase is confirmed add this activity to user's Activities
+
+        return render(request,
+                      self.template_name,
+                      context)
 
 class AskRefundView(TemplateView):
     template_name = "TravelsApp/ask_refund.html"

@@ -142,7 +142,8 @@
             </form>
           {% elif event.partecipants.count < event.activity.maxNumPartecipants %}
 
-          <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='confirmation' total=0 credits_to_use=0 order_id=0 %}" method="get">
+          <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='confirmation' total=0 credits_to_use=0 order_id=0 %}" method="post">
+          {% csrf_token %}
             <div class="w3-center">
               <button class="w3-btn w3-blue w3-center" type="submit">Buy ticket!</button>
             </div>
