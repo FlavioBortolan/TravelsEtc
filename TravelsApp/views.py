@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (TemplateView,ListView,
                                   DetailView,CreateView,
                                   UpdateView,DeleteView)
+from django.shortcuts import redirect
 from .models import Activity
 from .models import Event
 from .models import Setting
@@ -341,7 +342,6 @@ class EventListView(LoginRequiredMixin, ListView):
             user_events = self.request.user.event_set.all()
             context['event_list']       = user_events.filter(date__gte = date.today())
 
-
         elif self.kwargs['filter_mode']=='current_user_past':
             logger.error('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate solo le attivita passate dell utente attuale')
 
@@ -417,8 +417,6 @@ class EventListView(LoginRequiredMixin, ListView):
         if end_date:
             print('filtering events with end date >' + end_date)
             filtered_events = filtered_events.filter(date__lte = end_date)
-
-
 
         #renders the page with the context dictionary elements set to the values
         #previously calculated
@@ -628,12 +626,28 @@ class BuyTicketView(TemplateView):
 
         print('BuyTicket GET was called')
         context  = super().get_context_data(**kwargs)
-        context  = super().get_context_data(**kwargs)
         #context['Event_pk'] =  kwargs['pk']
         context['pk'] =  kwargs['pk']
         context['buy_step'] =  kwargs['buy_step']
 
-        if kwargs['buy_step']=='confirmed':
+
+        if kwargs['buy_step']=='partecipant_selection':
+            print('buy_step = partecipant_selection')
+            print('requst:' + str(request))
+
+
+        elif kwargs['buy_step']=='confirmation':
+
+            if kwargs['friend_id'] != '-1':
+                partecipant = User.objects.get(id = int(kwargs['friend_id']))
+            else:
+                partecipant = self.request.user
+
+            res, context_out, order = open_order(context['pk'], self.request.user, partecipant)
+            context = { **context,  **context_out}
+            print('BuyTicketView: confirmation, context = ' + str(context))
+
+        elif kwargs['buy_step']=='confirmed':
 
             close_order(Order.objects.get(id=kwargs['order_id']))
 
@@ -649,12 +663,60 @@ class BuyTicketView(TemplateView):
         context['pk'] =  kwargs['pk']
         context['buy_step'] =  kwargs['buy_step']
 
-        if kwargs['buy_step']=='confirmation':
+        if kwargs['buy_step']=='receive_user_selected':
+            print('buy_step = receive_user_selected')
 
-            res, context_out, order = open_order(context['pk'], self.request.user, self.request.user)
-            context = { **context,  **context_out}
-            print('BuyTicketView: confirmation, context = ' + str(context))
-        #if the purchase is confirmed add this activity to user's Activities
+            #ticket for me: go to the confirmation page
+            if request.POST.get('me_or_friend') == 'me':
+
+                return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="confirmation", total = 0, credits_to_use = 0, order_id = 0, friend_id='-1')
+
+            #ticket for friend: collect friend's email
+            else:
+
+                user_form = UserForm(error_class=DivErrorList)
+
+                #Hide password
+                user_form.fields['password'].widget = user_form.fields['email'].hidden_widget()
+                user_form.fields['repeat_password'].widget = user_form.fields['repeat_password'].hidden_widget()
+                user_form.fields['first_name'].widget = user_form.fields['first_name'].hidden_widget()
+                user_form.fields['last_name'].widget = user_form.fields['last_name'].hidden_widget()
+
+                context['user_form'] = user_form
+
+        elif kwargs['buy_step']=='receive_email':
+
+            friend_mail = request.POST.get('email')
+            friend_match = User.objects.filter(email=friend_mail)
+
+            if friend_match.count()>0:
+                print('The friend is already a member')
+                friend = friend_match[0]
+
+                #check if friend is already subscribed to the event
+                e = Event.objects.get(id=context['pk'])
+                if e.partecipants.filter(email = friend.email ).count()>0:
+                    print('friend is already subscribed')
+                    context['friend_already_subscibed'] = True
+                #redirect to buy ticket for him
+                else:
+                    return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="confirmation", total = 0, credits_to_use = 0, order_id = 0, friend_id = friend.id)
+            else:
+                print(friend_mail + ' has to register')
+                return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="receive_friends_data", total = 0, credits_to_use = 0, order_id = 0, friend_id = -1)
+
+        elif kwargs['buy_step']=='receive_friends_data':
+
+            print('received registration data')
+            user_form = UserForm( error_class = DivErrorList)
+            profile_form = UserProfileInfoForm( error_class = DivErrorList)
+            user_form.fields['email'].widget.attrs['value'] = friend_mail
+            user_form.fields['email'].widget.attrs['disabled'] = True
+            user_form.fields['password'].widget = user_form.fields['email'].hidden_widget()
+            user_form.fields['repeat_password'].widget = user_form.fields['repeat_password'].hidden_widget()
+
+            context['user_form'] = user_form
+            context['profile_form'] = profile_form
 
         return render(request,
                       self.template_name,

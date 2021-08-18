@@ -4,14 +4,15 @@
 - Gestire acquisto del biglietto per un altro iscritto:
  Nella buy ticket deve comparire la possibilità di acquistarlo per me o per un altro.
 
- >se per me si procede come ora
+ >**se per me si procede come ora
  >Se per un altro:
 
-    inserire email->se già iscritta:->
+    **inserire email->se già iscritta:->
 
-   a) la persona è gia iscritta:
-    a1) con sottoscrizione valida: pago solo il biglietto
-    a2) con sottoscrizione scaduta: devo pagare anche rinnovo.
+   **a) la persona è gia iscritta:
+    **a1) con sottoscrizione valida: pago solo il biglietto
+    **a2) con sottoscrizione scaduta: devo pagare anche rinnovo.
+    -controllare che la persona non sia già iscritta all'evento.
    b)persona nuova:
     inserire dati
     compra biglietto (primo anno iscrizione gratuita)
@@ -20,17 +21,6 @@
  -lui se lo vedrà tra i suoi biglietti.
 - se chiederà rimborso potra farlo con le stesse regole del biglietto per me stesso.
   i crediti, cosi come il rimborso via carta vengono accreditati al compratore.
-
-SVILUPPO:
-buyTicketView:
->aggiungere steps:
- select partecipant: viene chiesto se il biglietto e per te o per un altro
- partecipant_email form : viene chiesta la mail del partecipante
-                          se il partecipante è già iscritto si procede
-                          se il partecipante non è iscritto si va
-subscription_step:        vengono inseriti i dati del partecipante e viene creato il partecipante
-
-confirmation : è quello attuale
 
 
 
