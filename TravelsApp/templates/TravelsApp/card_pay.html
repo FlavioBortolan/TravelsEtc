@@ -11,7 +11,7 @@
 
     {% csrf_token %}
     <input type="hidden" id="total" value="{{ total }}">
-
+    <input type="hidden" id="friend_id" value="{{ friend_id }}">
 
   <div class="w3-container">
       <h1>Card Payment</h1>
@@ -140,7 +140,7 @@
             );
           document.querySelector(".result-message").classList.remove("hidden");
           document.querySelector("button").disabled = true;
-          window.location.replace("{% url 'TravelsApp:buyticket' pk=0 buy_step='confirmed' total=0 credits_to_use=0 order_id=order_id friend_id='-1'%}");
+          window.location.replace("{% url 'TravelsApp:buyticket' pk=0 buy_step='confirmed' cmd='init' total=0 credits_to_use=0 order_id=order_id friend_id=friend_id %}");
 
         };
 

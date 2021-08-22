@@ -46,6 +46,9 @@ class UserForm(forms.ModelForm):
             raise forms.ValidationError("This email is already in use.")
         return supplied_email
 
+        #add regex validator
+        #^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$
+
     class Meta():
         model = User
 

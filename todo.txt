@@ -1,30 +1,7 @@
 
 
 
-- Gestire acquisto del biglietto per un altro iscritto:
- Nella buy ticket deve comparire la possibilità di acquistarlo per me o per un altro.
-
- >**se per me si procede come ora
- >Se per un altro:
-
-    **inserire email->se già iscritta:->
-
-   **a) la persona è gia iscritta:
-    **a1) con sottoscrizione valida: pago solo il biglietto
-    **a2) con sottoscrizione scaduta: devo pagare anche rinnovo.
-    -controllare che la persona non sia già iscritta all'evento.
-   b)persona nuova:
-    inserire dati
-    compra biglietto (primo anno iscrizione gratuita)
-
- il biglietto viene assegnato alla persona per cui ho comprato.
- -lui se lo vedrà tra i suoi biglietti.
-- se chiederà rimborso potra farlo con le stesse regole del biglietto per me stesso.
-  i crediti, cosi come il rimborso via carta vengono accreditati al compratore.
-
-
-
-
+-testare acquisto per altra persona.
 
 -Account data non compare nome e cognome
  -capire come mai i queued partecipants viene considerato cme reqiured

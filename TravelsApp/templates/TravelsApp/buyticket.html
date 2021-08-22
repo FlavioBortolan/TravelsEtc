@@ -10,7 +10,7 @@
       {% if buy_step == 'partecipant_selection' %}
 
         <h3>Is the ticket for you or for a friend?</h3>
-        <form action = "{% url 'TravelsApp:buyticket' pk=pk buy_step='receive_user_selected' total=total credits_to_use=credits_to_use order_id=order_id friend_id='-1'%}" class="w3-container" enctype="multipart/form-data" method="POST">
+        <form action = "{% url 'TravelsApp:buyticket' pk=pk buy_step='partecipant_selection' cmd='receive_user_selected' total=total credits_to_use=credits_to_use order_id=order_id friend_id='-1'%}" class="w3-container" enctype="multipart/form-data" method="POST">
           {% csrf_token %}
           <div class="w3-card w3-padding w3-border w3-border-black">
 
@@ -31,41 +31,29 @@
         <br>
         <br>
 
-      {% elif buy_step == 'receive_user_selected' %}
+      {% elif buy_step == 'collect_friends_mail' %}
 
         <h3>Please insert your friend's email:</h3>
-        <form action = "{% url 'TravelsApp:buyticket' pk=pk buy_step='receive_email' total=total credits_to_use=credits_to_use order_id=order_id friend_id='-1'%}" class="w3-container" enctype="multipart/form-data" method="POST">
+        <form action = "{% url 'TravelsApp:buyticket' pk=pk buy_step='collect_friends_mail' cmd='receive_email' total=total credits_to_use=credits_to_use order_id=order_id friend_id='-1'%}" class="w3-container" enctype="multipart/form-data" method="POST">
 
           {% csrf_token %}
           {{ user_form.as_p }}
           <input type="submit" class="w3-btn w3-blue w3-center" name="" value="Proceed">
 
         </form>
+        {% elif buy_step == 'friend_already_subscibed' %}
 
-      {% elif buy_step == 'receive_email' %}
-        {% if friend_registered %}
+             <h3>Your friend already has a ticket for this event!</h3>
+             <form action="{% url 'TravelsApp:events' filter_mode='all' %}" method = "get">
+              <br>
+              <div class="w3-center">
+                <button class="w3-btn w3-blue w3-center" type="submit">Back to events</button>
+              </div>
+              <br>
+            </form>
 
-          {% if friend_already_subscibed %}
-           <h3>Your friend already has a ticket for this event!</h3>
-           <form action="{% url 'TravelsApp:events' filter_mode='all' %}" method = "get">
-            <br>
-            <div class="w3-center">
-              <button class="w3-btn w3-blue w3-center" type="submit">Back to events</button>
-            </div>
-            <br>
-          </form>
-          {% else %}
-            <h3>server will redirect to buy ticket confirmation</h3>
-
-          {% endif %}
-        {% else %}
-
-          <h3>You need to register your friend.</h3>
-
-        {% endif %}
-
-      {% elif buy_step == 'receive_friends_data' %}
-        <form action = "{% url 'TravelsApp:buyticket' pk=pk buy_step='receive_friends_data' total=total credits_to_use=credits_to_use order_id=order_id friend_id='-1'%}" class="w3-container" enctype="multipart/form-data" method="POST">
+      {% elif buy_step == 'collect_friends_data' %}
+        <form action = "{% url 'TravelsApp:buyticket' pk=pk buy_step='collect_friends_data' cmd='receive_friends_data' total=total credits_to_use=credits_to_use order_id=order_id friend_id='-1'%}" class="w3-container" enctype="multipart/form-data" method="POST">
 
           {% csrf_token %}
           {{ user_form.as_p }}
@@ -74,6 +62,15 @@
           <input type="submit" class="w3-btn w3-blue w3-center" name="" value="Proceed">
 
         </form>
+      {% elif buy_step == 'registration_successful' %}
+        <h3>Registration was successful</h3>
+        <h3>The user will receive a welcome mail with a temporary password</h3>
+        <h3>Click to proceed with ticket purchase</h3>
+        <form action = "{% url 'TravelsApp:buyticket' pk=pk buy_step='confirmation' cmd='init' total=total credits_to_use=credits_to_use order_id=order_id friend_id=friend_id %}" class="w3-container" enctype="multipart/form-data" method="GET">
+
+          {% csrf_token %}
+
+        <input type="submit" class="w3-btn w3-blue w3-center" name="" value="Proceed">
 
       {% elif buy_step == 'confirmation' %}
 
@@ -96,8 +93,8 @@
 
         <!-- Payment with card -->
         {% if total > 0 %}
-
-          <form action="{% url 'TravelsApp:card_pay' amount=total order_id=order_id %}" method="get">
+          
+          <form action="{% url 'TravelsApp:card_pay' amount=total order_id=order_id friend_id=friend_id %}" method="get">
             <div class="w3-center">
               <button class="w3-btn w3-blue w3-center" type="submit">Pay with card!</button>
             </div>
