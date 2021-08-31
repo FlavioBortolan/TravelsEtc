@@ -18,7 +18,7 @@ urlpatterns=[
     path('buyticket/<int:pk>/<str:buy_step>/<str:cmd>/<int:total>/<int:credits_to_use>/<int:order_id>/<str:friend_id>',views.BuyTicketView.as_view(),name="buyticket"),
     path('queue_to_event/<int:pk>/<str:command>',views.QueueToEventView.as_view(),name="queue_to_event"),
     path('ask_refund/<int:pk>/<str:refund_step>',views.AskRefundView.as_view(),name="ask_refund"),
-    path('card_pay/<int:amount>/<int:order_id>/<int:friend_id>',views.CardPayView.as_view(),name="card_pay"),
+    path('card_pay/<int:amount>/<int:order_id>/<str:friend_id>',views.CardPayView.as_view(),name="card_pay"),
     path('create_payment_intent/',views.create_payment_intent,name="create_payment_intent"),
     path('stripe_webhook/',views.stripe_webhook,name="stripe_webhook"),
 

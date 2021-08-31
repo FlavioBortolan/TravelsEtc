@@ -93,7 +93,7 @@
 
         <!-- Payment with card -->
         {% if total > 0 %}
-          
+
           <form action="{% url 'TravelsApp:card_pay' amount=total order_id=order_id friend_id=friend_id %}" method="get">
             <div class="w3-center">
               <button class="w3-btn w3-blue w3-center" type="submit">Pay with card!</button>
@@ -112,7 +112,7 @@
         <br>
           {% if subscription_expired %}
 
-            <h5>* Your subscription expired on: {{ subs_exp_date }}</h5>
+            <h5>* Subscription expired on: {{ subs_exp_date }}</h5>
 
           {% endif %}
 

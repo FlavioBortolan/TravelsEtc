@@ -1,7 +1,10 @@
 
 
 
+
+-completare acquisto per altra persona quando per me ho già il biglietto.
 -testare acquisto per altra persona.
+-gestire scadenza differenziata degli eventi
 
 -Account data non compare nome e cognome
  -capire come mai i queued partecipants viene considerato cme reqiured
