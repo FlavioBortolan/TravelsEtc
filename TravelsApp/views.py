@@ -18,6 +18,7 @@ from .models import Event
 from .models import Setting
 from .models import Order
 from .models import Ticket
+from .mail import Mailer
 
 import string
 import random
@@ -109,11 +110,13 @@ def create_profile(user_form, profile_form, autogenerate_password ):
 
             user = User.objects.create_user(username=supplied_email,
                                  email=supplied_email,
+                                 first_name = user_form.cleaned_data['first_name'],
+                                 last_name = user_form.cleaned_data['last_name'],
                                  password=None)
             user.save()
 
             print('new user saved with mail: ' + supplied_email)
-            #xxx
+
             # Hash the password
             user.set_password(password)
 
@@ -145,7 +148,12 @@ def create_profile(user_form, profile_form, autogenerate_password ):
 
             # Now save model
             profile.save()
-            return True, user.id
+            print('??????????????:')
+            print(user.first_name)
+            print(user.last_name)
+            print(user.email)
+
+            return True, user.id, password, user
 
         else:
             print(user.email + ' is already registered')
@@ -785,8 +793,8 @@ class BuyTicketView(TemplateView):
                       context)
 
     def post(self, request, *args, **kwargs):
-        print('BuyTicket POST was called')
 
+        print('BuyTicket POST was called')
         context  = super().get_context_data(**kwargs)
         #context['Event_pk'] =  kwargs['pk']
         context['pk'] =  kwargs['pk']
@@ -867,14 +875,21 @@ class BuyTicketView(TemplateView):
                 user_form.fields['password'].widget = user_form.fields['email'].hidden_widget()
                 user_form.fields['repeat_password'].widget = user_form.fields['repeat_password'].hidden_widget()
 
-                (ret, friend_id) = create_profile(user_form, profile_form, True)
+                (ret, friend_id, pw, new_user) = create_profile(user_form, profile_form, True)
+
+                print('^^^^^^^^^^^^^^^^^^^^^')
+                print(new_user.first_name)
+                print(self.request.user.first_name)
+                print('^^^^^^^^^^^^^^^^^^^^^')
 
                 if ret:
+
+                    self.your_friend_subscibed_you(pw, new_user, request.user)
 
                     return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="registration_successful", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend_id)
                     #manda mail nuovo utente
                     #manda una comunicazione che utente registrato e mail inviata
-                    #procedi con acquisto biglietto. xxx
+
                 else:
                     context['user_form'] = user_form
                     context['profile_form'] = profile_form
@@ -884,6 +899,25 @@ class BuyTicketView(TemplateView):
         return render(request,
                       self.template_name,
                       context)
+
+    def your_friend_subscibed_you(self,password, new_user, creator_user):
+
+        print('*** your_friend_subscibed_you ***' + 'pw:' + password + ', new_user: ' + new_user.first_name + ', creator_user: ' + creator_user.first_name)
+
+        company_mail = get_setting('company_email')
+        smtp_server  = get_setting('company_email_smtp_server')
+        company_pw   = get_setting('company_email_password')
+
+        #m = Mailer(sender='roberto.ferro1996@gmail.com', smtp_server = "smtp.gmail.com", password = 'margherita1')
+        m = Mailer(sender=company_mail, smtp_server = smtp_server, password = company_pw)
+        m.login()
+
+        response = render(None, 'TravelsApp/Your_friend_subscibed_you.html', {'password':password, 'new_user': new_user, 'creator_user':creator_user})
+        html=str(response.content.decode('UTF-8'))
+
+        m.send_mail(company_mail, "buongiorno da mailer", html, html)
+        m.quit()
+
 
 class AskRefundView(TemplateView):
     template_name = "TravelsApp/ask_refund.html"

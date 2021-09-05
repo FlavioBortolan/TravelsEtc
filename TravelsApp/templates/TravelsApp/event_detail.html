@@ -113,15 +113,23 @@
           {% if user_already_has_this_ticket  %}
             {% if can_ask_refund %}
               <form action="{% url 'TravelsApp:ask_refund' pk=event.id refund_step=1%}" method="get">
-
+                  {% csrf_token %}
                 <div class="w3-center">
                   <button class="w3-btn w3-blue w3-center" type="submit">Ask refund</button>
-                  <a class="w3-btn w3-blue w3-center" href="{% url 'TravelsApp:events' filter_mode='current_user_past' %}">Buy for a friend</a>
                 </div>
 
                 <br>
-
               </form>
+
+              <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='partecipant_selection' cmd='receive_user_selected' total=0 credits_to_use=0 order_id=0 friend_id='-1'%}" method="post">
+                {% csrf_token %}
+                <div class="w3-center">
+                  <button class="w3-btn w3-blue w3-center" type="submit">Buy for a friend</button>
+                </div>
+
+                <br>
+              </form>
+
             {% else %}
             <!--
             <div class="w3-center">

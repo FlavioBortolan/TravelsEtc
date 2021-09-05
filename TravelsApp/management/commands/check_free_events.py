@@ -45,7 +45,6 @@ class Command(BaseCommand):
         message["From"] = sender
         message["To"] = user.email
 
-
         response = render(None, 'TravelsApp/free_ticket_message.html', {'event':event, 'user': user})
         html=str(response.content.decode('UTF-8'))
 
