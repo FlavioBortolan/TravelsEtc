@@ -670,7 +670,6 @@ def close_order(o):
             print('credits to be used : ' + str(o.credits_to_use))
             print('order total:' + str(o.total))
 
-
             #add user to event
             e.partecipants.add(partecipant)
 
@@ -698,26 +697,7 @@ def close_order(o):
 class BuyTicketView(TemplateView):
     template_name = "TravelsApp/buyticket.html"
 
-    '''
-    def get_context_data(self,**kwargs):
 
-        context  = super().get_context_data(**kwargs)
-        #context['Event_pk'] =  kwargs['pk']
-        context['pk'] =  kwargs['pk']
-        context['buy_step'] =  kwargs['buy_step']
-
-        if kwargs['buy_step']=='confirmation':
-
-            res, context_out, order = open_order(context['pk'], self.request.user, self.request.user)
-            context = { **context,  **context_out}
-            print('BuyTicketView: confirmation, context = ' + str(context))
-        #if the purchase is confirmed add this activity to user's Activities
-        elif kwargs['buy_step']=='confirmed':
-
-            close_order(Order.objects.get(id=kwargs['order_id']))
-
-        return context
-    '''
     def get(self, request, *args, **kwargs):
 
         print('BuyTicket GET was called')
@@ -786,7 +766,9 @@ class BuyTicketView(TemplateView):
 
         elif kwargs['buy_step']=='confirmed':
 
-            close_order(Order.objects.get(id=kwargs['order_id']))
+            ret = close_order(Order.objects.get(id=kwargs['order_id']))
+            #xxx send mail with order confirmation
+
 
         return render(request,
                       self.template_name,
@@ -877,14 +859,9 @@ class BuyTicketView(TemplateView):
 
                 (ret, friend_id, pw, new_user) = create_profile(user_form, profile_form, True)
 
-                print('^^^^^^^^^^^^^^^^^^^^^')
-                print(new_user.first_name)
-                print(self.request.user.first_name)
-                print('^^^^^^^^^^^^^^^^^^^^^')
-
                 if ret:
 
-                    self.your_friend_subscibed_you(pw, new_user, request.user)
+                    self.your_friend_subscibed_you(pw, new_user, request.user, context['pk'])
 
                     return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="registration_successful", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend_id)
                     #manda mail nuovo utente
@@ -900,7 +877,26 @@ class BuyTicketView(TemplateView):
                       self.template_name,
                       context)
 
-    def your_friend_subscibed_you(self,password, new_user, creator_user):
+    def event_subcription_successfull(self, user, creator_user, event_pk):
+
+        print('*** event_subcription_successfull ***' + ', new_user: ' +user.first_name + ', creator_user: ' + creator_user.first_name)
+
+        company_mail = get_setting('company_email')
+        smtp_server  = get_setting('company_email_smtp_server')
+        company_pw   = get_setting('company_email_password')
+
+        event = Event.object.get(id = event_pk)
+        #m = Mailer(sender='roberto.ferro1996@gmail.com', smtp_server = "smtp.gmail.com", password = 'margherita1')
+        m = Mailer(sender=company_mail, smtp_server = smtp_server, password = company_pw)
+        m.login()
+
+        response = render(None, 'TravelsApp/event_subcription_successful.html', {'user': user, 'creator_user':creator_user, 'event':event })
+        html=str(response.content.decode('UTF-8'))
+
+        m.send_mail(company_mail, "Subscription to event " + event.activity.name, html, html)
+        m.quit()
+
+    def your_friend_subscibed_you(self, password, new_user, creator_user, event_pk):
 
         print('*** your_friend_subscibed_you ***' + 'pw:' + password + ', new_user: ' + new_user.first_name + ', creator_user: ' + creator_user.first_name)
 
@@ -908,14 +904,15 @@ class BuyTicketView(TemplateView):
         smtp_server  = get_setting('company_email_smtp_server')
         company_pw   = get_setting('company_email_password')
 
+        event = Event.object.get(id = event_pk)
         #m = Mailer(sender='roberto.ferro1996@gmail.com', smtp_server = "smtp.gmail.com", password = 'margherita1')
         m = Mailer(sender=company_mail, smtp_server = smtp_server, password = company_pw)
         m.login()
 
-        response = render(None, 'TravelsApp/Your_friend_subscibed_you.html', {'password':password, 'new_user': new_user, 'creator_user':creator_user})
+        response = render(None, 'TravelsApp/your_friend_subscibed_you.html', {'password':password, 'new_user': new_user, 'creator_user':creator_user, 'event':event })
         html=str(response.content.decode('UTF-8'))
 
-        m.send_mail(company_mail, "buongiorno da mailer", html, html)
+        m.send_mail(company_mail, "Registration successfull", html, html)
         m.quit()
 
 
@@ -1216,7 +1213,9 @@ def stripe_webhook(request):
 
         ret = close_order(o)
 
-        if ret:
+
+        if ret:xxxx
+            event_subcription_successfull(self, user, creator_user, event_pk)
             return HttpResponse(status=200)
 
     elif event_dict['type'] == "payment_intent.payment_failed":

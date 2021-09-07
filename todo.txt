@@ -1,5 +1,11 @@
 
 
+-Testare se openorder closeorder funziona veramente
+
+-close_order restituisca una struttura con gli eventi e destinatari in modo che
+  una unzione che riveve la struttura possa spedire le mail. oppure fare una funzione
+  che riveve un order in ingresso e cicla sui sui elementei e spedisce le mail di conseguenza
+
 
 -spedire una mail quando amico registra amico e compra biglietto
  (due mail,
@@ -7,7 +13,8 @@
 >la prima
 ***informa dell'avvenuta iscrizione e cominica la pw
 
->e la seconda comunica l'evento.)
+>e la seconda comunica l'evento. ->>quando viene chiamata la close_order (pagamento
+  in crediti o da webhook per la carta)
 
 -testare acquisto per altra persona.
 -gestire scadenza differenziata degli eventi

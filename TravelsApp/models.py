@@ -2,6 +2,16 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 from django.core.validators import RegexValidator
+import time
+from dateutil.relativedelta import *
+from dateutil.rrule import *
+
+import datetime
+from datetime import datetime
+from  datetime import date
+
+import ast
+
 
 # SuperUserInformation
 # User: Jose
@@ -63,6 +73,7 @@ class Activity(models.Model):
     # Built-in attribute of django.contrib.auth.models.User !
         return "ID: " + str(self.id) + ", Place: " + self.place + ", Leader: " + self.leader
 
+
 class Order(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -73,6 +84,125 @@ class Order(models.Model):
     total = models.PositiveIntegerField(default=0)
     credits_to_use = models.PositiveIntegerField(default=0)
     payment_id = models.CharField(max_length=200, default="xxx")
+
+    #opens an order for one single event and for the specified user
+    @classmethod
+    def open_order(cls, pk, payer, partecipant, year_subscription_price):
+
+       print('*** open order ***: payer = ' + payer.email + ', partecipant = ' + partecipant.email)
+
+       sub_total = 0
+       max_exp_date = date.today()
+
+       e = Event.objects.get( id = pk )
+       sub_total += e.activity.price
+
+       #check if an event requires subscription to be renewed
+       subscription_expired = e.date > partecipant.userprofileinfo.exp_date
+
+       print('cost of tickets:' + str(sub_total))
+
+       if subscription_expired:
+          sub_total += year_subscription_price
+          print('with subscription:' + str(sub_total))
+
+       #check user credits
+       credits = payer.userprofileinfo.credits
+       print('payer credits:' + str(credits))
+
+       if sub_total > credits:
+           print('#total sum is partially  paid with credits')
+           credits_to_use = credits
+           total = sub_total - credits_to_use
+       else:
+          print('total sum is paid with credits')
+          credits_to_use = sub_total
+          total = 0
+
+       print('Total to be paid with card:' + str(total))
+
+       items=[]
+       items.append({'type':'event_ticket_purchase', 'pk': pk, 'partecipant': partecipant.email})
+
+       if subscription_expired:
+          items.append({'type':"subscription", 'partecipant': partecipant.email} )
+
+       #Create the order
+       o = Order.objects.create(user=payer, date=date.today(), time=datetime.now(), status="chart", items=str(items), total=total, credits_to_use=credits_to_use )
+       o.save()
+       print('Order saved:' + str(o))
+
+       e = Event.objects.get( id = pk )
+
+       context = {}
+       context['subs_exp_date'] = partecipant.userprofileinfo.exp_date
+       context['subscription_expired'] = subscription_expired
+       context['year_subscription_price'] = year_subscription_price
+       context['sub_total'] = sub_total
+       context['total'] = total
+       context['credits_to_use'] = credits_to_use
+       context['event'] =  e
+       context['order_id'] = o.id
+
+       return (True, context, o)
+
+    #closes a specific order after payment is completed
+    def close(self):
+
+        print('*** close_order ***')
+        if self.status=="completed":
+            return False
+
+        #retrive the user
+        user = self.user
+        print('User: ' + user.email)
+        #retrive the articles in the orders
+        items = ast.literal_eval(self.items)
+
+        print('User had: ' + str(user.userprofileinfo.credits) + 'credits')
+        #subtract credits used
+        if self.credits_to_use > 0:
+            user.userprofileinfo.credits-=self.credits_to_use
+            user.userprofileinfo.save()
+
+        print('User now has: ' + str(user.userprofileinfo.credits) + 'credits')
+
+        for i in items:
+
+            partecipant = User.objects.get(email=i['partecipant'])
+
+            if i['type'] == 'event_ticket_purchase':
+
+                e=Event.objects.get(id=int(i['pk']))
+
+                print('Order contains ticket for event : ' + str(e.activity.name) +' on date:' + str(e.date))
+                print('The target partecipant is:' + i['partecipant'])
+                print('credits to be used : ' + str(self.credits_to_use))
+                print('order total:' + str(self.total))
+
+                #add user to event
+                e.partecipants.add(partecipant)
+
+                #remove him from the queue if he was in the queued_partecipants
+                if e.queued_partecipants.filter(email=partecipant.email).count()>0:
+                    e.queued_partecipants.remove(partecipant)
+                    print('removed user ' + partecipant.email + ' from the queue of event ' + e.activity.name)
+
+                #Create the ticket
+                t = Ticket.objects.create(user=partecipant, event=e, order=self, status = 'valid')
+                t.save()
+                e.save()
+
+            elif i['type'] == 'subscription':
+                subscription_duration_months = int(get_setting('subscription_duration_months'))
+                partecipant.userprofileinfo.exp_date = datetime.today() + relativedelta(months=+subscription_duration_months)
+                partecipant.userprofileinfo.save()
+                print('Order contains subscription, user subscription now expires on ' + str(user.userprofileinfo.exp_date) )
+
+        self.status = "completed"
+        self.save()
+
+        return True
 
     def __str__(self):
     # Built-in attribute of django.contrib.auth.models.User !
@@ -102,6 +232,19 @@ class Setting(models.Model):
     name  = models.CharField(max_length=128)
     value = models.CharField(max_length=128)
     description = models.CharField(max_length=128)
+
+    @classmethod
+    def get_setting(cls, name):
+        r = Setting.objects.get(name=name).value
+        return r
+
+    @classmethod
+    def save_setting(cls, name, value, description):
+        s = Setting.objects.get_or_create( name=name)[0]
+        s.value = value
+        s.description = description
+        s.save()
+
 
     def __str__(self):
         return "name: " + str(self.name) + ", value: " + str(self.value)

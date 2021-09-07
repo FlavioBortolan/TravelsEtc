@@ -1,0 +1,24 @@
+
+<html >
+
+  <body>
+    <p>Hallo <b>{{ user.first_name }}!</b></p>
+    <p>
+    Your subscription to the event <b>{{ event.activity.name }}</b> on date {{  event.activity.name }} have been successful!
+
+    {% if user != new_user %}
+    The subscription was done by your friend <b>{{ creator_user.first_name }}</b>
+    {{% endif %}}
+
+    <br>
+    Login to the site and check event details trough the link below:
+    <a href="{% url 'TravelsApp:single' pk=event.id %}"> Click here to login</a>
+    <br>
+    Password:<b>{{ password }}</b>
+    <br>
+    <br>
+    The TravelsEtc Team
+    </p>
+
+  </body>
+</html>

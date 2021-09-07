@@ -59,7 +59,6 @@ class Command(BaseCommand):
 
         return message
 
-
     def handle(self, *args, **options):
         port = 465  # For SSL
         smtp_server = "smtp.gmail.com"
