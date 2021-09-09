@@ -1,13 +1,16 @@
 
-
--Testare se openorder closeorder funziona veramente
-
--close_order restituisca una struttura con gli eventi e destinatari in modo che
-  una unzione che riveve la struttura possa spedire le mail. oppure fare una funzione
-  che riveve un order in ingresso e cicla sui sui elementei e spedisce le mail di conseguenza
-
-
--spedire una mail quando amico registra amico e compra biglietto
+- creare
+    class Outmail:
+        recipient,
+        type('your_friend_subscibed_you', ...),
+        context: #stringa (dictionary) che contiene tutte le variabili che servono per il relativo template_name
+        status : sent/not sent yet/could not send
+        send error: ...
+  deve avere:
+   >un metodo generate_from_order:  genera un messaggio a partire da un Order.
+   >un metodo generate_indirect_subscription_msg che genera un messaggio di notifica your_friend_subscibed_you
+   
+- salvare mail usando OutMail quando amico registra amico e compra biglietto
  (due mail,
 
 >la prima

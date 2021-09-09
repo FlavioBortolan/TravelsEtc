@@ -18,7 +18,7 @@ from .models import Event
 from .models import Setting
 from .models import Order
 from .models import Ticket
-from .mail import Mailer
+from .mailer import Mailer
 
 import string
 import random
@@ -1214,7 +1214,7 @@ def stripe_webhook(request):
         ret = close_order(o)
 
 
-        if ret:xxxx
+        if ret:#xxx
             event_subcription_successfull(self, user, creator_user, event_pk)
             return HttpResponse(status=200)
 

@@ -70,9 +70,10 @@ def test_Order_open_close():
     partecipant = User.objects.get(email='roberto.ferro1996@gmail.com')
 
     year_subscription_price = int(Setting.get_setting('year_subscription_price'))
+    subscription_duration_months = int(Setting.get_setting('subscription_duration_months'))
 
     (ret, context, o) = Order.open_order(pk, payer, partecipant, year_subscription_price)
-    o.close()
+    o.close(subscription_duration_months)
 
 # Create your tests here.
 if __name__ == '__main__':

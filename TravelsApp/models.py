@@ -85,7 +85,8 @@ class Order(models.Model):
     credits_to_use = models.PositiveIntegerField(default=0)
     payment_id = models.CharField(max_length=200, default="xxx")
 
-    #opens an order for one single event and for the specified user
+    #opens an order for one single event and for the specified partecipant
+    #if the partecipant subscription expires before the event date, a subscripion item is addedo to the order
     @classmethod
     def open_order(cls, pk, payer, partecipant, year_subscription_price):
 
@@ -147,7 +148,7 @@ class Order(models.Model):
        return (True, context, o)
 
     #closes a specific order after payment is completed
-    def close(self):
+    def close(self, subscription_duration_months):
 
         print('*** close_order ***')
         if self.status=="completed":
@@ -194,7 +195,7 @@ class Order(models.Model):
                 e.save()
 
             elif i['type'] == 'subscription':
-                subscription_duration_months = int(get_setting('subscription_duration_months'))
+
                 partecipant.userprofileinfo.exp_date = datetime.today() + relativedelta(months=+subscription_duration_months)
                 partecipant.userprofileinfo.save()
                 print('Order contains subscription, user subscription now expires on ' + str(user.userprofileinfo.exp_date) )
@@ -248,3 +249,12 @@ class Setting(models.Model):
 
     def __str__(self):
         return "name: " + str(self.name) + ", value: " + str(self.value)
+
+class OutMail(models.Model):
+
+    #user: the user that triggered the generation of this message
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipient')
+    type = models.CharField(max_length=64)
+    context = models.CharField(max_length=128)
+    status = models.CharField(max_length=32)
