@@ -19,7 +19,7 @@ User = get_user_model()
 from TravelsApp.models import Setting
 from TravelsApp.models import Event
 from TravelsApp.models import Order
-
+from TravelsApp.models import OutMail
 
 
 #views.save_setting(name='subscription_duration_months', description = 'Duration of subscription', value=13)
@@ -75,7 +75,52 @@ def test_Order_open_close():
     (ret, context, o) = Order.open_order(pk, payer, partecipant, year_subscription_price)
     o.close(subscription_duration_months)
 
+def test_OutMail_Create():
+
+    user      = User.objects.get(email='flavio.bortolan@gmail.com')
+    recipient = User.objects.get(email='roberto.ferro1996@gmail.com')
+
+    params_dict={}
+    params_dict['template'] = 'your_friend_subscibed_you.html'
+    params_dict['user'] = user
+    params_dict['recipient'] = recipient
+    params_dict['password'] = 'drtrot'
+
+    om = OutMail.create( params_dict )
+    print(om.subject)
+    print(om.html)
+
+    #test event subscription mail
+    event = Event.objects.all()[0]
+
+    params_dict={}
+    params_dict['template'] = 'event_subcription_successful.html'
+    params_dict['user'] = user
+    params_dict['recipient'] = recipient
+    params_dict['event'] = event
+
+    om = OutMail.create( params_dict )
+    print(om.subject)
+    print(om.html)
+
+def test_OutMail_create_from_order():
+
+    pk = Event.objects.all()[0].id
+    payer       = User.objects.get(email='flavio.bortolan@gmail.com')
+    partecipant = User.objects.get(email='roberto.ferro1996@gmail.com')
+
+    year_subscription_price = int(Setting.get_setting('year_subscription_price'))
+    subscription_duration_months = int(Setting.get_setting('subscription_duration_months'))
+
+    (ret, context, o) = Order.open_order(pk, payer, partecipant, year_subscription_price)
+    o.close(subscription_duration_months)
+
+    om = OutMail.create_from_order( o )
+    print(om.subject)
+    print(om.html)
+
 # Create your tests here.
 if __name__ == '__main__':
     #test_mail()
-    test_Order_open_close()
+    #test_Order_open_close()
+    test_OutMail_create_from_order()

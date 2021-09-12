@@ -1,3 +1,5 @@
+from django.shortcuts import render
+from django.http import HttpResponseRedirect, HttpResponse
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -12,6 +14,7 @@ from  datetime import date
 
 import ast
 
+from bs4 import  BeautifulSoup
 
 # SuperUserInformation
 # User: Jose
@@ -255,6 +258,64 @@ class OutMail(models.Model):
     #user: the user that triggered the generation of this message
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     recipient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='recipient')
-    type = models.CharField(max_length=64)
-    context = models.CharField(max_length=128)
+    template = models.CharField(max_length=64)
+    html = models.CharField(max_length=2048)
+    subject = models.CharField(max_length=64)
     status = models.CharField(max_length=32)
+
+    @classmethod
+    def create(cls, params_dict):
+    #xxx
+        om = cls(template = params_dict['template'], user = params_dict['user'], recipient = params_dict['recipient'], status = 'created' )
+
+        response = render(None, 'TravelsApp/' + om.template ,  params_dict)
+        om.html = str(response.content.decode('UTF-8'))
+
+        soup = BeautifulSoup(om.html)
+
+        om.subject =soup.find(id='Subject').text
+
+        om.save()
+
+        return om
+
+    @classmethod
+    def create_from_order(cls, order):
+
+        if order.status != 'completed':
+            raise ValueError('Tryng to generate confirmation message from an order not yet closed')
+
+        dict = {}
+        dict['user'] = order.user
+
+        #retrive the articles in the orders
+        items = ast.literal_eval(order.items)
+        found = False
+
+        for i in items:
+
+            partecipant = User.objects.get(email=i['partecipant'])
+
+            if i['type'] == 'event_ticket_purchase':
+                dict['recipient'] = partecipant
+                dict['event'] = Event.objects.get(id=int(i['pk']))
+
+                if found == True:
+                    raise ValueError('Error tryng to generate message mail from order with multiple partecipants')
+
+                found = True
+
+        dict['template'] = 'event_subcription_successful.html'
+
+        om = cls.create( dict )
+        return om
+
+    @classmethod
+    def your_friend_subscibed_you(cls, password,  user, recipient):
+
+        print('*** your_friend_subscibed_you ***' + 'pw:' + password + ', recipient: ' + recipient.first_name + ', user: ' + user.first_name)
+
+        response = render(None, 'TravelsApp/your_friend_subscibed_you.html', {'password':password, 'recipient': recipient, 'user':user})
+        html = str(response.content.decode('UTF-8'))
+
+        return html

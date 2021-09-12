@@ -2,11 +2,15 @@
 <html >
 
   <body>
-    <p>Hallo <b>{{ new_user.first_name }}!</b></p>
+
+    <!-- Subject is a hidden field from wich we will exctract the subject of the mail  -->
+    <p id="Subject" hidden> Registration successful</p>
+
+    <p>Hallo <b>{{ recipient.first_name }}!</b></p>
     <p>
-    You have been registered to our site by your friend <b>{{ creator_user.first_name }}</b>
+    You have been registered to our site by your friend <b>{{ user.first_name }}</b>
     <br>
-    You can login to the site with yout email and the temporary password below:
+    You can login to the site with your email and the temporary password below:
     <a href="{% url 'TravelsApp:user_login' %}"> Click here to login</a>
     <br>
     Password:<b>{{ password }}</b>

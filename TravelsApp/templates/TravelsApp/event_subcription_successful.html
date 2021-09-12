@@ -2,19 +2,21 @@
 <html >
 
   <body>
-    <p>Hallo <b>{{ user.first_name }}!</b></p>
+
+    <!-- Subject is a hidden field from wich we will exctract the subject of the mail  -->
+    <p  id="Subject" hidden> Subscription to the event {{ event.activity.name }} on date {{  event.date }}</p>
+
+    <p>Hallo <b>{{ recipient.first_name }}!</b></p>
     <p>
     Your subscription to the event <b>{{ event.activity.name }}</b> on date {{  event.activity.name }} have been successful!
 
-    {% if user != new_user %}
-    The subscription was done by your friend <b>{{ creator_user.first_name }}</b>
-    {{% endif %}}
+    {% if user != recipient %}
+    The subscription was done by your friend <b>{{ user.first_name }}</b>
+    {% endif %}
 
     <br>
     Login to the site and check event details trough the link below:
-    <a href="{% url 'TravelsApp:single' pk=event.id %}"> Click here to login</a>
-    <br>
-    Password:<b>{{ password }}</b>
+    <a href="{% url 'TravelsApp:single' pk=event.id %}"> Event link</a>
     <br>
     <br>
     The TravelsEtc Team
