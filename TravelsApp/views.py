@@ -18,7 +18,10 @@ from .models import Event
 from .models import Setting
 from .models import Order
 from .models import Ticket
+from .models import OutMail
+
 from .mailer import Mailer
+
 
 import string
 import random
@@ -759,16 +762,21 @@ class BuyTicketView(TemplateView):
                 partecipant = User.objects.get(id = int(kwargs['friend_id']))
             else:
                 partecipant = self.request.user
-
-            res, context_out, order = open_order(context['pk'], self.request.user, partecipant)
+            #xxx
+            #res, context_out, order = open_order(context['pk'], self.request.user, partecipant)
+            year_subscription_price = int(Setting.get_setting('year_subscription_price'))
+            res, context_out, order = Order.open_order(context['pk'], self.request.user, partecipant, year_subscription_price)
             context = { **context,  **context_out}
             print('BuyTicketView: confirmation, context = ' + str(context))
 
         elif kwargs['buy_step']=='confirmed':
 
-            ret = close_order(Order.objects.get(id=kwargs['order_id']))
+            o = Order.objects.get(id=kwargs['order_id'])
+            subscription_duration_months = int(Setting.get_setting('subscription_duration_months'))
+            ret = o.close(subscription_duration_months)
             #xxx send mail with order confirmation
-
+            print('Creating mail for order confirmation')
+            om = OutMail.create_from_order(o)
 
         return render(request,
                       self.template_name,
@@ -861,7 +869,9 @@ class BuyTicketView(TemplateView):
 
                 if ret:
 
-                    self.your_friend_subscibed_you(pw, new_user, request.user, context['pk'])
+                    #xxx
+                    #self.your_friend_subscibed_you(pw, new_user, request.user, context['pk'])
+                    om = OutMail.create_from_subscription( request.user, new_user, pw )
 
                     return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="registration_successful", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend_id)
                     #manda mail nuovo utente
@@ -1211,8 +1221,12 @@ def stripe_webhook(request):
             print(str(ex))
             return HttpResponse(status=400)
 
-        ret = close_order(o)
-
+        #xxx
+        subscription_duration_months = int(Setting.get_setting('subscription_duration_months'))
+        ret = o.close(subscription_duration_months)
+        #xxx send mail with order confirmation
+        print('Creating mail for order confirmation')
+        om = OutMail.create_from_order(o)
 
         if ret:#xxx
             event_subcription_successfull(self, user, creator_user, event_pk)

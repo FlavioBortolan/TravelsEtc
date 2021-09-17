@@ -86,7 +86,7 @@ class Order(models.Model):
     items = models.CharField(max_length=600, default="")
     total = models.PositiveIntegerField(default=0)
     credits_to_use = models.PositiveIntegerField(default=0)
-    payment_id = models.CharField(max_length=200, default="xxx")
+    payment_id = models.CharField(max_length=200, default="xyz")
 
     #opens an order for one single event and for the specified partecipant
     #if the partecipant subscription expires before the event date, a subscripion item is addedo to the order
@@ -265,7 +265,7 @@ class OutMail(models.Model):
 
     @classmethod
     def create(cls, params_dict):
-    #xxx
+        
         om = cls(template = params_dict['template'], user = params_dict['user'], recipient = params_dict['recipient'], status = 'created' )
 
         response = render(None, 'TravelsApp/' + om.template ,  params_dict)
@@ -306,6 +306,18 @@ class OutMail(models.Model):
                 found = True
 
         dict['template'] = 'event_subcription_successful.html'
+
+        om = cls.create( dict )
+        return om
+
+    @classmethod
+    def create_from_subscription(cls, user, recipient, password ):
+
+        dict = {}
+        dict['user'] = user
+        dict['recipient'] = recipient
+        dict['template'] = 'your_friend_subscibed_you.html'
+        dict['password'] = password
 
         om = cls.create( dict )
         return om

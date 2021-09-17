@@ -25,8 +25,16 @@ from django.contrib.auth import get_user_model
 import random
 from TravelsApp.models import Activity
 from TravelsApp.models import Event
+from TravelsApp.models import Setting
+from TravelsApp.models import OutMail
+
+from TravelsApp.mailer import Mailer
+
+
 from TravelsApp.models import UserProfileInfo
 from django.db.models import F
+
+
 
 from django.core.management.base import BaseCommand, CommandError
 
@@ -40,19 +48,23 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        company_mail = get_setting('company_email')
-        smtp_server  = get_setting('company_email_smtp_server')
-        company_pw   = get_setting('company_email_password')
+        company_mail = Setting.get_setting('company_email')
+        smtp_server  = Setting.get_setting('company_email_smtp_server')
+        company_pw   = Setting.get_setting('company_email_password')
 
         #setup mailer component
-        m = Mailer(sender=company_mail, smtp_server = smtp_server, password = company_pw)
+        m = Mailer(sender_email=company_mail, smtp_server = smtp_server, password = company_pw)
         m.login()
 
-        m.send_mail(company_mail, "Subscription to event " + event.activity.name, html, html)
-
         #scan all elements in OutMail
-        for om in OutMail.objects.filter(staus = 'generated'):
-            m.send_mail(company_mail, om.subject, om.html, om.html)
+        for om in OutMail.objects.filter(status = 'created'):
+
+            self.stdout.write('sending mail to ' + om.recipient.email + ':' + om.subject)
+            r = m.send_mail(om.recipient.email, om.subject, om.html, om.html)
+            self.stdout.write(str(r))
+
+            om.status = 'notified'
+            om.save()
 
         m.quit()
 

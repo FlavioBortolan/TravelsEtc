@@ -13,9 +13,9 @@ from email.mime.multipart import MIMEMultipart
 
 class Mailer:
 
-    def __init__(self, sender, smtp_server, password):
+    def __init__(self, sender_email, smtp_server, password):
 
-        self.sender = sender
+        self.sender_email = sender_email
         self.smtp_server = smtp_server
         self.password = password
 
@@ -25,28 +25,28 @@ class Mailer:
         self.server =  smtplib.SMTP_SSL(smtp_server, port, context=context)
 
     def login(self):
-        return self.server.login(self.sender, self.password)
+        return self.server.login(self.sender_email, self.password)
 
     def quit(self):
         return self.server.quit()
 
-    def send_mail(self, receiver, subject, txt, html):
+    def send_mail(self, receiver_email, subject, txt, html):
 
-        self.receiver = receiver
+        self.receiver_email = receiver_email
         self.subject = subject
         self.txt = txt
         self.html = html
 
         msg = self.build_message()
 
-        err = self.server.sendmail(self.sender, self.receiver, msg)
+        return self.server.sendmail(self.sender_email, self.receiver_email, msg)
 
     def build_message(self):
 
         message = MIMEMultipart("alternative")
         message["Subject"] = self.subject
-        message["From"] = self.sender
-        message["To"] = self.receiver
+        message["From"] = self.sender_email
+        message["To"] = self.receiver_email
 
         # Turn these into plain/html MIMEText objects
         part1 = MIMEText(self.txt, "plain")
@@ -57,4 +57,4 @@ class Mailer:
         message.attach(part1)
         message.attach(part2)
 
-        return str(message)
+        return message.as_string()

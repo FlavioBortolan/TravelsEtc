@@ -1,7 +1,7 @@
 
 - creare
     class Outmail:
-      
+
   deve avere:
    >un metodo generate_from_order:  genera un messaggio a partire da un Order.
    >un metodo generate_indirect_subscription_msg che genera un messaggio di notifica your_friend_subscibed_you
@@ -15,7 +15,11 @@
 >e la seconda comunica l'evento. ->>quando viene chiamata la close_order (pagamento
   in crediti o da webhook per la carta)
 
--testare acquisto per altra persona.
+
+///////////////// ****** TESTARE TUTTA LA ROBA SOPRA, OGNI XXX UN TEST ******* \\\\\\\\\\\\\\\\\\\\\\
+
+
+
 -gestire scadenza differenziata degli eventi
 
  -capire come mai i queued partecipants viene considerato cme reqiured

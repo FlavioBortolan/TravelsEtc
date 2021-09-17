@@ -112,10 +112,24 @@ def test_OutMail_create_from_order():
     year_subscription_price = int(Setting.get_setting('year_subscription_price'))
     subscription_duration_months = int(Setting.get_setting('subscription_duration_months'))
 
-    (ret, context, o) = Order.open_order(pk, payer, partecipant, year_subscription_price)
+    (ret, context, o) = \
+    Order.open_order(pk, payer, partecipant, year_subscription_price)
     o.close(subscription_duration_months)
 
     om = OutMail.create_from_order( o )
+
+    print(om.subject)
+    print(om.html)
+
+def test_OutMail_create_from_subscription():
+
+    pk = Event.objects.all()[0].id
+    payer       = User.objects.get(email='flavio.bortolan@gmail.com')
+    partecipant = User.objects.get(email='roberto.ferro1996@gmail.com')
+    password = '£$%DFGS%$'
+
+    om = OutMail.create_from_subscription( payer, partecipant, password )
+
     print(om.subject)
     print(om.html)
 
@@ -123,4 +137,4 @@ def test_OutMail_create_from_order():
 if __name__ == '__main__':
     #test_mail()
     #test_Order_open_close()
-    test_OutMail_create_from_order()
+    test_OutMail_create_from_subscription()
