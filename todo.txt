@@ -17,6 +17,9 @@
 
 
 ///////////////// ****** TESTARE TUTTA LA ROBA SOPRA, OGNI XXX UN TEST ******* \\\\\\\\\\\\\\\\\\\\\\
+>test ordine per me OK
+>test ordine per amico con solo biglietto OK
+>test ordine per amico biglietto e sottoscrizione
 
 
 

@@ -30,7 +30,7 @@ class UserProfileInfo(models.Model):
     # Optional: pip install pillow --global-option="build_ext" --global-option="--disable-jpeg"
     profile_pic = models.ImageField(upload_to='TravelsApp/profile_pics',blank=True)
     phone_number = models.CharField(validators=[RegexValidator(regex=r'^(( *0 *0 *| *\+) *3 *9 *)?((\d *){3})((\d *){6,7})$', message="Phone number must be entered like: 340 1461538. Up to 10 digits allowed. Only digits, no other character allowed.")], max_length=64, blank=True)
-    credits = models.PositiveIntegerField(default=10)
+    credits = models.PositiveIntegerField(default=0)
     exp_date = models.DateField(default = timezone.now)
 
     USER_TYPE_CHOICES = [
@@ -265,7 +265,7 @@ class OutMail(models.Model):
 
     @classmethod
     def create(cls, params_dict):
-        
+
         om = cls(template = params_dict['template'], user = params_dict['user'], recipient = params_dict['recipient'], status = 'created' )
 
         response = render(None, 'TravelsApp/' + om.template ,  params_dict)

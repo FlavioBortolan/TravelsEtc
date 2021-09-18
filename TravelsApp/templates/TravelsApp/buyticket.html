@@ -102,9 +102,8 @@
 
         <!-- Payment with credits -->
         {% else %}
-        <form action="{% url 'TravelsApp:buyticket' pk=pk buy_step='confirmed' total=total credits_to_use=credits_to_use order_id=order_id friend_id='-1'%}" method="get">
-
-
+        <form action="{% url 'TravelsApp:buyticket' pk=pk buy_step='confirmed' cmd='init' total=total credits_to_use=credits_to_use order_id=order_id friend_id=friend_id%}" method="get">
+                             
         <div class="w3-center">
           <button class="w3-btn w3-blue w3-center" type="submit">Buy ticket!</button>
         </div>
@@ -118,7 +117,16 @@
 
         </form>
         {% endif       %}
+      {% elif  buy_step == 'card_pay_successful' %}
+          <h2>Card payment successful! Your ticket is confirmed!</h2>
 
+          <form action="{% url 'TravelsApp:events' filter_mode='all' %}" method = "get">
+            <br>
+            <div class="w3-center">
+              <button class="w3-btn w3-blue w3-center" type="submit">Back to events</button>
+            </div>
+            <br>
+         </form>
       {% elif  buy_step == 'confirmed' %}
         <h2>Congratulation your ticket is confirmed!</h2>
 

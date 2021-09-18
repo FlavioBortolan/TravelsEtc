@@ -39,14 +39,16 @@ import ast
 from django.http import JsonResponse
 import os
 
+#see https://stripe.com/docs/payments/integration-builder
 import stripe
 from django.views.decorators.csrf import csrf_exempt
 
 # This is a sample test API key. Sign in to see examples pre-filled with your key.
+#see https://stripe.com/docs/payments/integration-builder
 stripe.api_key = "sk_test_51JKVSWC9NPB01a0ntYHt93lawC5fmkYHcghlD3ZOwnbScemvFjxC6rfbbHWOsXkuyvdMBfe5C4tpEeRklxMkrBQZ00SfVNyeyW"
 
 #used to simulate payments for debug
-stripe_simulate_for_debug = False
+stripe_simulate_for_debug = True
 User = get_user_model()
 
 import logging
@@ -144,7 +146,7 @@ def create_profile(user_form, profile_form, autogenerate_password ):
                 # If yes, then grab it from the POST form reply
                 profile.profile_pic = request.FILES['profile_pic']
             '''
-            subscription_duration_months = int(get_setting('subscription_duration_months'))
+            subscription_duration_months = int(Setting.get_setting('subscription_duration_months'))
 
             #subscription expires after one year, when payment is implemented this will shitf after payment....
             profile.exp_date = datetime.today() + relativedelta(months=+subscription_duration_months)
@@ -160,9 +162,9 @@ def create_profile(user_form, profile_form, autogenerate_password ):
 
         else:
             print(user.email + ' is already registered')
-            return False, -1
+            return False, -1, None, None
     else:
-        return False, -1
+        return False, -1, None, None
 
 def register(request):
 
@@ -225,7 +227,7 @@ def register(request):
                     # If yes, then grab it from the POST form reply
                     profile.profile_pic = request.FILES['profile_pic']
 
-                subscription_duration_months = int(get_setting('subscription_duration_months'))
+                subscription_duration_months = int(Setting.get_setting('subscription_duration_months'))
 
                 #subscription expires after one year, when payment is implemented this will shitf after payment....
                 profile.exp_date = datetime.today() + relativedelta(months=+subscription_duration_months)
@@ -582,7 +584,7 @@ class SingleEvent(DetailView):
 def open_order(pk, payer, partecipant):
 
    print('*** open order ***: payer = ' + payer.email + ', partecipant = ' + partecipant.email)
-   year_subscription_price = int(get_setting('year_subscription_price'))
+   year_subscription_price = int(Setting.get_setting('year_subscription_price'))
 
    sub_total = 0
    max_exp_date = date.today()
@@ -687,7 +689,7 @@ def close_order(o):
             e.save()
 
         elif i['type'] == 'subscription':
-            subscription_duration_months = int(get_setting('subscription_duration_months'))
+            subscription_duration_months = int(Setting.get_setting('subscription_duration_months'))
             partecipant.userprofileinfo.exp_date = datetime.today() + relativedelta(months=+subscription_duration_months)
             partecipant.userprofileinfo.save()
             print('Order contains subscription, user subscription now expires on ' + str(user.userprofileinfo.exp_date) )
@@ -711,12 +713,13 @@ class BuyTicketView(TemplateView):
         context['friend_id'] = kwargs['friend_id']
 
         if kwargs['buy_step']=='partecipant_selection':
-            print('buy_step = partecipant_selection')
+            print('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
 
             if kwargs['cmd']=='init':
                 print('cmd=' + kwargs['cmd'] )
 
         elif kwargs['buy_step']=='collect_friends_mail':
+            print('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
 
             if kwargs['cmd']=='init':
 
@@ -733,9 +736,10 @@ class BuyTicketView(TemplateView):
 
 
         elif kwargs['buy_step']=='friend_already_subscibed':
-            print('friend_already_subscibed')
+            print('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
 
         elif kwargs['buy_step']=='collect_friends_data':
+            print('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
 
             if kwargs['cmd']=='init':
 
@@ -753,10 +757,11 @@ class BuyTicketView(TemplateView):
                 context['profile_form'] = profile_form
 
         elif kwargs['buy_step']=='registration_successful':
+            print('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
             print('registration_successful, friend_id = ' + str(kwargs['friend_id']))
 
-
         elif kwargs['buy_step']=='confirmation':
+            print('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
 
             if kwargs['friend_id'] != '-1':
                 partecipant = User.objects.get(id = int(kwargs['friend_id']))
@@ -769,8 +774,13 @@ class BuyTicketView(TemplateView):
             context = { **context,  **context_out}
             print('BuyTicketView: confirmation, context = ' + str(context))
 
-        elif kwargs['buy_step']=='confirmed':
+        elif kwargs['buy_step']=='card_pay_successful':
+            print('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
 
+        elif kwargs['buy_step']=='confirmed':
+            print('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
+
+            print('Closing order from -confirmed-')
             o = Order.objects.get(id=kwargs['order_id'])
             subscription_duration_months = int(Setting.get_setting('subscription_duration_months'))
             ret = o.close(subscription_duration_months)
@@ -891,9 +901,9 @@ class BuyTicketView(TemplateView):
 
         print('*** event_subcription_successfull ***' + ', new_user: ' +user.first_name + ', creator_user: ' + creator_user.first_name)
 
-        company_mail = get_setting('company_email')
-        smtp_server  = get_setting('company_email_smtp_server')
-        company_pw   = get_setting('company_email_password')
+        company_mail = Setting.get_setting('company_email')
+        smtp_server  = Setting.get_setting('company_email_smtp_server')
+        company_pw   = Setting.get_setting('company_email_password')
 
         event = Event.object.get(id = event_pk)
         #m = Mailer(sender='roberto.ferro1996@gmail.com', smtp_server = "smtp.gmail.com", password = 'margherita1')
@@ -910,9 +920,9 @@ class BuyTicketView(TemplateView):
 
         print('*** your_friend_subscibed_you ***' + 'pw:' + password + ', new_user: ' + new_user.first_name + ', creator_user: ' + creator_user.first_name)
 
-        company_mail = get_setting('company_email')
-        smtp_server  = get_setting('company_email_smtp_server')
-        company_pw   = get_setting('company_email_password')
+        company_mail = Setting.get_setting('company_email')
+        smtp_server  = Setting.get_setting('company_email_smtp_server')
+        company_pw   = Setting.get_setting('company_email_password')
 
         event = Event.object.get(id = event_pk)
         #m = Mailer(sender='roberto.ferro1996@gmail.com', smtp_server = "smtp.gmail.com", password = 'margherita1')
@@ -983,9 +993,10 @@ class AskRefundView(TemplateView):
         order = ticket.order
 
         #refund for the amount given
-        smallest_currency_ratio = int(get_setting('smallest_currency_ratio'))
+        smallest_currency_ratio = int(Setting.get_setting('smallest_currency_ratio'))
         try:
             print('refunding payment_intent:' + order.payment_id)
+            #https://stripe.com/docs/payments/integration-builder
             r = stripe.Refund.create(
             payment_intent = order.payment_id,
             amount = amount*smallest_currency_ratio)
@@ -1042,7 +1053,7 @@ class AskRefundView(TemplateView):
             if card_refund > 0:
 
                 #bank refund
-                card_refund_cost = int(get_setting('card_refund_cost'))
+                card_refund_cost = int(Setting.get_setting('card_refund_cost'))
                 net_refund = card_refund - card_refund_cost
 
                 ret_card, e = self.refund_ticket_with_card(ticket, card_refund)
@@ -1079,18 +1090,6 @@ class AskRefundView(TemplateView):
         return render(request,
                       self.template_name,
                       context)
-class Payment:
-
-    def mock_request_payment(self, sum):
-        print('connecting to bank.....')
-        time.sleep(3)
-        print('request for payment of ' + str(sum)  + ' euros successful')
-
-    def mock_do_payment(self, sum):
-        print('connecting to bank.....')
-        time.sleep(3)
-        print('payment of ' + str(sum)  + ' euros successful')
-
 
 class QueueToEventView(TemplateView):
     template_name = "TravelsApp/queue_to_event.html"
@@ -1158,9 +1157,10 @@ def create_payment_intent(request):
         print('request:' + str(request.body))
 
         try:
+            #see https://stripe.com/docs/payments/integration-builder
             intent = stripe.PaymentIntent.create(
                 amount = total*eur_cents,
-                currency='eur' #move to settings
+                currency='eur' #move to Setting
             )
 
             print('intent' + str(intent))
@@ -1184,9 +1184,16 @@ def create_payment_intent(request):
             print('error creting intent:' + str(e))
             return JsonResponse({'error':str(e), })
 
-# Using Django
+#see for integration:
+# https://stripe.com/docs/payments/integration-builder
+#for webhook test:
+#https://stripe.com/docs/webhooks/test
+#https://stripe.com/docs/stripe-cli/webhooks#forward-events
 @csrf_exempt
 def stripe_webhook(request):
+
+    print('+++++++++stripe_webhook called+++++++++++')
+
     payload = request.body
     event = None
 
@@ -1211,8 +1218,13 @@ def stripe_webhook(request):
             #o = Order.objects.filter(status='chart', payment_id = intent['id'])[0]
 
             #overwrite for debug purposes
+            #set stripe_simulate_for_debug to false during real life
             if stripe_simulate_for_debug == True:
                 o = Order.objects.filter(status__iexact='chart', payment_id__iexact = 'this is just a dummy id')[0]
+            else:
+                #retrive the order correspondig to the intent id
+                o = Order.objects.filter(status='chart', payment_id = intent['id'])[0]
+
 
             print('Payment receved for order id: ' + str(o.id))
 
@@ -1221,15 +1233,14 @@ def stripe_webhook(request):
             print(str(ex))
             return HttpResponse(status=400)
 
-        #xxx
+        print('Closing order from -webhook-')
         subscription_duration_months = int(Setting.get_setting('subscription_duration_months'))
         ret = o.close(subscription_duration_months)
         #xxx send mail with order confirmation
         print('Creating mail for order confirmation')
         om = OutMail.create_from_order(o)
 
-        if ret:#xxx
-            event_subcription_successfull(self, user, creator_user, event_pk)
+        if ret:
             return HttpResponse(status=200)
 
     elif event_dict['type'] == "payment_intent.payment_failed":
@@ -1240,13 +1251,3 @@ def stripe_webhook(request):
         return HttpResponse(status=400)
     else:
         return HttpResponse(status=400)
-
-def get_setting(name):
-    r = Setting.objects.get(name=name).value
-    return r
-
-def save_setting(name, value, description):
-    s = Setting.objects.get_or_create( name=name)[0]
-    s.value = value
-    s.description = description
-    s.save()
