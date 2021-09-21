@@ -1,29 +1,7 @@
 
-- creare
-    class Outmail:
-
-  deve avere:
-   >un metodo generate_from_order:  genera un messaggio a partire da un Order.
-   >un metodo generate_indirect_subscription_msg che genera un messaggio di notifica your_friend_subscibed_you
-
-- salvare mail usando OutMail quando amico registra amico e compra biglietto
- (due mail,
-
->la prima
-***informa dell'avvenuta iscrizione e cominica la pw
-
->e la seconda comunica l'evento. ->>quando viene chiamata la close_order (pagamento
-  in crediti o da webhook per la carta)
 
 
-///////////////// ****** TESTARE TUTTA LA ROBA SOPRA, OGNI XXX UN TEST ******* \\\\\\\\\\\\\\\\\\\\\\
->test ordine per me OK
->test ordine per amico con solo biglietto OK
->test ordine per amico biglietto e sottoscrizione
-
-
-
--gestire scadenza differenziata degli eventi
+test refund_limit_delta_hours
 
  -capire come mai i queued partecipants viene considerato cme reqiured
 

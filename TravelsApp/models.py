@@ -220,6 +220,8 @@ class Event(models.Model):
     partecipants = models.ManyToManyField(User)
     queued_partecipants = models.ManyToManyField(User, related_name='my_queued_events')
     confirmed = models.BooleanField(default=0)
+    #how may hours prior to event begin user can still ask refund
+    refund_limit_delta_hours =  models.PositiveIntegerField(default = 48)
 
     def __str__(self):
         return "ID: " + str(self.id) + ", Date: " + str(self.date) + str(self.activity)

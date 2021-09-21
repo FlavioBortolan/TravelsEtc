@@ -569,8 +569,8 @@ class SingleEvent(DetailView):
         dt = datetime.combine(event.date, event.time) + timedelta(minutes=30)
         context['start_time'] = dt.time
 
-        #detect if it is possible to ask for refund
-        refund_limit_time = dt - timedelta(hours=48)
+        #detect if it is possible to ask for refund 
+        refund_limit_time = dt - timedelta(hours = event.refund_limit_delta_hours)
         if  refund_limit_time > datetime.now() and context['user_already_has_this_ticket']:
             context['can_ask_refund'] = True
             print('The guy can have his money back as:' + str(refund_limit_time) + '>' + str(datetime.now()))
@@ -1056,7 +1056,7 @@ class AskRefundView(TemplateView):
                 card_refund_cost = int(Setting.get_setting('card_refund_cost'))
                 net_refund = card_refund - card_refund_cost
 
-                ret_card, e = self.refund_ticket_with_card(ticket, card_refund)
+                ret_card, e = self.refund_ticket_with_card(ticket, net_refund)
 
                 if ret_card:
                     print ('Refund of ' + str(net_refund) + 'euros done (' + str(card_refund) + '-' + str(card_refund_cost) +')')
@@ -1189,6 +1189,11 @@ def create_payment_intent(request):
 #for webhook test:
 #https://stripe.com/docs/webhooks/test
 #https://stripe.com/docs/stripe-cli/webhooks#forward-events
+
+#forward events to web hook:
+#stripe listen --forward-to http://127.0.0.1:8000/TravelsApp/stripe_webhook/
+#trigger an event:
+#stripe trigger payment_intent.succeeded
 @csrf_exempt
 def stripe_webhook(request):
 
