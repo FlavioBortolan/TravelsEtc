@@ -45,6 +45,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 # This is a sample test API key. Sign in to see examples pre-filled with your key.
 #see https://stripe.com/docs/payments/integration-builder
+#if key is compromised, regenerate it from the dashboard
 stripe.api_key = "sk_test_51JKVSWC9NPB01a0ntYHt93lawC5fmkYHcghlD3ZOwnbScemvFjxC6rfbbHWOsXkuyvdMBfe5C4tpEeRklxMkrBQZ00SfVNyeyW"
 
 #used to simulate payments for debug
@@ -569,7 +570,7 @@ class SingleEvent(DetailView):
         dt = datetime.combine(event.date, event.time) + timedelta(minutes=30)
         context['start_time'] = dt.time
 
-        #detect if it is possible to ask for refund 
+        #detect if it is possible to ask for refund
         refund_limit_time = dt - timedelta(hours = event.refund_limit_delta_hours)
         if  refund_limit_time > datetime.now() and context['user_already_has_this_ticket']:
             context['can_ask_refund'] = True

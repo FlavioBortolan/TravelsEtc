@@ -1,9 +1,11 @@
 
 
 
+test queued_partecipants as optional parameter
 test refund_limit_delta_hours
 
- -capire come mai i queued partecipants viene considerato cme reqiured
+
+ -capire come mai i queued partecipants viene considerato come reqiured
 
 
 -print dei log in una funzione a aprte un po piu strutturata
@@ -15,11 +17,6 @@ test refund_limit_delta_hours
 - Gestire prospetto di fatturazione mensile per le guide
 
 - Test su schermo formato cellulare
-
-
-
-
-
 
 GESTIONE
 -Creare associazione culturale

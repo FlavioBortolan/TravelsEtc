@@ -218,7 +218,7 @@ class Event(models.Model):
     date = models.DateField(default = timezone.now)
     time = models.TimeField(default = timezone.now)
     partecipants = models.ManyToManyField(User)
-    queued_partecipants = models.ManyToManyField(User, related_name='my_queued_events')
+    queued_partecipants = models.ManyToManyField(User, related_name='my_queued_events', blank=True)
     confirmed = models.BooleanField(default=0)
     #how may hours prior to event begin user can still ask refund
     refund_limit_delta_hours =  models.PositiveIntegerField(default = 48)
