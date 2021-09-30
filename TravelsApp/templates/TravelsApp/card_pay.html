@@ -130,6 +130,11 @@
         /* ------- UI helpers ------- */
 
         // Shows a success message when the payment is complete
+        //note that at this point the payment is done so it is ok that the user is
+        //sent a confirmation page.
+        //Please note anyway that the webhook at server side has not been called yet
+        // and untill that point the order is not actually close and the tickets
+        //are not emitted 
         var orderComplete = function(paymentIntentId) {
           loading(false);
           document

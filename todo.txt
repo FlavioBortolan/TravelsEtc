@@ -1,22 +1,14 @@
 
 
 
-test queued_partecipants as optional parameter
-test refund_limit_delta_hours
+- test pagamento carta da WEB(test mode)
 
-
- -capire come mai i queued partecipants viene considerato come reqiured
-
-
--print dei log in una funzione a aprte un po piu strutturata
-
-
-- deploy su digital ocean
-
-
-- Gestire prospetto di fatturazione mensile per le guide
+- traduzioni in italiano
 
 - Test su schermo formato cellulare
+- print dei log in una funzione a parte un po piu strutturata
+
+- Gestire prospetto di fatturazione mensile per le guide
 
 GESTIONE
 -Creare associazione culturale
@@ -24,3 +16,12 @@ GESTIONE
 
 -verificare come assicurare le uscite.
 -cominciare a contattare le guide naturalische.
+
+-creare escursioni:
+  >>decidere giro
+  >>creare contenuto (evento, activity)
+  >>trovare guida disponibile
+  >>decidere data e attivare evento
+
+-Community:
+ >>....

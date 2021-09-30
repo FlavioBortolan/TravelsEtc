@@ -1191,10 +1191,15 @@ def create_payment_intent(request):
 #https://stripe.com/docs/webhooks/test
 #https://stripe.com/docs/stripe-cli/webhooks#forward-events
 
-#forward events to web hook:
+#forward events to web hook(local):
 #stripe listen --forward-to http://127.0.0.1:8000/TravelsApp/stripe_webhook/
+
+#forward events to web hook(server):
+#stripe listen --forward-to https://flaviobortolan.pythonanywhere.com/TravelsApp/stripe_webhook/
+
 #trigger an event:
 #stripe trigger payment_intent.succeeded
+
 @csrf_exempt
 def stripe_webhook(request):
 
