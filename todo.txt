@@ -1,8 +1,6 @@
 
 
 
-- test pagamento carta da WEB(test mode)
-
 - traduzioni in italiano
 
 - Test su schermo formato cellulare

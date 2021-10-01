@@ -136,5 +136,5 @@ def test_OutMail_create_from_subscription():
 # Create your tests here.
 if __name__ == '__main__':
     #test_mail()
-    #test_Order_open_close()
-    test_OutMail_create_from_subscription()
+    test_Order_open_close()
+    #test_OutMail_create_from_subscription()

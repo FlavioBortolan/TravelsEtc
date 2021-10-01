@@ -171,37 +171,43 @@ class Order(models.Model):
 
         print('User now has: ' + str(user.userprofileinfo.credits) + 'credits')
 
-        for i in items:
+        try:
 
-            partecipant = User.objects.get(email=i['partecipant'])
+            for i in items:
 
-            if i['type'] == 'event_ticket_purchase':
+                partecipant = User.objects.get(email=i['partecipant'])
 
-                e=Event.objects.get(id=int(i['pk']))
+                if i['type'] == 'event_ticket_purchase':
 
-                print('Order contains ticket for event : ' + str(e.activity.name) +' on date:' + str(e.date))
-                print('The target partecipant is:' + i['partecipant'])
-                print('credits to be used : ' + str(self.credits_to_use))
-                print('order total:' + str(self.total))
+                    e=Event.objects.get(id=int(i['pk']))
 
-                #add user to event
-                e.partecipants.add(partecipant)
+                    print('Order contains ticket for event : ' + str(e.activity.name) +' on date:' + str(e.date))
+                    print('The target partecipant is:' + i['partecipant'])
+                    print('credits to be used : ' + str(self.credits_to_use))
+                    print('order total:' + str(self.total))
 
-                #remove him from the queue if he was in the queued_partecipants
-                if e.queued_partecipants.filter(email=partecipant.email).count()>0:
-                    e.queued_partecipants.remove(partecipant)
-                    print('removed user ' + partecipant.email + ' from the queue of event ' + e.activity.name)
+                    #add user to event
+                    e.partecipants.add(partecipant)
 
-                #Create the ticket
-                t = Ticket.objects.create(user=partecipant, event=e, order=self, status = 'valid')
-                t.save()
-                e.save()
+                    #remove him from the queue if he was in the queued_partecipants
+                    if e.queued_partecipants.filter(email=partecipant.email).count()>0:
+                        e.queued_partecipants.remove(partecipant)
+                        print('removed user ' + partecipant.email + ' from the queue of event ' + e.activity.name)
 
-            elif i['type'] == 'subscription':
+                    #Create the ticket
+                    t = Ticket.objects.create(user=partecipant, event=e, order=self, status = 'valid')
+                    t.save()
+                    e.save()
 
-                partecipant.userprofileinfo.exp_date = datetime.today() + relativedelta(months=+subscription_duration_months)
-                partecipant.userprofileinfo.save()
-                print('Order contains subscription, user subscription now expires on ' + str(user.userprofileinfo.exp_date) )
+                elif i['type'] == 'subscription':
+
+                    partecipant.userprofileinfo.exp_date = datetime.today() + relativedelta(months=+subscription_duration_months)
+                    partecipant.userprofileinfo.save()
+                    print('Order contains subscription, user subscription now expires on ' + str(user.userprofileinfo.exp_date) )
+
+        except Exception as e:
+            print('Exception processing order items:' + str(e))
+            return False
 
         self.status = "completed"
         self.save()

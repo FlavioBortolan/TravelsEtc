@@ -785,9 +785,11 @@ class BuyTicketView(TemplateView):
             o = Order.objects.get(id=kwargs['order_id'])
             subscription_duration_months = int(Setting.get_setting('subscription_duration_months'))
             ret = o.close(subscription_duration_months)
-            #xxx send mail with order confirmation
-            print('Creating mail for order confirmation')
-            om = OutMail.create_from_order(o)
+
+            if ret:
+                #send mail with order confirmation
+                print('Creating mail for order confirmation')
+                om = OutMail.create_from_order(o)
 
         return render(request,
                       self.template_name,
@@ -1247,11 +1249,12 @@ def stripe_webhook(request):
         print('Closing order from -webhook-')
         subscription_duration_months = int(Setting.get_setting('subscription_duration_months'))
         ret = o.close(subscription_duration_months)
-        #xxx send mail with order confirmation
-        print('Creating mail for order confirmation')
-        om = OutMail.create_from_order(o)
 
         if ret:
+            #xxx send mail with order confirmation
+            print('Creating mail for order confirmation')
+            om = OutMail.create_from_order(o)
+
             return HttpResponse(status=200)
 
     elif event_dict['type'] == "payment_intent.payment_failed":
