@@ -1,6 +1,7 @@
 {% extends "TravelsApp/base.html" %}
 {% block body_block %}
 {% load static %}
+{% load i18n %}
 
   <!-- Add a background color and large text to the whole page
   <div class="w3-center w3-sand w3-grayscale w3-large">-->
@@ -11,6 +12,7 @@
         <p>The nature within</p>
     </div>
 
+    <p>{% translate "This is a translation test" %}</p>
     <p>Con noi potrai scoprire tantissimi gioielli del tuo territorio ed incontrare tante persone nuove.</p>
     <p>Vi proponiamo tante uscite in giornata grazie alle quali potrai visitare in compagnia i posti piu belli del nostro meravigioso paese.</p>
 

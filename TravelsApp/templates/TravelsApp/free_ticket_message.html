@@ -2,19 +2,19 @@
 <html >
 
   <body>
-    <p>Hallo {{ user.first_name }}!</p>
+    <p>Ciao {{ user.first_name }}!</p>
     <p>
-    There is a free ticket for event <b>{{ event.activity.name }}</b> on <b>{{ event.date }}</b> <br>
-    Get it from the site before it disappears!
+    Si è liberato un posto per l'evento <b>{{ event.activity.name }}</b> in data <b>{{ event.date }}</b> <br>
+    Acquistalo dal sito prima che scompaia!
 
-    <a href="{% url 'TravelsApp:single' pk=event.id %}"> Click here to go to the event!</a>
+    <a href="{% url 'TravelsApp:single' pk=event.id %}"> Fai click qui per accedere all'evento!</a>
 
     <br>
-    You are receving this email because you are on the queue for this event. <br>
-    You can cancel this from the event's page by pressing the 'Remove me from the queue' button
+    Hai ricevuto questa mail perche' chiesto di essere messo in coda a questo evento. <br>
+    Puoi interrompere questa comunicazione dalla pagina dell'evento tramite il pulsante 'Rimuovimi dalla coda'
     <br>
     <br>
-    The TravelsEtc Team
+    Il team di TravelsEtc
     </p>
   </body>
 </html>

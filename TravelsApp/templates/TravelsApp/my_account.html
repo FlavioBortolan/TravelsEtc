@@ -6,13 +6,13 @@
   {% if data_change_successful %}
 
   <div class="w3-container w3-blue">
-    <h2>Your account data has been updated!</h2>
+    <h2>Il tuo account è stato aggiornato!</h2>
   </div>
 
   {% else %}
 
       <div class="w3-container w3-blue">
-        <h2>Account data</h2>
+        <h2>I tuoi dati</h2>
       </div>
 
       <form class="w3-container" enctype="multipart/form-data" method="POST">
@@ -21,13 +21,13 @@
         {{ user_form.as_p }}
         {{ profile_form.as_p }}
 
-        <label>Credits:</label>
+        <label>Crediti:</label>
           <input class="w3-input" type="text" name="credits" value={{ credits }} disabled>
         <br>
 
         <input type="submit" class="w3-btn w3-blue w3-center" name="" value="Save">
-        <a href="{% url 'TravelsApp:change_password' %}" class="w3-btn w3-blue w3-center">Change Password</a>
-        <a href="{% url 'TravelsApp:index' %}" class="w3-btn w3-blue w3-center">Discard</a>
+        <a href="{% url 'TravelsApp:change_password' %}" class="w3-btn w3-blue w3-center">Cambia password</a>
+        <a href="{% url 'TravelsApp:index' %}" class="w3-btn w3-blue w3-center">Annulla</a>
 
       </form>
       <br>

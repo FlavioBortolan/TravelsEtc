@@ -1,3 +1,5 @@
+
+from django.utils.translation import gettext as _
 from django.shortcuts import render
 from .forms import UserForm,UserProfileInfoForm
 from .forms import DivErrorList

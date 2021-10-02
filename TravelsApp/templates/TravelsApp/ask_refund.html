@@ -6,10 +6,10 @@
   <div class="w3-container">
 
     <div class="w3-container">
-      <h1>Refund request </h1>
-      <h3>Event: {{ event.activity.name }}</h3>
-      <h3>Date: {{ event.date }}</h3>
-      <h3>Price: {{ event.activity.price }}</h3>
+      <h1>Richiesta di rimborso </h1>
+      <h3>Evento: {{ event.activity.name }}</h3>
+      <h3>Data: {{ event.date }}</h3>
+      <h3>Prezzo: {{ event.activity.price }}</h3>
     </div>
 
     {% if refund_step == '1' %}
@@ -20,27 +20,27 @@
           <div class="w3-card w3-padding w3-border w3-border-black">
 
             {% if choices == 'credits' %}
-              <h3>Refund will be done in credits as in the initial purchase:</h3>
+              <h3>Poiche l'acquisto è stato fatto in crediti anche il rimborso avverrà in crediti:</h3>
               <input class="w3-radio" type="radio" name="refund" value="credits" checked>
-              <label>Credits</label>
+              <label>Crediti</label>
               <br>
               <br>
             {% elif choices == 'card_or_credits' %}
-              <h3>Please choose refund mode:</h3>
+              <h3>Scegli una modalità di rimborso:</h3>
               <input class="w3-radio" type="radio" name="refund" value="card" >
-              <label>Credit Card (1 euro commission)</label>
+              <label>Carta (1 euro di commissione)</label>
               <br>
               <input class="w3-radio" type="radio" name="refund" value="credits" checked>
-              <label>Credits</label>
+              <label>Crediti</label>
               <br>
               <br>
             {% elif choices == 'card_plus_credit_or_credits' %}
-              <h3>Please choose refund mode:</h3>
+              <h3>Scegli una modalità di rimborso:</h3>
               <input class="w3-radio" type="radio" name="refund" value="card_plus_credits" >
-              <label>Credit Card (1 euro commission) for the maximum amount possible {{ max_amount_card }}, the rest in credits</label>
+              <label>Carta (1 euro di commissione) per il massimo importo possibile: {{ max_amount_card }}, il resto in crediti</label>
               <br>
               <input class="w3-radio" type="radio" name="refund" value="credits" checked>
-              <label>Credits</label>
+              <label>Crediti</label>
               <br>
               <br>
             {% endif %}
@@ -59,20 +59,20 @@
       {% if user_subscribed %}
 
         {% if refund_result == 'success' %}
-        <h3><i class="fas fa-check"></i>Refund done!</h3>
+        <h3><i class="fas fa-check"></i>Rimborso eseguito!</h3>
         {% else %}
-        <h3><i class="fas fa-times"></i>There was a problem in the refund: {{ refund_result }}</h3>
-        <h3>Please contact support form more information.</h3>
+        <h3><i class="fas fa-times"></i>C'è stato un problema con il rimborso: {{ refund_result }}</h3>
+        <h3>Contattare il supporto per informazioni.</h3>
         {% endif %}
       {% else %}
-        <h3><i class="fas fa-times"></i>Refund impossible - you are not subscibed to this event!</h3>
+        <h3><i class="fas fa-times"></i>Rimborso non possibile - non sei iscritto a questo evento!</h3>
       {% endif %}
     </div>
 
     <form action="{% url 'TravelsApp:events' filter_mode='all' %}" method = "get">
       <br>
       <div class="w3-center">
-        <button class="w3-btn w3-blue w3-center" type="submit">Back to events</button>
+        <button class="w3-btn w3-blue w3-center" type="submit">Torna agli eventi</button>
       </div>
 
       <br>

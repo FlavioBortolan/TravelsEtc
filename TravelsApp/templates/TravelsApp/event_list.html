@@ -9,24 +9,24 @@
 
         <div class="centerstage">
           <div class="w3-container w3-blue">
-            <h2>Hallo {{ user.first_name }} !</h2>
+            <h2>Ciao {{ user.first_name }} !</h2>
           </div>
 
         {% if filter_mode == "current_user" %}
 
           <div class="w3-container w3-blue">
-            <h2>Here is the list of your incoming events:</h2>
+            <h2>Ecco la lista dei prossimi eventi:</h2>
           </div>
         {% elif filter_mode == "current_user_past" %}
 
             <div class="w3-container w3-blue">
-              <h2>Here is the list of your past events:</h2>
+              <h2>Ecco la lista dei tuoi eventi passati:</h2>
             </div>
 
         {% elif filter_mode == "all" %}
 
           <div class="w3-container w3-blue">
-            <h2>Here is the list of all events in the next {{ delta_months }} months,  please choose one or select filter parameters!</h2>
+            <h2>Ecco la lista degli eventi nei prossimi {{ delta_months }} mesi,  scegline uno o usa i filtri per restringere la ricerca!</h2>
           </div>
 
         {% elif filter_mode == "apply_filter" %}
@@ -34,13 +34,13 @@
           {% if event_list %}
 
           <div class="w3-container w3-blue">
-            <h2>Here's a list of events that match your search criteria:</h2>
+            <h2>Ecco una lista di eventi che corrispondono alla tua ricerca:</h2>
           </div>
 
           {% else %}
 
           <div class="w3-container w3-blue">
-            <h2>No event matches  your search criteria:</h2>
+            <h2>Nessun evento corrisponde ai tuoi criteri di ricerca :-(:</h2>
           </div>
 
           {% endif %}
@@ -58,7 +58,7 @@
               <div class="w3-col s12 m4 l2 w3-container">
 
                 <p>
-                  <label>City:</label>
+                  <label>Città:</label>
                   <input id = "city" onchange="triggerPost()" class="w3-input" type="text" name="city"  value={{city}}>
                 </p>
 
@@ -66,7 +66,7 @@
 
               <div class="w3-col s12 m4 l2 w3-container">
                 <p>
-                  <label>Start Date:</label>
+                  <label>Data inizio:</label>
 
                   {% if start_date %}
 
@@ -85,7 +85,7 @@
               <div class="w3-col s12 m4 l2 w3-container">
 
                 <p>
-                  <label>End Date:</label>
+                  <label>Data fine:</label>
                   <input onchange="triggerPost()" class="w3-input" type="date" name="end_date" value={{ end_date }}>
                 </p>
 
@@ -94,7 +94,7 @@
               <div class="w3-col s12 m4 l2 w3-container">
 
                 <p>
-                  <label>Type:</label>
+                  <label>Tipo:</label>
                     <!--<input class="w3-input" type="text" name="type" value={{type}}>  -->
                   <select oninput="triggerPost()" class="w3-input" name="type">
 
@@ -114,7 +114,7 @@
               <div class="w3-col s12 m4 l2 w3-container">
 
                 <p>
-                  <label>Difficulty Level:</label>
+                  <label>Difficoltà:</label>
                     <!--<input class="w3-input" type="text" name="type" value={{type}}>  -->
                   <select onchange="triggerPost()" class="w3-input" name="difficultyLevel">
 
@@ -133,13 +133,13 @@
               <div class="w3-col s12 m4 l2 w3-container">
 
                 <p>
-                  <label>Confirmation:</label>
+                  <label>Conferma:</label>
                     <!--<input class="w3-input" type="text" name="type" value={{type}}>  -->
                   <select onchange="triggerPost()" class="w3-input" name="confirmed">
 
                     <option value="NoSelection" {% if confirmed == "No Selection" %} selected="selected"{% endif %}></option>
-                    <option value="confirmed" {% if confirmed == "confirmed" %} selected="selected"{% endif %}>confirmed</option>
-                    <option value="all" {% if confirmed == "all" %} selected="selected"{% endif %}>all</option>
+                    <option value="confirmed" {% if confirmed == "confirmed" %} selected="selected"{% endif %}>confermato</option>
+                    <option value="all" {% if confirmed == "all" %} selected="selected"{% endif %}>tutti</option>
 
                   </select>
                 </p>
@@ -169,8 +169,8 @@
 
                       {{ event.date               }} <br>
                       {{ event.activity.place         }} <br>
-                      Partecipants:  {{ event.partecipants.all.count }}<br>
-                      Price:         {{ event.activity.price         }}<br>
+                      Partecipanti:  {{ event.partecipants.all.count }}<br>
+                      Prezzo:         {{ event.activity.price         }}<br>
                     </div>
                   </div>
                 </a>
@@ -184,7 +184,7 @@
 
       {% else %}
 
-        <h1>You need to register in order to see this</h1>
+        <h1>E' richista la registrazione per vedere questo contenuto.</h1>
 
       {% endif %}
 

@@ -48,45 +48,45 @@
         <!-- Right panel with properties -->
         <div class="w3-container  w3-card-4 w3-third  w3-pale-blue w3-mobile w3-round-xxlarge">
 
-          <p><b>Description: </b>{{ event.activity.description }}</p>
-          <p><b>Date: </b>{{ event.date }}</p>
-          <p><b>Place: </b>{{ event.activity.place }}</p>
-          <p><b>Partecipants: </b>{{ event.partecipants.all.count }}</p>
-          <p><b>Type: </b>{{ event.activity.type }}</p>
-          <p><b>Price: </b>{{ event.activity.price }} Euro</p>
+          <p><b>Descrizione: </b>{{ event.activity.description }}</p>
+          <p><b>Data: </b>{{ event.date }}</p>
+          <p><b>Luogo: </b>{{ event.activity.place }}</p>
+          <p><b>Partecipanti: </b>{{ event.partecipants.all.count }}</p>
+          <p><b>Tipo: </b>{{ event.activity.type }}</p>
+          <p><b>Prezzo: </b>{{ event.activity.price }} Euro</p>
 
-          <p><b>Confirmed: </b>
+          <p><b>Confermato: </b>
           {% if event.confirmed %}
-           Yes!
+           Si!
           {% else %}
-           Not yet
+           Non ancora
           {% endif %}</p>
 
-          <p><b>Dogs allowed: </b>
+          <p><b>Cani ammessi: </b>
           {% if event.activity.dogsAllowed %}
-           Yes!
+           Si!
           {% else %}
            No
           {% endif %}</p>
 
-          <p><b>Kids allowed: </b>
+          <p><b>Minori ammessi: </b>
           {% if event.activity.kidsAllowed %}
-           Yes!
+           Si!
           {% else %}
            No
           {% endif %}</p>
 
-          <p><b>Duration: </b>{{ event.activity.duration }} hours</p>
-          <p><b>Minimum partecipants: </b>{{ event.activity.minNumPartecipants }}</p>
-          <p><b>Maximum partecipants: </b>{{ event.activity.maxNumPartecipants }}</p>
+          <p><b>Durata: </b>{{ event.activity.duration }} hours</p>
+          <p><b>Minimo partecipanti: </b>{{ event.activity.minNumPartecipants }}</p>
+          <p><b>Massimo partecipanti: </b>{{ event.activity.maxNumPartecipants }}</p>
 
-          <p><b>Difficulty Level: </b>{{ event.activity.difficultyLevel }}</p>
+          <p><b>Difficoltà: </b>{{ event.activity.difficultyLevel }}</p>
 
           {% if event.activity.type == "Trekking" %}
 
-            <p><b>Length: </b>{{ event.activity.length|floatformat }} Km</p>
-            <p><b>Gradient: </b>{{ event.activity.gradient|floatformat  }} m</p>
-            <p><b>Street type: </b>{{ event.activity.streetType }}</p>
+            <p><b>Lunghezza: </b>{{ event.activity.length|floatformat }} Km</p>
+            <p><b>Dislivello: </b>{{ event.activity.gradient|floatformat  }} m</p>
+            <p><b>Tipo fondo: </b>{{ event.activity.streetType }}</p>
 
           {% endif %}
 
@@ -97,14 +97,14 @@
       <!-- Bottom panel with properties -->
       <div class="w3-row w3-padding-16" >
         <div class="w3-container w3-card-4 w3-pale-blue w3-mobile w3-round-xxlarge">
-              <p><b>Meet place: </b>
-                <a href="{{ event.activity.meetPlaceLink }}">Click to see on Google Maps</a>
+              <p><b>Luogo di incontro: </b>
+                <a href="{{ event.activity.meetPlaceLink }}">Fai click per vedere su Google Maps</a>
               </p>
-              <p><b>Meet time: </b>{{ event.time }}</p>
-              <p><b>Start time: </b>{{ start_time }}</p>
-              <p><b>Directions: </b>{{ event.activity.meetPlaceDirections }}</p>
-              <p><b>Leader: </b>{{ event.activity.leader }}</p>
-              <p><b>What To Bring: </b>{{ event.activity.whatToBring }}</p>
+              <p><b>Orario di incontro: </b>{{ event.time }}</p>
+              <p><b>Orario di partenza: </b>{{ start_time }}</p>
+              <p><b>Indicazioni: </b>{{ event.activity.meetPlaceDirections }}</p>
+              <p><b>Guida: </b>{{ event.activity.leader }}</p>
+              <p><b>Cosa portare: </b>{{ event.activity.whatToBring }}</p>
               <br><br>
           </div>
           <br>
@@ -115,7 +115,7 @@
               <form action="{% url 'TravelsApp:ask_refund' pk=event.id refund_step=1%}" method="get">
                   {% csrf_token %}
                 <div class="w3-center">
-                  <button class="w3-btn w3-blue w3-center" type="submit">Ask refund</button>
+                  <button class="w3-btn w3-blue w3-center" type="submit">Chiedi rimborso</button>
                 </div>
 
                 <br>
@@ -124,7 +124,7 @@
               <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='partecipant_selection' cmd='receive_user_selected' total=0 credits_to_use=0 order_id=0 friend_id='-1'%}" method="post">
                 {% csrf_token %}
                 <div class="w3-center">
-                  <button class="w3-btn w3-blue w3-center" type="submit">Buy for a friend</button>
+                  <button class="w3-btn w3-blue w3-center" type="submit">Compra per un amico</button>
                 </div>
 
                 <br>
@@ -142,8 +142,8 @@
             <form action="{% url 'TravelsApp:queue_to_event' pk=event.id command='remove_me' %}" method="get">
 
               <div class="w3-center">
-                <h2>You are queued to this event. Press the button below to be removed from the queue. </h2>
-                <button class="w3-btn w3-blue w3-center" type="submit">Remove me from queue!</button>
+                <h2>Sei in coda per questo evento. Premi il pulsante qui sotto per essere rimosso dalla coda. </h2>
+                <button class="w3-btn w3-blue w3-center" type="submit">Rimuovimi dalla coda!</button>
               </div>
 
               <br>
@@ -154,7 +154,7 @@
           <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='partecipant_selection' cmd='init' total=0 credits_to_use=0 order_id=0 friend_id='-1' %}" method="get">
           {% csrf_token %}
             <div class="w3-center">
-              <button class="w3-btn w3-blue w3-center" type="submit">Buy ticket!</button>
+              <button class="w3-btn w3-blue w3-center" type="submit">Acquista biglietto!</button>
             </div>
 
             <br>
@@ -164,7 +164,7 @@
           <form action="{% url 'TravelsApp:queue_to_event' pk=event.id command='add_me' %}" method="get">
 
             <div class="w3-center">
-              <h2>This event is full! Press the button below to be added to the queue. You will be notified as soon as a place becomes available</h2>
+                <h2>Questo evento è pieno! Permi il tasto qui sotto per essere aggiunto alla coda. Sarai informato via mail quando si libera un posto.</h2>
               <button class="w3-btn w3-blue w3-center" type="submit">Add me to the queue!</button>
             </div>
 
@@ -178,7 +178,7 @@
 
       {% else %}
 
-        <h1>You need to register in order to see this</h1>
+        <h1>E' necessaria la registazione per vedere queste informazioni</h1>
 
       {% endif %}
       </div>

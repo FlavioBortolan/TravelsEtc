@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 {% load static %}
+{% load i18n %}
   <head>
     <title>TravelsEtc.</title>
     <script src="https://kit.fontawesome.com/0eb3328522.js" crossorigin="anonymous"></script>
@@ -40,7 +41,7 @@
 
         <button class="w3-button">
           <i class="fa fa-sign-in w3-large"></i>
-          Access
+          Accesso
         </button>
 
         <div class="w3-dropdown-content w3-bar-block w3-card-4">
@@ -49,12 +50,12 @@
           <a class="w3-button w3-block   w3-left-align" href="{% url 'logout' %}">
             <i class="fa fa-sign-out w3-large"></i> Logout</a>
           <a class="w3-button w3-block w3-left-align" href="{% url 'TravelsApp:my_account' %}">
-            <i class="far fa-address-book"></i> My Account</a>
+            <i class="far fa-address-book"></i> Account</a>
 
           {% else %}
 
           <a class="w3-button w3-block w3-left-align"href="{% url 'TravelsApp:register' %}">
-            <i class="fas fa-fingerprint"></i> Register</a>
+            <i class="fas fa-fingerprint"></i> Registrazione</a>
           <a class="w3-button w3-block w3-left-align" href="{% url 'TravelsApp:user_login' %}">
             <i class="fas fa-sign-in-alt"></i> Login</a>
 
@@ -71,7 +72,7 @@
         <button class="w3-button">
 
           <i class="fa fa-calendar w3-large"></i>
-          Events
+          Eventi
 
         </button>
 
@@ -79,13 +80,13 @@
           {% if user.is_authenticated %}
 
           <a class="w3-button w3-block w3-left-align" href="{% url 'TravelsApp:events' filter_mode='all' %}">
-            <i class="far fa-calendar-alt"></i> Events</a>
+            <i class="far fa-calendar-alt"></i> Eventi</a>
 
           <a class="w3-button w3-block w3-left-align" href="{% url 'TravelsApp:events' filter_mode='current_user' %}">
-            <i class="fas fa-calendar-check"></i> My Events</a>
+            <i class="fas fa-calendar-check"></i> I miei eventi</a>
 
           <a class="w3-button w3-block w3-left-align" href="{% url 'TravelsApp:events' filter_mode='current_user_past' %}">
-            <i class="far fa-calendar-times"></i> My past Events</a>
+            <i class="far fa-calendar-times"></i> Eventi passati</a>
 
           {% endif %}
 
@@ -112,7 +113,7 @@
 
 <footer class="w3-container w3-padding-32 w3-light-grey w3-center">
   <h4>Footer</h4>
-  <a href="#" class="w3-button w3-black w3-margin"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
+  <a href="#" class="w3-button w3-black w3-margin"><i class="fa fa-arrow-up w3-margin-right"></i>Torna su</a>
   <div class="w3-xlarge w3-section">
     <i class="fa fa-facebook-official w3-hover-opacity"></i>
     <i class="fa fa-instagram w3-hover-opacity"></i>
@@ -155,7 +156,7 @@ function showDivs(n) {
 }
 
 
-function triggerPost() {  
+function triggerPost() {
   $('#event_filter_form').trigger( "submit" );
 };
 

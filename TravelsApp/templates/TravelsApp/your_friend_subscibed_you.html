@@ -4,19 +4,19 @@
   <body>
 
     <!-- Subject is a hidden field from wich we will exctract the subject of the mail  -->
-    <p id="Subject" hidden> Registration successful</p>
+    <p id="Subject" hidden> Registrazione avvenuta</p>
 
-    <p>Hallo <b>{{ recipient.first_name }}!</b></p>
+    <p>Ciao <b>{{ recipient.first_name }}!</b></p>
     <p>
-    You have been registered to our site by your friend <b>{{ user.first_name }}</b>
+    Sei stato iscritto a questo sito dal tuo amico <b>{{ user.first_name }}</b>
     <br>
-    You can login to the site with your email and the temporary password below:
-    <a href="{% url 'TravelsApp:user_login' %}"> Click here to login</a>
+    Puoi effettuare il login al sito con la tua mail e la password temporanea riportata sotto:
+    <a href="{% url 'TravelsApp:user_login' %}"> Fai click qui per effettuare il login</a>
     <br>
     Password:<b>{{ password }}</b>
     <br>
     <br>
-    The TravelsEtc Team
+    Il team TravelsEtc
     </p>
 
   </body>

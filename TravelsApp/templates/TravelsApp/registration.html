@@ -6,8 +6,8 @@
       {% if registered %}
 
         <div class="w3-container w3-blue">
-          <h2>Thank you for registering!</h2>
-          <h2>You are now logged in </h2>
+          <h2>Grazie per esserti registrato!</h2>
+          <h2>Hai effettuato il login </h2>
         </div>
 
       {% else %}
@@ -15,14 +15,14 @@
         {% if user_form.errors or profile_form.errors%}
 
           <div class="w3-container w3-blue">
-            <h2>Something went wrong in your data</h2>
-            <h2>Please correct the errors below:</h2>
+            <h2>Qualcosa non va nei dati</h2>
+            <h2>Per favore correggi gli errori qui sotto:</h2>
           </div>
 
         {% else %}
 
           <div class="w3-container w3-blue">
-            <h2>Please register here</h2>
+            <h2>Registrati qui</h2>
           </div>
 
         {% endif %}

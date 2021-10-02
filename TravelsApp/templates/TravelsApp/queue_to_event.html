@@ -9,11 +9,11 @@
 
       {% if user_queued %}
         <div class="w3-container">
-          <h3>You are already in the queue for this event and will be notified if a ticket will be available</h3>
+          <h3>Sei già in coda per questo evento e verrai informato qualora si liberi un posto.</h3>
         </div>
       {% else %}
         <div class="w3-container">
-          <h3>You have been added to the queue for this event and will be notified if a ticket will be available</h3>
+          <h3>Sei stato inserito nella coda per questo evento e verrai informato qualora si liberi un posto.</h3>
         </div>
       {% endif %}
 
@@ -22,17 +22,17 @@
       <div class="w3-container">
 
       {% if user_queued %}
-          <h3>You have been removed from the queue for this event.</h3>
+          <h3>Sei stato rimosso dalla coda di questo evento.</h3>
       {% else %}
-          <h3>You are not queued to this event.</h3>
+          <h3>Non sei in coda per questo evento.</h3>
       {% endif %}
 
       </div>
     {% endif %}
       <div class="w3-container">
-        <h3><b>Event:</b> {{ event.activity.name }}</h3>
-        <h3><b>Date:</b> {{ event.date }}</h3>
-        <h3><b>Price:</b> {{ event.activity.price }}</h3>
+        <h3><b>Evento:</b> {{ event.activity.name }}</h3>
+        <h3><b>Data:</b> {{ event.date }}</h3>
+        <h3><b>Prezzo:</b> {{ event.activity.price }}</h3>
       </div>
   </div>
 

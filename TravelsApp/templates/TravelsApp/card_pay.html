@@ -3,8 +3,9 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Stripe payment page</title>
+    <title>Pagina pagamento con stripe</title>
     {% load staticfiles  %}
+
     <script src="https://js.stripe.com/v3/"></script>
   </head>
   <body>
@@ -14,9 +15,9 @@
     <input type="hidden" id="friend_id" value="{{ friend_id }}">
 
   <div class="w3-container">
-      <h1>Card Payment</h1>
+      <h1>Pagamento con carta</h1>
       <br>
-      <h3><b>TOTAL: </b></h3> <h3><b>{{ total }}</b></h3>
+      <h3><b>TOTALE: </b></h3> <h3><b>{{ total }}</b></h3>
 
       <link rel="stylesheet" href="{% static 'css/payment.css' %}" />
         <!-- Display a payment form -->
@@ -28,8 +29,8 @@
           </button>
           <p id="card-error" role="alert"></p>
           <p class="result-message hidden">
-            Payment succeeded, see the result in your
-            <a href="" target="_blank">Stripe dashboard.</a> Refresh the page to pay again.
+            Pagamento confermato, guarda il risultato nel tuo
+            <a href="" target="_blank">Stripe dashboard.</a>
           </p>
         </form>
 
@@ -134,7 +135,7 @@
         //sent a confirmation page.
         //Please note anyway that the webhook at server side has not been called yet
         // and untill that point the order is not actually close and the tickets
-        //are not emitted 
+        //are not emitted
         var orderComplete = function(paymentIntentId) {
           loading(false);
           document
