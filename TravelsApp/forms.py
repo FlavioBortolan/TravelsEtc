@@ -62,14 +62,15 @@ class UserForm(forms.ModelForm):
             'email':            forms.EmailInput(attrs={'class': "w3-input"}),
         }
 
-        #labels = {
-        #    'first_name': 'Nome',
-        #    'last_name': 'Cognome',
-        #}
+        labels = {
+            'first_name': 'Nome',
+            'last_name': 'Cognome',
+            'email': 'Email',
+        }
 
 class UserProfileInfoForm(forms.ModelForm):
 
-    exp_date = forms.DateField(required=False, widget = forms.DateInput(attrs={'class': "w3-input", 'disabled': 'True', 'required': 'False'}))
+    exp_date = forms.DateField(required=False, label = 'Scadenza iscrizione', widget = forms.DateInput(attrs={'class': "w3-input", 'disabled': 'True', 'required': 'False'}))
 
     class Meta():
 
@@ -79,4 +80,9 @@ class UserProfileInfoForm(forms.ModelForm):
             'profile_pic':              forms.ClearableFileInput(attrs={'class': "w3-btn w3-blue w3-center"}),
             'phone_number':             forms.TextInput(attrs={'class': "w3-input", 'required':'True'}),
 
+        }
+
+        labels = {
+            'profile_pic': 'Immagine di profilo',
+            'phone_number': 'Telefono',
         }

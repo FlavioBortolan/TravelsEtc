@@ -1,7 +1,6 @@
 
 
 
--list view, verificare immagine dell'evento
 
 - traduzioni in italiano - completare traduzione campi registration
 
