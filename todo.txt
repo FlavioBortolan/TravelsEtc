@@ -1,10 +1,18 @@
 
 
 
-- traduzioni in italiano
+-list view, verificare immagine dell'evento
+
+- traduzioni in italiano - completare traduzione campi registration
 
 - Test su schermo formato cellulare
-- print dei log in una funzione a parte un po piu strutturata
+
+- sistemare filtro, all'inizio mostra tutti gli eventi anche quelli che non sono
+  nell intervallo di date indicato.
+  l'elenco iniziale dovrebbe corrispondere all intervallo di data indicato nei
+  campi
+
+- print dei log in una funzione a parte un po' piu strutturata
 
 - Gestire prospetto di fatturazione mensile per le guide
 

@@ -25,7 +25,7 @@ SECRET_KEY = 'j&wblwbdq(i*x+r&l0y96-wv%c5bjopqbgix(0s*i#o32%5r*b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['flaviobortolan.pythonanywhere.com']
+ALLOWED_HOSTS = ['flaviobortolan.pythonanywhere.com','127.0.0.1']
 
 
 # Password validation
