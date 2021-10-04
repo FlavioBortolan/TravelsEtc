@@ -1,17 +1,14 @@
 
 
 
-
-- traduzioni in italiano - completare traduzione campi registration
-
-- Test su schermo formato cellulare
+- Test su schermo formato cellulare.
 
 - sistemare filtro, all'inizio mostra tutti gli eventi anche quelli che non sono
   nell intervallo di date indicato.
   l'elenco iniziale dovrebbe corrispondere all intervallo di data indicato nei
-  campi
+  campi.
 
-- print dei log in una funzione a parte un po' piu strutturata
+- print dei log in una funzione a parte un po' piu strutturata.
 
 - Gestire prospetto di fatturazione mensile per le guide
 

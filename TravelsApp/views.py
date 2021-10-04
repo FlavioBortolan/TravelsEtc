@@ -421,10 +421,11 @@ class EventListView(LoginRequiredMixin, ListView):
     template_name = 'TravelsApp/event_list.html'
     model = Event
 
+    '''
     #defines the set of elments to be shown (GET)
     #note: *args    = positional arguments in the url call
     #      **kwargs = name-based arguments in the url call
-    def get_queryset(self,*args, **kwargs):
+    def get_queryset(self, *args, **kwargs):
         print('***get_queryset: kwargs' + str(**kwargs) + '***')
         if self.kwargs['filter_mode']=='current_user':
             logger.error('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate solo le attivita dell utente attuale')
@@ -433,12 +434,23 @@ class EventListView(LoginRequiredMixin, ListView):
         elif self.kwargs['filter_mode']=='all':
             logger.error('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate tutte le attivita')
             return(Event.objects.all())
-
+    '''
     #defines the context dictionary to be used to render page during GET
     def get_context_data(self, **kwargs):
+
         print('***get_context_data: kwargs' + str(kwargs) + '***')
         context  = super().get_context_data(**kwargs)
         context['filter_mode'] = self.kwargs['filter_mode']
+
+        delta_months = 2
+        start_date = time.strftime("%Y-%M-%d", time.strptime(str(date.today()), '%Y-%M-%d'))
+        context['start_date'] = start_date
+
+        end_date = time.strftime("%Y-%M-%d", time.strptime(str(date.today() + relativedelta(months=+delta_months)), '%Y-%M-%d'))
+        context['end_date'] = end_date
+
+        context['delta_months'] = delta_months
+
 
         if self.kwargs['filter_mode']=='current_user':
             logger.error('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate solo le attivita dell utente attuale')
@@ -456,16 +468,8 @@ class EventListView(LoginRequiredMixin, ListView):
             logger.error('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate tutte le attivita')
 
             #exclude past events
-            context['event_list'] = Event.objects.filter(date__gte = date.today())
+            context['event_list'] = Event.objects.filter(date__gte = start_date, date__lte = end_date )
 
-        delta_months = 2
-        start_date = time.strftime("%Y-%M-%d", time.strptime(str(date.today()), '%Y-%M-%d'))
-        context['start_date'] = start_date
-
-        end_date = time.strftime("%Y-%M-%d", time.strptime(str(date.today() + relativedelta(months=+delta_months)), '%Y-%M-%d'))
-        context['end_date'] = end_date
-
-        context['delta_months'] = delta_months
 
         print('GET:start_date: ' + start_date)
         print('GET:end_date: ' + end_date)
@@ -583,124 +587,6 @@ class SingleEvent(DetailView):
 
         return context
 
-#opens an order for one single event and for the specified user
-def open_order(pk, payer, partecipant):
-
-   print('*** open order ***: payer = ' + payer.email + ', partecipant = ' + partecipant.email)
-   year_subscription_price = int(Setting.get_setting('year_subscription_price'))
-
-   sub_total = 0
-   max_exp_date = date.today()
-
-   e = Event.objects.get( id = pk )
-   sub_total += e.activity.price
-
-   #check if an event requires subscription to be renewed
-   subscription_expired = e.date > partecipant.userprofileinfo.exp_date
-
-   print('cost of tickets:' + str(sub_total))
-
-   if subscription_expired:
-      sub_total += year_subscription_price
-      print('with subscription:' + str(sub_total))
-
-   #check user credits
-   credits = payer.userprofileinfo.credits
-   print('payer credits:' + str(credits))
-
-   if sub_total > credits:
-       print('#total sum is partially  paid with credits')
-       credits_to_use = credits
-       total = sub_total - credits_to_use
-   else:
-      print('total sum is paid with credits')
-      credits_to_use = sub_total
-      total = 0
-
-   print('Total to be paid with card:' + str(total))
-
-   items=[]
-   items.append({'type':'event_ticket_purchase', 'pk': pk, 'partecipant': partecipant.email})
-
-   if subscription_expired:
-      items.append({'type':"subscription", 'partecipant': partecipant.email} )
-
-   #Create the order
-   o = Order.objects.create(user=payer, date=date.today(), time=datetime.now(), status="chart", items=str(items), total=total, credits_to_use=credits_to_use )
-   o.save()
-   print('Order saved:' + str(o))
-
-   e = Event.objects.get(id=pk)
-
-   context = {}
-   context['subs_exp_date'] = partecipant.userprofileinfo.exp_date
-   context['subscription_expired'] = subscription_expired
-   context['year_subscription_price'] = year_subscription_price
-   context['sub_total'] = sub_total
-   context['total'] = total
-   context['credits_to_use'] = credits_to_use
-   context['event'] =  e
-   context['order_id'] = o.id
-
-   return (True, context, o)
-
-#closes a specific order after payment is completed
-def close_order(o):
-
-    print('*** close_order ***')
-    if o.status=="completed":
-        return False
-
-    #retrive the user
-    user = o.user
-    print('User: ' + user.email)
-    #retrive the articles in the orders
-    items = ast.literal_eval(o.items)
-
-    print('User had: ' + str(user.userprofileinfo.credits) + 'credits')
-    #subtract credits used
-    if o.credits_to_use>0:
-        user.userprofileinfo.credits-=o.credits_to_use
-        user.userprofileinfo.save()
-
-    print('User now has: ' + str(user.userprofileinfo.credits) + 'credits')
-
-    for i in items:
-
-        partecipant = User.objects.get(email=i['partecipant'])
-
-        if i['type'] == 'event_ticket_purchase':
-
-            e=Event.objects.get(id=int(i['pk']))
-
-            print('Order contains ticket for event : ' + str(e.activity.name) +' on date:' + str(e.date))
-            print('The target partecipant is:' + i['partecipant'])
-            print('credits to be used : ' + str(o.credits_to_use))
-            print('order total:' + str(o.total))
-
-            #add user to event
-            e.partecipants.add(partecipant)
-
-            #remove him from the queue if he was in the queued_partecipants
-            if e.queued_partecipants.filter(email=partecipant.email).count()>0:
-                e.queued_partecipants.remove(partecipant)
-                print('removed user ' + partecipant.email + ' from the queue of event ' + e.activity.name)
-
-            #Create the ticket
-            t = Ticket.objects.create(user=partecipant, event=e, order=o, status = 'valid')
-            t.save()
-            e.save()
-
-        elif i['type'] == 'subscription':
-            subscription_duration_months = int(Setting.get_setting('subscription_duration_months'))
-            partecipant.userprofileinfo.exp_date = datetime.today() + relativedelta(months=+subscription_duration_months)
-            partecipant.userprofileinfo.save()
-            print('Order contains subscription, user subscription now expires on ' + str(user.userprofileinfo.exp_date) )
-
-    o.status = "completed"
-    o.save()
-
-    return True
 
 class BuyTicketView(TemplateView):
     template_name = "TravelsApp/buyticket.html"
