@@ -59,7 +59,7 @@
 
                 <p>
                   <label>Città:</label>
-                  <input id = "city" onchange="triggerPost()" class="w3-input" type="text" name="city"  value={{city}}>
+                  <input id = "city" onchange="triggerPost()" class="w3-input w3-white" type="text" name="city"  value={{city}}>
                 </p>
 
               </div>
@@ -70,11 +70,11 @@
 
                   {% if start_date %}
 
-                    <input id ="start_date" onchange="triggerPost()" class="w3-input" type="date"  name="start_date" value={{ start_date }}>
+                    <input id ="start_date" onchange="triggerPost()" class="w3-input w3-white" type="date"  name="start_date" value={{ start_date }}>
 
                   {% else %}
 
-                    <input id ="start_date" onchange="triggerPost()" class="w3-input" type="date" name="start_date" value="2021-01-01">
+                    <input id ="start_date" onchange="triggerPost()" class="w3-input w3-white" type="date" name="start_date" value="2021-01-01">
 
                   {% endif %}
 
@@ -86,7 +86,7 @@
 
                 <p>
                   <label>Data fine:</label>
-                  <input onchange="triggerPost()" class="w3-input" type="date" name="end_date" value={{ end_date }}>
+                  <input onchange="triggerPost()" class="w3-input w3-white" type="date" name="end_date" value={{ end_date }}>
                 </p>
 
               </div>
@@ -96,7 +96,7 @@
                 <p>
                   <label>Tipo:</label>
                     <!--<input class="w3-input" type="text" name="type" value={{type}}>  -->
-                  <select oninput="triggerPost()" class="w3-input" name="type">
+                  <select oninput="triggerPost()" class="w3-input w3-white" name="type">
 
                     <option value="NoSelection" {% if type == "No Selection" %} selected="selected"{% endif %}></option>
                     <option value="Aperitivo" {% if type == "Aperitivo" %} selected="selected"{% endif %}>Aperitivo</option>
@@ -116,7 +116,7 @@
                 <p>
                   <label>Difficoltà:</label>
                     <!--<input class="w3-input" type="text" name="type" value={{type}}>  -->
-                  <select onchange="triggerPost()" class="w3-input" name="difficultyLevel">
+                  <select onchange="triggerPost()" class="w3-input w3-white" name="difficultyLevel">
 
                     <option value="NoSelection" {% if difficultyLevel == "No Selection" %} selected="selected"{% endif %}></option>
                     <option value="Nessuna" {% if difficultyLevel == "Nessuna" %} selected="selected"{% endif %}>Nessuna</option>
@@ -135,7 +135,7 @@
                 <p>
                   <label>Conferma:</label>
                     <!--<input class="w3-input" type="text" name="type" value={{type}}>  -->
-                  <select onchange="triggerPost()" class="w3-input" name="confirmed">
+                  <select onchange="triggerPost()" class="w3-input w3-white" name="confirmed">
 
                     <option value="NoSelection" {% if confirmed == "No Selection" %} selected="selected"{% endif %}></option>
                     <option value="confirmed" {% if confirmed == "confirmed" %} selected="selected"{% endif %}>confermato</option>
@@ -160,7 +160,7 @@
 
                 <a style="text-decoration: none" href="{% url 'TravelsApp:single' pk=event.pk %}">
                   <div class="w3-card-4  w3-round-xxlarge w3-pale-blue" >
-                  
+
                     <img src="{% static 'Images/'|add:event.activity.name|add:'.jpg' %}"
                         class="{% if filter_mode == 'current_user_past' %} w3-grayscale-max  {% endif %} w3-hover-shadow w3-round-xxlarge" alt="Alps" style="width:100%">
 

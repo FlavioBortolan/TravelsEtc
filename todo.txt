@@ -1,13 +1,9 @@
 
 
 
-- Test su schermo formato cellulare.
-
-- sistemare filtro, all'inizio mostra tutti gli eventi anche quelli che non sono
-  nell intervallo di date indicato.
-  l'elenco iniziale dovrebbe corrispondere all intervallo di data indicato nei
-  campi.
-
+- gestione schermo formato cellulare.
+  >lista eventi
+  >...
 - print dei log in una funzione a parte un po' piu strutturata.
 
 - Gestire prospetto di fatturazione mensile per le guide

@@ -30,11 +30,22 @@
   <div class="w3-top">
     <div class="w3-bar w3-light-grey">
 
-        <a href="{% url 'index' %}" class="w3-bar-item w3-button">
-          <i class="fa fa-home w3-large w3-text-light-blue">  </i>
-          TravelsPeopleEtcetera
-        </a>
+      <!---HOME MENU -->
+      <div class="w3-dropdown-hover w3-light-grey">
 
+        <button class="w3-button">
+          <i class="fa fa-home w3-large w3-text-light-blue"> </i>
+          Home
+        </button>
+
+        <div class="w3-dropdown-content w3-bar-block w3-card-4 ">
+
+          <a class="w3-button w3-block w3-left-align" href="{% url 'index' %}">
+            <i class="fa fa-home w3-large w3-text-light-blue">  </i> TravelsPeopleEtcetera</a>
+
+        </div>
+
+      </div>
 
       <!---ACCESS MENU -->
       <div class="w3-dropdown-hover">
