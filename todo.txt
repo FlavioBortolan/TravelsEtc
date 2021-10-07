@@ -2,7 +2,7 @@
 
 
 - gestione schermo formato cellulare.
-  >lista eventi
+  >lista eventi: https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp
   >...
 - print dei log in una funzione a parte un po' piu strutturata.
 

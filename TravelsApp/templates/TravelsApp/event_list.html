@@ -47,109 +47,123 @@
 
         {% endif %}
 
-        <br>
-        <!--Filters form-->
-        {% if filter_mode == "all" or filter_mode == "apply_filter" %}
-          <form id = "event_filter_form" action="{% url 'TravelsApp:events' filter_mode='apply_filter' %}" method="POST">
-            {% csrf_token %}
+        <div class="">
 
-            <div class="w3-row w3-border">
+          <br>
+          <button class="w3-btn w3-blue w3-center" onclick="ShowHide('filtersDiv')">
+            <i class="fa fa-filter"></i>
+            Filtri</button>
+          <br>
+          <br>
 
-              <div class="w3-col s12 m4 l2 w3-container">
+        </div>
 
-                <p>
-                  <label>Città:</label>
-                  <input id = "city" onchange="triggerPost()" class="w3-input w3-white" type="text" name="city"  value={{city}}>
-                </p>
+        <div id="filtersDiv">
 
-              </div>
+          <!--Filters form-->
+          {% if filter_mode == "all" or filter_mode == "apply_filter" %}
+            <form id = "event_filter_form" action="{% url 'TravelsApp:events' filter_mode='apply_filter' %}" method="POST">
+              {% csrf_token %}
 
-              <div class="w3-col s12 m4 l2 w3-container">
-                <p>
-                  <label>Data inizio:</label>
 
-                  {% if start_date %}
+                <div class="w3-row w3-border">
 
-                    <input id ="start_date" onchange="triggerPost()" class="w3-input w3-white" type="date"  name="start_date" value={{ start_date }}>
+                  <div class="w3-col s12 m4 l2 w3-container">
 
-                  {% else %}
+                    <p>
+                      <label>Città:</label>
+                      <input id = "city" onchange="triggerPost()" class="w3-input w3-white" type="text" name="city"  value={{city}}>
+                    </p>
 
-                    <input id ="start_date" onchange="triggerPost()" class="w3-input w3-white" type="date" name="start_date" value="2021-01-01">
+                  </div>
 
-                  {% endif %}
+                  <div class="w3-col s12 m4 l2 w3-container">
+                    <p>
+                      <label>Data inizio:</label>
 
-                </p>
+                      {% if start_date %}
 
-              </div>
+                        <input id ="start_date" onchange="triggerPost()" class="w3-input w3-white" type="date"  name="start_date" value={{ start_date }}>
 
-              <div class="w3-col s12 m4 l2 w3-container">
+                      {% else %}
 
-                <p>
-                  <label>Data fine:</label>
-                  <input onchange="triggerPost()" class="w3-input w3-white" type="date" name="end_date" value={{ end_date }}>
-                </p>
+                        <input id ="start_date" onchange="triggerPost()" class="w3-input w3-white" type="date" name="start_date" value="2021-01-01">
 
-              </div>
+                      {% endif %}
 
-              <div class="w3-col s12 m4 l2 w3-container">
+                    </p>
 
-                <p>
-                  <label>Tipo:</label>
-                    <!--<input class="w3-input" type="text" name="type" value={{type}}>  -->
-                  <select oninput="triggerPost()" class="w3-input w3-white" name="type">
+                  </div>
 
-                    <option value="NoSelection" {% if type == "No Selection" %} selected="selected"{% endif %}></option>
-                    <option value="Aperitivo" {% if type == "Aperitivo" %} selected="selected"{% endif %}>Aperitivo</option>
-                    <option value="Trekking" {% if type == "Trekking" %} selected="selected"{% endif %}>Trekking</option>
-                    <option value="Bicicletta" {% if type == "Bicicletta" %} selected="selected"{% endif %}>Bicicletta</option>
-                    <option value="Museo" {% if type == "Museo" %} selected="selected"{% endif %}>Museo</option>
-                    <option value="Caccia al tesoro" {% if type == "Caccia al tesoro" %} selected="selected"{% endif %}>Caccia al tesoro</option>
-                    <option value="Sport a squadre" {% if type == "Sport a squadre" %} selected="selected"{% endif %}>Sport a squadre</option>
+                  <div class="w3-col s12 m4 l2 w3-container">
 
-                  </select>
-                </p>
+                    <p>
+                      <label>Data fine:</label>
+                      <input onchange="triggerPost()" class="w3-input w3-white" type="date" name="end_date" value={{ end_date }}>
+                    </p>
 
-              </div>
+                  </div>
 
-              <div class="w3-col s12 m4 l2 w3-container">
+                  <div class="w3-col s12 m4 l2 w3-container">
 
-                <p>
-                  <label>Difficoltà:</label>
-                    <!--<input class="w3-input" type="text" name="type" value={{type}}>  -->
-                  <select onchange="triggerPost()" class="w3-input w3-white" name="difficultyLevel">
+                    <p>
+                      <label>Tipo:</label>
+                        <!--<input class="w3-input" type="text" name="type" value={{type}}>  -->
+                      <select oninput="triggerPost()" class="w3-input w3-white" name="type">
 
-                    <option value="NoSelection" {% if difficultyLevel == "No Selection" %} selected="selected"{% endif %}></option>
-                    <option value="Nessuna" {% if difficultyLevel == "Nessuna" %} selected="selected"{% endif %}>Nessuna</option>
-                    <option value="T" {% if difficultyLevel == "T" %} selected="selected"{% endif %}>T</option>
-                    <option value="E" {% if difficultyLevel == "E" %} selected="selected"{% endif %}>E</option>
-                    <option value="EE" {% if difficultyLevel == "EE" %} selected="selected"{% endif %}>EE</option>
-                    <option value="EEA" {% if difficultyLevel == "EEA" %} selected="selected"{% endif %}>EEA</option>
+                        <option value="NoSelection" {% if type == "No Selection" %} selected="selected"{% endif %}></option>
+                        <option value="Aperitivo" {% if type == "Aperitivo" %} selected="selected"{% endif %}>Aperitivo</option>
+                        <option value="Trekking" {% if type == "Trekking" %} selected="selected"{% endif %}>Trekking</option>
+                        <option value="Bicicletta" {% if type == "Bicicletta" %} selected="selected"{% endif %}>Bicicletta</option>
+                        <option value="Museo" {% if type == "Museo" %} selected="selected"{% endif %}>Museo</option>
+                        <option value="Caccia al tesoro" {% if type == "Caccia al tesoro" %} selected="selected"{% endif %}>Caccia al tesoro</option>
+                        <option value="Sport a squadre" {% if type == "Sport a squadre" %} selected="selected"{% endif %}>Sport a squadre</option>
 
-                  </select>
-                </p>
+                      </select>
+                    </p>
 
-              </div>
+                  </div>
 
-              <div class="w3-col s12 m4 l2 w3-container">
+                  <div class="w3-col s12 m4 l2 w3-container">
 
-                <p>
-                  <label>Conferma:</label>
-                    <!--<input class="w3-input" type="text" name="type" value={{type}}>  -->
-                  <select onchange="triggerPost()" class="w3-input w3-white" name="confirmed">
+                    <p>
+                      <label>Difficoltà:</label>
+                        <!--<input class="w3-input" type="text" name="type" value={{type}}>  -->
+                      <select onchange="triggerPost()" class="w3-input w3-white" name="difficultyLevel">
 
-                    <option value="NoSelection" {% if confirmed == "No Selection" %} selected="selected"{% endif %}></option>
-                    <option value="confirmed" {% if confirmed == "confirmed" %} selected="selected"{% endif %}>confermato</option>
-                    <option value="all" {% if confirmed == "all" %} selected="selected"{% endif %}>tutti</option>
+                        <option value="NoSelection" {% if difficultyLevel == "No Selection" %} selected="selected"{% endif %}></option>
+                        <option value="Nessuna" {% if difficultyLevel == "Nessuna" %} selected="selected"{% endif %}>Nessuna</option>
+                        <option value="T" {% if difficultyLevel == "T" %} selected="selected"{% endif %}>T</option>
+                        <option value="E" {% if difficultyLevel == "E" %} selected="selected"{% endif %}>E</option>
+                        <option value="EE" {% if difficultyLevel == "EE" %} selected="selected"{% endif %}>EE</option>
+                        <option value="EEA" {% if difficultyLevel == "EEA" %} selected="selected"{% endif %}>EEA</option>
 
-                  </select>
-                </p>
+                      </select>
+                    </p>
 
-              </div>
+                  </div>
 
-            </div>
+                  <div class="w3-col s12 m4 l2 w3-container">
 
-          </form>
+                    <p>
+                      <label>Conferma:</label>
+                        <!--<input class="w3-input" type="text" name="type" value={{type}}>  -->
+                      <select onchange="triggerPost()" class="w3-input w3-white" name="confirmed">
 
+                        <option value="NoSelection" {% if confirmed == "No Selection" %} selected="selected"{% endif %}></option>
+                        <option value="confirmed" {% if confirmed == "confirmed" %} selected="selected"{% endif %}>confermato</option>
+                        <option value="all" {% if confirmed == "all" %} selected="selected"{% endif %}>tutti</option>
+
+                      </select>
+                    </p>
+
+                  </div>
+
+                </div>
+
+
+            </form>
+          </div>
         {% endif %}
 
         <!-- List of events -->

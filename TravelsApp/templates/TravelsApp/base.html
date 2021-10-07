@@ -166,6 +166,14 @@ function showDivs(n) {
   dots[slideIndex-1].className += " w3-white";
 }
 
+function ShowHide(elName){
+  var x = document.getElementById(elName);
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
 
 function triggerPost() {
   $('#event_filter_form').trigger( "submit" );
