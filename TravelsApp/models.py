@@ -51,14 +51,14 @@ class UserProfileInfo(models.Model):
 class Activity(models.Model):
 
     name = models.CharField(max_length=100)
-    description = models.CharField(max_length=600)
+    description = models.CharField(max_length=512)
     place = models.CharField(max_length=100)
     #partecipants
     type = models.CharField(max_length=100)
     price = models.PositiveIntegerField(default = 15)
     #confirmed
     duration = models.FloatField(default = 3.5)
-    activityDetail = models.CharField(max_length=600, default="Andremo su per la collina e poi giu per la collina")
+    activityDetail = models.CharField(max_length=2048, default="Andremo su per la collina e poi giu per la collina")
     difficultyLevel = models.CharField(max_length=8, default="E")
     length = models.FloatField(default=4)
     gradient = models.FloatField(default=300)
@@ -223,7 +223,7 @@ class Event(models.Model):
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
     date = models.DateField(default = timezone.now)
     time = models.TimeField(default = timezone.now)
-    partecipants = models.ManyToManyField(User)
+    partecipants = models.ManyToManyField(User, blank=True)
     queued_partecipants = models.ManyToManyField(User, related_name='my_queued_events', blank=True)
     confirmed = models.BooleanField(default=0)
     #how may hours prior to event begin user can still ask refund

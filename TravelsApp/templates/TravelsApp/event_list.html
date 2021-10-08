@@ -8,24 +8,25 @@
       {% if user.is_authenticated %}
 
         <div class="centerstage">
-          <div class="w3-container w3-blue">
-            <h2>Ciao {{ user.first_name }} !</h2>
-          </div>
 
         {% if filter_mode == "current_user" %}
 
-          <div class="w3-container w3-blue">
+          <div class="w3-container w3-blue w3-round-xxlarge">
+            <h2>Ciao {{ user.first_name }} !</h2>
             <h2>Ecco la lista dei prossimi eventi:</h2>
           </div>
+
         {% elif filter_mode == "current_user_past" %}
 
-            <div class="w3-container w3-blue">
+            <div class="w3-container w3-blue w3-round-xxlarge">
+              <h2>Ciao {{ user.first_name }} !</h2>
               <h2>Ecco la lista dei tuoi eventi passati:</h2>
             </div>
 
         {% elif filter_mode == "all" %}
 
-          <div class="w3-container w3-blue">
+          <div class="w3-container w3-blue w3-round-xxlarge">
+            <h2>Ciao {{ user.first_name }} !</h2>
             <h2>Ecco la lista degli eventi nei prossimi {{ delta_months }} mesi,  scegline uno o usa i filtri per restringere la ricerca!</h2>
           </div>
 
@@ -33,13 +34,15 @@
 
           {% if event_list %}
 
-          <div class="w3-container w3-blue">
+          <div class="w3-container w3-blue w3-round-xxlarge">
+            <h2>Ciao {{ user.first_name }} !</h2>
             <h2>Ecco una lista di eventi che corrispondono alla tua ricerca:</h2>
           </div>
 
           {% else %}
 
-          <div class="w3-container w3-blue">
+          <div class="w3-container w3-blue w3-round-xxlarge">
+            <h2>Ciao {{ user.first_name }} !</h2>
             <h2>Nessun evento corrisponde ai tuoi criteri di ricerca :-(:</h2>
           </div>
 
