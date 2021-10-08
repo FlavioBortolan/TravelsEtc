@@ -15,10 +15,11 @@
         </div>
 
       </div>
+      <!-- container for image and right panel  -->
+      <div class="w3-row   w3-bottombar w3-border-red" >
 
-      <div class="w3-row w3-padding-16" >
         <!-- Image for the activity ! -->
-        <div class="w3-container w3-twothird w3-mobile">
+        <div class="w3-container w3-twothird w3-mobile w3-margin-bottom">
           <div class="w3-display-container w3-card-4 w3-round-xxlarge">
 
             <div class="w3-display-container">
@@ -38,7 +39,7 @@
             </div>
 
             <!-- Detail of activity below image -->
-            <div class="w3-container w3-center" style="height:300px">
+            <div class="w3-container w3-rest w3-mobile" >
               <p>{{ event.activity.activityDetail }}</p>
             </div>
 
@@ -95,7 +96,7 @@
       </div>
 
       <!-- Bottom panel with properties -->
-      <div class="w3-row w3-padding-16" >
+      <div class="w3-row " >
         <div class="w3-container w3-card-4 w3-pale-blue w3-mobile w3-round-xxlarge">
               <p><b>Luogo di incontro: </b>
                 <a href="{{ event.activity.meetPlaceLink }}">Fai click per vedere su Google Maps</a>
