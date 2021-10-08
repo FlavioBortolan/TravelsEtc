@@ -19,19 +19,22 @@
       <div class="w3-row" >
 
         <!-- Image for the activity ! -->
-        <div class="w3-container w3-twothird w3-mobile w3-margin-bottom">
+        <div class="w3-twothird w3-mobile w3-margin-bottom">
           <div class="w3-display-container w3-card-4 w3-round-xxlarge">
 
             <div class="w3-display-container">
               <img src="{% static event_image_name %}" class="w3-round-xxlarge" style="width:100%" alt="{{ event_image_name }}">
+
               <!-- Disply place on top left of image -->
               <div class="w3-display-topleft w3-container w3-round-xxlarge w3-yellow w3-opacity-min">
                 <h2 >{{ event.activity.place }}</h2>
               </div>
+
               <!-- Disply date on bottom right of image -->
               <div class="w3-display-bottomright w3-container w3-round-xxlarge w3-brown w3-opacity-min">
                 <h2 >{{ event.date }}</h2>
               </div>
+
               <!-- Disply type on top right of image -->
               <div class="w3-display-topright w3-container w3-round-xxlarge w3-orange w3-opacity-min">
                 <h2 >{{ event.activity.type }}</h2>
@@ -47,7 +50,7 @@
         </div>
 
         <!-- Right panel with properties -->
-        <div class="w3-container  w3-card-4 w3-third  w3-pale-blue w3-mobile w3-round-xxlarge">
+        <div class="w3-container  w3-card-4 w3-rest  w3-pale-blue w3-mobile w3-round-xxlarge w3-margin-bottom">
 
           <p><b>Descrizione: </b>{{ event.activity.description }}</p>
           <p><b>Data: </b>{{ event.date }}</p>
