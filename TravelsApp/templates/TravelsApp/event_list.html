@@ -13,7 +13,7 @@
 
           <div class="w3-container w3-blue w3-round-xxlarge">
             <h2>Ciao {{ user.first_name }} !</h2>
-            <h2>Ecco la lista dei prossimi eventi:</h2>
+            <h2>Ecco la lista degli eventi a cui sei iscritto:</h2>
           </div>
 
         {% elif filter_mode == "current_user_past" %}
@@ -50,6 +50,9 @@
 
         {% endif %}
 
+
+
+        {% if filter_mode == "all" or filter_mode == "apply_filter" %}
         <div class="w3-display-container">
 
           <br>
@@ -60,11 +63,10 @@
           <br>
 
         </div>
-
         <div id="filtersDiv" style="display:none">
 
           <!--Filters form-->
-          {% if filter_mode == "all" or filter_mode == "apply_filter" %}
+
             <form id = "event_filter_form" action="{% url 'TravelsApp:events' filter_mode='apply_filter' %}" method="POST">
               {% csrf_token %}
 
@@ -170,7 +172,7 @@
         {% endif %}
 
         <!-- List of events -->
-        <div class="w3-row w3-border  ">
+        <div class="w3-row w3-border" id="events_area">
 
           {% for event in event_list %}
             <div class="w3-container w3-col s12 m6 l4  w3-round-xxlarge  w3-margin-bottom" >

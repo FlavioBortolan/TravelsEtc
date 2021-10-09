@@ -1,6 +1,6 @@
 
 
-
+-nella lista dei miei eventi premendo sui filtri scompare la lista di eventi
 - print dei log in una funzione a parte un po' piu strutturata.
 
 - Gestire prospetto di fatturazione mensile per le guide
