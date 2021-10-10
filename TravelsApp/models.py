@@ -74,7 +74,7 @@ class Activity(models.Model):
 
     def __str__(self):
     # Built-in attribute of django.contrib.auth.models.User !
-        return "ID: " + str(self.id) + ", Place: " + self.place + ", Leader: " + self.leader
+        return self.name + ' ' + self.place
 
 
 class Order(models.Model):
