@@ -470,6 +470,8 @@ class EventListView(LoginRequiredMixin, ListView):
             #exclude past events
             context['event_list'] = Event.objects.filter(date__gte = start_date, date__lte = end_date )
 
+        context['event_list'] = context['event_list'].order_by('date')
+
 
         print('GET:start_date: ' + start_date)
         print('GET:end_date: ' + end_date)
@@ -525,6 +527,8 @@ class EventListView(LoginRequiredMixin, ListView):
         if end_date:
             print('filtering events with end date >' + end_date)
             filtered_events = filtered_events.filter(date__lte = end_date)
+
+        filtered_events = filtered_events.order_by('date')
 
         #renders the page with the context dictionary elements set to the values
         #previously calculated

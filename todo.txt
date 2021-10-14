@@ -1,6 +1,8 @@
 
+-inserire evento anche di altro tipo (aperitivo)
 
--nella lista dei miei eventi premendo sui filtri scompare la lista di eventi
+-gestire vista eventi nel caso di utente non loggato:
+
 - print dei log in una funzione a parte un po' piu strutturata.
 
 - Gestire prospetto di fatturazione mensile per le guide

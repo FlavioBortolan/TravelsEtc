@@ -58,7 +58,7 @@ class Activity(models.Model):
     price = models.PositiveIntegerField(default = 15)
     #confirmed
     duration = models.FloatField(default = 3.5)
-    activityDetail = models.CharField(max_length=2048, default="Andremo su per la collina e poi giu per la collina")
+    activityDetail = models.CharField(max_length=2048, default="xxxxxxxxxxxxxxxxxx")
     difficultyLevel = models.CharField(max_length=8, default="E")
     length = models.FloatField(default=4)
     gradient = models.FloatField(default=300)
