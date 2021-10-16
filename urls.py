@@ -5,6 +5,7 @@ from . import views
 app_name = 'TravelsApp'
 
 # Be careful setting the name to just /login use userlogin instead!
+'''
 urlpatterns=[
     path('index/',views.register,name='index'),
     path('register/',views.register,name='register'),
@@ -13,3 +14,4 @@ urlpatterns=[
     path("activities<pk>/",views.SingleActivity.as_view(),name="single"),
 
 ]
+'''

@@ -414,9 +414,10 @@ def user_login(request):
         #Nothing has been provided for username or password.
         return render(request, 'TravelsApp/login.html', {})
 
-class EventListView(LoginRequiredMixin, ListView):
+#class EventListView(LoginRequiredMixin, ListView):
+class EventListView(ListView):
 
-    login_url = '/login/'
+    #login_url = '/login/'
     redirect_field_name = 'events'
     template_name = 'TravelsApp/event_list.html'
     model = Event
@@ -556,19 +557,21 @@ class SingleEvent(DetailView):
     def get_context_data(self,**kwargs):
         context  = super().get_context_data(**kwargs)
 
-        if self.request.user.event_set.filter(id=self.kwargs['pk']).count()>0:
-            context['user_already_has_this_ticket'] = True
-            logger.error('The user already has this ticket')
-        else:
-            context['user_already_has_this_ticket'] = False
-            logger.error('The user does not have this ticket')
+        if self.request.user.is_authenticated:
 
-        if self.request.user.my_queued_events.filter(id=self.kwargs['pk']).count()>0:
-            context['queued_to_this_event'] = True
-            logger.error('The user is queued to the event')
-        else:
-            context['queued_to_this_event']  = False
-            logger.error('The user is not queued to the event')
+            if self.request.user.event_set.filter(id=self.kwargs['pk']).count()>0:
+                context['user_already_has_this_ticket'] = True
+                logger.error('The user already has this ticket')
+            else:
+                context['user_already_has_this_ticket'] = False
+                logger.error('The user does not have this ticket')
+
+            if self.request.user.my_queued_events.filter(id=self.kwargs['pk']).count()>0:
+                context['queued_to_this_event'] = True
+                logger.error('The user is queued to the event')
+            else:
+                context['queued_to_this_event']  = False
+                logger.error('The user is not queued to the event')
 
 
         event = Event.objects.filter(id=self.kwargs['pk'])[0]
@@ -580,14 +583,15 @@ class SingleEvent(DetailView):
         dt = datetime.combine(event.date, event.time) + timedelta(minutes=30)
         context['start_time'] = dt.time
 
-        #detect if it is possible to ask for refund
-        refund_limit_time = dt - timedelta(hours = event.refund_limit_delta_hours)
-        if  refund_limit_time > datetime.now() and context['user_already_has_this_ticket']:
-            context['can_ask_refund'] = True
-            print('The guy can have his money back as:' + str(refund_limit_time) + '>' + str(datetime.now()))
-        else:
-            context['can_ask_refund'] = False
-            print('The guy cannot have his money back as:' + str(refund_limit_time) + '<' + str(datetime.now()))
+        if self.request.user.is_authenticated:
+            #detect if it is possible to ask for refund
+            refund_limit_time = dt - timedelta(hours = event.refund_limit_delta_hours)
+            if  refund_limit_time > datetime.now() and context['user_already_has_this_ticket']:
+                context['can_ask_refund'] = True
+                print('The guy can have his money back as:' + str(refund_limit_time) + '>' + str(datetime.now()))
+            else:
+                context['can_ask_refund'] = False
+                print('The guy cannot have his money back as:' + str(refund_limit_time) + '<' + str(datetime.now()))
 
         return context
 

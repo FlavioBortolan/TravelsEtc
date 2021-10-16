@@ -88,11 +88,12 @@
         </button>
 
         <div class="w3-dropdown-content w3-bar-block w3-card-4">
-          {% if user.is_authenticated %}
+
 
           <a class="w3-button w3-block w3-left-align" href="{% url 'TravelsApp:events' filter_mode='all' %}">
             <i class="far fa-calendar-alt"></i> Eventi</a>
 
+          {% if user.is_authenticated %}
           <a class="w3-button w3-block w3-left-align" href="{% url 'TravelsApp:events' filter_mode='current_user' %}">
             <i class="fas fa-calendar-check"></i> I miei eventi</a>
 

@@ -5,7 +5,7 @@
 
   <div class="w3-container">
 
-      {% if user.is_authenticated %}
+
       <!-- Title on the top ! -->
       <div class="w3-row w3-padding-16 " >
 
@@ -98,6 +98,7 @@
 
       </div>
 
+      {% if user.is_authenticated %}
       <!-- Bottom panel with properties -->
       <div class="w3-row " >
         <div class="w3-container w3-card-4 w3-pale-blue w3-mobile w3-round-xxlarge">
@@ -179,12 +180,6 @@
           </form>
 
           {% endif %}
-
-
-
-      {% else %}
-
-        <h1>E' necessaria la registazione per vedere queste informazioni</h1>
 
       {% endif %}
       </div>
