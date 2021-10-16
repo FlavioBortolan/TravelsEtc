@@ -108,7 +108,9 @@
               <p><b>Orario di partenza: </b>{{ start_time }}</p>
               <p><b>Indicazioni: </b>{{ event.activity.meetPlaceDirections }}</p>
               <p><b>Guida: </b>{{ event.activity.leader }}</p>
+              {% if event.activity.type != "Aperitivo" %}
               <p><b>Cosa portare: </b>{{ event.activity.whatToBring }}</p>
+              {% endif %}
               <br><br>
           </div>
           <br>
