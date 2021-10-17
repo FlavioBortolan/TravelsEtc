@@ -59,7 +59,13 @@ logger = logging.getLogger(__name__)
 
 # Create your views here.
 def index(request):
-    print("this is the index page")
+
+    site_under_maintenance = Setting.get_setting('site_under_maintenance')
+    print('Site under maintenance:' + str(site_under_maintenance))
+
+    if site_under_maintenance=='True' and not request.user.is_superuser:
+        return render(request,'TravelsApp/site_under_maintenance.html')
+
     return render(request,'TravelsApp/index.html')
 
 

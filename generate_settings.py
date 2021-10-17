@@ -44,3 +44,6 @@ if __name__=="__main__" :
 
     s = Setting.objects.get_or_create( name="company_email_password", value = 'margherita1', description='Company email. password')[0]
     s.save()
+
+    s = Setting.objects.get_or_create( name="site_under_maintenance", value = 'true', description='True when the site is down for maintenance')[0]
+    s.save()
