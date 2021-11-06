@@ -1,9 +1,4 @@
 
-
-- in caso di aperitivo gestire la voce cosa portare....
--Accesso solo ai betatester? https://stackoverflow.com/questions/22374985/parse-http-user-agent-string-in-django
--gestire vista eventi nel caso di utente non loggato:
-
 - print dei log in una funzione a parte un po' piu strutturata.
 
 - Gestire prospetto di fatturazione mensile per le guide
