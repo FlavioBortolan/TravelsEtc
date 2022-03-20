@@ -133,8 +133,52 @@ def test_OutMail_create_from_subscription():
     print(om.subject)
     print(om.html)
 
+def print_outmail_name_surname(event_id):
+
+    evt = Event.objects.get(id=event_id)
+    oms = OutMail.objects.filter(subject__contains="Risorgive", status__iexact="notified", template__iexact="event_subcription_successful.html" )
+
+    print("Evento:" + evt.activity.name)
+    print("Data:" + str(evt.date))
+    print()
+    print("Partecipanti:" + str(evt.partecipants.all().count()))
+    print()
+    print("Mail di conferma spedite:" + str(oms.count()))
+    print()
+    print()
+
+    for m in oms:
+        print ( "ID:" + str(m.id) + ", Acquistato da: " + m.user.first_name + " " + m.user.last_name + ", Mail:" + m.user.username + ", Per: "  + m.recipient.first_name + " " + m.recipient.last_name + ", Mail: " + m.recipient.username   )
+        print()
+
+
+def print_mail_name_surname(event_id):
+
+    evt = Event.objects.get(id=event_id)
+
+    print("Evento:" + evt.activity.name)
+    print("Data:" + str(evt.date))
+    print()
+    print("Partecipanti:" + str(evt.partecipants.all().count()))
+    print()
+
+    for usr in evt.partecipants.all():
+        print ( "Mail: " + usr.username + " Nome: " + usr.first_name + " Cognome: " + usr.last_name)
+
+def print_users():
+
+    print("Soci:" + str(User.objects.all().count()))
+    print()
+
+    for usr in User.objects.all():
+        print ( "Mail: " + usr.username + " Nome: " + usr.first_name + " Cognome: " + usr.last_name)
+
+
 # Create your tests here.
 if __name__ == '__main__':
     #test_mail()
-    test_Order_open_close()
+    #test_Order_open_close()
     #test_OutMail_create_from_subscription()
+    #print_mail_name_surname(19)
+    #print_users()
+    print_outmail_name_surname(19)

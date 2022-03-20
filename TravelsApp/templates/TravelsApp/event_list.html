@@ -178,8 +178,18 @@
                 <a style="text-decoration: none" href="{% url 'TravelsApp:single' pk=event.pk %}">
                   <div class="w3-card-4  w3-round-xxlarge w3-pale-blue" >
 
+                    <div class="w3-display-container">
                     <img src="{% static 'Images/'|add:event.activity.name|add:'.jpg' %}"
                         class="{% if filter_mode == 'current_user_past' %} w3-grayscale-max  {% endif %} w3-hover-shadow w3-round-xxlarge" alt="Alps" style="width:100%">
+
+                        {% if event.partecipants.count >= event.activity.maxNumPartecipants%}
+                        <!-- Disply SOLDOUT at center of image -->
+                        <div class="w3-display-topleft w3-container w3-round-xxlarge w3-red w3-opacity-min">
+                          <h2 >SOLD OUT!</h2>
+                        </div>
+                        {% endif %}
+
+                    </div>
 
                     <div class="w3-container w3-center " >
                       <h4><b>{{ event.activity.name }}</b></h4>

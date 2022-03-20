@@ -1,11 +1,20 @@
 
-- print dei log in una funzione a parte un po' piu strutturata.
 
+- spedizione in automatico della mail
+- sistemare link nella mail inviata
+- creare gruppo facebook
+- aggiungere data di nascita, luogo di nascita, residenza . verificare quali servono
+- possibilità di registrare minori o altre persone non registrate
+
+- print dei log in una funzione a parte un po' piu strutturata.
 - Gestire prospetto di fatturazione mensile per le guide
 
+
 GESTIONE
+
 -Creare associazione culturale
  (chiedere commercialista, enrico, martina)
+
 -capire come si possono fare eventi gratuiti(quali sono i vincoli di legge)
  per esempio:
   >>posso guidare una gita gratuita? che rischi mi prendo?
@@ -13,12 +22,3 @@ GESTIONE
 
 -verificare come assicurare le uscite.
 -cominciare a contattare le guide naturalische.
-
--creare escursioni:
-  >>decidere giro
-  >>creare contenuto (evento, activity)
-  >>trovare guida disponibile
-  >>decidere data e attivare evento
-
--Community:
- >>....
