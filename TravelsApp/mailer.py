@@ -58,3 +58,20 @@ class Mailer:
         message.attach(part2)
 
         return message.as_string()
+
+    def flush_outmail(self, om):
+
+        print('Mailer: flush_outmail: ' + om.recipient.email + ', ' + om.subject)
+
+        self.login()
+
+        print('sending mail to ' + om.recipient.email + ':' + om.subject)
+        r = self.send_mail(om.recipient.email, om.subject, om.html, om.html)
+        print(str(r))
+
+        om.status = 'notified'
+        om.save()
+
+        self.quit()
+
+        print('Success!!')

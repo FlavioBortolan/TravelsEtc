@@ -152,7 +152,7 @@ def print_outmail_name_surname(event_id):
         print()
 
 
-def print_mail_name_surname(event_id):
+def print_event_partecipants_mail_name_surname(event_id):
 
     evt = Event.objects.get(id=event_id)
 
@@ -179,6 +179,6 @@ if __name__ == '__main__':
     #test_mail()
     #test_Order_open_close()
     #test_OutMail_create_from_subscription()
-    #print_mail_name_surname(19)
+    print_event_partecipants_mail_name_surname(19)
     #print_users()
-    print_outmail_name_surname(19)
+    #print_outmail_name_surname(19)

@@ -603,6 +603,7 @@ class SingleEvent(DetailView):
 
 
 class BuyTicketView(TemplateView):
+
     template_name = "TravelsApp/buyticket.html"
 
 
@@ -692,6 +693,17 @@ class BuyTicketView(TemplateView):
                 #send mail with order confirmation
                 print('Creating mail for order confirmation')
                 om = OutMail.create_from_order(o)
+
+                try:
+                    #setup mailer component
+                    m = Mailer(sender_email=Setting.get_setting('company_email'), smtp_server = Setting.get_setting('company_email_smtp_server'), password = Setting.get_setting('company_email_password'))
+
+                    #send mail with order confirmation
+                    m.flush_outmail(om)
+
+                except Exception as e:
+                    print('Could not send mail: ' + str(e))
+                    return False,
 
         return render(request,
                       self.template_name,
@@ -1140,7 +1152,6 @@ def stripe_webhook(request):
                 #retrive the order correspondig to the intent id
                 o = Order.objects.filter(status='chart', payment_id = intent['id'])[0]
 
-
             print('Payment receved for order id: ' + str(o.id))
 
         except Exception as ex:
@@ -1153,9 +1164,20 @@ def stripe_webhook(request):
         ret = o.close(subscription_duration_months)
 
         if ret:
-            #xxx send mail with order confirmation
+
             print('Creating mail for order confirmation')
             om = OutMail.create_from_order(o)
+
+            try:
+                #setup mailer component
+                m = Mailer(sender_email=Setting.get_setting('company_email'), smtp_server = Setting.get_setting('company_email_smtp_server'), password = Setting.get_setting('company_email_password'))
+
+                #send mail with order confirmation
+                m.flush_outmail(om)
+
+            except Exception as e:
+                print('Could not send mail: ' + str(e))
+                return False,
 
             return HttpResponse(status=200)
 
