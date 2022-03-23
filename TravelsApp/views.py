@@ -692,7 +692,7 @@ class BuyTicketView(TemplateView):
             if ret:
                 #send mail with order confirmation
                 print('Creating mail for order confirmation')
-                om = OutMail.create_from_order(o)
+                om = OutMail.create_from_order(o, request)
 
                 try:
                     #setup mailer component
@@ -733,8 +733,8 @@ class BuyTicketView(TemplateView):
 
                     user_form = UserForm(error_class=DivErrorList)
 
-                    #Show email only
-                    user_form.fields['password'].widget = user_form.fields['email'].hidden_widget()
+                    #Hide all fields except email
+                    user_form.fields['password'].widget = user_form.fields['password'].hidden_widget()
                     user_form.fields['repeat_password'].widget = user_form.fields['repeat_password'].hidden_widget()
                     user_form.fields['first_name'].widget = user_form.fields['first_name'].hidden_widget()
                     user_form.fields['last_name'].widget = user_form.fields['last_name'].hidden_widget()
@@ -1166,7 +1166,7 @@ def stripe_webhook(request):
         if ret:
 
             print('Creating mail for order confirmation')
-            om = OutMail.create_from_order(o)
+            om = OutMail.create_from_order(o, request)
 
             try:
                 #setup mailer component

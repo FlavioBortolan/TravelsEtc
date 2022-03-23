@@ -173,12 +173,31 @@ def print_users():
     for usr in User.objects.all():
         print ( "Mail: " + usr.username + " Nome: " + usr.first_name + " Cognome: " + usr.last_name)
 
+from django.test.client import Client
+
+def test_request(url):
+
+    client = Client(SERVER_NAME='127.0.0.1')
+    response = client.get(url)
+    request = response.wsgi_request
+
+    print('request.build_absolute_uri(): ' + request.build_absolute_uri())
+
+    import re
+    m = re.search(r"(http\w*:\/\/[\w\.\d\:]*\/)", request.build_absolute_uri())
+
+    #parameters extraction
+    site_address = m.group(0)
+
+    print(site_address)
+
 
 # Create your tests here.
 if __name__ == '__main__':
     #test_mail()
     #test_Order_open_close()
     #test_OutMail_create_from_subscription()
-    print_event_partecipants_mail_name_surname(19)
+    #print_event_partecipants_mail_name_surname(19)
     #print_users()
     #print_outmail_name_surname(19)
+    test_request('http://127.0.0.1:8000/TravelsApp/events/all/')

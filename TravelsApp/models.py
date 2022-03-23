@@ -1,3 +1,4 @@
+import re
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse
 from django.db import models
@@ -274,7 +275,11 @@ class OutMail(models.Model):
     @classmethod
     def create(cls, params_dict):
 
-        om = cls(template = params_dict['template'], user = params_dict['user'], recipient = params_dict['recipient'], status = 'created' )
+        om = cls(template = params_dict['template'],   \
+                 user = params_dict['user'],           \
+                 recipient = params_dict['recipient'], \
+                 status = 'created' )
+
 
         response = render(None, 'TravelsApp/' + om.template ,  params_dict)
         om.html = str(response.content.decode('UTF-8'))
@@ -288,13 +293,22 @@ class OutMail(models.Model):
         return om
 
     @classmethod
-    def create_from_order(cls, order):
+    def create_from_order(cls, order, request):
 
         if order.status != 'completed':
             raise ValueError('Tryng to generate confirmation message from an order not yet closed')
 
+        print('§§§§§§§§§§§§§ REQUEST:' + request.build_absolute_uri())
+
         dict = {}
         dict['user'] = order.user
+
+        #get the server name
+        m = re.search(r"(http\w*:\/\/[\w\.\d\:]*)", request.build_absolute_uri())
+        dict['server_address'] = m.group(0)
+
+        #turn request into a dictionary and merge it with existing
+        #dict  =  {**dict, **vars(request)}
 
         #retrive the articles in the orders
         items = ast.literal_eval(order.items)
@@ -315,7 +329,7 @@ class OutMail(models.Model):
 
         dict['template'] = 'event_subcription_successful.html'
 
-        om = cls.create( dict )
+        om = cls.create(dict)
         return om
 
     @classmethod
@@ -331,11 +345,11 @@ class OutMail(models.Model):
         return om
 
     @classmethod
-    def your_friend_subscibed_you(cls, password,  user, recipient):
+    def your_friend_subscibed_you(cls, password,  user, recipient, request = None):
 
         print('*** your_friend_subscibed_you ***' + 'pw:' + password + ', recipient: ' + recipient.first_name + ', user: ' + user.first_name)
 
-        response = render(None, 'TravelsApp/your_friend_subscibed_you.html', {'password':password, 'recipient': recipient, 'user':user})
+        response = render(request, 'TravelsApp/your_friend_subscibed_you.html', {'password':password, 'recipient': recipient, 'user':user})
         html = str(response.content.decode('UTF-8'))
 
         return html

@@ -47,3 +47,6 @@ if __name__=="__main__" :
 
     s = Setting.objects.get_or_create( name="site_under_maintenance", value = 'true', description='True when the site is down for maintenance')[0]
     s.save()
+
+    s = Setting.objects.get_or_create( name="server_address", value = 'https://flaviobortolan.pythonanywhere.com/', description='Address of web server')[0]
+    s.save()
