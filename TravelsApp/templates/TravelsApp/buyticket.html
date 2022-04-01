@@ -64,7 +64,7 @@
         </form>
       {% elif buy_step == 'registration_successful' %}
         <h3>Registazione completata</h3>
-        <h3>Il tuo amico riceerà una mail di benvenuto con una password temporanea.</h3>
+        <h3>Il tuo amico riceverà una mail di benvenuto con una password temporanea.</h3>
         <h3>Fai click per procedere con l'acquisto del biglietto</h3>
         <form action = "{% url 'TravelsApp:buyticket' pk=pk buy_step='confirmation' cmd='init' total=total credits_to_use=credits_to_use order_id=order_id friend_id=friend_id %}" class="w3-container" enctype="multipart/form-data" method="GET">
 

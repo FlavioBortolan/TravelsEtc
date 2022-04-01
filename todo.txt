@@ -1,9 +1,67 @@
 
 
-- spedizione in automatico della mail
-- sistemare link nella mail inviata
-- creare gruppo facebook
-- aggiungere data di nascita, luogo di nascita, residenza . verificare quali servono
+- aggiungere:
+
+  data di nascita
+  luogo di nascita:
+     cap,
+     strada,
+     civico
+  indirizzo di residenza:
+    cap residenza
+    strada
+    civico
+  *codice fiscale,
+  data di avvenuta iscrizione.
+
+- aggiungere campo parent all'utente.
+
+-buyticket.html:
+ aggiungere pulsanti:
+   acquista per figlio minore ->buy_step = buy_for_minor_children
+
+   aggiungere:
+   buy_step = collect_minor_children_name:
+
+  submit: -> cmd = receive_minor_name
+
+-BuyTicketView:
+
+  modificare buy_step 'partecipant_selection':
+   aggiungere
+      if cmd==receive_user_selected:
+          if me_or_friend = minor:
+            mostrare solo nome
+            context['buy_step'] = 'collect_minor_children_name'
+
+  Aggiungere i seguenti 'buy_step':
+
+     -'collect_minor_children_name':
+        cmd: receive_minor_name
+
+          controlla se il minore risulta mio figlio
+
+            SI:
+              controlla se il minore è già iscritto
+
+                SI:
+                  buy_step ="friend_already_subscibed", cmd='init'
+
+                NO:
+                 friend_id = id di mio miglio
+                 return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="confirmation", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend.id)
+
+
+            NO: bisogna registrarlo
+             mostra nome cognome data ecc senza mail
+             context['buy_step']='collect_minor_data'
+
+      -'collect_minor_data':
+         if ['cmd'] == 'receive_minor_data':
+            creare profilo minore usando nome.cognome@mailgenitore
+            return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="registration_successful", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend_id)
+
+
 - possibilità di registrare minori o altre persone non registrate
 
 - print dei log in una funzione a parte un po' piu strutturata.
