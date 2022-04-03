@@ -83,7 +83,7 @@ def user_logout(request):
     return HttpResponseRedirect(reverse('index'))
 
 
-def create_profile(user_form, profile_form, autogenerate_password ):
+def create_profile(user_form, profile_form, autogenerate_password, is_minor ):
 
     print('*** create_profile ***: '+ str(user_form)  + str(profile_form))
 
@@ -101,7 +101,10 @@ def create_profile(user_form, profile_form, autogenerate_password ):
 
     print('+++ user_form cleaned_data:' + str(user_form.cleaned_data))
 
-    # Check to see both forms are valid
+    #print('mail field value =' + user_form.fields['email'].widget.attrs['value'] )
+    print('cleaned mail field value =' + user_form.cleaned_data['email'] )
+
+    # Check to see if both forms are valid
     if user_form_ok and profile_form.is_valid():
 
         print('create_profile:data is ok')
@@ -147,7 +150,7 @@ def create_profile(user_form, profile_form, autogenerate_password ):
             # Set One to One relationship between
             # UserForm and UserProfileInfoForm
             profile.user = user
-
+            profile.is_minor = is_minor
             '''
             # Check if they provided a profile picture
             if 'profile_pic' in request.FILES:
@@ -606,6 +609,18 @@ class BuyTicketView(TemplateView):
 
     template_name = "TravelsApp/buyticket.html"
 
+    def flush(self, om):
+
+        try:
+            #setup mailer component
+            m = Mailer(sender_email=Setting.get_setting('company_email'), smtp_server = Setting.get_setting('company_email_smtp_server'), password = Setting.get_setting('company_email_password'))
+
+            #send mail
+            m.flush_outmail(om)
+
+        except Exception as e:
+            print('Could not send mail: ' + str(e))
+            return False,
 
     def get(self, request, *args, **kwargs):
 
@@ -694,20 +709,15 @@ class BuyTicketView(TemplateView):
                 print('Creating mail for order confirmation')
                 om = OutMail.create_from_order(o, request)
 
-                try:
-                    #setup mailer component
-                    m = Mailer(sender_email=Setting.get_setting('company_email'), smtp_server = Setting.get_setting('company_email_smtp_server'), password = Setting.get_setting('company_email_password'))
-
-                    #send mail with order confirmation
-                    m.flush_outmail(om)
-
-                except Exception as e:
-                    print('Could not send mail: ' + str(e))
-                    return False,
+                self.flush(om)
 
         return render(request,
                       self.template_name,
                       context)
+
+    def minor_mail_from_name(self, minor_name, minor_last_name, parent):
+        minor_mail =  minor_name + '.' + minor_last_name + '_minor_by_' + parent.email
+        return minor_mail
 
     def post(self, request, *args, **kwargs):
 
@@ -720,17 +730,20 @@ class BuyTicketView(TemplateView):
 
         if kwargs['buy_step']=='partecipant_selection':
 
+            context['ticket_target_user'] = request.POST.get('ticket_target_user')
+
             if kwargs['cmd']=='receive_user_selected':
                 print('cmd=' + kwargs['cmd'] )
 
                 #ticket for me: go to the confirmation page
-                if request.POST.get('me_or_friend') == 'me':
+                if context['ticket_target_user'] == 'me':
 
                     return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="confirmation", cmd="init", total = 0, credits_to_use = 0, order_id = 0, friend_id='-1')
 
                 #ticket for friend: collect friend's email
-                else:
+                elif context['ticket_target_user'] == 'friend':
 
+                    print ('****** collecting friends email ******')
                     user_form = UserForm(error_class=DivErrorList)
 
                     #Hide all fields except email
@@ -742,6 +755,23 @@ class BuyTicketView(TemplateView):
                     context['user_form'] = user_form
 
                     context['buy_step'] = 'collect_friends_mail'
+
+                #ticket for friend: collect friend's email
+                elif context['ticket_target_user'] == 'minor':
+
+                    print ('****** collecting minor name ******')
+                    user_form = UserForm(error_class=DivErrorList)
+
+                    #Hide all fields except email
+                    user_form.fields['password'].widget = user_form.fields['password'].hidden_widget()
+                    user_form.fields['repeat_password'].widget = user_form.fields['repeat_password'].hidden_widget()
+                    user_form.fields['email'].widget = user_form.fields['email'].hidden_widget()
+                    user_form.fields['last_name'].widget = user_form.fields['last_name'].hidden_widget()
+
+                    context['user_form'] = user_form
+
+                    context['buy_step'] = 'collect_friends_mail'
+
 
         elif kwargs['buy_step']=='collect_friends_mail':
 
@@ -779,7 +809,53 @@ class BuyTicketView(TemplateView):
                     context['user_form'] = user_form
                     context['profile_form'] = profile_form
                     context['buy_step']='collect_friends_data'
-                    #return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="collect_friends_data", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend.id)
+                    context['ticket_target_user']='friend'
+
+            elif kwargs['cmd'] == 'receive_minor_name':
+
+                #build minor name using name plus mail of parent (the parent must be the current user, also for legal reasons)
+                minor_name = request.POST.get('first_name')
+                minor_last_name = request.POST.get('last_name')
+
+                minor_mail =  self.minor_mail_from_name(minor_name, minor_last_name, request.user)
+                friend_match = User.objects.filter(email = minor_mail)
+
+                #check if kid's mail corresponds to a user
+                if friend_match.count()>0:
+                    print('The friend is already a member')
+                    friend = friend_match[0]
+
+                    #check if friend is already subscribed to the event
+                    e = Event.objects.get(id=context['pk'])
+                    if e.partecipants.filter(email = friend.email ).count()>0:
+                        print('friend is already subscribed')
+                        return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="friend_already_subscibed", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend.id)
+
+                    #redirect to buy ticket for him
+                    else:
+                        return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="confirmation", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend.id)
+
+                #kid needs registration
+                else:
+                    print(minor_name + ' has to register')
+
+                    user_form = UserForm( error_class = DivErrorList)
+                    profile_form = UserProfileInfoForm( error_class = DivErrorList)
+
+                    user_form.fields['first_name'].widget.attrs['value'] = minor_name
+                    user_form.fields['first_name'].widget.attrs['readonly'] = True
+
+                    user_form.fields['email'].widget.attrs['value'] = minor_mail
+                    user_form.fields['email'].widget = user_form.fields['email'].hidden_widget()
+
+                    user_form.fields['password'].widget = user_form.fields['password'].hidden_widget()
+                    user_form.fields['repeat_password'].widget = user_form.fields['repeat_password'].hidden_widget()
+                    profile_form.fields['phone_number'].widget = profile_form.fields['phone_number'].hidden_widget()
+
+                    context['user_form'] = user_form
+                    context['profile_form'] = profile_form
+                    context['buy_step']='collect_friends_data'
+                    context['ticket_target_user']='minor'
 
         elif kwargs['buy_step']=='collect_friends_data':
 
@@ -789,16 +865,48 @@ class BuyTicketView(TemplateView):
                 user_form = UserForm(data=request.POST, error_class=DivErrorList)
                 profile_form = UserProfileInfoForm(data=request.POST, error_class=DivErrorList)
                 #user_form.fields['email'].widget.attrs['disabled'] = True
-                user_form.fields['password'].widget = user_form.fields['email'].hidden_widget()
+                user_form.fields['password'].widget = user_form.fields['password'].hidden_widget()
                 user_form.fields['repeat_password'].widget = user_form.fields['repeat_password'].hidden_widget()
 
-                (ret, friend_id, pw, new_user) = create_profile(user_form, profile_form, True)
+                (ret, friend_id, pw, new_user) = create_profile(user_form, profile_form, True, False)
 
                 if ret:
 
-                    #xxx
-                    #self.your_friend_subscibed_you(pw, new_user, request.user, context['pk'])
-                    om = OutMail.create_from_subscription( request.user, new_user, pw )
+                    om = OutMail.create_from_subscription( request.user, new_user, pw, 'friend' )
+                    self.flush(om)
+
+                    return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="registration_successful", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend_id)
+                    #manda mail nuovo utente
+                    #manda una comunicazione che utente registrato e mail inviata
+
+                else:
+                    context['user_form'] = user_form
+                    context['profile_form'] = profile_form
+                    context['buy_step'] = 'collect_friends_data'
+                    print('poop')
+
+            if kwargs['cmd'] == 'receive_minor_data':
+
+                minor_mail = \
+                self.minor_mail_from_name(request.POST.get('first_name'), request.POST.get('last_name'), request.user)
+
+                print('+++minor autogenerated mail:' + minor_mail)
+
+                tmp_data = request.POST.copy()
+                tmp_data['email'] = minor_mail
+                user_form = UserForm(data=tmp_data, error_class=DivErrorList)
+                profile_form = UserProfileInfoForm(data=request.POST, error_class=DivErrorList)
+
+                #feed kid mail
+                user_form.fields['password'].widget = user_form.fields['password'].hidden_widget()
+                user_form.fields['repeat_password'].widget = user_form.fields['repeat_password'].hidden_widget()
+
+                (ret, friend_id, pw, new_user) = create_profile(user_form, profile_form, True, True)
+
+                if ret:
+
+                    om = OutMail.create_from_subscription( request.user, new_user, pw, 'minor' )
+                    self.flush(om)
 
                     return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="registration_successful", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend_id)
                     #manda mail nuovo utente
@@ -813,45 +921,6 @@ class BuyTicketView(TemplateView):
         return render(request,
                       self.template_name,
                       context)
-
-    def event_subcription_successfull(self, user, creator_user, event_pk):
-
-        print('*** event_subcription_successfull ***' + ', new_user: ' +user.first_name + ', creator_user: ' + creator_user.first_name)
-
-        company_mail = Setting.get_setting('company_email')
-        smtp_server  = Setting.get_setting('company_email_smtp_server')
-        company_pw   = Setting.get_setting('company_email_password')
-
-        event = Event.object.get(id = event_pk)
-        #m = Mailer(sender='roberto.ferro1996@gmail.com', smtp_server = "smtp.gmail.com", password = 'margherita1')
-        m = Mailer(sender=company_mail, smtp_server = smtp_server, password = company_pw)
-        m.login()
-
-        response = render(None, 'TravelsApp/event_subcription_successful.html', {'user': user, 'creator_user':creator_user, 'event':event })
-        html=str(response.content.decode('UTF-8'))
-
-        m.send_mail(company_mail, "Subscription to event " + event.activity.name, html, html)
-        m.quit()
-
-    def your_friend_subscibed_you(self, password, new_user, creator_user, event_pk):
-
-        print('*** your_friend_subscibed_you ***' + 'pw:' + password + ', new_user: ' + new_user.first_name + ', creator_user: ' + creator_user.first_name)
-
-        company_mail = Setting.get_setting('company_email')
-        smtp_server  = Setting.get_setting('company_email_smtp_server')
-        company_pw   = Setting.get_setting('company_email_password')
-
-        event = Event.object.get(id = event_pk)
-        #m = Mailer(sender='roberto.ferro1996@gmail.com', smtp_server = "smtp.gmail.com", password = 'margherita1')
-        m = Mailer(sender=company_mail, smtp_server = smtp_server, password = company_pw)
-        m.login()
-
-        response = render(None, 'TravelsApp/your_friend_subscibed_you.html', {'password':password, 'new_user': new_user, 'creator_user':creator_user, 'event':event })
-        html=str(response.content.decode('UTF-8'))
-
-        m.send_mail(company_mail, "Registration successfull", html, html)
-        m.quit()
-
 
 class AskRefundView(TemplateView):
     template_name = "TravelsApp/ask_refund.html"

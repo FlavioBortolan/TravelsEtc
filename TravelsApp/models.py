@@ -33,6 +33,7 @@ class UserProfileInfo(models.Model):
     phone_number = models.CharField(validators=[RegexValidator(regex=r'^(( *0 *0 *| *\+) *3 *9 *)?((\d *){3})((\d *){6,7})$', message="Phone number must be entered like: 340 1461538. Up to 10 digits allowed. Only digits, no other character allowed.")], max_length=64, blank=True)
     credits = models.PositiveIntegerField(default=0)
     exp_date = models.DateField(default = timezone.now)
+    is_minor = models.BooleanField(default=False)
 
     USER_TYPE_CHOICES = [
         ('Std', 'Standard'),
@@ -64,8 +65,8 @@ class Activity(models.Model):
     length = models.FloatField(default=4)
     gradient = models.FloatField(default=300)
     streetType = models.CharField(max_length=600, default="Sterrato e asfalto")
-    dogsAllowed = models.BooleanField(default=0)
-    kidsAllowed = models.BooleanField(default=0)
+    dogsAllowed = models.BooleanField(default=False)
+    kidsAllowed = models.BooleanField(default=False)
     meetPlaceLink = models.CharField(max_length=600, default = "https://www.google.com/maps/place/45%C2%B050'14.3%22N+11%C2%B044'11.2%22E/@45.8373125,11.7342488,17z/data=!3m1!4b1!4m5!3m4!1s0x0:0x0!8m2!3d45.8373125!4d11.7364375" )
     meetPlaceDirections = models.CharField(max_length=600, default ="Verso Marostica ")
     leader = models.CharField(max_length=64)
@@ -226,7 +227,7 @@ class Event(models.Model):
     time = models.TimeField(default = timezone.now)
     partecipants = models.ManyToManyField(User, blank=True)
     queued_partecipants = models.ManyToManyField(User, related_name='my_queued_events', blank=True)
-    confirmed = models.BooleanField(default=0)
+    confirmed = models.BooleanField(default=False)
     #how may hours prior to event begin user can still ask refund
     refund_limit_delta_hours =  models.PositiveIntegerField(default = 48)
 
@@ -319,7 +320,19 @@ class OutMail(models.Model):
             partecipant = User.objects.get(email=i['partecipant'])
 
             if i['type'] == 'event_ticket_purchase':
-                dict['recipient'] = partecipant
+
+                #generates different message based on minor status
+                if partecipant.userprofileinfo.is_minor == True:
+
+                    dict['template'] = 'event_subcription_successful_minor.html'
+                    dict['minor'] = partecipant
+                    dict['recipient'] = dict['user']
+
+                else:
+
+                    dict['template'] = 'event_subcription_successful_adult.html'
+                    dict['recipient'] = partecipant
+
                 dict['event'] = Event.objects.get(id=int(i['pk']))
 
                 if found == True:
@@ -327,29 +340,33 @@ class OutMail(models.Model):
 
                 found = True
 
-        dict['template'] = 'event_subcription_successful.html'
 
         om = cls.create(dict)
         return om
 
+    #creates a mail sent when user has bought ticket for someone else
+    #ticket_target_user=minor => user has bought for a kid
+    #ticket_target_user=minor => friend has bought for a friend
     @classmethod
-    def create_from_subscription(cls, user, recipient, password ):
+    def create_from_subscription(cls, user, new_user, password, ticket_target_user):
 
-        dict = {}
-        dict['user'] = user
-        dict['recipient'] = recipient
-        dict['template'] = 'your_friend_subscibed_you.html'
-        dict['password'] = password
+        dict              = {}
+        dict['user']      = user
+
+        if ticket_target_user == 'minor':
+
+            dict['recipient'] = user
+            dict['minor'] = new_user
+            dict['template']  = 'minor_subscibed.html'
+
+        elif ticket_target_user == 'friend':
+
+            dict['recipient'] = new_user
+            dict['template']  = 'your_friend_subscibed_you.html'
+            dict['password']  = password
+
+        else:
+            raise ValueError("Unexpected value for ticket_target_user:" + ticket_target_user)
 
         om = cls.create( dict )
         return om
-
-    @classmethod
-    def your_friend_subscibed_you(cls, password,  user, recipient, request = None):
-
-        print('*** your_friend_subscibed_you ***' + 'pw:' + password + ', recipient: ' + recipient.first_name + ', user: ' + user.first_name)
-
-        response = render(request, 'TravelsApp/your_friend_subscibed_you.html', {'password':password, 'recipient': recipient, 'user':user})
-        html = str(response.content.decode('UTF-8'))
-
-        return html

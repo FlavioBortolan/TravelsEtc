@@ -45,8 +45,8 @@
               <br>
             {% endif %}
 
-            <input type="submit" class="w3-btn w3-blue w3-center" name="" value="Proceed">
-            <a href="{% url 'TravelsApp:ask_refund' pk=event.id refund_step=2%}" class="w3-btn w3-blue w3-center">Discard</a>
+            <input type="submit" class="w3-btn w3-blue w3-block w3-round-large" name="" value="Proceed">
+            <a href="{% url 'TravelsApp:ask_refund' pk=event.id refund_step=2%}" class="w3-btn w3-blue w3-block w3-round-large">Discard</a>
             <br>
             <br>
           </div>
@@ -72,7 +72,7 @@
     <form action="{% url 'TravelsApp:events' filter_mode='all' %}" method = "get">
       <br>
       <div class="w3-center">
-        <button class="w3-btn w3-blue w3-center" type="submit">Torna agli eventi</button>
+        <button class="w3-btn w3-blue w3-block w3-round-large" type="submit">Torna agli eventi</button>
       </div>
 
       <br>

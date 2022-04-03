@@ -191,6 +191,23 @@ def test_request(url):
 
     print(site_address)
 
+def test_mail_validation(email):
+    from django.forms import EmailField
+    from django.core.exceptions import ValidationError
+
+    try:
+        EmailField().clean(email)
+        print('mail is OK')
+        return True
+
+    except ValidationError:
+        print('mail is NOT OK')
+        return False
+
+def test_create_profile():
+
+
+
 
 # Create your tests here.
 if __name__ == '__main__':
@@ -200,4 +217,5 @@ if __name__ == '__main__':
     #print_event_partecipants_mail_name_surname(19)
     #print_users()
     #print_outmail_name_surname(19)
-    test_request('http://127.0.0.1:8000/TravelsApp/events/all/')
+    #test_request('http://127.0.0.1:8000/TravelsApp/events/all/')
+    test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')

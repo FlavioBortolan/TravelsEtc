@@ -77,7 +77,7 @@ class UserProfileInfoForm(forms.ModelForm):
         model = UserProfileInfo
         fields = ('profile_pic', 'phone_number')
         widgets = {
-            'profile_pic':              forms.ClearableFileInput(attrs={'class': "w3-btn w3-blue w3-center"}),
+            'profile_pic':              forms.ClearableFileInput(attrs={'class': "w3-btn w3-blue w3-block w3-round-large"}),
             'phone_number':             forms.TextInput(attrs={'class': "w3-input", 'required':'True'}),
 
         }

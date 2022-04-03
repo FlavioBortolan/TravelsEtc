@@ -122,7 +122,7 @@
               <form action="{% url 'TravelsApp:ask_refund' pk=event.id refund_step=1%}" method="get">
                   {% csrf_token %}
                 <div class="w3-center">
-                  <button class="w3-btn w3-blue w3-center" type="submit">Chiedi rimborso</button>
+                  <button class="w3-btn w3-blue w3-block w3-round-large" type="submit">Chiedi rimborso</button>
                 </div>
 
                 <br>
@@ -131,7 +131,7 @@
               <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='partecipant_selection' cmd='receive_user_selected' total=0 credits_to_use=0 order_id=0 friend_id='-1'%}" method="post">
                 {% csrf_token %}
                 <div class="w3-center">
-                  <button class="w3-btn w3-blue w3-center" type="submit">Compra per un amico</button>
+                  <button class="w3-btn w3-blue w3-block w3-round-large" type="submit">Compra per un altra persona</button>
                 </div>
 
                 <br>
@@ -150,7 +150,7 @@
 
               <div class="w3-center">
                 <h2>Sei in coda per questo evento. Premi il pulsante qui sotto per essere rimosso dalla coda. </h2>
-                <button class="w3-btn w3-blue w3-center" type="submit">Rimuovimi dalla coda!</button>
+                <button class="w3-btn w3-blue w3-block w3-round-large" type="submit">Rimuovimi dalla coda!</button>
               </div>
 
               <br>
@@ -161,7 +161,7 @@
           <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='partecipant_selection' cmd='init' total=0 credits_to_use=0 order_id=0 friend_id='-1' %}" method="get">
           {% csrf_token %}
             <div class="w3-center">
-              <button class="w3-btn w3-blue w3-center" type="submit">Acquista biglietto!</button>
+              <button class="w3-btn w3-blue w3-block w3-round-large" type="submit">Acquista biglietto!</button>
             </div>
 
             <br>
@@ -172,7 +172,7 @@
 
             <div class="w3-center">
                 <h2>Questo evento è pieno! Permi il tasto qui sotto per essere aggiunto alla coda. Sarai informato via mail quando si libera un posto.</h2>
-              <button class="w3-btn w3-blue w3-center" type="submit">Add me to the queue!</button>
+              <button class="w3-btn w3-blue w3-block w3-round-large" type="submit">Add me to the queue!</button>
             </div>
 
             <br>
