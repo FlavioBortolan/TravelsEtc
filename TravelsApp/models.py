@@ -293,20 +293,23 @@ class OutMail(models.Model):
 
         return om
 
+    #retrives the name of the server from the request
+    @classmethod
+    def server_address_from_request(cls, request):
+        m = re.search(r"(http\w*:\/\/[\w\.\d\:]*)", request.build_absolute_uri())
+        return m.group(0)
+
     @classmethod
     def create_from_order(cls, order, request):
 
         if order.status != 'completed':
             raise ValueError('Tryng to generate confirmation message from an order not yet closed')
 
-        print('§§§§§§§§§§§§§ REQUEST:' + request.build_absolute_uri())
-
         dict = {}
         dict['user'] = order.user
 
         #get the server name
-        m = re.search(r"(http\w*:\/\/[\w\.\d\:]*)", request.build_absolute_uri())
-        dict['server_address'] = m.group(0)
+        dict['server_address'] = cls.server_address_from_request(request)
 
         #turn request into a dictionary and merge it with existing
         #dict  =  {**dict, **vars(request)}
@@ -348,10 +351,12 @@ class OutMail(models.Model):
     #ticket_target_user=minor => user has bought for a kid
     #ticket_target_user=minor => friend has bought for a friend
     @classmethod
-    def create_from_subscription(cls, user, new_user, password, ticket_target_user):
+    def create_from_site_subscription_completed(cls, user, new_user, password, ticket_target_user, request):
 
         dict              = {}
         dict['user']      = user
+        #get the server name
+        dict['server_address'] = cls.server_address_from_request(request)
 
         if ticket_target_user == 'minor':
 

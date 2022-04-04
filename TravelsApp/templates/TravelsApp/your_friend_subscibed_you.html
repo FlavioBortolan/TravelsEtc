@@ -11,7 +11,7 @@
     Sei stato iscritto a questo sito dal tuo amico <b>{{ user.first_name }}</b>
     <br>
     Puoi effettuare il login al sito con la tua mail e la password temporanea riportata sotto:
-    <a href="{% url 'TravelsApp:user_login' %}"> Fai click qui per effettuare il login</a>
+    <a href="{{ server_address }}{% url 'TravelsApp:user_login' %}"> Fai click qui per effettuare il login</a>
     <br>
     Password:<b>{{ password }}</b>
     <br>

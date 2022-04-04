@@ -99,6 +99,9 @@ def create_profile(user_form, profile_form, autogenerate_password, is_minor ):
        'repeat_password' in user_form.cleaned_data) or autogenerate_password):
        user_form_ok = True
 
+    else:
+        return False, -1, None, None
+
     print('+++ user_form cleaned_data:' + str(user_form.cleaned_data))
 
     #print('mail field value =' + user_form.fields['email'].widget.attrs['value'] )
@@ -780,6 +783,9 @@ class BuyTicketView(TemplateView):
                 friend_mail = request.POST.get('email')
                 friend_match = User.objects.filter(email=friend_mail)
 
+                print('buy_step=collect_friends_mail, cmd=receive_email: mail=' + friend_mail)
+                print('matches:' + str(friend_match.count()))
+
                 #check if friend mail corresponds to a user
                 if friend_match.count()>0:
                     print('The friend is already a member')
@@ -861,8 +867,12 @@ class BuyTicketView(TemplateView):
 
             if kwargs['cmd'] == 'receive_friends_data':
 
-                print('+++received email:' + str(request.POST.get('email')))
-                user_form = UserForm(data=request.POST, error_class=DivErrorList)
+                friend_mail = request.POST.get('email')
+                print('+++received email:' + str(friend_mail))
+
+                tmp_data = request.POST.copy()
+                tmp_data['email'] = friend_mail
+                user_form = UserForm(data=tmp_data, error_class=DivErrorList)
                 profile_form = UserProfileInfoForm(data=request.POST, error_class=DivErrorList)
                 #user_form.fields['email'].widget.attrs['disabled'] = True
                 user_form.fields['password'].widget = user_form.fields['password'].hidden_widget()
@@ -872,7 +882,7 @@ class BuyTicketView(TemplateView):
 
                 if ret:
 
-                    om = OutMail.create_from_subscription( request.user, new_user, pw, 'friend' )
+                    om = OutMail.create_from_site_subscription_completed( request.user, new_user, pw, 'friend', request)
                     self.flush(om)
 
                     return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="registration_successful", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend_id)
@@ -880,9 +890,15 @@ class BuyTicketView(TemplateView):
                     #manda una comunicazione che utente registrato e mail inviata
 
                 else:
+
+                    #Discard errors on the password as we do not edit it here
+                    user_form.errors['password'] = None
+                    user_form.errors['repeat_password'] = None
                     context['user_form'] = user_form
                     context['profile_form'] = profile_form
                     context['buy_step'] = 'collect_friends_data'
+                    context['ticket_target_user'] = 'friend'
+
                     print('poop')
 
             if kwargs['cmd'] == 'receive_minor_data':
@@ -905,7 +921,7 @@ class BuyTicketView(TemplateView):
 
                 if ret:
 
-                    om = OutMail.create_from_subscription( request.user, new_user, pw, 'minor' )
+                    om = OutMail.create_from_site_subscription_completed( request.user, new_user, pw, 'minor' )
                     self.flush(om)
 
                     return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="registration_successful", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend_id)
@@ -913,9 +929,13 @@ class BuyTicketView(TemplateView):
                     #manda una comunicazione che utente registrato e mail inviata
 
                 else:
+                    #Discard errors on the password as we do not edit it here
+                    user_form.errors['password'] = None
+                    user_form.errors['repeat_password'] = None
                     context['user_form'] = user_form
                     context['profile_form'] = profile_form
                     context['buy_step'] = 'collect_friends_data'
+                    context['ticket_target_user'] = 'friend'
                     print('poop')
 
         return render(request,

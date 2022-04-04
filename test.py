@@ -121,14 +121,14 @@ def test_OutMail_create_from_order():
     print(om.subject)
     print(om.html)
 
-def test_OutMail_create_from_subscription():
+def test_OutMail_create_from_site_subscription_completed():
 
     pk = Event.objects.all()[0].id
     payer       = User.objects.get(email='flavio.bortolan@gmail.com')
     partecipant = User.objects.get(email='roberto.ferro1996@gmail.com')
     password = '£$%DFGS%$'
 
-    om = OutMail.create_from_subscription( payer, partecipant, password )
+    om = OutMail.create_from_site_subscription_completed( payer, partecipant, password )
 
     print(om.subject)
     print(om.html)
@@ -213,7 +213,7 @@ def test_create_profile():
 if __name__ == '__main__':
     #test_mail()
     #test_Order_open_close()
-    #test_OutMail_create_from_subscription()
+    #test_OutMail_create_from_site_subscription_completed()
     #print_event_partecipants_mail_name_surname(19)
     #print_users()
     #print_outmail_name_surname(19)
