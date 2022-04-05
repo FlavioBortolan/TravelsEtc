@@ -83,7 +83,7 @@ def user_logout(request):
     return HttpResponseRedirect(reverse('index'))
 
 
-def create_profile(user_form, profile_form, autogenerate_password, is_minor ):
+def create_profile(request, user_form, profile_form, autogenerate_password, is_minor):
 
     print('*** create_profile ***: '+ str(user_form)  + str(profile_form))
 
@@ -154,6 +154,10 @@ def create_profile(user_form, profile_form, autogenerate_password, is_minor ):
             # UserForm and UserProfileInfoForm
             profile.user = user
             profile.is_minor = is_minor
+
+            if is_minor:
+                profile.parent = request.user
+
             '''
             # Check if they provided a profile picture
             if 'profile_pic' in request.FILES:
@@ -878,7 +882,7 @@ class BuyTicketView(TemplateView):
                 user_form.fields['password'].widget = user_form.fields['password'].hidden_widget()
                 user_form.fields['repeat_password'].widget = user_form.fields['repeat_password'].hidden_widget()
 
-                (ret, friend_id, pw, new_user) = create_profile(user_form, profile_form, True, False)
+                (ret, friend_id, pw, new_user) = create_profile(request, user_form, profile_form, True, False)
 
                 if ret:
 
@@ -917,11 +921,11 @@ class BuyTicketView(TemplateView):
                 user_form.fields['password'].widget = user_form.fields['password'].hidden_widget()
                 user_form.fields['repeat_password'].widget = user_form.fields['repeat_password'].hidden_widget()
 
-                (ret, friend_id, pw, new_user) = create_profile(user_form, profile_form, True, True)
+                (ret, friend_id, pw, new_user) = create_profile(request, user_form, profile_form, True, True)
 
                 if ret:
 
-                    om = OutMail.create_from_site_subscription_completed( request.user, new_user, pw, 'minor' )
+                    om = OutMail.create_from_site_subscription_completed( request.user, new_user, pw, 'minor', request )
                     self.flush(om)
 
                     return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="registration_successful", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend_id)

@@ -34,6 +34,7 @@ class UserProfileInfo(models.Model):
     credits = models.PositiveIntegerField(default=0)
     exp_date = models.DateField(default = timezone.now)
     is_minor = models.BooleanField(default=False)
+    parent = models.ForeignKey(User, related_name='parent', on_delete=models.CASCADE, blank=True, default=None, null=True)
 
     USER_TYPE_CHOICES = [
         ('Std', 'Standard'),
