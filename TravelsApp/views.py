@@ -40,6 +40,7 @@ import ast
 
 from django.http import JsonResponse
 import os
+import logging
 
 #see https://stripe.com/docs/payments/integration-builder
 import stripe
@@ -55,13 +56,13 @@ stripe_simulate_for_debug = True
 User = get_user_model()
 
 import logging
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('logger')
 
 # Create your views here.
 def index(request):
 
     site_under_maintenance = Setting.get_setting('site_under_maintenance')
-    print('Site under maintenance:' + str(site_under_maintenance))
+    logger.info('Site under maintenance:' + str(site_under_maintenance))
 
     if site_under_maintenance=='True' and not request.user.is_superuser:
         return render(request,'TravelsApp/site_under_maintenance.html')
@@ -85,7 +86,7 @@ def user_logout(request):
 
 def create_profile(request, user_form, profile_form, autogenerate_password, is_minor):
 
-    print('*** create_profile ***: '+ str(user_form)  + str(profile_form))
+    logger.info('*** create_profile ***: '+ str(user_form)  + str(profile_form))
 
     #generate cleaned_data
     user_form.is_valid()
@@ -102,29 +103,29 @@ def create_profile(request, user_form, profile_form, autogenerate_password, is_m
     else:
         return False, -1, None, None
 
-    print('+++ user_form cleaned_data:' + str(user_form.cleaned_data))
+    logger.info('+++ user_form cleaned_data:' + str(user_form.cleaned_data))
 
-    #print('mail field value =' + user_form.fields['email'].widget.attrs['value'] )
-    print('cleaned mail field value =' + user_form.cleaned_data['email'] )
+    #logger.info('mail field value =' + user_form.fields['email'].widget.attrs['value'] )
+    logger.info('cleaned mail field value =' + user_form.cleaned_data['email'] )
 
     # Check to see if both forms are valid
     if user_form_ok and profile_form.is_valid():
 
-        print('create_profile:data is ok')
+        logger.info('create_profile:data is ok')
         #get the email supplied trough the form
         supplied_email = user_form.cleaned_data['email']
-        print("Supplied mail is:" + supplied_email)
+        logger.info("Supplied mail is:" + supplied_email)
 
         #check if someone else in the database used that email
         duplicate_users = User.objects.filter(email__iexact = supplied_email).count()
 
         if duplicate_users == 0:
 
-            print("No duplicate users found")
+            logger.info("No duplicate users found")
 
             if autogenerate_password:
                 password = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(5))
-                print('password:' + password)
+                logger.info('password:' + password)
             else:
                 password = user.password
 
@@ -135,7 +136,7 @@ def create_profile(request, user_form, profile_form, autogenerate_password, is_m
                                  password=None)
             user.save()
 
-            print('new user saved with mail: ' + supplied_email)
+            logger.info('new user saved with mail: ' + supplied_email)
 
             # Hash the password
             user.set_password(password)
@@ -143,7 +144,7 @@ def create_profile(request, user_form, profile_form, autogenerate_password, is_m
             # Update with Hashed password
             user.save()
 
-            print('password saved')
+            logger.info('password saved')
 
             # Now we deal with the extra info!
 
@@ -161,7 +162,7 @@ def create_profile(request, user_form, profile_form, autogenerate_password, is_m
             '''
             # Check if they provided a profile picture
             if 'profile_pic' in request.FILES:
-                print('found it')
+                logger.info('found it')
                 # If yes, then grab it from the POST form reply
                 profile.profile_pic = request.FILES['profile_pic']
             '''
@@ -172,15 +173,15 @@ def create_profile(request, user_form, profile_form, autogenerate_password, is_m
 
             # Now save model
             profile.save()
-            print('??????????????:')
-            print(user.first_name)
-            print(user.last_name)
-            print(user.email)
+            logger.info('Saving profile info for:')
+            logger.info(user.first_name)
+            logger.info(user.last_name)
+            logger.info(user.email)
 
             return True, user.id, password, user
 
         else:
-            print(user.email + ' is already registered')
+            logger.info(user.email + ' is already registered')
             return False, -1, None, None
     else:
         return False, -1, None, None
@@ -203,19 +204,19 @@ def register(request):
         profile_form = UserProfileInfoForm(data=request.POST, error_class=DivErrorList)
 
         #profile_form.is_valid()
-        #print('POST:' + profile_form.cleaned_data['subscription_exp_date'])
+        #logger.info('POST:' + profile_form.cleaned_data['subscription_exp_date'])
         # Check to see both forms are valid
         if user_form.is_valid() and profile_form.is_valid():
 
             #get the email supplied trough the form
             supplied_email = user_form.cleaned_data['email']
-            print("Supplied mail is:" + supplied_email)
+            logger.info("Supplied mail is:" + supplied_email)
             #check if someone else in the database used that email
             duplicate_users = User.objects.filter(email__iexact = supplied_email).count()
 
             if duplicate_users == 0:
 
-                print("No duplicate users found")
+                logger.info("No duplicate users found")
 
                 # Save User Form to Database
                 user = user_form.save(commit=False)
@@ -242,7 +243,7 @@ def register(request):
 
                 # Check if they provided a profile picture
                 if 'profile_pic' in request.FILES:
-                    print('found it')
+                    logger.info('found it')
                     # If yes, then grab it from the POST form reply
                     profile.profile_pic = request.FILES['profile_pic']
 
@@ -264,15 +265,15 @@ def register(request):
 
             else:
                 # One of the forms was invalid if this else gets called.
-                print("Duplicate users where found: There are " + str(duplicate_users) + " users with email " + supplied_email)
+                logger.info("Duplicate users where found: There are " + str(duplicate_users) + " users with email " + supplied_email)
         else:
             # One of the forms was invalid if this else gets called.
-            print(user_form.errors,profile_form.errors)
+            logger.info(user_form.errors,profile_form.errors)
 
     #GET
     else:
 
-        print('register:GET')
+        logger.info('register:GET')
         # Just render the forms as blank.
         user_form = UserForm()
         profile_form = UserProfileInfoForm()
@@ -323,7 +324,7 @@ def my_account(request):
 
         else:
             # One of the forms was invalid if this else gets called.
-            print(user_form.errors,profile_form.errors)
+            logger.info(user_form.errors,profile_form.errors)
 
     #GET
     else:
@@ -378,7 +379,7 @@ def change_password(request):
 
         else:
             # One of the forms was invalid if this else gets called.
-            print(user_form.errors)
+            logger.info(user_form.errors)
     else:
         user_form = UserForm()
 
@@ -422,8 +423,8 @@ def user_login(request):
                 # If account is not active:
                 return HttpResponse("Your account is not active.")
         else:
-            print("Someone tried to login and failed.")
-            print("They used email: {} and password: {}".format(email,password))
+            logger.info("Someone tried to login and failed.")
+            logger.info("They used email: {} and password: {}".format(email,password))
 
             return render(request, 'TravelsApp/login.html', {'post_response': 'failed login', 'err_message': 'Invalid email or password, please try again'})
     else:
@@ -443,19 +444,19 @@ class EventListView(ListView):
     #note: *args    = positional arguments in the url call
     #      **kwargs = name-based arguments in the url call
     def get_queryset(self, *args, **kwargs):
-        print('***get_queryset: kwargs' + str(**kwargs) + '***')
+        logger.info('***get_queryset: kwargs' + str(**kwargs) + '***')
         if self.kwargs['filter_mode']=='current_user':
-            logger.error('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate solo le attivita dell utente attuale')
+            logger.info('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate solo le attivita dell utente attuale')
             return(self.request.user.event_set.all())
 
         elif self.kwargs['filter_mode']=='all':
-            logger.error('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate tutte le attivita')
+            logger.info('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate tutte le attivita')
             return(Event.objects.all())
     '''
     #defines the context dictionary to be used to render page during GET
     def get_context_data(self, **kwargs):
 
-        print('***get_context_data: kwargs' + str(kwargs) + '***')
+        logger.info('***get_context_data: kwargs' + str(kwargs) + '***')
         context  = super().get_context_data(**kwargs)
         context['filter_mode'] = self.kwargs['filter_mode']
 
@@ -470,19 +471,19 @@ class EventListView(ListView):
 
 
         if self.kwargs['filter_mode']=='current_user':
-            logger.error('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate solo le attivita dell utente attuale')
+            logger.info('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate solo le attivita dell utente attuale')
 
             user_events = self.request.user.event_set.all()
             context['event_list']       = user_events.filter(date__gte = date.today())
 
         elif self.kwargs['filter_mode']=='current_user_past':
-            logger.error('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate solo le attivita passate dell utente attuale')
+            logger.info('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate solo le attivita passate dell utente attuale')
 
             user_events = self.request.user.event_set.all()
             context['event_list']  = user_events.filter(date__lt = date.today())
 
         elif self.kwargs['filter_mode']=='all':
-            logger.error('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate tutte le attivita')
+            logger.info('filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate tutte le attivita')
 
             #exclude past events
             context['event_list'] = Event.objects.filter(date__gte = start_date, date__lte = end_date )
@@ -490,14 +491,14 @@ class EventListView(ListView):
         context['event_list'] = context['event_list'].order_by('date')
 
 
-        print('GET:start_date: ' + start_date)
-        print('GET:end_date: ' + end_date)
+        logger.info('GET:start_date: ' + start_date)
+        logger.info('GET:end_date: ' + end_date)
 
         return context
 
     #Handles the 'POST' request from the client browser
     def post(self, request, *args, **kwargs):
-        logger.error('POST: filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate le attivita corrispondenti ai filtri')
+        logger.info('POST: filter_mode:' + self.kwargs['filter_mode'] + ', verranno mostrate le attivita corrispondenti ai filtri')
 
         #get the filter criteria from the POST request(city, start_date etc)
         #these values comes from the form field inside the web page
@@ -509,10 +510,10 @@ class EventListView(ListView):
         confirmed = request.POST.get("confirmed")
 
         #Log filter values for debug purposes
-        logger.error('POST data:')
-        logger.error('City:' + city)
-        logger.error('StartDate:' + str(start_date))
-        logger.error('EndDate:' + str(end_date))
+        logger.info('POST data:')
+        logger.info('City:' + city)
+        logger.info('StartDate:' + str(start_date))
+        logger.info('EndDate:' + str(end_date))
         query = {}
 
         #incremental filter by active fields
@@ -525,24 +526,24 @@ class EventListView(ListView):
             filtered_events = filtered_events.filter(activity__place__iexact = city)
 
         if type!='NoSelection' and type !='':
-            print('filtering events with type =*' + type + '*')
+            logger.info('filtering events with type =*' + type + '*')
             filtered_events = filtered_events.filter(activity__type = type)
 
         if confirmed!='NoSelection' and confirmed !='':
-            print('filtering events with confirmed =*' + str(confirmed) + '*')
+            logger.info('filtering events with confirmed =*' + str(confirmed) + '*')
             if confirmed == 'confirmed':
                 filtered_events = filtered_events.filter(confirmed = True)
 
         if difficultyLevel!='NoSelection' and difficultyLevel !='':
-            print('filtering events with difficultyLevel =*' + difficultyLevel + '*')
+            logger.info('filtering events with difficultyLevel =*' + difficultyLevel + '*')
             filtered_events = filtered_events.filter(activity__difficultyLevel = difficultyLevel)
 
         if start_date:
-            print('filtering events with start date >' + start_date )
+            logger.info('filtering events with start date >' + start_date )
             filtered_events = filtered_events.filter(date__gte = start_date)
 
         if end_date:
-            print('filtering events with end date >' + end_date)
+            logger.info('filtering events with end date >' + end_date)
             filtered_events = filtered_events.filter(date__lte = end_date)
 
         filtered_events = filtered_events.order_by('date')
@@ -567,7 +568,7 @@ class SingleEvent(DetailView):
     model = Event
 
     def get_queryset(self,*args, **kwargs):
-        #logger.error('get_queryset:Selected single activity')
+        #logger.info('get_queryset:Selected single activity')
         return(Event.objects.filter(id=self.kwargs['pk']))
 
     def get_context_data(self,**kwargs):
@@ -577,17 +578,17 @@ class SingleEvent(DetailView):
 
             if self.request.user.event_set.filter(id=self.kwargs['pk']).count()>0:
                 context['user_already_has_this_ticket'] = True
-                logger.error('The user already has this ticket')
+                logger.info('The user already has this ticket')
             else:
                 context['user_already_has_this_ticket'] = False
-                logger.error('The user does not have this ticket')
+                logger.info('The user does not have this ticket')
 
             if self.request.user.my_queued_events.filter(id=self.kwargs['pk']).count()>0:
                 context['queued_to_this_event'] = True
-                logger.error('The user is queued to the event')
+                logger.info('The user is queued to the event')
             else:
                 context['queued_to_this_event']  = False
-                logger.error('The user is not queued to the event')
+                logger.info('The user is not queued to the event')
 
 
         event = Event.objects.filter(id=self.kwargs['pk'])[0]
@@ -604,10 +605,10 @@ class SingleEvent(DetailView):
             refund_limit_time = dt - timedelta(hours = event.refund_limit_delta_hours)
             if  refund_limit_time > datetime.now() and context['user_already_has_this_ticket']:
                 context['can_ask_refund'] = True
-                print('The guy can have his money back as:' + str(refund_limit_time) + '>' + str(datetime.now()))
+                logger.info('The guy can have his money back as:' + str(refund_limit_time) + '>' + str(datetime.now()))
             else:
                 context['can_ask_refund'] = False
-                print('The guy cannot have his money back as:' + str(refund_limit_time) + '<' + str(datetime.now()))
+                logger.info('The guy cannot have his money back as:' + str(refund_limit_time) + '<' + str(datetime.now()))
 
         return context
 
@@ -626,12 +627,12 @@ class BuyTicketView(TemplateView):
             m.flush_outmail(om)
 
         except Exception as e:
-            print('Could not send mail: ' + str(e))
+            logger.error('Could not send mail: ' + str(e))
             return False,
 
     def get(self, request, *args, **kwargs):
 
-        print('BuyTicket GET was called')
+        logger.info('BuyTicket GET was called')
         context  = super().get_context_data(**kwargs)
         #context['Event_pk'] =  kwargs['pk']
         context['pk'] =  kwargs['pk']
@@ -639,17 +640,17 @@ class BuyTicketView(TemplateView):
         context['friend_id'] = kwargs['friend_id']
 
         if kwargs['buy_step']=='partecipant_selection':
-            print('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
+            logger.info('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
 
             if kwargs['cmd']=='init':
-                print('cmd=' + kwargs['cmd'] )
+                logger.info('cmd=' + kwargs['cmd'] )
 
         elif kwargs['buy_step']=='collect_friends_mail':
-            print('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
+            logger.info('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
 
             if kwargs['cmd']=='init':
 
-                print('received registration data')
+                logger.info('received registration data')
                 user_form = UserForm( error_class = DivErrorList)
                 profile_form = UserProfileInfoForm( error_class = DivErrorList)
                 user_form.fields['email'].widget.attrs['value'] = friend_mail
@@ -662,16 +663,16 @@ class BuyTicketView(TemplateView):
 
 
         elif kwargs['buy_step']=='friend_already_subscibed':
-            print('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
+            logger.info('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
 
         elif kwargs['buy_step']=='collect_friends_data':
-            print('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
+            logger.info('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
 
             if kwargs['cmd']=='init':
 
                 #friend = User.objects.get(id=int(kwargs['friend_id']))
 
-                print('received registration data')
+                logger.info('received registration data')
                 user_form = UserForm( error_class = DivErrorList)
                 profile_form = UserProfileInfoForm( error_class = DivErrorList)
                 #user_form.fields['email'].widget.attrs['value'] = friend.mail
@@ -683,11 +684,11 @@ class BuyTicketView(TemplateView):
                 context['profile_form'] = profile_form
 
         elif kwargs['buy_step']=='registration_successful':
-            print('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
-            print('registration_successful, friend_id = ' + str(kwargs['friend_id']))
+            logger.info('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
+            logger.info('registration_successful, friend_id = ' + str(kwargs['friend_id']))
 
         elif kwargs['buy_step']=='confirmation':
-            print('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
+            logger.info('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
 
             if kwargs['friend_id'] != '-1':
                 partecipant = User.objects.get(id = int(kwargs['friend_id']))
@@ -698,22 +699,22 @@ class BuyTicketView(TemplateView):
             year_subscription_price = int(Setting.get_setting('year_subscription_price'))
             res, context_out, order = Order.open_order(context['pk'], self.request.user, partecipant, year_subscription_price)
             context = { **context,  **context_out}
-            print('BuyTicketView: confirmation, context = ' + str(context))
+            logger.info('BuyTicketView: confirmation, context = ' + str(context))
 
         elif kwargs['buy_step']=='card_pay_successful':
-            print('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
+            logger.info('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
 
         elif kwargs['buy_step']=='confirmed':
-            print('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
+            logger.info('BuyTicket.get:' + kwargs['buy_step'] + ' ' + kwargs['cmd'] )
 
-            print('Closing order from -confirmed-')
+            logger.info('Closing order from -confirmed-')
             o = Order.objects.get(id=kwargs['order_id'])
             subscription_duration_months = int(Setting.get_setting('subscription_duration_months'))
             ret = o.close(subscription_duration_months)
 
             if ret:
                 #send mail with order confirmation
-                print('Creating mail for order confirmation')
+                logger.info('Creating mail for order confirmation')
                 om = OutMail.create_from_order(o, request)
 
                 self.flush(om)
@@ -728,7 +729,7 @@ class BuyTicketView(TemplateView):
 
     def post(self, request, *args, **kwargs):
 
-        print('BuyTicket POST was called')
+        logger.info('BuyTicket POST was called')
         context  = super().get_context_data(**kwargs)
         #context['Event_pk'] =  kwargs['pk']
         context['pk'] =  kwargs['pk']
@@ -740,7 +741,7 @@ class BuyTicketView(TemplateView):
             context['ticket_target_user'] = request.POST.get('ticket_target_user')
 
             if kwargs['cmd']=='receive_user_selected':
-                print('cmd=' + kwargs['cmd'] )
+                logger.info('cmd=' + kwargs['cmd'] )
 
                 #ticket for me: go to the confirmation page
                 if context['ticket_target_user'] == 'me':
@@ -787,18 +788,18 @@ class BuyTicketView(TemplateView):
                 friend_mail = request.POST.get('email')
                 friend_match = User.objects.filter(email=friend_mail)
 
-                print('buy_step=collect_friends_mail, cmd=receive_email: mail=' + friend_mail)
-                print('matches:' + str(friend_match.count()))
+                logger.info('buy_step=collect_friends_mail, cmd=receive_email: mail=' + friend_mail)
+                logger.info('matches:' + str(friend_match.count()))
 
                 #check if friend mail corresponds to a user
                 if friend_match.count()>0:
-                    print('The friend is already a member')
+                    logger.info('The friend is already a member')
                     friend = friend_match[0]
 
                     #check if friend is already subscribed to the event
                     e = Event.objects.get(id=context['pk'])
                     if e.partecipants.filter(email = friend.email ).count()>0:
-                        print('friend is already subscribed')
+                        logger.info('friend is already subscribed')
                         return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="friend_already_subscibed", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend.id)
 
                     #redirect to buy ticket for him
@@ -807,7 +808,7 @@ class BuyTicketView(TemplateView):
 
                 #friend needs registration
                 else:
-                    print(friend_mail + ' has to register')
+                    logger.info(friend_mail + ' has to register')
 
                     user_form = UserForm( error_class = DivErrorList)
                     profile_form = UserProfileInfoForm( error_class = DivErrorList)
@@ -832,13 +833,13 @@ class BuyTicketView(TemplateView):
 
                 #check if kid's mail corresponds to a user
                 if friend_match.count()>0:
-                    print('The friend is already a member')
+                    logger.info('The friend is already a member')
                     friend = friend_match[0]
 
                     #check if friend is already subscribed to the event
                     e = Event.objects.get(id=context['pk'])
                     if e.partecipants.filter(email = friend.email ).count()>0:
-                        print('friend is already subscribed')
+                        logger.info('friend is already subscribed')
                         return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="friend_already_subscibed", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend.id)
 
                     #redirect to buy ticket for him
@@ -847,7 +848,7 @@ class BuyTicketView(TemplateView):
 
                 #kid needs registration
                 else:
-                    print(minor_name + ' has to register')
+                    logger.info(minor_name + ' has to register')
 
                     user_form = UserForm( error_class = DivErrorList)
                     profile_form = UserProfileInfoForm( error_class = DivErrorList)
@@ -872,7 +873,7 @@ class BuyTicketView(TemplateView):
             if kwargs['cmd'] == 'receive_friends_data':
 
                 friend_mail = request.POST.get('email')
-                print('+++received email:' + str(friend_mail))
+                logger.info('+++received email:' + str(friend_mail))
 
                 tmp_data = request.POST.copy()
                 tmp_data['email'] = friend_mail
@@ -903,14 +904,14 @@ class BuyTicketView(TemplateView):
                     context['buy_step'] = 'collect_friends_data'
                     context['ticket_target_user'] = 'friend'
 
-                    print('poop')
+                    logger.info('poop')
 
             if kwargs['cmd'] == 'receive_minor_data':
 
                 minor_mail = \
                 self.minor_mail_from_name(request.POST.get('first_name'), request.POST.get('last_name'), request.user)
 
-                print('+++minor autogenerated mail:' + minor_mail)
+                logger.info('+++minor autogenerated mail:' + minor_mail)
 
                 tmp_data = request.POST.copy()
                 tmp_data['email'] = minor_mail
@@ -940,7 +941,7 @@ class BuyTicketView(TemplateView):
                     context['profile_form'] = profile_form
                     context['buy_step'] = 'collect_friends_data'
                     context['ticket_target_user'] = 'friend'
-                    print('poop')
+                    logger.info('poop')
 
         return render(request,
                       self.template_name,
@@ -951,14 +952,14 @@ class AskRefundView(TemplateView):
 
     def get_refund_coices(self, ticket):
 
-        print('*** get_refund_coices ***')
+        logger.info('*** get_refund_coices ***')
         r_context={}
 
         price = ticket.event.activity.price
         #get ticket id from event, user,
         tot_card = ticket.order.total
 
-        print('Ticket id = ' + str(ticket.id) + ', price = ' + str(price) + ', tot_card = ' + str(tot_card))
+        logger.info('Ticket id = ' + str(ticket.id) + ', price = ' + str(price) + ', tot_card = ' + str(tot_card))
 
         #define which refund options there are
         if tot_card == 0:
@@ -980,7 +981,7 @@ class AskRefundView(TemplateView):
 
         r_context['price'] = price
 
-        print(str(r_context))
+        logger.info(str(r_context))
         return r_context
 
     def get_context_data(self,**kwargs):
@@ -997,7 +998,7 @@ class AskRefundView(TemplateView):
 
     def refund_ticket_with_card(self, ticket, amount):
 
-        print('*** refund_ticket ***: user = ' + ticket.user.email + ', event = ' + ticket.event.activity.name + ', amount = ' + str(amount) )
+        logger.info('*** refund_ticket ***: user = ' + ticket.user.email + ', event = ' + ticket.event.activity.name + ', amount = ' + str(amount) )
 
         #get order id from ticket id
         order = ticket.order
@@ -1005,24 +1006,24 @@ class AskRefundView(TemplateView):
         #refund for the amount given
         smallest_currency_ratio = int(Setting.get_setting('smallest_currency_ratio'))
         try:
-            print('refunding payment_intent:' + order.payment_id)
+            logger.info('refunding payment_intent:' + order.payment_id)
             #https://stripe.com/docs/payments/integration-builder
             r = stripe.Refund.create(
             payment_intent = order.payment_id,
             amount = amount*smallest_currency_ratio)
-            print(str(r))
+            logger.info(str(r))
 
             return True, None
 
         except Exception as e:
-            print('error refund payment intent:' + str(e))
+            logger.error('error refund payment intent:' + str(e))
             return False, e
 
     #Handles the 'POST' request from the client browser
     def post(self, request, *args, **kwargs):
 
         refund = request.POST.get("refund")
-        print('Post: refund requested: ' + str(refund))
+        logger.info('Post: refund requested: ' + str(refund))
 
         context  = super().get_context_data(**kwargs)
         context['event'] = Event.objects.get(id=kwargs['pk'])
@@ -1107,7 +1108,7 @@ class QueueToEventView(TemplateView):
     #Handles the 'POST' request from the client browser
     def get(self, request, *args, **kwargs):
 
-        print('QueueToEventView.POST')
+        logger.info('QueueToEventView.POST')
         context  = super().get_context_data(**kwargs)
         context['event'] = Event.objects.get(id=kwargs['pk'])
 
@@ -1163,8 +1164,8 @@ def create_payment_intent(request):
         total=int(json.loads(request.body)['total'])
         order_id=int(json.loads(request.body)['order_id'])
 
-        print('Creating payment intent for order_id:' + str(order_id) + ' ,total: ' + str(total) )
-        print('request:' + str(request.body))
+        logger.info('Creating payment intent for order_id:' + str(order_id) + ' ,total: ' + str(total) )
+        logger.info('request:' + str(request.body))
 
         try:
             #see https://stripe.com/docs/payments/integration-builder
@@ -1173,8 +1174,8 @@ def create_payment_intent(request):
                 currency='eur' #move to Setting
             )
 
-            print('intent' + str(intent))
-            print('************ intent id:' + str(intent['id']) + '************')
+            logger.info('intent' + str(intent))
+            logger.info('************ intent id:' + str(intent['id']) + '************')
 
             #update the order
             o = Order.objects.get(id=order_id)
@@ -1191,7 +1192,7 @@ def create_payment_intent(request):
             })
 
         except Exception as e:
-            print('error creting intent:' + str(e))
+            logger.error('error creting intent:' + str(e))
             return JsonResponse({'error':str(e), })
 
 #see for integration:
@@ -1212,7 +1213,7 @@ def create_payment_intent(request):
 @csrf_exempt
 def stripe_webhook(request):
 
-    print('+++++++++stripe_webhook called+++++++++++')
+    logger.info('+++++++++stripe_webhook called+++++++++++')
 
     payload = request.body
     event = None
@@ -1245,20 +1246,20 @@ def stripe_webhook(request):
                 #retrive the order correspondig to the intent id
                 o = Order.objects.filter(status='chart', payment_id = intent['id'])[0]
 
-            print('Payment receved for order id: ' + str(o.id))
+            logger.info('Payment receved for order id: ' + str(o.id))
 
         except Exception as ex:
-            print('Receved stripe hook call for unexisting intent with id:' + intent['id'])
-            print(str(ex))
+            logger.error('Receved stripe hook call for unexisting intent with id:' + intent['id'])
+            logger.error(str(ex))
             return HttpResponse(status=400)
 
-        print('Closing order from -webhook-')
+        logger.info('Closing order from -webhook-')
         subscription_duration_months = int(Setting.get_setting('subscription_duration_months'))
         ret = o.close(subscription_duration_months)
 
         if ret:
 
-            print('Creating mail for order confirmation')
+            logger.info('Creating mail for order confirmation')
             om = OutMail.create_from_order(o, request)
 
             try:
@@ -1269,7 +1270,7 @@ def stripe_webhook(request):
                 m.flush_outmail(om)
 
             except Exception as e:
-                print('Could not send mail: ' + str(e))
+                logger.info('Could not send mail: ' + str(e))
                 return False,
 
             return HttpResponse(status=200)

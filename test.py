@@ -204,10 +204,11 @@ def test_mail_validation(email):
         print('mail is NOT OK')
         return False
 
-def test_create_profile():
-
-
-
+def test_logging(msg):
+    import logging
+    logger = logging.getLogger('logger')
+    logger.info('this is an information')
+    logger.error('this is an error')
 
 # Create your tests here.
 if __name__ == '__main__':
@@ -218,4 +219,5 @@ if __name__ == '__main__':
     #print_users()
     #print_outmail_name_surname(19)
     #test_request('http://127.0.0.1:8000/TravelsApp/events/all/')
-    test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
+    #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
+    test_logging("ciao ciao")

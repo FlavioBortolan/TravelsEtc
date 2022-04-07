@@ -137,3 +137,43 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = '/TravelsApp/user_login/'
+
+'''
+LOGGING_CONFIG = None
+LOGGING = {...}  # whatever you want, as you already have
+
+import logging.config
+logging.config.dictConfig(LOGGING)
+'''
+
+LOGGING = {
+   'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'filename': 'debug.log',
+            'when':'D',
+            'interval':14,
+            'formatter': 'verbose',
+        },
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+            'logger': {
+            'handlers': ['file','console'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
