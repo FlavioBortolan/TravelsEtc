@@ -6,7 +6,46 @@ Avanti{% extends "TravelsApp/base.html" %}
 
   <div class="w3-container">
 
-      {% if buy_step == 'partecipant_selection' %}
+      {% if buy_step == 'conditions_acceptance' %}
+        <h1>Condizioni di partecipazione</h1>
+        <br>
+        <p>
+        JustWalks è un gruppo di amici che organizza uscite aperte al pubblico.<br>
+        Non siamo un agenzia turistica e ciascun partecipante accetta di essere responsabile in prima persona dei rischi derivanti dalla partecipazione all'evento e solleva l'organizzazione da qualsisasi responsabilità relativa a danni ricevuti o causati durante lo svolgimento dell'evento stesso o durante gli spostamenti verso il luogo di incontro o durante il ritorno.<br>
+        Nel caso di partecipazione con minori il partecipante è responsabile in prima persona dei minori accompagnati e si impegna a monitorare il minore durante tutta la durata dell'escursione garantendone la sicurezza.<br>
+        Per nessun motivo la supervisione del minore può essere delegata ad altri e tanto meno all'organizzazione.<br>
+        <br>
+        Coloro che partecipano con cani sono tenuti alla costante supervisione garantendo la sicurezza sia del cane che degli altri partecipanti e assumendosi la responsabilità di qualsiasi danno causato o ricevuto dal cane stesso.<br>
+        E' necessario inoltre raccogliere eventuali deiezioni e tenere il cane al guinzaglio durante tutta la durata dell'escursione.<br>
+        <br>
+        Le uscite sono gratuite, in qualche caso è possibile che vengano raccolti dei soldi per pagare l'ingresso ad una villa o per un aperitivo ma JustWalks fa solo da tramite verso il gestore del servizio e non trattiene niente per se.<br>
+        <br>
+        Le guide di JustWalks sono appassionati che prestano il loro tempo alla conduzione di uscite nella natura ma nessuno di loro è una guida professionale per cui le informazioni date relativamente a luoghi o ambienti naturali sono frutto di studio svolto in forma privata a titolo hobbistico.<br>
+        <br>
+        Durante tutta la durata dell'escursione il partecipante è tenuto ad un comportamento di rispetto sia verso gli altri partecipanti che verso l'ambiente in cui ci si muove e si impegna a non sporcare, non lasciare rifiuti e non causare danno a piante o a qualsiasi proprietà pubblica o privata.
+        <br>
+        La guida ha la facoltà insindacabile di escludere dalla partecipazione qualsiasi persona che non si attenga al presente regolamento.
+        <br>
+        Premendo <b>'Accetta condizioni e continua'</b>, dichiari di aver letto e accettato le condizioni qui riportate
+        <br>
+        <br>
+        </p>
+
+
+        <form action="{% url 'TravelsApp:buyticket' pk=pk buy_step='partecipant_selection' cmd='init' total=0 credits_to_use=0 order_id=0 friend_id='-1' %}" method="get">
+
+          {% csrf_token %}
+
+          <div class="w3-card w3-padding w3-border w3-border-black">
+            <br>
+            <input type="submit" class="w3-btn w3-blue w3-block w3-round-large" name="" value="Accetta condizioni e continua">
+            <br>
+            <a href="{% url 'TravelsApp:index' %}" class="w3-btn w3-blue w3-block w3-round-large">Abbandona</a>
+            <br>
+          </div>
+        </form>
+
+      {% elif buy_step == 'partecipant_selection' %}
       <h1>Acquisto biglietto</h1>
       <br>
 

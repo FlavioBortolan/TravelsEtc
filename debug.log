@@ -1,0 +1,295 @@
+INFO 2022-04-09 18:57:21,355 views Site under maintenance:False
+INFO 2022-04-09 18:57:24,671 views ***get_context_data: kwargs{}***
+INFO 2022-04-09 18:57:24,673 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-09 18:57:24,674 views GET:start_date: 2022-04-09
+INFO 2022-04-09 18:57:24,674 views GET:end_date: 2022-06-09
+INFO 2022-04-09 18:57:35,096 views Site under maintenance:False
+INFO 2022-04-09 18:57:41,536 views ***get_context_data: kwargs{}***
+INFO 2022-04-09 18:57:41,536 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-09 18:57:41,538 views GET:start_date: 2022-04-09
+INFO 2022-04-09 18:57:41,538 views GET:end_date: 2022-06-09
+INFO 2022-04-09 18:57:42,730 views The user already has this ticket
+INFO 2022-04-09 18:57:42,731 views The user is not queued to the event
+INFO 2022-04-09 18:57:42,733 views The guy can have his money back as:2022-04-29 15:30:00>2022-04-09 18:57:42.733472
+INFO 2022-04-09 18:57:49,081 views *** get_refund_coices ***
+INFO 2022-04-09 18:57:49,084 views Ticket id = 115, price = 0, tot_card = 0
+INFO 2022-04-09 18:57:49,084 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
+INFO 2022-04-09 18:57:50,966 views Post: refund requested: credits
+INFO 2022-04-09 18:57:50,973 views *** get_refund_coices ***
+INFO 2022-04-09 18:57:50,975 views Ticket id = 115, price = 0, tot_card = 0
+INFO 2022-04-09 18:57:50,975 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
+INFO 2022-04-09 18:57:52,303 views ***get_context_data: kwargs{}***
+INFO 2022-04-09 18:57:52,303 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-09 18:57:52,305 views GET:start_date: 2022-04-09
+INFO 2022-04-09 18:57:52,305 views GET:end_date: 2022-06-09
+INFO 2022-04-09 18:57:53,679 views The user does not have this ticket
+INFO 2022-04-09 18:57:53,680 views The user is not queued to the event
+INFO 2022-04-09 18:57:53,682 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-09 18:57:53.682548
+INFO 2022-04-09 18:57:56,517 views BuyTicket GET was called
+INFO 2022-04-09 19:07:07,993 views BuyTicket GET was called
+INFO 2022-04-09 19:18:45,849 views Site under maintenance:False
+INFO 2022-04-09 19:18:47,689 views ***get_context_data: kwargs{}***
+INFO 2022-04-09 19:18:47,692 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-09 19:18:47,692 views GET:start_date: 2022-04-09
+INFO 2022-04-09 19:18:47,693 views GET:end_date: 2022-06-09
+INFO 2022-04-09 19:18:49,007 views The user does not have this ticket
+INFO 2022-04-09 19:18:49,007 views The user is not queued to the event
+INFO 2022-04-09 19:18:49,010 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-09 19:18:49.010029
+INFO 2022-04-09 19:18:51,743 views BuyTicket POST was called
+INFO 2022-04-09 19:18:51,744 views buy_step=conditions_acceptance
+INFO 2022-04-09 19:21:07,009 views Site under maintenance:False
+INFO 2022-04-09 19:21:09,085 views ***get_context_data: kwargs{}***
+INFO 2022-04-09 19:21:09,088 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-09 19:21:09,089 views GET:start_date: 2022-04-09
+INFO 2022-04-09 19:21:09,089 views GET:end_date: 2022-06-09
+INFO 2022-04-09 19:21:10,241 views The user does not have this ticket
+INFO 2022-04-09 19:21:10,242 views The user is not queued to the event
+INFO 2022-04-09 19:21:10,243 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-09 19:21:10.243723
+INFO 2022-04-09 19:21:13,288 views BuyTicket POST was called
+INFO 2022-04-09 19:21:13,289 views buy_step=conditions_acceptance
+INFO 2022-04-09 19:28:41,444 views Site under maintenance:False
+INFO 2022-04-09 19:28:43,843 views ***get_context_data: kwargs{}***
+INFO 2022-04-09 19:28:43,848 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-09 19:28:43,849 views GET:start_date: 2022-04-09
+INFO 2022-04-09 19:28:43,849 views GET:end_date: 2022-06-09
+INFO 2022-04-09 19:28:45,921 views The user does not have this ticket
+INFO 2022-04-09 19:28:45,921 views The user is not queued to the event
+INFO 2022-04-09 19:28:45,925 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-09 19:28:45.925015
+INFO 2022-04-09 19:28:52,074 views BuyTicket POST was called
+INFO 2022-04-09 19:28:52,074 views buy_step=conditions_acceptance
+INFO 2022-04-09 19:29:13,762 views BuyTicket POST was called
+INFO 2022-04-09 19:29:13,762 views buy_step=conditions_acceptance
+INFO 2022-04-09 19:29:13,764 views pk=22
+INFO 2022-04-09 19:31:58,011 views BuyTicket POST was called
+INFO 2022-04-09 19:31:58,013 views buy_step=conditions_acceptance
+INFO 2022-04-09 19:31:58,014 views pk=22
+INFO 2022-04-09 19:31:58,015 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000002560699D970>}
+INFO 2022-04-09 20:11:20,856 views BuyTicket POST was called
+INFO 2022-04-09 20:11:20,861 views buy_step=conditions_acceptance
+INFO 2022-04-09 20:11:20,862 views pk=22
+INFO 2022-04-09 20:11:20,862 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000023BFD46FA30>}
+INFO 2022-04-09 20:13:39,095 views BuyTicket POST was called
+INFO 2022-04-09 20:13:39,100 views buy_step=conditions_acceptance
+INFO 2022-04-09 20:13:39,101 views pk=22
+INFO 2022-04-09 20:13:39,103 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001DD51A652B0>}
+INFO 2022-04-09 20:16:24,119 views BuyTicket POST was called
+INFO 2022-04-09 20:16:24,124 views buy_step=conditions_acceptance
+INFO 2022-04-09 20:16:24,125 views pk=22
+INFO 2022-04-09 20:16:24,128 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x00000205A24C9B50>}
+INFO 2022-04-09 20:16:44,591 views Site under maintenance:False
+INFO 2022-04-09 20:16:46,505 views ***get_context_data: kwargs{}***
+INFO 2022-04-09 20:16:46,509 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-09 20:16:46,510 views GET:start_date: 2022-04-09
+INFO 2022-04-09 20:16:46,510 views GET:end_date: 2022-06-09
+INFO 2022-04-09 20:16:48,041 views The user does not have this ticket
+INFO 2022-04-09 20:16:48,043 views The user is not queued to the event
+INFO 2022-04-09 20:16:48,044 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-09 20:16:48.044366
+INFO 2022-04-09 20:16:50,399 views BuyTicket POST was called
+INFO 2022-04-09 20:16:50,399 views buy_step=conditions_acceptance
+INFO 2022-04-09 20:16:50,400 views pk=22
+INFO 2022-04-09 20:16:50,400 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x00000205A254B550>}
+INFO 2022-04-09 20:17:25,122 views Site under maintenance:False
+INFO 2022-04-09 20:17:27,130 views ***get_context_data: kwargs{}***
+INFO 2022-04-09 20:17:27,133 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-09 20:17:27,134 views GET:start_date: 2022-04-09
+INFO 2022-04-09 20:17:27,135 views GET:end_date: 2022-06-09
+INFO 2022-04-09 20:17:28,480 views The user does not have this ticket
+INFO 2022-04-09 20:17:28,481 views The user is not queued to the event
+INFO 2022-04-09 20:17:28,483 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-09 20:17:28.483816
+INFO 2022-04-09 20:17:32,164 views BuyTicket POST was called
+INFO 2022-04-09 20:17:32,165 views buy_step=conditions_acceptance
+INFO 2022-04-09 20:17:32,169 views pk=22
+INFO 2022-04-09 20:17:32,172 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001C507189E80>}
+INFO 2022-04-09 20:21:43,648 views Site under maintenance:False
+INFO 2022-04-09 20:21:46,400 views ***get_context_data: kwargs{}***
+INFO 2022-04-09 20:21:46,404 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-09 20:21:46,406 views GET:start_date: 2022-04-09
+INFO 2022-04-09 20:21:46,407 views GET:end_date: 2022-06-09
+INFO 2022-04-09 20:21:48,479 views The user does not have this ticket
+INFO 2022-04-09 20:21:48,480 views The user is not queued to the event
+INFO 2022-04-09 20:21:48,481 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-09 20:21:48.481219
+INFO 2022-04-09 20:21:51,759 views BuyTicket POST was called
+INFO 2022-04-09 20:21:51,760 views buy_step=conditions_acceptance
+INFO 2022-04-09 20:21:51,761 views pk=22
+INFO 2022-04-09 20:21:51,762 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001F7976DDFA0>}
+INFO 2022-04-09 20:23:46,767 views BuyTicket POST was called
+INFO 2022-04-09 20:23:46,767 views buy_step=conditions_acceptance
+INFO 2022-04-09 20:23:46,768 views pk=22
+INFO 2022-04-09 20:23:46,768 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001F79764EE20>}
+INFO 2022-04-09 20:24:07,296 views Site under maintenance:False
+INFO 2022-04-09 20:24:10,052 views ***get_context_data: kwargs{}***
+INFO 2022-04-09 20:24:10,053 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-09 20:24:10,057 views GET:start_date: 2022-04-09
+INFO 2022-04-09 20:24:10,059 views GET:end_date: 2022-06-09
+INFO 2022-04-09 20:24:11,586 views The user does not have this ticket
+INFO 2022-04-09 20:24:11,588 views The user is not queued to the event
+INFO 2022-04-09 20:24:11,589 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-09 20:24:11.589131
+INFO 2022-04-09 20:24:17,317 views BuyTicket POST was called
+INFO 2022-04-09 20:24:17,317 views buy_step=conditions_acceptance
+INFO 2022-04-09 20:24:17,319 views pk=22
+INFO 2022-04-09 20:24:17,319 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001F7975EA340>}
+INFO 2022-04-09 20:24:30,930 views BuyTicket GET was called
+INFO 2022-04-09 20:24:30,930 views BuyTicket.get:partecipant_selection init
+INFO 2022-04-09 20:24:30,932 views cmd=init
+INFO 2022-04-09 20:24:37,200 views BuyTicket POST was called
+INFO 2022-04-09 20:24:37,200 views cmd=receive_user_selected
+INFO 2022-04-09 20:24:37,207 views BuyTicket GET was called
+INFO 2022-04-09 20:24:37,208 views BuyTicket.get:confirmation init
+INFO 2022-04-09 20:24:37,245 views BuyTicketView: confirmation, context = {'pk': 22, 'buy_step': 'confirmation', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 155, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001F797544B20>, 'subs_exp_date': datetime.date(2022, 8, 16), 'subscription_expired': False, 'year_subscription_price': 20, 'sub_total': 0, 'event': <Event: ID: 22, Date: 2022-05-01Valle dei Mulini di Mossano Mossano VI>}
+INFO 2022-04-09 20:24:48,985 views BuyTicket GET was called
+INFO 2022-04-09 20:24:48,985 views BuyTicket.get:confirmed init
+INFO 2022-04-09 20:24:48,987 views Closing order from -confirmed-
+INFO 2022-04-09 20:24:49,046 views Creating mail for order confirmation
+INFO 2022-04-09 20:24:59,310 views ***get_context_data: kwargs{}***
+INFO 2022-04-09 20:24:59,310 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-09 20:24:59,311 views GET:start_date: 2022-04-09
+INFO 2022-04-09 20:24:59,312 views GET:end_date: 2022-06-09
+INFO 2022-04-09 22:49:00,968 views The user already has this ticket
+INFO 2022-04-09 22:49:00,969 views The user is not queued to the event
+INFO 2022-04-09 22:49:00,971 views The guy can have his money back as:2022-04-29 15:30:00>2022-04-09 22:49:00.971177
+INFO 2022-04-09 22:49:26,375 views Site under maintenance:False
+INFO 2022-04-09 22:50:48,847 views Site under maintenance:False
+INFO 2022-04-09 22:50:52,194 views ***get_context_data: kwargs{}***
+INFO 2022-04-09 22:50:52,195 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-09 22:50:52,196 views GET:start_date: 2022-04-09
+INFO 2022-04-09 22:50:52,196 views GET:end_date: 2022-06-09
+INFO 2022-04-09 22:50:55,594 views The user already has this ticket
+INFO 2022-04-09 22:50:55,595 views The user is not queued to the event
+INFO 2022-04-09 22:50:55,597 views The guy can have his money back as:2022-04-29 15:30:00>2022-04-09 22:50:55.597989
+INFO 2022-04-09 22:50:58,887 views BuyTicket POST was called
+INFO 2022-04-09 22:50:58,888 views cmd=receive_user_selected
+INFO 2022-04-09 22:51:04,346 views ***get_context_data: kwargs{}***
+INFO 2022-04-09 22:51:04,346 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-09 22:51:04,348 views GET:start_date: 2022-04-09
+INFO 2022-04-09 22:51:04,348 views GET:end_date: 2022-06-09
+INFO 2022-04-09 22:51:05,750 views The user already has this ticket
+INFO 2022-04-09 22:51:05,752 views The user is not queued to the event
+INFO 2022-04-09 22:51:05,754 views The guy can have his money back as:2022-04-29 15:30:00>2022-04-09 22:51:05.754546
+INFO 2022-04-09 23:55:58,965 views BuyTicket POST was called
+INFO 2022-04-09 23:55:58,966 views cmd=receive_user_selected
+INFO 2022-04-09 23:56:34,863 views Site under maintenance:False
+INFO 2022-04-09 23:56:37,498 views ***get_context_data: kwargs{}***
+INFO 2022-04-09 23:56:37,500 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-09 23:56:37,501 views GET:start_date: 2022-04-09
+INFO 2022-04-09 23:56:37,501 views GET:end_date: 2022-06-09
+INFO 2022-04-09 23:56:39,508 views The user already has this ticket
+INFO 2022-04-09 23:56:39,509 views The user is not queued to the event
+INFO 2022-04-09 23:56:39,511 views The guy can have his money back as:2022-04-29 15:30:00>2022-04-09 23:56:39.511955
+INFO 2022-04-09 23:56:43,629 views BuyTicket POST was called
+INFO 2022-04-09 23:56:43,629 views buy_step=conditions_acceptance
+INFO 2022-04-09 23:56:43,631 views cmd=acceptance_for_friend
+INFO 2022-04-09 23:56:43,632 views pk=22
+INFO 2022-04-09 23:56:43,633 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001FECF7AAF70>}
+INFO 2022-04-09 23:58:14,215 views Site under maintenance:False
+INFO 2022-04-09 23:58:20,915 views ***get_context_data: kwargs{}***
+INFO 2022-04-09 23:58:20,919 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-09 23:58:20,920 views GET:start_date: 2022-04-09
+INFO 2022-04-09 23:58:20,921 views GET:end_date: 2022-06-09
+INFO 2022-04-09 23:58:23,458 views The user already has this ticket
+INFO 2022-04-09 23:58:23,460 views The user is not queued to the event
+INFO 2022-04-09 23:58:23,463 views The guy can have his money back as:2022-04-29 15:30:00>2022-04-09 23:58:23.463217
+INFO 2022-04-09 23:58:32,366 views BuyTicket POST was called
+INFO 2022-04-09 23:58:32,367 views buy_step=conditions_acceptance
+INFO 2022-04-09 23:58:32,368 views cmd=acceptance_for_friend
+INFO 2022-04-09 23:58:32,368 views pk=22
+INFO 2022-04-09 23:58:32,369 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000019B88110430>}
+INFO 2022-04-10 00:01:15,196 views *** get_refund_coices ***
+INFO 2022-04-10 00:01:15,199 views Ticket id = 130, price = 0, tot_card = 0
+INFO 2022-04-10 00:01:15,199 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
+INFO 2022-04-10 00:01:16,923 views Post: refund requested: credits
+INFO 2022-04-10 00:01:16,931 views *** get_refund_coices ***
+INFO 2022-04-10 00:01:16,934 views Ticket id = 130, price = 0, tot_card = 0
+INFO 2022-04-10 00:01:16,934 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
+INFO 2022-04-10 00:01:19,450 views ***get_context_data: kwargs{}***
+INFO 2022-04-10 00:01:19,452 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-10 00:01:19,453 views GET:start_date: 2022-04-10
+INFO 2022-04-10 00:01:19,455 views GET:end_date: 2022-06-10
+INFO 2022-04-10 00:01:30,393 views The user does not have this ticket
+INFO 2022-04-10 00:01:30,395 views The user is not queued to the event
+INFO 2022-04-10 00:01:30,397 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-10 00:01:30.397612
+INFO 2022-04-10 00:01:33,586 views BuyTicket POST was called
+INFO 2022-04-10 00:01:33,587 views buy_step=conditions_acceptance
+INFO 2022-04-10 00:01:33,588 views cmd=acceptance_for_me
+INFO 2022-04-10 00:01:33,590 views pk=22
+INFO 2022-04-10 00:01:33,591 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_me', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000019B8807ABB0>}
+INFO 2022-04-10 00:02:11,399 views Site under maintenance:False
+INFO 2022-04-10 00:02:40,012 views ***get_context_data: kwargs{}***
+INFO 2022-04-10 00:02:40,012 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-10 00:02:40,014 views GET:start_date: 2022-04-10
+INFO 2022-04-10 00:02:40,014 views GET:end_date: 2022-06-10
+INFO 2022-04-10 00:02:41,699 views The user does not have this ticket
+INFO 2022-04-10 00:02:41,701 views The user is not queued to the event
+INFO 2022-04-10 00:02:41,703 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-10 00:02:41.703013
+INFO 2022-04-10 00:02:44,386 views BuyTicket POST was called
+INFO 2022-04-10 00:02:44,387 views buy_step=conditions_acceptance
+INFO 2022-04-10 00:02:44,390 views cmd=acceptance_for_me
+INFO 2022-04-10 00:02:44,392 views pk=22
+INFO 2022-04-10 00:02:44,393 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_me', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000019B883AA220>}
+INFO 2022-04-10 00:04:21,666 views BuyTicket POST was called
+INFO 2022-04-10 00:04:21,666 views buy_step=conditions_acceptance
+INFO 2022-04-10 00:04:21,668 views cmd=acceptance_for_me
+INFO 2022-04-10 00:04:21,668 views pk=22
+INFO 2022-04-10 00:04:21,669 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_me', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000019B880EF760>}
+INFO 2022-04-10 00:04:23,230 views BuyTicket GET was called
+INFO 2022-04-10 00:04:23,231 views BuyTicket.get:partecipant_selection init
+INFO 2022-04-10 00:04:23,232 views cmd=init
+INFO 2022-04-10 00:04:37,624 views BuyTicket POST was called
+INFO 2022-04-10 00:04:37,625 views cmd=receive_user_selected
+INFO 2022-04-10 00:04:37,633 views BuyTicket GET was called
+INFO 2022-04-10 00:04:37,634 views BuyTicket.get:confirmation init
+INFO 2022-04-10 00:04:37,667 views BuyTicketView: confirmation, context = {'pk': 22, 'buy_step': 'confirmation', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 156, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000019B883A2040>, 'subs_exp_date': datetime.date(2022, 8, 16), 'subscription_expired': False, 'year_subscription_price': 20, 'sub_total': 0, 'event': <Event: ID: 22, Date: 2022-05-01Valle dei Mulini di Mossano Mossano VI>}
+INFO 2022-04-10 00:04:39,130 views BuyTicket GET was called
+INFO 2022-04-10 00:04:39,131 views BuyTicket.get:confirmed init
+INFO 2022-04-10 00:04:39,137 views Closing order from -confirmed-
+INFO 2022-04-10 00:04:39,193 views Creating mail for order confirmation
+INFO 2022-04-10 00:04:47,885 views ***get_context_data: kwargs{}***
+INFO 2022-04-10 00:04:47,886 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-10 00:04:47,887 views GET:start_date: 2022-04-10
+INFO 2022-04-10 00:04:47,888 views GET:end_date: 2022-06-10
+INFO 2022-04-10 00:04:49,120 views The user already has this ticket
+INFO 2022-04-10 00:04:49,122 views The user is not queued to the event
+INFO 2022-04-10 00:04:49,124 views The guy can have his money back as:2022-04-29 15:30:00>2022-04-10 00:04:49.124132
+INFO 2022-04-10 00:04:51,790 views BuyTicket POST was called
+INFO 2022-04-10 00:04:51,790 views buy_step=conditions_acceptance
+INFO 2022-04-10 00:04:51,793 views cmd=acceptance_for_friend
+INFO 2022-04-10 00:04:51,793 views pk=22
+INFO 2022-04-10 00:04:51,794 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000019B8826AE50>}
+INFO 2022-04-10 00:04:55,965 views BuyTicket GET was called
+INFO 2022-04-10 00:04:55,965 views BuyTicket.get:partecipant_selection init
+INFO 2022-04-10 00:04:55,966 views cmd=init
+INFO 2022-04-10 00:08:08,484 views Site under maintenance:False
+INFO 2022-04-10 00:08:10,621 views ***get_context_data: kwargs{}***
+INFO 2022-04-10 00:08:10,628 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-10 00:08:10,629 views GET:start_date: 2022-04-10
+INFO 2022-04-10 00:08:10,630 views GET:end_date: 2022-06-10
+INFO 2022-04-10 00:08:12,193 views The user already has this ticket
+INFO 2022-04-10 00:08:12,195 views The user is not queued to the event
+INFO 2022-04-10 00:08:12,197 views The guy can have his money back as:2022-04-29 15:30:00>2022-04-10 00:08:12.197287
+INFO 2022-04-10 00:08:15,753 views BuyTicket POST was called
+INFO 2022-04-10 00:08:15,753 views buy_step=conditions_acceptance
+INFO 2022-04-10 00:08:15,754 views cmd=acceptance_for_me
+INFO 2022-04-10 00:08:15,755 views pk=22
+INFO 2022-04-10 00:08:15,756 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000013288F68F70>}
+INFO 2022-04-10 00:08:19,283 views BuyTicket GET was called
+INFO 2022-04-10 00:08:19,283 views BuyTicket.get:partecipant_selection init
+INFO 2022-04-10 00:08:19,285 views cmd=init
+INFO 2022-04-10 00:12:45,484 views BuyTicket POST was called
+INFO 2022-04-10 00:12:45,485 views buy_step=conditions_acceptance
+INFO 2022-04-10 00:12:45,487 views cmd=acceptance_for_me
+INFO 2022-04-10 00:12:45,487 views pk=22
+INFO 2022-04-10 00:12:45,488 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000013288F6B7C0>}
+INFO 2022-04-10 00:13:40,496 views BuyTicket POST was called
+INFO 2022-04-10 00:13:40,496 views buy_step=conditions_acceptance
+INFO 2022-04-10 00:13:40,497 views cmd=acceptance_for_me
+INFO 2022-04-10 00:13:40,498 views pk=22
+INFO 2022-04-10 00:13:40,499 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000013288F6B850>}
+INFO 2022-04-10 00:26:21,987 views BuyTicket POST was called
+INFO 2022-04-10 00:26:21,988 views buy_step=conditions_acceptance
+INFO 2022-04-10 00:26:21,989 views cmd=acceptance_for_me
+INFO 2022-04-10 00:26:21,990 views pk=22
+INFO 2022-04-10 00:26:21,990 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000013288F68C10>}
+INFO 2022-04-10 00:27:21,739 views BuyTicket POST was called
+INFO 2022-04-10 00:27:21,739 views buy_step=conditions_acceptance
+INFO 2022-04-10 00:27:21,741 views cmd=acceptance_for_me
+INFO 2022-04-10 00:27:21,742 views pk=22
+INFO 2022-04-10 00:27:21,742 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000013288F83A60>}

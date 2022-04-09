@@ -45,8 +45,9 @@
               <br>
             {% endif %}
 
-            <input type="submit" class="w3-btn w3-blue w3-block w3-round-large" name="" value="Proceed">
-            <a href="{% url 'TravelsApp:ask_refund' pk=event.id refund_step=2%}" class="w3-btn w3-blue w3-block w3-round-large">Discard</a>
+            <input type="submit" class="w3-btn w3-blue w3-block w3-round-large" name="" value="Procedi">
+            <br>
+            <a href="{% url 'TravelsApp:ask_refund' pk=event.id refund_step=2%}" class="w3-btn w3-blue w3-block w3-round-large">Abbandona</a>
             <br>
             <br>
           </div>

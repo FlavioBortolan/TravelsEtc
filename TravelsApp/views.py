@@ -736,7 +736,15 @@ class BuyTicketView(TemplateView):
         context['buy_step'] =  kwargs['buy_step']
         context['friend_id'] = kwargs['friend_id']
 
-        if kwargs['buy_step']=='partecipant_selection':
+        if kwargs['buy_step']=='conditions_acceptance':
+
+            #Just pass the buy_step=conditions_acceptance to the buyticket.html that will show the conditions
+            logger.info('buy_step=conditions_acceptance')
+            logger.info('cmd=acceptance_for_me')
+            logger.info('pk=' + str(context['pk']))
+            logger.info('context:'+ str(context))
+            
+        elif kwargs['buy_step']=='partecipant_selection':
 
             context['ticket_target_user'] = request.POST.get('ticket_target_user')
 
@@ -779,7 +787,6 @@ class BuyTicketView(TemplateView):
                     context['user_form'] = user_form
 
                     context['buy_step'] = 'collect_friends_mail'
-
 
         elif kwargs['buy_step']=='collect_friends_mail':
 

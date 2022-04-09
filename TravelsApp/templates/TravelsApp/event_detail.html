@@ -128,7 +128,8 @@
                 <br>
               </form>
 
-              <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='partecipant_selection' cmd='receive_user_selected' total=0 credits_to_use=0 order_id=0 friend_id='-1'%}" method="post">
+                <!-- <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='partecipant_selection' cmd='receive_user_selected' total=0 credits_to_use=0 order_id=0 friend_id='-1'%}" method="post"> -->
+                <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='conditions_acceptance' cmd='acceptance_for_friend' total=0 credits_to_use=0 order_id=0 friend_id='-1' %}" method="POST">
                 {% csrf_token %}
                 <div class="w3-center">
                   <button class="w3-btn w3-blue w3-block w3-round-large" type="submit">Compra per un altra persona</button>
@@ -157,8 +158,11 @@
 
             </form>
           {% elif event.partecipants.count < event.activity.maxNumPartecipants %}
-
+          <!--
           <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='partecipant_selection' cmd='init' total=0 credits_to_use=0 order_id=0 friend_id='-1' %}" method="get">
+          -->
+          <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='conditions_acceptance' cmd='acceptance_for_me' total=0 credits_to_use=0 order_id=0 friend_id='-1' %}" method="POST">
+
           {% csrf_token %}
             <div class="w3-center">
               <button class="w3-btn w3-blue w3-block w3-round-large" type="submit">Acquista biglietto!</button>
@@ -167,6 +171,7 @@
             <br>
 
           </form>
+
           {% else %}
           <form action="{% url 'TravelsApp:queue_to_event' pk=event.id command='add_me' %}" method="get">
 
