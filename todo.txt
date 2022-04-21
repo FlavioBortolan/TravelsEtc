@@ -1,6 +1,8 @@
 
-#capire come mai la mail non finisce tra i campi del cleaned_data o meglio scompare il valore
 
+-testare fino a generazione link su mail
+
+-creare link nella mail che acceda ad attivazione dell'account.
 
 - aggiungere:
 
@@ -16,11 +18,6 @@
   *codice fiscale,
   data di avvenuta iscrizione.
 
-- aggiungere campo parent all'utente.
-
-- possibilità di registrare minori o altre persone non registrate
-
-- print dei log in una funzione a parte un po' piu strutturata.
 - Gestire prospetto di fatturazione mensile per le guide
 
 

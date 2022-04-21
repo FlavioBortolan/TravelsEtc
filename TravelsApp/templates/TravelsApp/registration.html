@@ -3,40 +3,83 @@
 
 {% block body_block %}
 
-      {% if registered %}
-
-        <div class="w3-container w3-blue">
-          <h2>Grazie per esserti registrato!</h2>
-          <h2>Hai effettuato il login </h2>
-        </div>
-
-      {% else %}
-
-        {% if user_form.errors or profile_form.errors%}
-
-          <div class="w3-container w3-blue">
-            <h2>Qualcosa non va nei dati</h2>
-            <h2>Per favore correggi gli errori qui sotto:</h2>
-          </div>
-
-        {% else %}
+      {% if registration_step == 'registration_init' %}
 
           <div class="w3-container w3-blue">
             <h2>Registrati qui</h2>
           </div>
-
-        {% endif %}
 
         <form class="w3-container" enctype="multipart/form-data" method="POST">
 
           {% csrf_token %}
           {{ user_form.as_p }}
           {{ profile_form.as_p }}
-          <input type="submit" class="w3-btn w3-blue w3-block w3-round-large" name="" value="Register">
+          <input type="submit" class="w3-btn w3-blue w3-block w3-round-large" name="Register" value="Register">
 
         </form>
         <br>
 
-      {% endif %}
+
+      {% elif registration_step == 'activation_link_sent' %}
+
+        <div class="w3-container w3-blue">
+          <h2>Ti abbiamo spedito una mail all'indirizzo: <br>
+              <b>{{ email }}</b>. <br> </h2>
+          <h2>In essa trovarei un link per attivare il tuo account.</h2>
+          <h2>Se non ricevi la mail ricontrolla che l'indirizzo {{ email }} sia corretto.<br>
+              Controlla inoltre che non sia stata classificata come spam o che non siano presenti
+              impostazioni della casella di posta che impediscano la ricezione di mail da indirizzi non conosciuti o mail contenenti link.
+           </h2>
+        </div>
+
+        <br>
+
+     {% elif registration_step == 'registration_wrong_code' %}
+
+          <div class="w3-container w3-blue">
+            <h2>
+              C'è un problema nella attivazione del tuo account <br>
+              Se sei arrivato qui tramite un link spedito all'indirizzo {{ supplied_email }} <br>
+              prova a contattare l'assistenza tecnica.
+              Altrimenti prova a ripetere la fase di registrazione al sito.
+            </h2>
+          </div>
+
+     {% elif registration_step == 'registration_duplicate' %}
+        <div class="w3-container w3-blue">
+          <h2>L'utente che si tenta di registrare è già presente.</h2>
+          <h2>Se sei tu, puoi effettuare il login </h2>
+        </div>
+
+     {% elif registration_step == 'registration_errors' %}
+
+          <div class="w3-container w3-blue">
+            <h2>Qualcosa non va nei dati</h2>
+            <h2>Per favore correggi gli errori qui sotto:</h2>
+          </div>
+          <form class="w3-container" enctype="multipart/form-data" method="POST">
+
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ profile_form.as_p }}
+            <input type="submit" class="w3-btn w3-blue w3-block w3-round-large" name="Register" value="Register">
+
+          </form>
+          <br>
+
+     {% elif registration_step == 'registration_completed' %}
+
+       <div class="w3-container w3-blue">
+         <h2>Congratulazioni l'attivvazione del tuo account è completa</h2>
+         <h2>Premi il tasto 'Login' per accedere</h2>
+       </div>
+       <form action="{% url 'TravelsApp:user_login' %}" class="w3-container" enctype="multipart/form-data" method="GET">
+         {% csrf_token %}
+         <input type="submit" class="w3-btn w3-blue w3-block w3-round-large" name="Login" value="Login">
+
+       </form>
+       <br>
+
+     {% endif %}
 
 {% endblock %}

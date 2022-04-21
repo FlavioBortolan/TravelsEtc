@@ -35,6 +35,7 @@ class UserProfileInfo(models.Model):
     exp_date = models.DateField(default = timezone.now)
     is_minor = models.BooleanField(default=False)
     parent = models.ForeignKey(User, related_name='parent', on_delete=models.CASCADE, blank=True, default=None, null=True)
+    activation_code = models.CharField(max_length=64, blank=True)
 
     USER_TYPE_CHOICES = [
         ('Std', 'Standard'),
@@ -348,6 +349,23 @@ class OutMail(models.Model):
         om = cls.create(dict)
         return om
 
+    @classmethod
+    def create_from_registration_code(cls, request, user, registration_code):
+
+        dict              = {}
+        dict['request']   = request
+        dict['user']      = user
+        dict['recipient'] = user 
+
+        #get the server name
+        dict['server_address'] = cls.server_address_from_request(request)
+        dict['template']  = 'create_from_registration_code.html'
+        dict['registration_code']  = registration_code
+
+        om = cls.create( dict )
+        return om
+
+
     #creates a mail sent when user has bought ticket for someone else
     #ticket_target_user=minor => user has bought for a kid
     #ticket_target_user=minor => friend has bought for a friend
@@ -376,3 +394,16 @@ class OutMail(models.Model):
 
         om = cls.create( dict )
         return om
+
+        @classmethod
+        def create_from_registration_code(cls, request, registration_code):
+
+            dict              = {}
+            dict['request']   = request
+            #get the server name
+            dict['server_address'] = cls.server_address_from_request(request)
+            dict['template']  = 'create_from_registration_code.html'
+            dict['registration_code']  = registration_code
+
+            om = cls.create( dict )
+            return om

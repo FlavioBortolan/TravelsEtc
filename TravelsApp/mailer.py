@@ -73,5 +73,5 @@ class Mailer:
         om.save()
 
         self.quit()
-
         print('Success!!')
+        return r

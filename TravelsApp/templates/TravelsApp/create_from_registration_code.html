@@ -1,0 +1,23 @@
+
+<html >
+
+  <body>
+
+    <!-- Subject is a hidden field from wich we will exctract the subject of the mail  -->
+    <p  id="Subject" hidden> Mail di attivazione account a JustWalks</p>
+
+    <p>Ciao <b>{{ user.first_name }}!</b></p>
+    <p>
+    <p>Tramite il link sottostante attiverai il tuo account a JustWalks <br>
+       Il link ti porterà alla pagina di accesso in cui potrai immettere le tue credenziali.
+    </p>
+    <br>
+
+    <a href="{{ server_address }}{%   url 'TravelsApp:register' code=registration_code %}"> Attiva account!</a>
+    <br>
+    <br>
+    Il team di JustWalks
+    </p>
+
+  </body>
+</html>

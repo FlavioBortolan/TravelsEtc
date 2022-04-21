@@ -7,7 +7,7 @@ app_name = 'TravelsApp'
 # Be careful setting the name to just /login use userlogin instead!
 urlpatterns=[
     path('index/',views.index,name='index'),
-    path('register/',views.register,name='register'),
+    re_path(r'register/(?P<code>\w{1,})?',views.register,name='register'),
     path('my_account/',views.my_account,name='my_account'),
     path('change_password/',views.change_password,name='change_password'),
     path('user_login/',views.user_login,name='user_login'),

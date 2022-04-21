@@ -21,6 +21,7 @@ from .models import Setting
 from .models import Order
 from .models import Ticket
 from .models import OutMail
+from .models import UserProfileInfo
 
 from .mailer import Mailer
 
@@ -101,7 +102,7 @@ def create_profile(request, user_form, profile_form, autogenerate_password, is_m
        user_form_ok = True
 
     else:
-        return False, -1, None, None
+        return False, "Invalid_fields", -1, None, None, None
 
     logger.info('+++ user_form cleaned_data:' + str(user_form.cleaned_data))
 
@@ -127,7 +128,7 @@ def create_profile(request, user_form, profile_form, autogenerate_password, is_m
                 password = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(5))
                 logger.info('password:' + password)
             else:
-                password = user.password
+                password = user_form.cleaned_data['password']
 
             user = User.objects.create_user(username=supplied_email,
                                  email=supplied_email,
@@ -171,6 +172,9 @@ def create_profile(request, user_form, profile_form, autogenerate_password, is_m
             #subscription expires after one year, when payment is implemented this will shitf after payment....
             profile.exp_date = datetime.today() + relativedelta(months=+subscription_duration_months)
 
+            #generate activation code
+            profile.activation_code = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(15))
+
             # Now save model
             profile.save()
             logger.info('Saving profile info for:')
@@ -178,15 +182,104 @@ def create_profile(request, user_form, profile_form, autogenerate_password, is_m
             logger.info(user.last_name)
             logger.info(user.email)
 
-            return True, user.id, password, user
+            return True, "ok", user.id, password, user, profile
 
         else:
             logger.info(user.email + ' is already registered')
-            return False, -1, None, None
+            return False, "duplicate_users", -1, None, None, None
     else:
-        return False, -1, None, None
+        return False, "Invalid_fields", -1, None, None, None
 
-def register(request):
+def register(request, code):
+
+    supplied_email=""
+    registration_step=""
+
+    if request.method == 'POST':
+
+        #Only buttons with the property 'name' are accessible trough
+        if request.POST.get("Register"):
+
+            # Get info from "both" forms
+            # It appears as one form to the user on the .html page
+            user_form = UserForm(data=request.POST, error_class=DivErrorList)
+            profile_form = UserProfileInfoForm(data=request.POST, error_class=DivErrorList)
+
+            if user_form.is_valid() and profile_form.is_valid():
+
+                (ret, err_code, friend_id, pw, user, profile) = create_profile(request, user_form, profile_form, False, False)
+
+                if ret:
+                    #send registration code
+                    logger.info('Creating mail with activation link')
+                    om = OutMail.create_from_registration_code(request, user, profile.activation_code)
+                    r = flush(om)
+                    supplied_email = user.email
+                    registration_step = 'activation_link_sent'
+
+
+                else:
+                    registration_step = 'registration_profile_error'
+
+            else:
+
+                # One of the forms was invalid if this else gets called.
+                logger.info(user_form.errors,profile_form.errors)
+                registration_step = 'registration_errors'
+
+
+    #GET
+    else:
+        user_form = UserForm()
+        profile_form = UserProfileInfoForm()
+
+        #GET register() with code==0 means first registration
+        if code =='0':
+
+            # Just render the forms as blank.
+            registration_step = 'registration_init'
+
+        #GET register() with code!=0 means activation trough code received by mail
+        else:
+            #search if there is a user with activation_code=kwargs['code']
+            if UserProfileInfo.objects.filter(activation_code__iexact = code).count()>0:
+
+                #in the template this will say congrats and show a link to login
+                registration_step = 'registration_completed'
+                logger.info('registration_step = registration_completed')
+
+            else:
+                #in the template this will say:
+                #there was an error activating your account, please go back to the registration form
+                registration_step = 'registration_wrong_code'
+                logger.info('registration_step = registration_wrong_code')
+
+    logger.info('registration_step = registration_step')
+    # This is the render and context dictionary to feed
+    # back to the registration.html file page.
+    return render(request,'TravelsApp/registration.html',
+                          {'user_form':user_form,
+                           'profile_form':profile_form,
+                           'registration_step':registration_step,
+                           'email':supplied_email
+                           })
+
+def flush(om):
+
+    try:
+        #setup mailer component
+        m = Mailer(sender_email=Setting.get_setting('company_email'), smtp_server = Setting.get_setting('company_email_smtp_server'), password = Setting.get_setting('company_email_password'))
+
+        #send mail
+        r = m.flush_outmail(om)
+
+    except Exception as e:
+        logger.error('Could not send mail: ' + str(e))
+        return False,
+
+    return True
+
+def register_old(request):
 
     registered = False
 
@@ -617,18 +710,7 @@ class BuyTicketView(TemplateView):
 
     template_name = "TravelsApp/buyticket.html"
 
-    def flush(self, om):
 
-        try:
-            #setup mailer component
-            m = Mailer(sender_email=Setting.get_setting('company_email'), smtp_server = Setting.get_setting('company_email_smtp_server'), password = Setting.get_setting('company_email_password'))
-
-            #send mail
-            m.flush_outmail(om)
-
-        except Exception as e:
-            logger.error('Could not send mail: ' + str(e))
-            return False,
 
     def get(self, request, *args, **kwargs):
 
@@ -717,7 +799,7 @@ class BuyTicketView(TemplateView):
                 logger.info('Creating mail for order confirmation')
                 om = OutMail.create_from_order(o, request)
 
-                self.flush(om)
+                r = flush(om)
 
         return render(request,
                       self.template_name,
@@ -743,7 +825,7 @@ class BuyTicketView(TemplateView):
             logger.info('cmd=acceptance_for_me')
             logger.info('pk=' + str(context['pk']))
             logger.info('context:'+ str(context))
-            
+
         elif kwargs['buy_step']=='partecipant_selection':
 
             context['ticket_target_user'] = request.POST.get('ticket_target_user')
@@ -890,12 +972,12 @@ class BuyTicketView(TemplateView):
                 user_form.fields['password'].widget = user_form.fields['password'].hidden_widget()
                 user_form.fields['repeat_password'].widget = user_form.fields['repeat_password'].hidden_widget()
 
-                (ret, friend_id, pw, new_user) = create_profile(request, user_form, profile_form, True, False)
+                (ret, err_code, friend_id, pw, new_user, new_profile) = create_profile(request, user_form, profile_form, True, False)
 
                 if ret:
 
                     om = OutMail.create_from_site_subscription_completed( request.user, new_user, pw, 'friend', request)
-                    self.flush(om)
+                    r = flush(om)
 
                     return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="registration_successful", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend_id)
                     #manda mail nuovo utente
@@ -929,12 +1011,12 @@ class BuyTicketView(TemplateView):
                 user_form.fields['password'].widget = user_form.fields['password'].hidden_widget()
                 user_form.fields['repeat_password'].widget = user_form.fields['repeat_password'].hidden_widget()
 
-                (ret, friend_id, pw, new_user) = create_profile(request, user_form, profile_form, True, True)
+                (ret, err_code, friend_id, pw, new_user, new_profile) = create_profile(request, user_form, profile_form, True, True)
 
                 if ret:
 
                     om = OutMail.create_from_site_subscription_completed( request.user, new_user, pw, 'minor', request )
-                    self.flush(om)
+                    r = flush(om)
 
                     return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="registration_successful", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend_id)
                     #manda mail nuovo utente
@@ -1269,16 +1351,7 @@ def stripe_webhook(request):
             logger.info('Creating mail for order confirmation')
             om = OutMail.create_from_order(o, request)
 
-            try:
-                #setup mailer component
-                m = Mailer(sender_email=Setting.get_setting('company_email'), smtp_server = Setting.get_setting('company_email_smtp_server'), password = Setting.get_setting('company_email_password'))
-
-                #send mail with order confirmation
-                m.flush_outmail(om)
-
-            except Exception as e:
-                logger.info('Could not send mail: ' + str(e))
-                return False,
+            r = flush(om)
 
             return HttpResponse(status=200)
 
