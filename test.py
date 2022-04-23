@@ -20,6 +20,7 @@ from TravelsApp.models import Setting
 from TravelsApp.models import Event
 from TravelsApp.models import Order
 from TravelsApp.models import OutMail
+from TravelsApp.views import flush
 
 
 #views.save_setting(name='subscription_duration_months', description = 'Duration of subscription', value=13)
@@ -35,8 +36,8 @@ def test_open_order():
     user = User.objects.get(email ="flavio.bortolan@gmail.com")
     pk=330
 
-    res, context, order = views.open_order(pk, user)
 
+    res, context, order = views.open_order(pk, user)
     #close the order
     print('#close the order')
     views.close_order(order)
@@ -210,6 +211,17 @@ def test_logging(msg):
     logger.info('this is an information')
     logger.error('this is an error')
 
+def test_OutMail_create_from_event_change(id):
+
+    event = Event.objects.get(id=id)
+
+    for user in event.partecipants.all():
+        om = OutMail.create_from_event_change(user, event,  'event_date_changed', 'delle previsioni meteo sfavorevoli', '25 April 2022')
+        r=flush(om)
+
+    #print(om.subject)
+    #print(om.html)
+
 # Create your tests here.
 if __name__ == '__main__':
     #test_mail()
@@ -220,4 +232,5 @@ if __name__ == '__main__':
     #print_outmail_name_surname(19)
     #test_request('http://127.0.0.1:8000/TravelsApp/events/all/')
     #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
-    test_logging("ciao ciao")
+    #test_logging("ciao ciao")
+    test_OutMail_create_from_event_change(21)

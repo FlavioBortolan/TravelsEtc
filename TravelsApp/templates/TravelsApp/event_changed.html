@@ -1,0 +1,63 @@
+
+<html >
+
+  <body>
+
+
+    {% if change_type == 'event_date_changed' %}
+    <!-- Subject is a hidden field from wich we will exctract the subject of the mail  -->
+      <p  id="Subject" hidden> Cambiamento data evento {{ event.activity.name }}, {{  event.date }} ->> {{ new_date_or_time }}</p>
+
+    {% elif change_type == 'event cancelled'%}
+      <p  id="Subject" hidden> Cancellazione evento {{ event.activity.name }}, data: {{  event.date }}</p>
+
+    {% elif change_type == 'time_changed' %}
+      <p  id="Subject" hidden> Cambio orario evento {{ event.activity.name }}, data: {{  event.date }}</p>
+
+    {% endif %}
+
+    <p>Ciao <b>{{ recipient.first_name }}!</b>, <br>
+    Ti informiamo che a causa {{ change_reason }} l'evento in oggetto
+
+    {% if change_type == 'event_date_changed' %}
+
+      è stato spostato alla data <b>{{ new_date_or_time }}</b>. <br>
+      L'orario di ritrovo rimane alle {{ event.time }} <br>
+      Ci dispiace per l'inconveniente e ti ringraziamo per la comprensione.<br>
+
+      Ti preghiamo di confermare la partecipazione rispondendo a questa mail includendo
+      nel testo del messaggio le parole 'si, partecipo' opppure 'non partecipo' in caso contrario.<br>
+
+    {% elif change_type == 'event cancelled'%}
+
+      è stato cancellato.
+      Ci dispiace per l'inconveniente.
+      Cercheremo di riproporlo appena possibile.
+
+    {% elif change_type == 'time_changed' %}
+
+      ha subito un cambio orario. <br>
+      Il nuovo orario di ritrovo è: {{ new_date_or_time }} .<br>
+      Ci dispiace per l'inconveniente e ti ringraziamo per la comprensione.<br>
+      <br>
+      Ti preghiamo di confermare la partecipazione rispondendo a questa mail includendo
+      nel testo del messaggio le parole 'si, partecipo' opppure 'non partecipo' in caso contrario.<br>
+    {% endif %}
+    </p>
+    <br>
+    Se vuoi chattare con gli altri partecipanti puoi usare la seguente chat Telegram:<br>
+    <br>
+    <a href="https://t.me/+lWgHBxa7UBkwZWU8"> Chat Telegram </a> <br>
+    <br>
+    Telegram è un sistema di messaggistica sicuro che garantisce la privacy(non mostra il tuo numero) <br>
+    <br>
+    Se hai Facebook puoi inoltre accedere al gruppo Facebook al seguente link: <br>
+    <br>
+    <a href="https://m.facebook.com/groups/221065716882364/?ref=group_browse"> Gruppo JustWalks su Facebook </a> <br>
+    <br>
+    <br>
+    Il team di JustWalks
+    </p>
+
+  </body>
+</html>
