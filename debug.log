@@ -618,3 +618,14 @@ INFO 2022-04-23 13:47:21,070 views The user is not queued to the event
 INFO 2022-04-23 13:47:21,075 views The guy can have his money back as:2022-05-06 14:30:00>2022-04-23 13:47:21.075925
 INFO 2022-04-23 13:52:18,462 test this is an information
 ERROR 2022-04-23 13:52:18,463 test this is an error
+INFO 2022-04-24 23:05:24,617 views Site under maintenance:False
+INFO 2022-04-24 23:05:39,289 views ***get_context_data: kwargs{}***
+INFO 2022-04-24 23:05:39,294 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-04-24 23:05:39,295 views GET:start_date: 2022-04-24
+INFO 2022-04-24 23:05:39,297 views GET:end_date: 2022-06-24
+INFO 2022-04-24 23:05:41,135 views The user already has this ticket
+INFO 2022-04-24 23:05:41,138 views The user is not queued to the event
+INFO 2022-04-24 23:05:41,140 views The guy cannot have his money back as:2022-04-22 14:30:00<2022-04-24 23:05:41.140261
+INFO 2022-04-24 23:19:38,562 views The user already has this ticket
+INFO 2022-04-24 23:19:38,566 views The user is not queued to the event
+INFO 2022-04-24 23:19:38,573 views The guy cannot have his money back as:2022-04-22 14:30:00<2022-04-24 23:19:38.573955

@@ -118,6 +118,7 @@
           <br>
 
           {% if user_already_has_this_ticket  %}
+
             {% if can_ask_refund %}
               <form action="{% url 'TravelsApp:ask_refund' pk=event.id refund_step=1%}" method="get">
                   {% csrf_token %}
@@ -128,23 +129,23 @@
                 <br>
               </form>
 
-                <!-- <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='partecipant_selection' cmd='receive_user_selected' total=0 credits_to_use=0 order_id=0 friend_id='-1'%}" method="post"> -->
-                <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='conditions_acceptance' cmd='acceptance_for_friend' total=0 credits_to_use=0 order_id=0 friend_id='-1' %}" method="POST">
-                {% csrf_token %}
-                <div class="w3-center">
-                  <button class="w3-btn w3-blue w3-block w3-round-large" type="submit">Compra per un altra persona</button>
-                </div>
-
-                <br>
-              </form>
-
             {% else %}
-            <!--
-            <div class="w3-center">
-              <p>Te toca nare!</p>
-            </div>
-            -->
+
+              <div class="w3-center w3-blue w3-block w3-round-large">
+                <p>Il biglietto non è più rimborsabile</p>
+              </div>
+
             {% endif %}
+
+            <!-- <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='partecipant_selection' cmd='receive_user_selected' total=0 credits_to_use=0 order_id=0 friend_id='-1'%}" method="post"> -->
+            <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='conditions_acceptance' cmd='acceptance_for_friend' total=0 credits_to_use=0 order_id=0 friend_id='-1' %}" method="POST">
+            {% csrf_token %}
+            <div class="w3-center">
+              <button class="w3-btn w3-blue w3-block w3-round-large" type="submit">Compra per un altra persona</button>
+            </div>
+
+            <br>
+            </form>
 
           {% elif queued_to_this_event %}
             <form action="{% url 'TravelsApp:queue_to_event' pk=event.id command='remove_me' %}" method="get">
