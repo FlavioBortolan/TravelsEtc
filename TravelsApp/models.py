@@ -296,7 +296,7 @@ class OutMail(models.Model):
         return om
 
     @classmethod
-    def create_from_event_change(cls, user, event,  change_type, change_reason, new_date_or_time):
+    def create_from_event_change(cls, user, event,  change_type, change_reason, new_date_or_time, notes=''):
 
         dict              = {}
         dict['template']  = 'event_changed.html'
@@ -306,6 +306,10 @@ class OutMail(models.Model):
         dict['change_type'] = change_type
         dict['new_date_or_time'] = new_date_or_time
         dict['change_reason'] = change_reason
+
+        if notes!='':
+            dict['notes'] = notes
+
 
 
         om = cls.create( dict )

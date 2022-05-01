@@ -20,6 +20,8 @@ from TravelsApp.models import Setting
 from TravelsApp.models import Event
 from TravelsApp.models import Order
 from TravelsApp.models import OutMail
+from TravelsApp.models import UserProfileInfo
+
 from TravelsApp.views import flush
 
 
@@ -152,6 +154,18 @@ def print_outmail_name_surname(event_id):
         print ( "ID:" + str(m.id) + ", Acquistato da: " + m.user.first_name + " " + m.user.last_name + ", Mail:" + m.user.username + ", Per: "  + m.recipient.first_name + " " + m.recipient.last_name + ", Mail: " + m.recipient.username   )
         print()
 
+def print_event_partecipants_name_surname(event_id):
+
+    evt = Event.objects.get(id=event_id)
+
+    print("Evento:" + evt.activity.name)
+    print("Data:" + str(evt.date))
+    print()
+    print("Partecipanti:" + str(evt.partecipants.all().count()))
+    print()
+
+    for usr in evt.partecipants.all():
+        print ( usr.first_name + " " + usr.last_name)
 
 def print_event_partecipants_mail_name_surname(event_id):
 
@@ -216,21 +230,50 @@ def test_OutMail_create_from_event_change(id):
     event = Event.objects.get(id=id)
 
     for user in event.partecipants.all():
-        om = OutMail.create_from_event_change(user, event,  'event_date_changed', 'delle previsioni meteo sfavorevoli', '25 April 2022')
+        om = OutMail.create_from_event_change(user, event,  'event_confirmed', '', '25 April 2022', "Data l'instabilità del meteo ti consigliamo di portare un k-way e una felpa.")
         r=flush(om)
 
     #print(om.subject)
     #print(om.html)
 
+def populate_dummy_users(users_count = 10):
+
+    id=1
+    for entry in range(users_count):
+
+        fake_first_name = 'folletto'
+        fake_last_name = 'dei_boschi' + '_' + str(id)
+        fake_email =  fake_first_name + '.' + fake_last_name + '@foresta.magica.com'
+        fake_number = "3401461555"
+
+        #new entry
+        u    = User           .objects.get_or_create(username = fake_email, first_name = fake_first_name,last_name= fake_last_name,email = fake_email)[0]
+        print('Created User:' + str(u) )
+
+        pi   = UserProfileInfo.objects.get_or_create(user=u, phone_number = fake_number, credits = randint(15, 40))[0]
+        print('Created UserProfileInfo:' + str(pi) )
+
+        u.save()
+        print('user saved')
+
+        pi.user = u
+        print('UserProfileInfo assigned to user')
+
+        pi.save()
+        print('UserProfileInfo saved')
+        id=id+1
 # Create your tests here.
 if __name__ == '__main__':
+
+    populate_dummy_users(users_count = 10)
     #test_mail()
     #test_Order_open_close()
     #test_OutMail_create_from_site_subscription_completed()
-    #print_event_partecipants_mail_name_surname(19)
+    #print_event_partecipants_mail_name_surname(21)
+    #print_event_partecipants_name_surname(21)
     #print_users()
     #print_outmail_name_surname(19)
     #test_request('http://127.0.0.1:8000/TravelsApp/events/all/')
     #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
     #test_logging("ciao ciao")
-    test_OutMail_create_from_event_change(21)
+    #test_OutMail_create_from_event_change(21)

@@ -14,10 +14,12 @@
     {% elif change_type == 'time_changed' %}
       <p  id="Subject" hidden> Cambio orario evento {{ event.activity.name }}, data: {{  event.date }}</p>
 
+    {% elif change_type == 'event_confirmed' %}
+      <p  id="Subject" hidden> Conferma evento {{ event.activity.name }}, data: {{  event.date }}</p>
     {% endif %}
 
     <p>Ciao <b>{{ recipient.first_name }}!</b>, <br>
-    Ti informiamo che a causa {{ change_reason }} l'evento in oggetto
+    Ti informiamo che{{ change_reason }} l'evento in oggetto
 
     {% if change_type == 'event_date_changed' %}
 
@@ -28,7 +30,7 @@
       Ti preghiamo di confermare la partecipazione rispondendo a questa mail includendo
       nel testo del messaggio le parole 'si, partecipo' opppure 'non partecipo' in caso contrario.<br>
 
-    {% elif change_type == 'event cancelled'%}
+    {% elif change_type == 'event_cancelled'%}
 
       è stato cancellato.
       Ci dispiace per l'inconveniente.
@@ -42,9 +44,15 @@
       <br>
       Ti preghiamo di confermare la partecipazione rispondendo a questa mail includendo
       nel testo del messaggio le parole 'si, partecipo' opppure 'non partecipo' in caso contrario.<br>
+
+    {% elif change_type == 'event_confirmed'%}
+      è confermato!<br>
     {% endif %}
     </p>
-    <br>
+    {% if notes != '' %}
+    <p>{{ notes }}</p>
+    {% endif %}
+
     Se vuoi chattare con gli altri partecipanti puoi usare la seguente chat Telegram:<br>
     <br>
     <a href="https://t.me/+lWgHBxa7UBkwZWU8"> Chat Telegram </a> <br>
