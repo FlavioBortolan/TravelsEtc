@@ -1,662 +1,273 @@
-INFO 2022-04-09 18:57:21,355 views Site under maintenance:False
-INFO 2022-04-09 18:57:24,671 views ***get_context_data: kwargs{}***
-INFO 2022-04-09 18:57:24,673 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-09 18:57:24,674 views GET:start_date: 2022-04-09
-INFO 2022-04-09 18:57:24,674 views GET:end_date: 2022-06-09
-INFO 2022-04-09 18:57:35,096 views Site under maintenance:False
-INFO 2022-04-09 18:57:41,536 views ***get_context_data: kwargs{}***
-INFO 2022-04-09 18:57:41,536 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-09 18:57:41,538 views GET:start_date: 2022-04-09
-INFO 2022-04-09 18:57:41,538 views GET:end_date: 2022-06-09
-INFO 2022-04-09 18:57:42,730 views The user already has this ticket
-INFO 2022-04-09 18:57:42,731 views The user is not queued to the event
-INFO 2022-04-09 18:57:42,733 views The guy can have his money back as:2022-04-29 15:30:00>2022-04-09 18:57:42.733472
-INFO 2022-04-09 18:57:49,081 views *** get_refund_coices ***
-INFO 2022-04-09 18:57:49,084 views Ticket id = 115, price = 0, tot_card = 0
-INFO 2022-04-09 18:57:49,084 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
-INFO 2022-04-09 18:57:50,966 views Post: refund requested: credits
-INFO 2022-04-09 18:57:50,973 views *** get_refund_coices ***
-INFO 2022-04-09 18:57:50,975 views Ticket id = 115, price = 0, tot_card = 0
-INFO 2022-04-09 18:57:50,975 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
-INFO 2022-04-09 18:57:52,303 views ***get_context_data: kwargs{}***
-INFO 2022-04-09 18:57:52,303 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-09 18:57:52,305 views GET:start_date: 2022-04-09
-INFO 2022-04-09 18:57:52,305 views GET:end_date: 2022-06-09
-INFO 2022-04-09 18:57:53,679 views The user does not have this ticket
-INFO 2022-04-09 18:57:53,680 views The user is not queued to the event
-INFO 2022-04-09 18:57:53,682 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-09 18:57:53.682548
-INFO 2022-04-09 18:57:56,517 views BuyTicket GET was called
-INFO 2022-04-09 19:07:07,993 views BuyTicket GET was called
-INFO 2022-04-09 19:18:45,849 views Site under maintenance:False
-INFO 2022-04-09 19:18:47,689 views ***get_context_data: kwargs{}***
-INFO 2022-04-09 19:18:47,692 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-09 19:18:47,692 views GET:start_date: 2022-04-09
-INFO 2022-04-09 19:18:47,693 views GET:end_date: 2022-06-09
-INFO 2022-04-09 19:18:49,007 views The user does not have this ticket
-INFO 2022-04-09 19:18:49,007 views The user is not queued to the event
-INFO 2022-04-09 19:18:49,010 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-09 19:18:49.010029
-INFO 2022-04-09 19:18:51,743 views BuyTicket POST was called
-INFO 2022-04-09 19:18:51,744 views buy_step=conditions_acceptance
-INFO 2022-04-09 19:21:07,009 views Site under maintenance:False
-INFO 2022-04-09 19:21:09,085 views ***get_context_data: kwargs{}***
-INFO 2022-04-09 19:21:09,088 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-09 19:21:09,089 views GET:start_date: 2022-04-09
-INFO 2022-04-09 19:21:09,089 views GET:end_date: 2022-06-09
-INFO 2022-04-09 19:21:10,241 views The user does not have this ticket
-INFO 2022-04-09 19:21:10,242 views The user is not queued to the event
-INFO 2022-04-09 19:21:10,243 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-09 19:21:10.243723
-INFO 2022-04-09 19:21:13,288 views BuyTicket POST was called
-INFO 2022-04-09 19:21:13,289 views buy_step=conditions_acceptance
-INFO 2022-04-09 19:28:41,444 views Site under maintenance:False
-INFO 2022-04-09 19:28:43,843 views ***get_context_data: kwargs{}***
-INFO 2022-04-09 19:28:43,848 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-09 19:28:43,849 views GET:start_date: 2022-04-09
-INFO 2022-04-09 19:28:43,849 views GET:end_date: 2022-06-09
-INFO 2022-04-09 19:28:45,921 views The user does not have this ticket
-INFO 2022-04-09 19:28:45,921 views The user is not queued to the event
-INFO 2022-04-09 19:28:45,925 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-09 19:28:45.925015
-INFO 2022-04-09 19:28:52,074 views BuyTicket POST was called
-INFO 2022-04-09 19:28:52,074 views buy_step=conditions_acceptance
-INFO 2022-04-09 19:29:13,762 views BuyTicket POST was called
-INFO 2022-04-09 19:29:13,762 views buy_step=conditions_acceptance
-INFO 2022-04-09 19:29:13,764 views pk=22
-INFO 2022-04-09 19:31:58,011 views BuyTicket POST was called
-INFO 2022-04-09 19:31:58,013 views buy_step=conditions_acceptance
-INFO 2022-04-09 19:31:58,014 views pk=22
-INFO 2022-04-09 19:31:58,015 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000002560699D970>}
-INFO 2022-04-09 20:11:20,856 views BuyTicket POST was called
-INFO 2022-04-09 20:11:20,861 views buy_step=conditions_acceptance
-INFO 2022-04-09 20:11:20,862 views pk=22
-INFO 2022-04-09 20:11:20,862 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000023BFD46FA30>}
-INFO 2022-04-09 20:13:39,095 views BuyTicket POST was called
-INFO 2022-04-09 20:13:39,100 views buy_step=conditions_acceptance
-INFO 2022-04-09 20:13:39,101 views pk=22
-INFO 2022-04-09 20:13:39,103 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001DD51A652B0>}
-INFO 2022-04-09 20:16:24,119 views BuyTicket POST was called
-INFO 2022-04-09 20:16:24,124 views buy_step=conditions_acceptance
-INFO 2022-04-09 20:16:24,125 views pk=22
-INFO 2022-04-09 20:16:24,128 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x00000205A24C9B50>}
-INFO 2022-04-09 20:16:44,591 views Site under maintenance:False
-INFO 2022-04-09 20:16:46,505 views ***get_context_data: kwargs{}***
-INFO 2022-04-09 20:16:46,509 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-09 20:16:46,510 views GET:start_date: 2022-04-09
-INFO 2022-04-09 20:16:46,510 views GET:end_date: 2022-06-09
-INFO 2022-04-09 20:16:48,041 views The user does not have this ticket
-INFO 2022-04-09 20:16:48,043 views The user is not queued to the event
-INFO 2022-04-09 20:16:48,044 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-09 20:16:48.044366
-INFO 2022-04-09 20:16:50,399 views BuyTicket POST was called
-INFO 2022-04-09 20:16:50,399 views buy_step=conditions_acceptance
-INFO 2022-04-09 20:16:50,400 views pk=22
-INFO 2022-04-09 20:16:50,400 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x00000205A254B550>}
-INFO 2022-04-09 20:17:25,122 views Site under maintenance:False
-INFO 2022-04-09 20:17:27,130 views ***get_context_data: kwargs{}***
-INFO 2022-04-09 20:17:27,133 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-09 20:17:27,134 views GET:start_date: 2022-04-09
-INFO 2022-04-09 20:17:27,135 views GET:end_date: 2022-06-09
-INFO 2022-04-09 20:17:28,480 views The user does not have this ticket
-INFO 2022-04-09 20:17:28,481 views The user is not queued to the event
-INFO 2022-04-09 20:17:28,483 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-09 20:17:28.483816
-INFO 2022-04-09 20:17:32,164 views BuyTicket POST was called
-INFO 2022-04-09 20:17:32,165 views buy_step=conditions_acceptance
-INFO 2022-04-09 20:17:32,169 views pk=22
-INFO 2022-04-09 20:17:32,172 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001C507189E80>}
-INFO 2022-04-09 20:21:43,648 views Site under maintenance:False
-INFO 2022-04-09 20:21:46,400 views ***get_context_data: kwargs{}***
-INFO 2022-04-09 20:21:46,404 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-09 20:21:46,406 views GET:start_date: 2022-04-09
-INFO 2022-04-09 20:21:46,407 views GET:end_date: 2022-06-09
-INFO 2022-04-09 20:21:48,479 views The user does not have this ticket
-INFO 2022-04-09 20:21:48,480 views The user is not queued to the event
-INFO 2022-04-09 20:21:48,481 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-09 20:21:48.481219
-INFO 2022-04-09 20:21:51,759 views BuyTicket POST was called
-INFO 2022-04-09 20:21:51,760 views buy_step=conditions_acceptance
-INFO 2022-04-09 20:21:51,761 views pk=22
-INFO 2022-04-09 20:21:51,762 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001F7976DDFA0>}
-INFO 2022-04-09 20:23:46,767 views BuyTicket POST was called
-INFO 2022-04-09 20:23:46,767 views buy_step=conditions_acceptance
-INFO 2022-04-09 20:23:46,768 views pk=22
-INFO 2022-04-09 20:23:46,768 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001F79764EE20>}
-INFO 2022-04-09 20:24:07,296 views Site under maintenance:False
-INFO 2022-04-09 20:24:10,052 views ***get_context_data: kwargs{}***
-INFO 2022-04-09 20:24:10,053 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-09 20:24:10,057 views GET:start_date: 2022-04-09
-INFO 2022-04-09 20:24:10,059 views GET:end_date: 2022-06-09
-INFO 2022-04-09 20:24:11,586 views The user does not have this ticket
-INFO 2022-04-09 20:24:11,588 views The user is not queued to the event
-INFO 2022-04-09 20:24:11,589 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-09 20:24:11.589131
-INFO 2022-04-09 20:24:17,317 views BuyTicket POST was called
-INFO 2022-04-09 20:24:17,317 views buy_step=conditions_acceptance
-INFO 2022-04-09 20:24:17,319 views pk=22
-INFO 2022-04-09 20:24:17,319 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001F7975EA340>}
-INFO 2022-04-09 20:24:30,930 views BuyTicket GET was called
-INFO 2022-04-09 20:24:30,930 views BuyTicket.get:partecipant_selection init
-INFO 2022-04-09 20:24:30,932 views cmd=init
-INFO 2022-04-09 20:24:37,200 views BuyTicket POST was called
-INFO 2022-04-09 20:24:37,200 views cmd=receive_user_selected
-INFO 2022-04-09 20:24:37,207 views BuyTicket GET was called
-INFO 2022-04-09 20:24:37,208 views BuyTicket.get:confirmation init
-INFO 2022-04-09 20:24:37,245 views BuyTicketView: confirmation, context = {'pk': 22, 'buy_step': 'confirmation', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 155, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001F797544B20>, 'subs_exp_date': datetime.date(2022, 8, 16), 'subscription_expired': False, 'year_subscription_price': 20, 'sub_total': 0, 'event': <Event: ID: 22, Date: 2022-05-01Valle dei Mulini di Mossano Mossano VI>}
-INFO 2022-04-09 20:24:48,985 views BuyTicket GET was called
-INFO 2022-04-09 20:24:48,985 views BuyTicket.get:confirmed init
-INFO 2022-04-09 20:24:48,987 views Closing order from -confirmed-
-INFO 2022-04-09 20:24:49,046 views Creating mail for order confirmation
-INFO 2022-04-09 20:24:59,310 views ***get_context_data: kwargs{}***
-INFO 2022-04-09 20:24:59,310 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-09 20:24:59,311 views GET:start_date: 2022-04-09
-INFO 2022-04-09 20:24:59,312 views GET:end_date: 2022-06-09
-INFO 2022-04-09 22:49:00,968 views The user already has this ticket
-INFO 2022-04-09 22:49:00,969 views The user is not queued to the event
-INFO 2022-04-09 22:49:00,971 views The guy can have his money back as:2022-04-29 15:30:00>2022-04-09 22:49:00.971177
-INFO 2022-04-09 22:49:26,375 views Site under maintenance:False
-INFO 2022-04-09 22:50:48,847 views Site under maintenance:False
-INFO 2022-04-09 22:50:52,194 views ***get_context_data: kwargs{}***
-INFO 2022-04-09 22:50:52,195 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-09 22:50:52,196 views GET:start_date: 2022-04-09
-INFO 2022-04-09 22:50:52,196 views GET:end_date: 2022-06-09
-INFO 2022-04-09 22:50:55,594 views The user already has this ticket
-INFO 2022-04-09 22:50:55,595 views The user is not queued to the event
-INFO 2022-04-09 22:50:55,597 views The guy can have his money back as:2022-04-29 15:30:00>2022-04-09 22:50:55.597989
-INFO 2022-04-09 22:50:58,887 views BuyTicket POST was called
-INFO 2022-04-09 22:50:58,888 views cmd=receive_user_selected
-INFO 2022-04-09 22:51:04,346 views ***get_context_data: kwargs{}***
-INFO 2022-04-09 22:51:04,346 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-09 22:51:04,348 views GET:start_date: 2022-04-09
-INFO 2022-04-09 22:51:04,348 views GET:end_date: 2022-06-09
-INFO 2022-04-09 22:51:05,750 views The user already has this ticket
-INFO 2022-04-09 22:51:05,752 views The user is not queued to the event
-INFO 2022-04-09 22:51:05,754 views The guy can have his money back as:2022-04-29 15:30:00>2022-04-09 22:51:05.754546
-INFO 2022-04-09 23:55:58,965 views BuyTicket POST was called
-INFO 2022-04-09 23:55:58,966 views cmd=receive_user_selected
-INFO 2022-04-09 23:56:34,863 views Site under maintenance:False
-INFO 2022-04-09 23:56:37,498 views ***get_context_data: kwargs{}***
-INFO 2022-04-09 23:56:37,500 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-09 23:56:37,501 views GET:start_date: 2022-04-09
-INFO 2022-04-09 23:56:37,501 views GET:end_date: 2022-06-09
-INFO 2022-04-09 23:56:39,508 views The user already has this ticket
-INFO 2022-04-09 23:56:39,509 views The user is not queued to the event
-INFO 2022-04-09 23:56:39,511 views The guy can have his money back as:2022-04-29 15:30:00>2022-04-09 23:56:39.511955
-INFO 2022-04-09 23:56:43,629 views BuyTicket POST was called
-INFO 2022-04-09 23:56:43,629 views buy_step=conditions_acceptance
-INFO 2022-04-09 23:56:43,631 views cmd=acceptance_for_friend
-INFO 2022-04-09 23:56:43,632 views pk=22
-INFO 2022-04-09 23:56:43,633 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001FECF7AAF70>}
-INFO 2022-04-09 23:58:14,215 views Site under maintenance:False
-INFO 2022-04-09 23:58:20,915 views ***get_context_data: kwargs{}***
-INFO 2022-04-09 23:58:20,919 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-09 23:58:20,920 views GET:start_date: 2022-04-09
-INFO 2022-04-09 23:58:20,921 views GET:end_date: 2022-06-09
-INFO 2022-04-09 23:58:23,458 views The user already has this ticket
-INFO 2022-04-09 23:58:23,460 views The user is not queued to the event
-INFO 2022-04-09 23:58:23,463 views The guy can have his money back as:2022-04-29 15:30:00>2022-04-09 23:58:23.463217
-INFO 2022-04-09 23:58:32,366 views BuyTicket POST was called
-INFO 2022-04-09 23:58:32,367 views buy_step=conditions_acceptance
-INFO 2022-04-09 23:58:32,368 views cmd=acceptance_for_friend
-INFO 2022-04-09 23:58:32,368 views pk=22
-INFO 2022-04-09 23:58:32,369 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000019B88110430>}
-INFO 2022-04-10 00:01:15,196 views *** get_refund_coices ***
-INFO 2022-04-10 00:01:15,199 views Ticket id = 130, price = 0, tot_card = 0
-INFO 2022-04-10 00:01:15,199 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
-INFO 2022-04-10 00:01:16,923 views Post: refund requested: credits
-INFO 2022-04-10 00:01:16,931 views *** get_refund_coices ***
-INFO 2022-04-10 00:01:16,934 views Ticket id = 130, price = 0, tot_card = 0
-INFO 2022-04-10 00:01:16,934 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
-INFO 2022-04-10 00:01:19,450 views ***get_context_data: kwargs{}***
-INFO 2022-04-10 00:01:19,452 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-10 00:01:19,453 views GET:start_date: 2022-04-10
-INFO 2022-04-10 00:01:19,455 views GET:end_date: 2022-06-10
-INFO 2022-04-10 00:01:30,393 views The user does not have this ticket
-INFO 2022-04-10 00:01:30,395 views The user is not queued to the event
-INFO 2022-04-10 00:01:30,397 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-10 00:01:30.397612
-INFO 2022-04-10 00:01:33,586 views BuyTicket POST was called
-INFO 2022-04-10 00:01:33,587 views buy_step=conditions_acceptance
-INFO 2022-04-10 00:01:33,588 views cmd=acceptance_for_me
-INFO 2022-04-10 00:01:33,590 views pk=22
-INFO 2022-04-10 00:01:33,591 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_me', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000019B8807ABB0>}
-INFO 2022-04-10 00:02:11,399 views Site under maintenance:False
-INFO 2022-04-10 00:02:40,012 views ***get_context_data: kwargs{}***
-INFO 2022-04-10 00:02:40,012 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-10 00:02:40,014 views GET:start_date: 2022-04-10
-INFO 2022-04-10 00:02:40,014 views GET:end_date: 2022-06-10
-INFO 2022-04-10 00:02:41,699 views The user does not have this ticket
-INFO 2022-04-10 00:02:41,701 views The user is not queued to the event
-INFO 2022-04-10 00:02:41,703 views The guy cannot have his money back as:2022-04-29 15:30:00<2022-04-10 00:02:41.703013
-INFO 2022-04-10 00:02:44,386 views BuyTicket POST was called
-INFO 2022-04-10 00:02:44,387 views buy_step=conditions_acceptance
-INFO 2022-04-10 00:02:44,390 views cmd=acceptance_for_me
-INFO 2022-04-10 00:02:44,392 views pk=22
-INFO 2022-04-10 00:02:44,393 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_me', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000019B883AA220>}
-INFO 2022-04-10 00:04:21,666 views BuyTicket POST was called
-INFO 2022-04-10 00:04:21,666 views buy_step=conditions_acceptance
-INFO 2022-04-10 00:04:21,668 views cmd=acceptance_for_me
-INFO 2022-04-10 00:04:21,668 views pk=22
-INFO 2022-04-10 00:04:21,669 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_me', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000019B880EF760>}
-INFO 2022-04-10 00:04:23,230 views BuyTicket GET was called
-INFO 2022-04-10 00:04:23,231 views BuyTicket.get:partecipant_selection init
-INFO 2022-04-10 00:04:23,232 views cmd=init
-INFO 2022-04-10 00:04:37,624 views BuyTicket POST was called
-INFO 2022-04-10 00:04:37,625 views cmd=receive_user_selected
-INFO 2022-04-10 00:04:37,633 views BuyTicket GET was called
-INFO 2022-04-10 00:04:37,634 views BuyTicket.get:confirmation init
-INFO 2022-04-10 00:04:37,667 views BuyTicketView: confirmation, context = {'pk': 22, 'buy_step': 'confirmation', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 156, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000019B883A2040>, 'subs_exp_date': datetime.date(2022, 8, 16), 'subscription_expired': False, 'year_subscription_price': 20, 'sub_total': 0, 'event': <Event: ID: 22, Date: 2022-05-01Valle dei Mulini di Mossano Mossano VI>}
-INFO 2022-04-10 00:04:39,130 views BuyTicket GET was called
-INFO 2022-04-10 00:04:39,131 views BuyTicket.get:confirmed init
-INFO 2022-04-10 00:04:39,137 views Closing order from -confirmed-
-INFO 2022-04-10 00:04:39,193 views Creating mail for order confirmation
-INFO 2022-04-10 00:04:47,885 views ***get_context_data: kwargs{}***
-INFO 2022-04-10 00:04:47,886 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-10 00:04:47,887 views GET:start_date: 2022-04-10
-INFO 2022-04-10 00:04:47,888 views GET:end_date: 2022-06-10
-INFO 2022-04-10 00:04:49,120 views The user already has this ticket
-INFO 2022-04-10 00:04:49,122 views The user is not queued to the event
-INFO 2022-04-10 00:04:49,124 views The guy can have his money back as:2022-04-29 15:30:00>2022-04-10 00:04:49.124132
-INFO 2022-04-10 00:04:51,790 views BuyTicket POST was called
-INFO 2022-04-10 00:04:51,790 views buy_step=conditions_acceptance
-INFO 2022-04-10 00:04:51,793 views cmd=acceptance_for_friend
-INFO 2022-04-10 00:04:51,793 views pk=22
-INFO 2022-04-10 00:04:51,794 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000019B8826AE50>}
-INFO 2022-04-10 00:04:55,965 views BuyTicket GET was called
-INFO 2022-04-10 00:04:55,965 views BuyTicket.get:partecipant_selection init
-INFO 2022-04-10 00:04:55,966 views cmd=init
-INFO 2022-04-10 00:08:08,484 views Site under maintenance:False
-INFO 2022-04-10 00:08:10,621 views ***get_context_data: kwargs{}***
-INFO 2022-04-10 00:08:10,628 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-10 00:08:10,629 views GET:start_date: 2022-04-10
-INFO 2022-04-10 00:08:10,630 views GET:end_date: 2022-06-10
-INFO 2022-04-10 00:08:12,193 views The user already has this ticket
-INFO 2022-04-10 00:08:12,195 views The user is not queued to the event
-INFO 2022-04-10 00:08:12,197 views The guy can have his money back as:2022-04-29 15:30:00>2022-04-10 00:08:12.197287
-INFO 2022-04-10 00:08:15,753 views BuyTicket POST was called
-INFO 2022-04-10 00:08:15,753 views buy_step=conditions_acceptance
-INFO 2022-04-10 00:08:15,754 views cmd=acceptance_for_me
-INFO 2022-04-10 00:08:15,755 views pk=22
-INFO 2022-04-10 00:08:15,756 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000013288F68F70>}
-INFO 2022-04-10 00:08:19,283 views BuyTicket GET was called
-INFO 2022-04-10 00:08:19,283 views BuyTicket.get:partecipant_selection init
-INFO 2022-04-10 00:08:19,285 views cmd=init
-INFO 2022-04-10 00:12:45,484 views BuyTicket POST was called
-INFO 2022-04-10 00:12:45,485 views buy_step=conditions_acceptance
-INFO 2022-04-10 00:12:45,487 views cmd=acceptance_for_me
-INFO 2022-04-10 00:12:45,487 views pk=22
-INFO 2022-04-10 00:12:45,488 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000013288F6B7C0>}
-INFO 2022-04-10 00:13:40,496 views BuyTicket POST was called
-INFO 2022-04-10 00:13:40,496 views buy_step=conditions_acceptance
-INFO 2022-04-10 00:13:40,497 views cmd=acceptance_for_me
-INFO 2022-04-10 00:13:40,498 views pk=22
-INFO 2022-04-10 00:13:40,499 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000013288F6B850>}
-INFO 2022-04-10 00:26:21,987 views BuyTicket POST was called
-INFO 2022-04-10 00:26:21,988 views buy_step=conditions_acceptance
-INFO 2022-04-10 00:26:21,989 views cmd=acceptance_for_me
-INFO 2022-04-10 00:26:21,990 views pk=22
-INFO 2022-04-10 00:26:21,990 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000013288F68C10>}
-INFO 2022-04-10 00:27:21,739 views BuyTicket POST was called
-INFO 2022-04-10 00:27:21,739 views buy_step=conditions_acceptance
-INFO 2022-04-10 00:27:21,741 views cmd=acceptance_for_me
-INFO 2022-04-10 00:27:21,742 views pk=22
-INFO 2022-04-10 00:27:21,742 views context:{'pk': 22, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000013288F83A60>}
-INFO 2022-04-17 22:59:16,981 views Site under maintenance:False
-INFO 2022-04-17 23:00:19,385 views Site under maintenance:False
-INFO 2022-04-17 23:01:11,039 views ***get_context_data: kwargs{}***
-INFO 2022-04-17 23:01:11,044 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-17 23:01:11,052 views GET:start_date: 2022-04-17
-INFO 2022-04-17 23:01:11,053 views GET:end_date: 2022-06-17
-INFO 2022-04-17 23:01:22,438 views register:GET
-INFO 2022-04-17 23:02:26,127 views register:GET
-INFO 2022-04-17 23:02:40,385 views ***get_context_data: kwargs{}***
-INFO 2022-04-17 23:02:40,386 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-17 23:02:40,390 views GET:start_date: 2022-04-17
-INFO 2022-04-17 23:02:40,391 views GET:end_date: 2022-06-17
-INFO 2022-04-17 23:02:45,023 views register:GET
-INFO 2022-04-17 23:03:25,688 views register:GET
-INFO 2022-04-17 23:05:27,626 views register:GET
-INFO 2022-04-17 23:08:13,011 views register:GET
-INFO 2022-04-17 23:11:03,954 views *** create_profile ***: <tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="Gino" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
-<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Strada" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
-<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="justwalksinfo@gmail.com" class="w3-input" maxlength="254" id="id_email"></td></tr>
+INFO 2022-05-19 19:14:13,825 views ***get_context_data: kwargs{}***
+INFO 2022-05-19 19:14:13,827 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-05-19 19:14:13,828 views GET:start_date: 2022-05-19
+INFO 2022-05-19 19:14:13,828 views GET:end_date: 2022-07-19
+INFO 2022-05-19 19:14:15,677 views The user already has this ticket
+INFO 2022-05-19 19:14:15,679 views The user is not queued to the event
+INFO 2022-05-19 19:14:15,681 views The guy can have his money back as:2022-05-20 14:30:00>2022-05-19 19:14:15.681849
+INFO 2022-05-19 19:14:18,591 views BuyTicket POST was called
+INFO 2022-05-19 19:14:18,592 views buy_step=conditions_acceptance
+INFO 2022-05-19 19:14:18,592 views cmd=acceptance_for_me
+INFO 2022-05-19 19:14:18,593 views pk=26
+INFO 2022-05-19 19:14:18,595 views context:{'pk': 26, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000018808C14DC0>}
+INFO 2022-05-19 19:14:21,740 views BuyTicket GET was called
+INFO 2022-05-19 19:14:21,740 views BuyTicket.get:partecipant_selection init
+INFO 2022-05-19 19:14:21,741 views cmd=init
+INFO 2022-05-19 19:14:23,829 views BuyTicket POST was called
+INFO 2022-05-19 19:14:23,830 views cmd=receive_user_selected
+INFO 2022-05-19 19:14:27,617 views BuyTicket POST was called
+INFO 2022-05-19 19:14:27,622 views Giulia has to register
+INFO 2022-05-19 19:14:32,163 views BuyTicket POST was called
+INFO 2022-05-19 19:14:32,167 views +++minor autogenerated mail:Giulia.Bortolan_minor_by_flavio.bortolan@gmail.com
+INFO 2022-05-19 19:14:32,189 views *** create_profile ***: <tr><td colspan="2"><div class="errorlist"><div class="w3-red">(Hidden field password) This field is required.</div><div class="w3-red">(Hidden field repeat_password) This field is required.</div></div></td></tr>
+<tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="Giulia" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
+<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Bortolan" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
+<tr><th><label for="id_email">Email:</label></th><td><div class="errorlist"><div class="w3-red">This email is already in use.</div></div><input type="email" name="email" value="Giulia.Bortolan_minor_by_flavio.bortolan@gmail.com" class="w3-input" maxlength="254" id="id_email"><input type="hidden" name="password" id="id_password"><input type="hidden" name="repeat_password" id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
+<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
+<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
+INFO 2022-05-19 19:14:32,191 views poop
+INFO 2022-05-19 19:17:18,975 views BuyTicket POST was called
+INFO 2022-05-19 19:17:18,981 views rrr has to register
+INFO 2022-05-19 19:17:22,846 views BuyTicket POST was called
+INFO 2022-05-19 19:17:22,850 views +++minor autogenerated mail:rrr.Bortolan_minor_by_flavio.bortolan@gmail.com
+INFO 2022-05-19 19:17:22,866 views *** create_profile ***: <tr><td colspan="2"><div class="errorlist"><div class="w3-red">(Hidden field password) This field is required.</div><div class="w3-red">(Hidden field repeat_password) This field is required.</div></div></td></tr>
+<tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="rrr" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
+<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Bortolan" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
+<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="rrr.Bortolan_minor_by_flavio.bortolan@gmail.com" class="w3-input" maxlength="254" id="id_email"><input type="hidden" name="password" id="id_password"><input type="hidden" name="repeat_password" id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
+<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
+<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
+INFO 2022-05-19 19:17:22,867 views +++ user_form cleaned_data:{'first_name': 'rrr', 'last_name': 'Bortolan', 'email': 'rrr.Bortolan_minor_by_flavio.bortolan@gmail.com'}
+INFO 2022-05-19 19:17:22,868 views cleaned mail field value =rrr.Bortolan_minor_by_flavio.bortolan@gmail.com
+INFO 2022-05-19 19:17:22,869 views create_profile:data is ok
+INFO 2022-05-19 19:17:22,869 views Supplied mail is:rrr.Bortolan_minor_by_flavio.bortolan@gmail.com
+INFO 2022-05-19 19:17:22,870 views No duplicate users found
+INFO 2022-05-19 19:17:22,870 views password:8NRE5
+INFO 2022-05-19 19:17:22,881 views new user saved with mail: rrr.Bortolan_minor_by_flavio.bortolan@gmail.com
+INFO 2022-05-19 19:17:22,990 views password saved
+INFO 2022-05-19 19:17:23,001 views Saving profile info for:
+INFO 2022-05-19 19:17:23,002 views rrr
+INFO 2022-05-19 19:17:23,002 views Bortolan
+INFO 2022-05-19 19:17:23,002 views rrr.Bortolan_minor_by_flavio.bortolan@gmail.com
+ERROR 2022-05-19 19:17:29,777 views Could not send mail: (534, b'5.7.14 <https://accounts.google.com/signin/continue?sarp=1&scc=1&plt=AKgnsbt\n5.7.14 uowPs5i907ZVX-fKA_uMTbOtLZaiv-n8UcR_0HI6ShRLYHSJ9X2FC188IdP-bgTCN5iRP\n5.7.14 B7KzxOBjkNxszaiOhXd1WRRJdITJ2cSdgSWxpt5eej_KcpVfTK8EV5p5_Q5qjoQx>\n5.7.14 Please log in via your web browser and then try again.\n5.7.14  Learn more at\n5.7.14  https://support.google.com/mail/answer/78754 l6-20020a05600c088600b00397335cf750sm44093wmp.47 - gsmtp')
+INFO 2022-05-19 19:17:29,782 views BuyTicket GET was called
+INFO 2022-05-19 19:17:29,786 views BuyTicket.get:registration_successful init
+INFO 2022-05-19 19:17:29,788 views registration_successful, friend_id = 108
+INFO 2022-05-19 19:17:34,610 views BuyTicket GET was called
+INFO 2022-05-19 19:17:34,610 views BuyTicket.get:confirmation init
+INFO 2022-05-19 19:17:34,650 views BuyTicketView: confirmation, context = {'pk': 26, 'buy_step': 'confirmation', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 180, 'friend_id': '108', 'view': <TravelsApp.views.BuyTicketView object at 0x00000188078815B0>, 'subs_exp_date': datetime.date(2023, 5, 19), 'subscription_expired': False, 'year_subscription_price': 20, 'sub_total': 0, 'event': <Event: ID: 26, Date: 2022-05-22Valle dei Mulini di Mossano Mossano VI>}
+INFO 2022-05-19 19:17:36,113 views BuyTicket GET was called
+INFO 2022-05-19 19:17:36,113 views BuyTicket.get:confirmed init
+INFO 2022-05-19 19:17:36,116 views Closing order from -confirmed-
+INFO 2022-05-19 19:17:36,189 views Creating mail for order confirmation
+ERROR 2022-05-19 19:17:42,284 views Could not send mail: (534, b'5.7.14 <https://accounts.google.com/signin/continue?sarp=1&scc=1&plt=AKgnsbt\n5.7.14 iFrZR5pgRkGPojcBQRsa3OLVuBgHzSwuxsgNhrSBfQk4qx1lw71sYZPHqr0LmbWn-IcIj\n5.7.14 vwdm-CThe2FgBwgl-XfTKvaEfrCDwdedSFGoCtOdCNtWBz-Uucq6HtgLwTcLz1PZ>\n5.7.14 Please log in via your web browser and then try again.\n5.7.14  Learn more at\n5.7.14  https://support.google.com/mail/answer/78754 o9-20020adf8b89000000b0020d0351dbb6sm150267wra.80 - gsmtp')
+INFO 2022-05-19 19:23:29,326 views ***get_context_data: kwargs{}***
+INFO 2022-05-19 19:23:29,327 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-05-19 19:23:29,327 views GET:start_date: 2022-05-19
+INFO 2022-05-19 19:23:29,328 views GET:end_date: 2022-07-19
+INFO 2022-05-20 00:12:48,605 views Site under maintenance:False
+INFO 2022-05-20 00:12:51,132 views ***get_context_data: kwargs{}***
+INFO 2022-05-20 00:12:51,137 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-05-20 00:12:51,145 views GET:start_date: 2022-05-20
+INFO 2022-05-20 00:12:51,149 views GET:end_date: 2022-07-20
+INFO 2022-05-20 00:12:52,700 views The user already has this ticket
+INFO 2022-05-20 00:12:52,704 views The user is not queued to the event
+INFO 2022-05-20 00:12:52,713 views The guy can have his money back as:2022-05-20 14:30:00>2022-05-20 00:12:52.712997
+INFO 2022-05-20 00:12:58,516 views BuyTicket POST was called
+INFO 2022-05-20 00:12:58,518 views buy_step=conditions_acceptance
+INFO 2022-05-20 00:12:58,530 views cmd=acceptance_for_me
+INFO 2022-05-20 00:12:58,534 views pk=26
+INFO 2022-05-20 00:12:58,539 views context:{'pk': 26, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000022EF987AFD0>}
+INFO 2022-05-20 00:13:01,288 views BuyTicket GET was called
+INFO 2022-05-20 00:13:01,289 views BuyTicket.get:partecipant_selection init
+INFO 2022-05-20 00:13:01,295 views cmd=init
+INFO 2022-05-20 00:13:03,467 views BuyTicket POST was called
+INFO 2022-05-20 00:13:03,468 views cmd=receive_user_selected
+INFO 2022-05-20 00:13:06,520 views BuyTicket POST was called
+INFO 2022-05-20 00:13:07,321 views #917 receive_minor_name
+INFO 2022-05-20 00:13:07,340 views #945 Giulia has to register
+INFO 2022-05-20 00:13:10,903 views BuyTicket POST was called
+INFO 2022-05-20 00:13:10,904 views #1006 receive_minor_data
+INFO 2022-05-20 00:13:10,918 views +++minor autogenerated mail:Giulia.Bortolan_minor_by_flavio.bortolan@gmail.com
+INFO 2022-05-20 00:13:10,961 views *** create_profile ***: <tr><td colspan="2"><div class="errorlist"><div class="w3-red">(Hidden field password) This field is required.</div><div class="w3-red">(Hidden field repeat_password) This field is required.</div></div></td></tr>
+<tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="Giulia" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
+<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Bortolan" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
+<tr><th><label for="id_email">Email:</label></th><td><div class="errorlist"><div class="w3-red">This email is already in use.</div></div><input type="email" name="email" value="Giulia.Bortolan_minor_by_flavio.bortolan@gmail.com" class="w3-input" maxlength="254" id="id_email"><input type="hidden" name="password" id="id_password"><input type="hidden" name="repeat_password" id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
+<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
+<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
+INFO 2022-05-20 00:13:10,966 views poop
+INFO 2022-05-20 00:16:49,036 views BuyTicket POST was called
+INFO 2022-05-20 00:16:49,853 views #917 receive_minor_name
+INFO 2022-05-20 00:16:49,863 views #924searching minor_mail:Giulia._minor_by_flavio.bortolan@gmail.com
+INFO 2022-05-20 00:16:49,865 views #946 Giulia has to register
+INFO 2022-05-20 00:16:54,419 views BuyTicket POST was called
+INFO 2022-05-20 00:16:54,420 views #1007 receive_minor_data
+INFO 2022-05-20 00:16:54,430 views +++minor autogenerated mail:Giulia.Bortolan_minor_by_flavio.bortolan@gmail.com
+INFO 2022-05-20 00:16:54,474 views *** create_profile ***: <tr><td colspan="2"><div class="errorlist"><div class="w3-red">(Hidden field password) This field is required.</div><div class="w3-red">(Hidden field repeat_password) This field is required.</div></div></td></tr>
+<tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="Giulia" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
+<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Bortolan" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
+<tr><th><label for="id_email">Email:</label></th><td><div class="errorlist"><div class="w3-red">This email is already in use.</div></div><input type="email" name="email" value="Giulia.Bortolan_minor_by_flavio.bortolan@gmail.com" class="w3-input" maxlength="254" id="id_email"><input type="hidden" name="password" id="id_password"><input type="hidden" name="repeat_password" id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
+<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
+<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
+INFO 2022-05-20 00:16:54,479 views poop
+INFO 2022-05-20 00:31:34,542 views BuyTicket POST was called
+INFO 2022-05-20 00:31:35,495 views #917 receive_minor_name
+INFO 2022-05-20 00:31:35,505 views #924searching minor_mail:Giulia._minor_by_flavio.bortolan@gmail.com
+INFO 2022-05-20 00:31:35,513 views #946 Giulia has to register
+INFO 2022-05-20 00:31:46,726 views ***get_context_data: kwargs{}***
+INFO 2022-05-20 00:31:46,730 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-05-20 00:31:46,739 views GET:start_date: 2022-05-20
+INFO 2022-05-20 00:31:46,746 views GET:end_date: 2022-07-20
+INFO 2022-05-20 00:31:47,864 views The user already has this ticket
+INFO 2022-05-20 00:31:47,866 views The user is not queued to the event
+INFO 2022-05-20 00:31:47,877 views The guy can have his money back as:2022-05-20 14:30:00>2022-05-20 00:31:47.877373
+INFO 2022-05-20 00:31:50,894 views BuyTicket POST was called
+INFO 2022-05-20 00:31:50,894 views buy_step=conditions_acceptance
+INFO 2022-05-20 00:31:50,905 views cmd=acceptance_for_me
+INFO 2022-05-20 00:31:50,919 views pk=26
+INFO 2022-05-20 00:31:50,923 views context:{'pk': 26, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000021400D35EB0>}
+INFO 2022-05-20 00:31:53,480 views BuyTicket GET was called
+INFO 2022-05-20 00:31:53,480 views BuyTicket.get:partecipant_selection init
+INFO 2022-05-20 00:31:53,490 views cmd=init
+INFO 2022-05-20 00:31:55,395 views BuyTicket POST was called
+INFO 2022-05-20 00:31:55,396 views cmd=receive_user_selected
+INFO 2022-05-20 00:32:00,191 views BuyTicket POST was called
+INFO 2022-05-20 00:32:00,193 views #917 receive_minor_name
+INFO 2022-05-20 00:32:00,208 views #924searching minor_mail:Giulia.Bortolan_minor_by_flavio.bortolan@gmail.com
+INFO 2022-05-20 00:32:00,216 views #929 The kid is already a member
+INFO 2022-05-20 00:32:00,226 views #937 kid is already subscribed
+INFO 2022-05-20 00:32:00,244 views BuyTicket GET was called
+INFO 2022-05-20 00:32:00,250 views BuyTicket.get:friend_already_subscibed init
+INFO 2022-05-20 00:32:18,818 views ***get_context_data: kwargs{}***
+INFO 2022-05-20 00:32:18,819 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-05-20 00:32:18,827 views GET:start_date: 2022-05-20
+INFO 2022-05-20 00:32:18,837 views GET:end_date: 2022-07-20
+INFO 2022-05-20 00:32:20,767 views The user already has this ticket
+INFO 2022-05-20 00:32:20,770 views The user is not queued to the event
+INFO 2022-05-20 00:32:20,779 views The guy can have his money back as:2022-06-03 14:30:00>2022-05-20 00:32:20.779208
+INFO 2022-05-20 00:32:23,973 views BuyTicket POST was called
+INFO 2022-05-20 00:32:23,974 views buy_step=conditions_acceptance
+INFO 2022-05-20 00:32:23,989 views cmd=acceptance_for_me
+INFO 2022-05-20 00:32:24,008 views pk=25
+INFO 2022-05-20 00:32:24,023 views context:{'pk': 25, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x00000214020B8550>}
+INFO 2022-05-20 00:32:26,369 views BuyTicket GET was called
+INFO 2022-05-20 00:32:26,370 views BuyTicket.get:partecipant_selection init
+INFO 2022-05-20 00:32:26,388 views cmd=init
+INFO 2022-05-20 00:32:28,564 views BuyTicket POST was called
+INFO 2022-05-20 00:32:28,564 views cmd=receive_user_selected
+INFO 2022-05-20 00:32:32,835 views BuyTicket POST was called
+INFO 2022-05-20 00:32:32,836 views #917 receive_minor_name
+INFO 2022-05-20 00:32:32,858 views #924searching minor_mail:Giulia.Bortolan_minor_by_flavio.bortolan@gmail.com
+INFO 2022-05-20 00:32:32,861 views #929 The kid is already a member
+INFO 2022-05-20 00:32:32,881 views BuyTicket GET was called
+INFO 2022-05-20 00:32:32,885 views BuyTicket.get:confirmation init
+INFO 2022-05-20 00:32:32,956 views BuyTicketView: confirmation, context = {'pk': 25, 'buy_step': 'confirmation', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 181, 'friend_id': '107', 'view': <TravelsApp.views.BuyTicketView object at 0x0000021401DC8100>, 'subs_exp_date': datetime.date(2023, 5, 19), 'subscription_expired': False, 'year_subscription_price': 20, 'sub_total': 0, 'event': <Event: ID: 25, Date: 2022-06-05Colceresa percorso della Lepre Mason (VI)>}
+INFO 2022-05-20 00:32:35,336 views BuyTicket GET was called
+INFO 2022-05-20 00:32:35,337 views BuyTicket.get:confirmed init
+INFO 2022-05-20 00:32:35,350 views Closing order from -confirmed-
+INFO 2022-05-20 00:32:35,471 views Creating mail for order confirmation
+INFO 2022-05-20 00:32:43,613 views ***get_context_data: kwargs{}***
+INFO 2022-05-20 00:32:43,614 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-05-20 00:32:43,630 views GET:start_date: 2022-05-20
+INFO 2022-05-20 00:32:43,647 views GET:end_date: 2022-07-20
+INFO 2022-05-20 00:33:14,259 views Site under maintenance:False
+INFO 2022-05-20 00:33:15,910 views ***get_context_data: kwargs{}***
+INFO 2022-05-20 00:33:15,911 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-05-20 00:33:15,920 views GET:start_date: 2022-05-20
+INFO 2022-05-20 00:33:15,930 views GET:end_date: 2022-07-20
+INFO 2022-05-20 00:33:17,456 views The user already has this ticket
+INFO 2022-05-20 00:33:17,460 views The user is not queued to the event
+INFO 2022-05-20 00:33:17,463 views The guy can have his money back as:2022-05-20 14:30:00>2022-05-20 00:33:17.463676
+INFO 2022-05-20 00:33:19,887 views BuyTicket POST was called
+INFO 2022-05-20 00:33:19,888 views buy_step=conditions_acceptance
+INFO 2022-05-20 00:33:19,899 views cmd=acceptance_for_me
+INFO 2022-05-20 00:33:19,912 views pk=26
+INFO 2022-05-20 00:33:19,926 views context:{'pk': 26, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_friend', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x00000214020CAC10>}
+INFO 2022-05-20 00:33:21,897 views BuyTicket GET was called
+INFO 2022-05-20 00:33:21,898 views BuyTicket.get:partecipant_selection init
+INFO 2022-05-20 00:33:21,908 views cmd=init
+INFO 2022-05-20 00:33:23,793 views BuyTicket POST was called
+INFO 2022-05-20 00:33:23,794 views cmd=receive_user_selected
+INFO 2022-05-20 00:33:29,217 views BuyTicket POST was called
+INFO 2022-05-20 00:33:29,219 views #917 receive_minor_name
+INFO 2022-05-20 00:33:29,244 views #924searching minor_mail:ttt.Bortolan_minor_by_flavio.bortolan@gmail.com
+INFO 2022-05-20 00:33:29,247 views #946 ttt has to register
+INFO 2022-05-20 00:33:37,022 views BuyTicket POST was called
+INFO 2022-05-20 00:33:37,023 views #1010 receive_minor_data
+INFO 2022-05-20 00:33:37,044 views +++minor autogenerated mail:ttt.Bortolan_minor_by_flavio.bortolan@gmail.com
+INFO 2022-05-20 00:33:37,094 views *** create_profile ***: <tr><td colspan="2"><div class="errorlist"><div class="w3-red">(Hidden field password) This field is required.</div><div class="w3-red">(Hidden field repeat_password) This field is required.</div></div></td></tr>
+<tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="ttt" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
+<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Bortolan" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
+<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="ttt.Bortolan_minor_by_flavio.bortolan@gmail.com" class="w3-input" maxlength="254" id="id_email"><input type="hidden" name="password" id="id_password"><input type="hidden" name="repeat_password" id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
+<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
+<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
+INFO 2022-05-20 00:33:37,097 views +++ user_form cleaned_data:{'first_name': 'ttt', 'last_name': 'Bortolan', 'email': 'ttt.Bortolan_minor_by_flavio.bortolan@gmail.com'}
+INFO 2022-05-20 00:33:37,107 views cleaned mail field value =ttt.Bortolan_minor_by_flavio.bortolan@gmail.com
+INFO 2022-05-20 00:33:37,113 views create_profile:data is ok
+INFO 2022-05-20 00:33:37,119 views Supplied mail is:ttt.Bortolan_minor_by_flavio.bortolan@gmail.com
+INFO 2022-05-20 00:33:37,131 views No duplicate users found
+INFO 2022-05-20 00:33:37,136 views password:DT8Y0
+INFO 2022-05-20 00:33:37,181 views new user saved with mail: ttt.Bortolan_minor_by_flavio.bortolan@gmail.com
+INFO 2022-05-20 00:33:37,434 views password saved
+INFO 2022-05-20 00:33:37,447 views Saving profile info for:
+INFO 2022-05-20 00:33:37,448 views ttt
+INFO 2022-05-20 00:33:37,450 views Bortolan
+INFO 2022-05-20 00:33:37,453 views ttt.Bortolan_minor_by_flavio.bortolan@gmail.com
+INFO 2022-05-20 00:33:43,606 views BuyTicket GET was called
+INFO 2022-05-20 00:33:43,613 views BuyTicket.get:registration_successful init
+INFO 2022-05-20 00:33:43,621 views registration_successful, friend_id = 109
+INFO 2022-05-20 00:33:53,269 views BuyTicket GET was called
+INFO 2022-05-20 00:33:53,270 views BuyTicket.get:confirmation init
+INFO 2022-05-20 00:33:53,354 views BuyTicketView: confirmation, context = {'pk': 26, 'buy_step': 'confirmation', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 182, 'friend_id': '109', 'view': <TravelsApp.views.BuyTicketView object at 0x00000214020ADE50>, 'subs_exp_date': datetime.date(2023, 5, 20), 'subscription_expired': False, 'year_subscription_price': 20, 'sub_total': 0, 'event': <Event: ID: 26, Date: 2022-05-22Valle dei Mulini di Mossano Mossano VI>}
+INFO 2022-05-20 00:33:55,617 views BuyTicket GET was called
+INFO 2022-05-20 00:33:55,618 views BuyTicket.get:confirmed init
+INFO 2022-05-20 00:33:55,626 views Closing order from -confirmed-
+INFO 2022-05-20 00:33:55,728 views Creating mail for order confirmation
+INFO 2022-05-20 00:34:03,812 views ***get_context_data: kwargs{}***
+INFO 2022-05-20 00:34:03,813 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-05-20 00:34:03,822 views GET:start_date: 2022-05-20
+INFO 2022-05-20 00:34:03,834 views GET:end_date: 2022-07-20
+INFO 2022-05-20 00:35:17,966 views The user already has this ticket
+INFO 2022-05-20 00:35:17,968 views The user is not queued to the event
+INFO 2022-05-20 00:35:17,994 views The guy can have his money back as:2022-06-03 14:30:00>2022-05-20 00:35:17.994459
+INFO 2022-05-20 00:48:14,850 views ***get_context_data: kwargs{}***
+INFO 2022-05-20 00:48:14,852 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-05-20 00:48:14,861 views GET:start_date: 2022-05-20
+INFO 2022-05-20 00:48:14,870 views GET:end_date: 2022-07-20
+INFO 2022-05-20 00:48:16,204 views The user already has this ticket
+INFO 2022-05-20 00:48:16,207 views The user is not queued to the event
+INFO 2022-05-20 00:48:16,213 views The guy can have his money back as:2022-05-20 14:30:00>2022-05-20 00:48:16.213021
+INFO 2022-05-20 00:49:25,764 views The user already has this ticket
+INFO 2022-05-20 00:49:25,766 views The user is not queued to the event
+INFO 2022-05-20 00:49:25,772 views The guy can have his money back as:2022-05-20 14:30:00>2022-05-20 00:49:25.772986
+INFO 2022-05-20 00:49:43,766 views Site under maintenance:False
+INFO 2022-05-20 00:49:45,457 views ***get_context_data: kwargs{}***
+INFO 2022-05-20 00:49:45,458 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-05-20 00:49:45,474 views GET:start_date: 2022-05-20
+INFO 2022-05-20 00:49:45,479 views GET:end_date: 2022-07-20
+INFO 2022-05-20 00:50:20,522 views registration_step = registration_step
+INFO 2022-05-20 00:51:17,733 views ***get_context_data: kwargs{}***
+INFO 2022-05-20 00:51:17,735 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-05-20 00:51:17,745 views GET:start_date: 2022-05-20
+INFO 2022-05-20 00:51:17,756 views GET:end_date: 2022-07-20
+INFO 2022-05-20 00:51:35,320 views registration_step = registration_step
+INFO 2022-05-20 00:52:12,732 views registration_step = registration_step
+INFO 2022-05-20 00:52:30,399 views *** create_profile ***: <tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="rrsa" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
+<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Bortolan" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
+<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="flavio.bortolan@gmail.come" class="w3-input" maxlength="254" id="id_email"></td></tr>
 <tr><th><label for="id_password">Password:</label></th><td><input type="password" name="password" class="w3-input" maxlength="128" required id="id_password"></td></tr>
 <tr><th><label for="id_repeat_password">Repeat password:</label></th><td><input type="password" name="repeat_password" class="w3-input" required id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
 <tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" value="3401461537" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
 <tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
-INFO 2022-04-17 23:11:03,957 views +++ user_form cleaned_data:{'first_name': 'Gino', 'last_name': 'Strada', 'email': 'justwalksinfo@gmail.com', 'password': 'Margherita1', 'repeat_password': 'Margherita1'}
-INFO 2022-04-17 23:11:03,961 views cleaned mail field value =justwalksinfo@gmail.com
-INFO 2022-04-17 23:11:03,963 views create_profile:data is ok
-INFO 2022-04-17 23:11:03,964 views Supplied mail is:justwalksinfo@gmail.com
-INFO 2022-04-17 23:11:03,967 views No duplicate users found
-INFO 2022-04-17 23:14:36,810 views *** create_profile ***: <tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="Gino" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
-<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Strada" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
-<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="justwalksinfo@gmail.com" class="w3-input" maxlength="254" id="id_email"></td></tr>
-<tr><th><label for="id_password">Password:</label></th><td><input type="password" name="password" class="w3-input" maxlength="128" required id="id_password"></td></tr>
-<tr><th><label for="id_repeat_password">Repeat password:</label></th><td><input type="password" name="repeat_password" class="w3-input" required id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
-<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" value="3401461537" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
-<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
-INFO 2022-04-17 23:14:36,814 views +++ user_form cleaned_data:{'first_name': 'Gino', 'last_name': 'Strada', 'email': 'justwalksinfo@gmail.com', 'password': 'Margherita1', 'repeat_password': 'Margherita1'}
-INFO 2022-04-17 23:14:36,818 views cleaned mail field value =justwalksinfo@gmail.com
-INFO 2022-04-17 23:14:36,821 views create_profile:data is ok
-INFO 2022-04-17 23:14:36,823 views Supplied mail is:justwalksinfo@gmail.com
-INFO 2022-04-17 23:14:36,825 views No duplicate users found
-INFO 2022-04-17 23:14:36,857 views new user saved with mail: justwalksinfo@gmail.com
-INFO 2022-04-17 23:14:37,077 views password saved
-INFO 2022-04-17 23:20:34,629 views register:GET
-INFO 2022-04-17 23:24:24,100 views Site under maintenance:False
-INFO 2022-04-17 23:24:27,312 views Site under maintenance:False
-INFO 2022-04-17 23:24:31,346 views register:GET
-INFO 2022-04-17 23:25:04,855 views *** create_profile ***: <tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="Gino" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
-<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Strada" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
-<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="justwalksinfo@gmail.com" class="w3-input" maxlength="254" id="id_email"></td></tr>
-<tr><th><label for="id_password">Password:</label></th><td><input type="password" name="password" class="w3-input" maxlength="128" required id="id_password"></td></tr>
-<tr><th><label for="id_repeat_password">Repeat password:</label></th><td><input type="password" name="repeat_password" class="w3-input" required id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
-<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" value="3401461537" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
-<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
-INFO 2022-04-17 23:25:04,857 views +++ user_form cleaned_data:{'first_name': 'Gino', 'last_name': 'Strada', 'email': 'justwalksinfo@gmail.com', 'password': 'Margherita1', 'repeat_password': 'Margherita1'}
-INFO 2022-04-17 23:25:04,860 views cleaned mail field value =justwalksinfo@gmail.com
-INFO 2022-04-17 23:25:04,861 views create_profile:data is ok
-INFO 2022-04-17 23:25:04,863 views Supplied mail is:justwalksinfo@gmail.com
-INFO 2022-04-17 23:25:04,865 views No duplicate users found
-INFO 2022-04-17 23:25:04,878 views new user saved with mail: justwalksinfo@gmail.com
-INFO 2022-04-17 23:25:04,975 views password saved
-INFO 2022-04-17 23:25:04,982 views Saving profile info for:
-INFO 2022-04-17 23:25:04,983 views Gino
-INFO 2022-04-17 23:25:04,985 views Strada
-INFO 2022-04-17 23:25:04,988 views justwalksinfo@gmail.com
-INFO 2022-04-17 23:25:04,990 views Creating mail with activation link
-INFO 2022-04-17 23:37:47,355 views register:GET
-INFO 2022-04-17 23:37:52,212 views Site under maintenance:False
-INFO 2022-04-17 23:37:54,711 views register:GET
-INFO 2022-04-17 23:38:41,918 views register:GET
-INFO 2022-04-17 23:40:59,771 views Site under maintenance:False
-INFO 2022-04-17 23:41:09,850 views Site under maintenance:False
-INFO 2022-04-17 23:41:42,699 views register:GET
-INFO 2022-04-17 23:42:21,463 views *** create_profile ***: <tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="Gino" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
-<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Strada" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
-<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="justwalksinfo@gmail.com" class="w3-input" maxlength="254" id="id_email"></td></tr>
-<tr><th><label for="id_password">Password:</label></th><td><input type="password" name="password" class="w3-input" maxlength="128" required id="id_password"></td></tr>
-<tr><th><label for="id_repeat_password">Repeat password:</label></th><td><input type="password" name="repeat_password" class="w3-input" required id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
-<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" value="3401461537" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
-<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
-INFO 2022-04-17 23:42:21,466 views +++ user_form cleaned_data:{'first_name': 'Gino', 'last_name': 'Strada', 'email': 'justwalksinfo@gmail.com', 'password': 'Margherita 1', 'repeat_password': 'Margherita 1'}
-INFO 2022-04-17 23:42:21,468 views cleaned mail field value =justwalksinfo@gmail.com
-INFO 2022-04-17 23:42:21,469 views create_profile:data is ok
-INFO 2022-04-17 23:42:21,471 views Supplied mail is:justwalksinfo@gmail.com
-INFO 2022-04-17 23:42:21,473 views No duplicate users found
-INFO 2022-04-17 23:42:21,486 views new user saved with mail: justwalksinfo@gmail.com
-INFO 2022-04-17 23:42:21,583 views password saved
-INFO 2022-04-17 23:42:21,591 views Saving profile info for:
-INFO 2022-04-17 23:42:21,591 views Gino
-INFO 2022-04-17 23:42:21,594 views Strada
-INFO 2022-04-17 23:42:21,596 views justwalksinfo@gmail.com
-INFO 2022-04-17 23:42:21,598 views Creating mail with activation link
-INFO 2022-04-17 23:44:15,996 views Site under maintenance:False
-INFO 2022-04-17 23:44:34,963 views Site under maintenance:False
-INFO 2022-04-17 23:44:58,167 views register:GET
-INFO 2022-04-17 23:45:35,524 views *** create_profile ***: <tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="Gino" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
-<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Strada" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
-<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="justwalksinfo@gmail.com" class="w3-input" maxlength="254" id="id_email"></td></tr>
-<tr><th><label for="id_password">Password:</label></th><td><input type="password" name="password" class="w3-input" maxlength="128" required id="id_password"></td></tr>
-<tr><th><label for="id_repeat_password">Repeat password:</label></th><td><input type="password" name="repeat_password" class="w3-input" required id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
-<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" value="3401461537" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
-<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
-INFO 2022-04-17 23:45:35,526 views +++ user_form cleaned_data:{'first_name': 'Gino', 'last_name': 'Strada', 'email': 'justwalksinfo@gmail.com', 'password': 'Margherita 1', 'repeat_password': 'Margherita 1'}
-INFO 2022-04-17 23:45:35,528 views cleaned mail field value =justwalksinfo@gmail.com
-INFO 2022-04-17 23:45:35,529 views create_profile:data is ok
-INFO 2022-04-17 23:45:35,531 views Supplied mail is:justwalksinfo@gmail.com
-INFO 2022-04-17 23:45:35,534 views No duplicate users found
-INFO 2022-04-17 23:45:35,552 views new user saved with mail: justwalksinfo@gmail.com
-INFO 2022-04-17 23:45:35,643 views password saved
-INFO 2022-04-17 23:45:35,651 views Saving profile info for:
-INFO 2022-04-17 23:45:35,652 views Gino
-INFO 2022-04-17 23:45:35,654 views Strada
-INFO 2022-04-17 23:45:35,656 views justwalksinfo@gmail.com
-INFO 2022-04-17 23:45:35,658 views Creating mail with activation link
-INFO 2022-04-17 23:48:07,772 views register:GET
-INFO 2022-04-17 23:48:19,565 views Site under maintenance:False
-INFO 2022-04-17 23:48:34,475 views register:GET
-INFO 2022-04-17 23:49:30,441 views *** create_profile ***: <tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="Gino" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
-<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Strada" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
-<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="justwalksinfo@gmail.com" class="w3-input" maxlength="254" id="id_email"></td></tr>
-<tr><th><label for="id_password">Password:</label></th><td><input type="password" name="password" class="w3-input" maxlength="128" required id="id_password"></td></tr>
-<tr><th><label for="id_repeat_password">Repeat password:</label></th><td><input type="password" name="repeat_password" class="w3-input" required id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
-<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" value="3401461537" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
-<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
-INFO 2022-04-17 23:49:30,445 views +++ user_form cleaned_data:{'first_name': 'Gino', 'last_name': 'Strada', 'email': 'justwalksinfo@gmail.com', 'password': 'Margherita 1', 'repeat_password': 'Margherita 1'}
-INFO 2022-04-17 23:49:30,447 views cleaned mail field value =justwalksinfo@gmail.com
-INFO 2022-04-17 23:49:30,449 views create_profile:data is ok
-INFO 2022-04-17 23:49:30,451 views Supplied mail is:justwalksinfo@gmail.com
-INFO 2022-04-17 23:49:30,453 views No duplicate users found
-INFO 2022-04-17 23:49:30,469 views new user saved with mail: justwalksinfo@gmail.com
-INFO 2022-04-17 23:49:30,566 views password saved
-INFO 2022-04-17 23:49:30,574 views Saving profile info for:
-INFO 2022-04-17 23:49:30,575 views Gino
-INFO 2022-04-17 23:49:30,577 views Strada
-INFO 2022-04-17 23:49:30,580 views justwalksinfo@gmail.com
-INFO 2022-04-17 23:49:30,581 views Creating mail with activation link
-INFO 2022-04-17 23:52:38,197 views Site under maintenance:False
-INFO 2022-04-17 23:52:40,622 views Site under maintenance:False
-INFO 2022-04-17 23:52:44,351 views register:GET
-INFO 2022-04-17 23:54:41,956 views *** create_profile ***: <tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="Gino" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
-<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Strada" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
-<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="justwalksinfo@gmail.com" class="w3-input" maxlength="254" id="id_email"></td></tr>
-<tr><th><label for="id_password">Password:</label></th><td><input type="password" name="password" class="w3-input" maxlength="128" required id="id_password"></td></tr>
-<tr><th><label for="id_repeat_password">Repeat password:</label></th><td><input type="password" name="repeat_password" class="w3-input" required id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
-<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" value="3401461537" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
-<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
-INFO 2022-04-17 23:54:41,958 views +++ user_form cleaned_data:{'first_name': 'Gino', 'last_name': 'Strada', 'email': 'justwalksinfo@gmail.com', 'password': 'Margherita 1', 'repeat_password': 'Margherita 1'}
-INFO 2022-04-17 23:54:41,961 views cleaned mail field value =justwalksinfo@gmail.com
-INFO 2022-04-17 23:54:41,964 views create_profile:data is ok
-INFO 2022-04-17 23:54:41,965 views Supplied mail is:justwalksinfo@gmail.com
-INFO 2022-04-17 23:54:41,968 views No duplicate users found
-INFO 2022-04-17 23:54:41,987 views new user saved with mail: justwalksinfo@gmail.com
-INFO 2022-04-17 23:54:42,094 views password saved
-INFO 2022-04-17 23:54:42,103 views Saving profile info for:
-INFO 2022-04-17 23:54:42,103 views Gino
-INFO 2022-04-17 23:54:42,106 views Strada
-INFO 2022-04-17 23:54:42,107 views justwalksinfo@gmail.com
-INFO 2022-04-17 23:54:42,109 views Creating mail with activation link
-INFO 2022-04-17 23:56:36,778 views Site under maintenance:False
-INFO 2022-04-17 23:56:39,940 views Site under maintenance:False
-INFO 2022-04-17 23:56:42,682 views register:GET
-INFO 2022-04-17 23:57:08,066 views *** create_profile ***: <tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="Gino" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
-<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Strada" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
-<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="justwalksinfo@gmail.com" class="w3-input" maxlength="254" id="id_email"></td></tr>
-<tr><th><label for="id_password">Password:</label></th><td><input type="password" name="password" class="w3-input" maxlength="128" required id="id_password"></td></tr>
-<tr><th><label for="id_repeat_password">Repeat password:</label></th><td><input type="password" name="repeat_password" class="w3-input" required id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
-<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" value="3401461537" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
-<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
-INFO 2022-04-17 23:57:08,068 views +++ user_form cleaned_data:{'first_name': 'Gino', 'last_name': 'Strada', 'email': 'justwalksinfo@gmail.com', 'password': 'Margherita 1', 'repeat_password': 'Margherita 1'}
-INFO 2022-04-17 23:57:08,070 views cleaned mail field value =justwalksinfo@gmail.com
-INFO 2022-04-17 23:57:08,071 views create_profile:data is ok
-INFO 2022-04-17 23:57:08,073 views Supplied mail is:justwalksinfo@gmail.com
-INFO 2022-04-17 23:57:08,076 views No duplicate users found
-INFO 2022-04-17 23:57:08,091 views new user saved with mail: justwalksinfo@gmail.com
-INFO 2022-04-17 23:57:08,189 views password saved
-INFO 2022-04-17 23:57:08,197 views Saving profile info for:
-INFO 2022-04-17 23:57:08,198 views Gino
-INFO 2022-04-17 23:57:08,200 views Strada
-INFO 2022-04-17 23:57:08,202 views justwalksinfo@gmail.com
-INFO 2022-04-17 23:57:08,203 views Creating mail with activation link
-INFO 2022-04-18 00:15:15,324 views Site under maintenance:False
-INFO 2022-04-18 00:15:19,272 views Site under maintenance:False
-INFO 2022-04-18 00:25:23,451 views Site under maintenance:False
-INFO 2022-04-18 00:25:26,809 views Site under maintenance:False
-INFO 2022-04-18 00:28:07,034 views Site under maintenance:False
-INFO 2022-04-18 00:36:03,835 views register:GET
-INFO 2022-04-18 00:37:11,256 views Site under maintenance:False
-INFO 2022-04-18 00:37:20,734 views Site under maintenance:False
-INFO 2022-04-18 00:37:23,210 views register:GET
-INFO 2022-04-18 00:37:50,486 views *** create_profile ***: <tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="Gino" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
-<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Strada" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
-<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="justwalksinfo@gmail.com" class="w3-input" maxlength="254" id="id_email"></td></tr>
-<tr><th><label for="id_password">Password:</label></th><td><input type="password" name="password" class="w3-input" maxlength="128" required id="id_password"></td></tr>
-<tr><th><label for="id_repeat_password">Repeat password:</label></th><td><input type="password" name="repeat_password" class="w3-input" required id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
-<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" value="3401461537" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
-<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
-INFO 2022-04-18 00:37:50,488 views +++ user_form cleaned_data:{'first_name': 'Gino', 'last_name': 'Strada', 'email': 'justwalksinfo@gmail.com', 'password': 'Margherita 1', 'repeat_password': 'Margherita 1'}
-INFO 2022-04-18 00:37:50,491 views cleaned mail field value =justwalksinfo@gmail.com
-INFO 2022-04-18 00:37:50,492 views create_profile:data is ok
-INFO 2022-04-18 00:37:50,493 views Supplied mail is:justwalksinfo@gmail.com
-INFO 2022-04-18 00:37:50,495 views No duplicate users found
-INFO 2022-04-18 00:37:50,510 views new user saved with mail: justwalksinfo@gmail.com
-INFO 2022-04-18 00:37:50,605 views password saved
-INFO 2022-04-18 00:37:50,613 views Saving profile info for:
-INFO 2022-04-18 00:37:50,613 views Gino
-INFO 2022-04-18 00:37:50,616 views Strada
-INFO 2022-04-18 00:37:50,618 views justwalksinfo@gmail.com
-INFO 2022-04-18 00:37:50,621 views Creating mail with activation link
-INFO 2022-04-18 00:44:18,730 views register:GET
-INFO 2022-04-18 17:13:42,134 views Site under maintenance:False
-INFO 2022-04-18 17:13:46,987 views Site under maintenance:False
-INFO 2022-04-18 17:21:29,381 views register:GET
-INFO 2022-04-18 17:23:34,717 views *** create_profile ***: <tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="Gino" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
-<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Strada" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
-<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="justwalksinfo@gmail.com" class="w3-input" maxlength="254" id="id_email"></td></tr>
-<tr><th><label for="id_password">Password:</label></th><td><input type="password" name="password" class="w3-input" maxlength="128" required id="id_password"></td></tr>
-<tr><th><label for="id_repeat_password">Repeat password:</label></th><td><input type="password" name="repeat_password" class="w3-input" required id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
-<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" value="3401461537" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
-<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
-INFO 2022-04-18 17:23:34,719 views +++ user_form cleaned_data:{'first_name': 'Gino', 'last_name': 'Strada', 'email': 'justwalksinfo@gmail.com', 'password': 'Margherita 1', 'repeat_password': 'Margherita 1'}
-INFO 2022-04-18 17:23:34,721 views cleaned mail field value =justwalksinfo@gmail.com
-INFO 2022-04-18 17:23:34,722 views create_profile:data is ok
-INFO 2022-04-18 17:23:34,723 views Supplied mail is:justwalksinfo@gmail.com
-INFO 2022-04-18 17:23:34,725 views No duplicate users found
-INFO 2022-04-18 17:23:34,737 views new user saved with mail: justwalksinfo@gmail.com
-INFO 2022-04-18 17:23:34,835 views password saved
-INFO 2022-04-18 17:23:34,843 views Saving profile info for:
-INFO 2022-04-18 17:23:34,844 views Gino
-INFO 2022-04-18 17:23:34,846 views Strada
-INFO 2022-04-18 17:23:34,848 views justwalksinfo@gmail.com
-INFO 2022-04-18 17:23:34,851 views Creating mail with activation link
-INFO 2022-04-18 17:51:35,275 views Site under maintenance:False
-INFO 2022-04-18 17:51:38,892 views Site under maintenance:False
-INFO 2022-04-18 17:51:41,207 views registration_step = registration_step
-INFO 2022-04-18 17:52:10,140 views 
-INFO 2022-04-18 17:52:10,140 views registration_step = registration_step
-INFO 2022-04-18 17:52:32,117 views 
-INFO 2022-04-18 17:52:32,117 views registration_step = registration_step
-INFO 2022-04-18 17:52:51,821 views *** create_profile ***: <tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="Gino" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
-<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Strada" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
-<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="justwalksinfo@gmail.com" class="w3-input" maxlength="254" id="id_email"></td></tr>
-<tr><th><label for="id_password">Password:</label></th><td><input type="password" name="password" class="w3-input" maxlength="128" required id="id_password"></td></tr>
-<tr><th><label for="id_repeat_password">Repeat password:</label></th><td><input type="password" name="repeat_password" class="w3-input" required id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
-<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" value="3401461537" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
-<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
-INFO 2022-04-18 17:52:51,822 views +++ user_form cleaned_data:{'first_name': 'Gino', 'last_name': 'Strada', 'email': 'justwalksinfo@gmail.com', 'password': 'Margherita 1', 'repeat_password': 'Margherita 1'}
-INFO 2022-04-18 17:52:51,825 views cleaned mail field value =justwalksinfo@gmail.com
-INFO 2022-04-18 17:52:51,826 views create_profile:data is ok
-INFO 2022-04-18 17:52:51,827 views Supplied mail is:justwalksinfo@gmail.com
-INFO 2022-04-18 17:52:51,830 views No duplicate users found
-INFO 2022-04-18 17:52:51,842 views new user saved with mail: justwalksinfo@gmail.com
-INFO 2022-04-18 17:52:51,954 views password saved
-INFO 2022-04-18 17:52:51,962 views Saving profile info for:
-INFO 2022-04-18 17:52:51,963 views Gino
-INFO 2022-04-18 17:52:51,964 views Strada
-INFO 2022-04-18 17:52:51,967 views justwalksinfo@gmail.com
-INFO 2022-04-18 17:52:51,968 views Creating mail with activation link
-INFO 2022-04-18 17:52:59,011 views registration_step = registration_step
-INFO 2022-04-18 17:53:46,347 views registration_step = registration_completed
-INFO 2022-04-18 17:53:46,348 views registration_step = registration_step
-INFO 2022-04-18 17:54:17,823 views Site under maintenance:False
-INFO 2022-04-18 17:57:40,129 views registration_step = registration_step
-INFO 2022-04-18 17:58:09,177 views *** create_profile ***: <tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="Gino" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
-<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Strada" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
-<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="justwalksinfo@gmail.com" class="w3-input" maxlength="254" id="id_email"></td></tr>
-<tr><th><label for="id_password">Password:</label></th><td><input type="password" name="password" class="w3-input" maxlength="128" required id="id_password"></td></tr>
-<tr><th><label for="id_repeat_password">Repeat password:</label></th><td><input type="password" name="repeat_password" class="w3-input" required id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
-<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" value="3401461537" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
-<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
-INFO 2022-04-18 17:58:09,180 views +++ user_form cleaned_data:{'first_name': 'Gino', 'last_name': 'Strada', 'email': 'justwalksinfo@gmail.com', 'password': 'Margherita 1', 'repeat_password': 'Margherita 1'}
-INFO 2022-04-18 17:58:09,182 views cleaned mail field value =justwalksinfo@gmail.com
-INFO 2022-04-18 17:58:09,183 views create_profile:data is ok
-INFO 2022-04-18 17:58:09,184 views Supplied mail is:justwalksinfo@gmail.com
-INFO 2022-04-18 17:58:09,186 views No duplicate users found
-INFO 2022-04-18 17:58:09,198 views new user saved with mail: justwalksinfo@gmail.com
-INFO 2022-04-18 17:58:09,287 views password saved
-INFO 2022-04-18 17:58:09,295 views Saving profile info for:
-INFO 2022-04-18 17:58:09,296 views Gino
-INFO 2022-04-18 17:58:09,297 views Strada
-INFO 2022-04-18 17:58:09,300 views justwalksinfo@gmail.com
-INFO 2022-04-18 17:58:09,301 views Creating mail with activation link
-INFO 2022-04-18 17:58:16,130 views registration_step = registration_step
-INFO 2022-04-18 19:16:17,600 views registration_step = registration_step
-INFO 2022-04-18 19:16:58,371 views Site under maintenance:False
-INFO 2022-04-18 19:29:31,964 views registration_step = registration_step
-INFO 2022-04-18 19:29:54,123 views *** create_profile ***: <tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="Gino" class="w3-input" required="True" maxlength="30" id="id_first_name"></td></tr>
-<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="Strada" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
-<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="justwalksinfo@gmail.com" class="w3-input" maxlength="254" id="id_email"></td></tr>
-<tr><th><label for="id_password">Password:</label></th><td><input type="password" name="password" class="w3-input" maxlength="128" required id="id_password"></td></tr>
-<tr><th><label for="id_repeat_password">Repeat password:</label></th><td><input type="password" name="repeat_password" class="w3-input" required id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
-<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" value="3401461537" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
-<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
-INFO 2022-04-18 19:29:54,125 views +++ user_form cleaned_data:{'first_name': 'Gino', 'last_name': 'Strada', 'email': 'justwalksinfo@gmail.com', 'password': '{{ email }}', 'repeat_password': '{{ email }}'}
-INFO 2022-04-18 19:29:54,129 views cleaned mail field value =justwalksinfo@gmail.com
-INFO 2022-04-18 19:29:54,130 views create_profile:data is ok
-INFO 2022-04-18 19:29:54,131 views Supplied mail is:justwalksinfo@gmail.com
-INFO 2022-04-18 19:29:54,133 views No duplicate users found
-INFO 2022-04-18 19:29:54,143 views new user saved with mail: justwalksinfo@gmail.com
-INFO 2022-04-18 19:29:54,236 views password saved
-INFO 2022-04-18 19:29:54,243 views Saving profile info for:
-INFO 2022-04-18 19:29:54,243 views Gino
-INFO 2022-04-18 19:29:54,244 views Strada
-INFO 2022-04-18 19:29:54,246 views justwalksinfo@gmail.com
-INFO 2022-04-18 19:29:54,248 views Creating mail with activation link
-INFO 2022-04-18 19:30:01,083 views registration_step = registration_step
-INFO 2022-04-18 19:33:00,232 views Site under maintenance:False
-INFO 2022-04-21 15:23:46,565 views Site under maintenance:False
-INFO 2022-04-21 15:23:51,005 views ***get_context_data: kwargs{}***
-INFO 2022-04-21 15:23:51,008 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-21 15:23:51,009 views GET:start_date: 2022-04-21
-INFO 2022-04-21 15:23:51,009 views GET:end_date: 2022-06-21
-INFO 2022-04-21 15:23:59,364 views Site under maintenance:False
-INFO 2022-04-21 15:24:02,397 views ***get_context_data: kwargs{}***
-INFO 2022-04-21 15:24:02,397 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-21 15:24:02,400 views GET:start_date: 2022-04-21
-INFO 2022-04-21 15:24:02,401 views GET:end_date: 2022-06-21
-INFO 2022-04-23 13:41:43,625 views Site under maintenance:False
-INFO 2022-04-23 13:47:14,039 views ***get_context_data: kwargs{}***
-INFO 2022-04-23 13:47:14,044 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-23 13:47:14,045 views GET:start_date: 2022-04-23
-INFO 2022-04-23 13:47:14,049 views GET:end_date: 2022-06-23
-INFO 2022-04-23 13:47:21,066 views The user already has this ticket
-INFO 2022-04-23 13:47:21,070 views The user is not queued to the event
-INFO 2022-04-23 13:47:21,075 views The guy can have his money back as:2022-05-06 14:30:00>2022-04-23 13:47:21.075925
-INFO 2022-04-23 13:52:18,462 test this is an information
-ERROR 2022-04-23 13:52:18,463 test this is an error
-INFO 2022-04-24 23:05:24,617 views Site under maintenance:False
-INFO 2022-04-24 23:05:39,289 views ***get_context_data: kwargs{}***
-INFO 2022-04-24 23:05:39,294 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-04-24 23:05:39,295 views GET:start_date: 2022-04-24
-INFO 2022-04-24 23:05:39,297 views GET:end_date: 2022-06-24
-INFO 2022-04-24 23:05:41,135 views The user already has this ticket
-INFO 2022-04-24 23:05:41,138 views The user is not queued to the event
-INFO 2022-04-24 23:05:41,140 views The guy cannot have his money back as:2022-04-22 14:30:00<2022-04-24 23:05:41.140261
-INFO 2022-04-24 23:19:38,562 views The user already has this ticket
-INFO 2022-04-24 23:19:38,566 views The user is not queued to the event
-INFO 2022-04-24 23:19:38,573 views The guy cannot have his money back as:2022-04-22 14:30:00<2022-04-24 23:19:38.573955
-INFO 2022-04-24 23:33:05,433 views The user already has this ticket
-INFO 2022-04-24 23:33:05,452 views The user is not queued to the event
-INFO 2022-04-24 23:33:05,457 views The guy cannot have his money back as:2022-04-23 14:30:00<2022-04-24 23:33:05.457131
-INFO 2022-04-24 23:33:59,885 views The user already has this ticket
-INFO 2022-04-24 23:33:59,887 views The user is not queued to the event
-INFO 2022-04-24 23:33:59,889 views The guy cannot have his money back as:2022-04-23 14:30:00<2022-04-24 23:33:59.889951
-INFO 2022-05-01 13:59:07,640 views Site under maintenance:False
-INFO 2022-05-01 13:59:14,449 views ***get_context_data: kwargs{}***
-INFO 2022-05-01 13:59:14,454 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-05-01 13:59:14,461 views GET:start_date: 2022-05-01
-INFO 2022-05-01 13:59:14,466 views GET:end_date: 2022-07-01
-INFO 2022-05-01 13:59:15,810 views The user already has this ticket
-INFO 2022-05-01 13:59:15,812 views The user is not queued to the event
-INFO 2022-05-01 13:59:15,817 views The guy can have his money back as:2022-05-06 14:30:00>2022-05-01 13:59:15.817619
-INFO 2022-05-01 14:00:33,515 views Site under maintenance:False
-INFO 2022-05-01 14:00:35,868 views ***get_context_data: kwargs{}***
-INFO 2022-05-01 14:00:35,869 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-05-01 14:00:35,874 views GET:start_date: 2022-05-01
-INFO 2022-05-01 14:00:35,877 views GET:end_date: 2022-07-01
-INFO 2022-05-01 14:02:52,030 views ***get_context_data: kwargs{}***
-INFO 2022-05-01 14:02:52,035 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-05-01 14:02:52,039 views GET:start_date: 2022-05-01
-INFO 2022-05-01 14:02:52,042 views GET:end_date: 2022-07-01
-INFO 2022-05-01 14:02:59,076 views The user already has this ticket
-INFO 2022-05-01 14:02:59,080 views The user is not queued to the event
-INFO 2022-05-01 14:02:59,086 views The guy can have his money back as:2022-05-06 14:30:00>2022-05-01 14:02:59.086788
-INFO 2022-05-01 14:04:53,120 views Site under maintenance:False
-INFO 2022-05-01 14:04:58,408 views ***get_context_data: kwargs{}***
-INFO 2022-05-01 14:04:58,410 views filter_mode:all, verranno mostrate tutte le attivita
-INFO 2022-05-01 14:04:58,418 views GET:start_date: 2022-05-01
-INFO 2022-05-01 14:04:58,423 views GET:end_date: 2022-07-01
+INFO 2022-05-20 00:52:30,404 views +++ user_form cleaned_data:{'first_name': 'rrsa', 'last_name': 'Bortolan', 'email': 'flavio.bortolan@gmail.come', 'password': 'Margherita1', 'repeat_password': 'Margherita1'}
+INFO 2022-05-20 00:52:30,415 views cleaned mail field value =flavio.bortolan@gmail.come
+INFO 2022-05-20 00:52:30,418 views create_profile:data is ok
+INFO 2022-05-20 00:52:30,421 views Supplied mail is:flavio.bortolan@gmail.come
+INFO 2022-05-20 00:52:30,432 views No duplicate users found
+INFO 2022-05-20 00:52:30,460 views new user saved with mail: flavio.bortolan@gmail.come
+INFO 2022-05-20 00:52:30,659 views password saved
+INFO 2022-05-20 00:52:30,670 views Saving profile info for:
+INFO 2022-05-20 00:52:30,673 views rrsa
+INFO 2022-05-20 00:52:30,679 views Bortolan
+INFO 2022-05-20 00:52:30,690 views flavio.bortolan@gmail.come
+INFO 2022-05-20 00:52:30,695 views Creating mail with activation link
+INFO 2022-05-20 00:52:36,989 views registration_step = registration_step

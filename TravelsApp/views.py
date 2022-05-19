@@ -1,3 +1,4 @@
+from inspect import currentframe, getframeinfo
 
 from django.utils.translation import gettext as _
 from django.shortcuts import render
@@ -864,7 +865,7 @@ class BuyTicketView(TemplateView):
                     user_form.fields['password'].widget = user_form.fields['password'].hidden_widget()
                     user_form.fields['repeat_password'].widget = user_form.fields['repeat_password'].hidden_widget()
                     user_form.fields['email'].widget = user_form.fields['email'].hidden_widget()
-                    user_form.fields['last_name'].widget = user_form.fields['last_name'].hidden_widget()
+                    #user_form.fields['last_name'].widget = user_form.fields['last_name'].hidden_widget()
 
                     context['user_form'] = user_form
 
@@ -913,37 +914,45 @@ class BuyTicketView(TemplateView):
 
             elif kwargs['cmd'] == 'receive_minor_name':
 
+                logger.info('#'+str(getframeinfo(currentframe()).lineno) + ' receive_minor_name')
+
                 #build minor name using name plus mail of parent (the parent must be the current user, also for legal reasons)
                 minor_name = request.POST.get('first_name')
                 minor_last_name = request.POST.get('last_name')
 
                 minor_mail =  self.minor_mail_from_name(minor_name, minor_last_name, request.user)
-                friend_match = User.objects.filter(email = minor_mail)
+                logger.info('#'+str(getframeinfo(currentframe()).lineno) + 'searching minor_mail:' + minor_mail)
+                kid_match = User.objects.filter(email = minor_mail)
 
                 #check if kid's mail corresponds to a user
-                if friend_match.count()>0:
-                    logger.info('The friend is already a member')
-                    friend = friend_match[0]
+                if kid_match.count()>0:
+                    logger.info('#'+str(getframeinfo(currentframe()).lineno) + ' The kid is already a member')
+
+                    kid = kid_match[0]
 
                     #check if friend is already subscribed to the event
                     e = Event.objects.get(id=context['pk'])
-                    if e.partecipants.filter(email = friend.email ).count()>0:
-                        logger.info('friend is already subscribed')
-                        return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="friend_already_subscibed", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend.id)
+                    if e.partecipants.filter(email = kid.email ).count()>0:
 
-                    #redirect to buy ticket for him
+                        logger.info('#'+str(getframeinfo(currentframe()).lineno) + ' kid is already subscribed')
+                        return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="friend_already_subscibed", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = kid.id)
+
+                    #redirect to ticket confirmation for the kid
                     else:
-                        return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="confirmation", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = friend.id)
+                        return redirect('TravelsApp:buyticket', pk = context['pk'], buy_step ="confirmation", cmd='init', total = 0, credits_to_use = 0, order_id = 0, friend_id = kid.id)
 
                 #kid needs registration
                 else:
-                    logger.info(minor_name + ' has to register')
+                    logger.info('#'+str(getframeinfo(currentframe()).lineno) + ' ' + minor_name + ' has to register')
 
                     user_form = UserForm( error_class = DivErrorList)
                     profile_form = UserProfileInfoForm( error_class = DivErrorList)
 
                     user_form.fields['first_name'].widget.attrs['value'] = minor_name
                     user_form.fields['first_name'].widget.attrs['readonly'] = True
+
+                    user_form.fields['last_name'].widget.attrs['value'] = minor_last_name
+                    user_form.fields['last_name'].widget.attrs['readonly'] = True
 
                     user_form.fields['email'].widget.attrs['value'] = minor_mail
                     user_form.fields['email'].widget = user_form.fields['email'].hidden_widget()
@@ -962,7 +971,8 @@ class BuyTicketView(TemplateView):
             if kwargs['cmd'] == 'receive_friends_data':
 
                 friend_mail = request.POST.get('email')
-                logger.info('+++received email:' + str(friend_mail))
+
+                logger.info('#'+str(getframeinfo(currentframe()).lineno) + ' +++received email:' + str(friend_mail))
 
                 tmp_data = request.POST.copy()
                 tmp_data['email'] = friend_mail
@@ -996,6 +1006,8 @@ class BuyTicketView(TemplateView):
                     logger.info('poop')
 
             if kwargs['cmd'] == 'receive_minor_data':
+
+                logger.info('#'+str(getframeinfo(currentframe()).lineno)  + ' receive_minor_data')
 
                 minor_mail = \
                 self.minor_mail_from_name(request.POST.get('first_name'), request.POST.get('last_name'), request.user)

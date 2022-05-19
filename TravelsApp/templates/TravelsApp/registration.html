@@ -23,10 +23,10 @@
       {% elif registration_step == 'activation_link_sent' %}
 
         <div class="w3-container w3-blue">
-          <h2>Ti abbiamo spedito una mail all'indirizzo: <br>
-              <b>{{ email }}</b>. <br> </h2>
+          <h2>Ti abbiamo spedito una mail all'indirizzo: <br><br>
+              <u><b>{{ email }}</b></u> <br> <br></h2>
           <h2>In essa trovarei un link per attivare il tuo account.</h2>
-          <h2>Se non ricevi la mail ricontrolla che l'indirizzo {{ email }} sia corretto.<br>
+          <h2>Se non ricevi la mail ricontrolla che l'indirizzo <u><b>{{ email }}</b></u> sia corretto.<br>
               Controlla inoltre che non sia stata classificata come spam o che non siano presenti
               impostazioni della casella di posta che impediscano la ricezione di mail da indirizzi non conosciuti o mail contenenti link.
            </h2>

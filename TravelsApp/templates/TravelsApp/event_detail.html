@@ -15,6 +15,98 @@
         </div>
 
       </div>
+
+      <!-- !!!! EXPERIMENTAL: duplicates the buttons at botton  -->
+      {% if user.is_authenticated %}
+      <!-- Bottom panel with properties -->
+      <div class="w3-row " >
+          {% if user_already_has_this_ticket  %}
+
+            {% if can_ask_refund %}
+              <form action="{% url 'TravelsApp:ask_refund' pk=event.id refund_step=1%}" method="get">
+                  {% csrf_token %}
+                <div class="w3-center">
+                  <button class="w3-btn w3-blue w3-block w3-round-large" type="submit">Chiedi rimborso</button>
+                </div>
+
+                <br>
+              </form>
+
+            {% else %}
+
+              <div class="w3-center w3-orange w3-block w3-round-large">
+                <p>Il biglietto non è più rimborsabile</p>
+              </div>
+
+            {% endif %}
+
+            <!-- <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='partecipant_selection' cmd='receive_user_selected' total=0 credits_to_use=0 order_id=0 friend_id='-1'%}" method="post"> -->
+            <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='conditions_acceptance' cmd='acceptance_for_friend' total=0 credits_to_use=0 order_id=0 friend_id='-1' %}" method="POST">
+            {% csrf_token %}
+            <div class="w3-center">
+              <button class="w3-btn w3-blue w3-block w3-round-large" type="submit">Compra per un altra persona</button>
+            </div>
+
+            <br>
+            </form>
+
+          {% elif queued_to_this_event %}
+            <form action="{% url 'TravelsApp:queue_to_event' pk=event.id command='remove_me' %}" method="get">
+
+              <div class="w3-center">
+                <h2>Sei in coda per questo evento. Premi il pulsante qui sotto per essere rimosso dalla coda. </h2>
+                <button class="w3-btn w3-blue w3-block w3-round-large" type="submit">Rimuovimi dalla coda!</button>
+              </div>
+
+              <br>
+
+            </form>
+          {% elif event.partecipants.count < event.activity.maxNumPartecipants %}
+          <!--
+          <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='partecipant_selection' cmd='init' total=0 credits_to_use=0 order_id=0 friend_id='-1' %}" method="get">
+          -->
+          <form action="{% url 'TravelsApp:buyticket' pk=event.id buy_step='conditions_acceptance' cmd='acceptance_for_me' total=0 credits_to_use=0 order_id=0 friend_id='-1' %}" method="POST">
+
+          {% csrf_token %}
+            <div class="w3-center">
+              <button class="w3-btn w3-blue w3-block w3-round-large" type="submit">Acquista biglietto!</button>
+            </div>
+
+            <br>
+
+          </form>
+
+          {% else %}
+          <form action="{% url 'TravelsApp:queue_to_event' pk=event.id command='add_me' %}" method="get">
+
+            <div class="w3-center">
+                <h2>Questo evento è pieno! Permi il tasto qui sotto per essere aggiunto alla coda. Sarai informato via mail quando si libera un posto.</h2>
+              <button class="w3-btn w3-blue w3-block w3-round-large" type="submit">Add me to the queue!</button>
+            </div>
+
+            <br>
+
+          </form>
+
+          {% endif %}
+
+      {% else %}
+        <form action="{% url 'TravelsApp:register' code='0' %}" method="get">
+
+          <div class="w3-center">
+            <button class="w3-btn w3-blue w3-block w3-round-large" type="submit">Registrati al sito per acquistare</button>
+          </div>
+
+          <br>
+
+        </form>
+
+
+      </div>
+      {% endif %}
+      <!-- END EXPERIMENTAL  -->
+
+
       <!-- container for image and right panel  -->
       <div class="w3-row" >
 
@@ -113,7 +205,7 @@
               <p><b>Cosa portare: </b>{{ event.activity.whatToBring }}</p>
               {% endif %}
               <br><br>
-          </div>
+        </div>
           <br>
           <br>
 
@@ -187,9 +279,9 @@
 
           {% endif %}
 
-      {% endif %}
-      </div>
 
+      </div>
+      {% endif %}
 
   </div>
 
