@@ -648,3 +648,15 @@ INFO 2022-05-01 14:00:35,868 views ***get_context_data: kwargs{}***
 INFO 2022-05-01 14:00:35,869 views filter_mode:all, verranno mostrate tutte le attivita
 INFO 2022-05-01 14:00:35,874 views GET:start_date: 2022-05-01
 INFO 2022-05-01 14:00:35,877 views GET:end_date: 2022-07-01
+INFO 2022-05-01 14:02:52,030 views ***get_context_data: kwargs{}***
+INFO 2022-05-01 14:02:52,035 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-05-01 14:02:52,039 views GET:start_date: 2022-05-01
+INFO 2022-05-01 14:02:52,042 views GET:end_date: 2022-07-01
+INFO 2022-05-01 14:02:59,076 views The user already has this ticket
+INFO 2022-05-01 14:02:59,080 views The user is not queued to the event
+INFO 2022-05-01 14:02:59,086 views The guy can have his money back as:2022-05-06 14:30:00>2022-05-01 14:02:59.086788
+INFO 2022-05-01 14:04:53,120 views Site under maintenance:False
+INFO 2022-05-01 14:04:58,408 views ***get_context_data: kwargs{}***
+INFO 2022-05-01 14:04:58,410 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-05-01 14:04:58,418 views GET:start_date: 2022-05-01
+INFO 2022-05-01 14:04:58,423 views GET:end_date: 2022-07-01
