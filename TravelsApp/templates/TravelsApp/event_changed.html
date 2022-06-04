@@ -3,7 +3,6 @@
 
   <body>
 
-
     {% if change_type == 'event_date_changed' %}
     <!-- Subject is a hidden field from wich we will exctract the subject of the mail  -->
       <p  id="Subject" hidden> Cambiamento data evento {{ event.activity.name }}, {{  event.date }} ->> {{ new_date_or_time }}</p>
@@ -16,10 +15,21 @@
 
     {% elif change_type == 'event_confirmed' %}
       <p  id="Subject" hidden> Conferma evento {{ event.activity.name }}, data: {{  event.date }}</p>
+
+    {% elif change_type == 'event_incoming' %}
+        <p  id="Subject" hidden> Evento in arrivo: "{{ event.activity.name }}", in data {{  event.date }}</p>
+
     {% endif %}
 
     <p>Ciao <b>{{ recipient.first_name }}!</b>, <br>
-    Ti informiamo che{{ change_reason }} l'evento in oggetto
+
+    {% if change_type != 'event_incoming' %}
+      Ti informiamo che{{ change_reason }} l'evento in oggetto
+    {% else %}
+      E' in arrivo l'evento "{{ event.activity.name }}" in data {{ event.date }}<br>
+      {{ event.activity.description }}<br>
+      Ci sono ancora posti a disposizione, se non vuoi perdertelo accedi al sito e inscriviti!<br>
+    {% endif %}
 
     {% if change_type == 'event_date_changed' %}
 
@@ -28,7 +38,7 @@
       Ci dispiace per l'inconveniente e ti ringraziamo per la comprensione.<br>
 
       Ti preghiamo di confermare la partecipazione rispondendo a questa mail includendo
-      nel testo del messaggio le parole 'si, partecipo' opppure 'non partecipo' in caso contrario.<br>
+      nel testo del messaggio le parole 'si, partecipo' oppure 'non partecipo' in caso contrario.<br>
 
     {% elif change_type == 'event_cancelled'%}
 
@@ -52,6 +62,11 @@
     {% if notes != '' %}
     <p>{{ notes }}</p>
     {% endif %}
+
+    Accedi al sito per vedere i dettagli dell'evento:
+    <br>
+    <a href="{{ server_address }}/{%   url 'TravelsApp:single' pk=event.id %}"> Link evento</a> <br>
+    <br>
 
     Se vuoi chattare con gli altri partecipanti puoi usare la seguente chat Telegram:<br>
     <br>

@@ -18,7 +18,7 @@
 
       <!-- !!!! EXPERIMENTAL: duplicates the buttons at botton  -->
       {% if user.is_authenticated %}
-      <!-- Bottom panel with properties -->
+
       <div class="w3-row " >
           {% if user_already_has_this_ticket  %}
 
@@ -100,7 +100,6 @@
           <br>
 
         </form>
-
 
       </div>
       {% endif %}
@@ -190,7 +189,7 @@
 
       </div>
 
-      {% if user.is_authenticated %}
+
       <!-- Bottom panel with properties -->
       <div class="w3-row " >
         <div class="w3-container w3-card-4 w3-pale-blue w3-mobile w3-round-xxlarge">
@@ -209,6 +208,7 @@
           <br>
           <br>
 
+       {% if user.is_authenticated %}
           {% if user_already_has_this_ticket  %}
 
             {% if can_ask_refund %}
@@ -279,9 +279,20 @@
 
           {% endif %}
 
+      {% else %}
+        <form action="{% url 'TravelsApp:register' code='0' %}" method="get">
+
+          <div class="w3-center">
+            <button class="w3-btn w3-blue w3-block w3-round-large" type="submit">Registrati al sito per acquistare</button>
+          </div>
+
+          <br>
+
+        </form>
+     {% endif %}
 
       </div>
-      {% endif %}
+
 
   </div>
 

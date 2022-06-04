@@ -225,16 +225,6 @@ def test_logging(msg):
     logger.info('this is an information')
     logger.error('this is an error')
 
-def test_OutMail_create_from_event_change(id):
-
-    event = Event.objects.get(id=id)
-
-    for user in event.partecipants.all():
-        om = OutMail.create_from_event_change(user, event,  'event_confirmed', '', '25 April 2022', "Data l'instabilità del meteo ti consigliamo di portare un k-way e una felpa.")
-        r=flush(om)
-
-    #print(om.subject)
-    #print(om.html)
 
 def populate_dummy_users(users_count = 10):
 
@@ -262,19 +252,39 @@ def populate_dummy_users(users_count = 10):
         pi.save()
         print('UserProfileInfo saved')
         id=id+1
-        
+
+def test_OutMail_create_from_event_change(id, target_type):
+
+    event = Event.objects.get(id=id)
+
+    if target_type == "event_partecipants":
+
+        tgt = event.partecipants.all()
+
+    elif target_type=="all":
+
+        tgt = User.objects.all()
+        #tgt = User.objects.get(email ="flavio.bortolan@gmail.com")
+
+    for user in tgt:
+        om = OutMail.create_from_event_change(user, event, "https://flaviobortolan.pythonanywhere.com/", 'event_incoming', '', '', "")
+        r=flush(om)
+
+    #print(om.subject)
+    #print(om.html)
+
 # Create your tests here.
 if __name__ == '__main__':
 
-    populate_dummy_users(users_count = 10)
+    #populate_dummy_users(users_count = 10)
     #test_mail()
     #test_Order_open_close()
     #test_OutMail_create_from_site_subscription_completed()
     #print_event_partecipants_mail_name_surname(21)
-    #print_event_partecipants_name_surname(21)
+    #print_event_partecipants_name_surname(27)
     #print_users()
     #print_outmail_name_surname(19)
     #test_request('http://127.0.0.1:8000/TravelsApp/events/all/')
     #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
     #test_logging("ciao ciao")
-    #test_OutMail_create_from_event_change(21)
+    test_OutMail_create_from_event_change(27, 'all')

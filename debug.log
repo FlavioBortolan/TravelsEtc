@@ -271,3 +271,27 @@ INFO 2022-05-20 00:52:30,679 views Bortolan
 INFO 2022-05-20 00:52:30,690 views flavio.bortolan@gmail.come
 INFO 2022-05-20 00:52:30,695 views Creating mail with activation link
 INFO 2022-05-20 00:52:36,989 views registration_step = registration_step
+INFO 2022-06-02 12:48:28,814 views Site under maintenance:False
+INFO 2022-06-02 12:48:42,145 views ***get_context_data: kwargs{}***
+INFO 2022-06-02 12:48:42,147 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-02 12:48:42,148 views GET:start_date: 2022-06-02
+INFO 2022-06-02 12:48:42,148 views GET:end_date: 2022-08-02
+INFO 2022-06-02 12:59:48,471 views Site under maintenance:False
+INFO 2022-06-02 12:59:51,184 views ***get_context_data: kwargs{}***
+INFO 2022-06-02 12:59:51,187 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-02 12:59:51,187 views GET:start_date: 2022-06-02
+INFO 2022-06-02 12:59:51,187 views GET:end_date: 2022-08-02
+INFO 2022-06-04 02:32:37,011 views Site under maintenance:False
+INFO 2022-06-04 02:32:38,307 views Site under maintenance:False
+INFO 2022-06-04 02:32:42,528 views ***get_context_data: kwargs{}***
+INFO 2022-06-04 02:32:42,532 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-04 02:32:42,534 views GET:start_date: 2022-06-04
+INFO 2022-06-04 02:32:42,534 views GET:end_date: 2022-08-04
+INFO 2022-06-04 02:33:12,675 views Site under maintenance:False
+INFO 2022-06-04 02:33:14,317 views ***get_context_data: kwargs{}***
+INFO 2022-06-04 02:33:14,319 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-04 02:33:14,325 views GET:start_date: 2022-06-04
+INFO 2022-06-04 02:33:14,328 views GET:end_date: 2022-08-04
+INFO 2022-06-04 02:33:15,587 views The user does not have this ticket
+INFO 2022-06-04 02:33:15,590 views The user is not queued to the event
+INFO 2022-06-04 02:33:15,595 views The guy cannot have his money back as:2022-06-03 15:00:00<2022-06-04 02:33:15.595459
