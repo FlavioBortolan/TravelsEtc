@@ -16,7 +16,7 @@ django.setup()
 User = get_user_model()
 from TravelsApp.models import Ticket
 
-
+ 
 
 if __name__ == '__main__':
 
