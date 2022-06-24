@@ -18,6 +18,7 @@ class Mailer:
         self.sender_email = sender_email
         self.smtp_server = smtp_server
         self.password = password
+        self.logged_in = False
 
         port = 465  # For SSL
         context = ssl.create_default_context()
@@ -25,9 +26,13 @@ class Mailer:
         self.server =  smtplib.SMTP_SSL(smtp_server, port, context=context)
 
     def login(self):
-        return self.server.login(self.sender_email, self.password)
+        self.logged_in=True
+        r = self.server.login(self.sender_email, self.password)
+        print('login:' + str(r))
+        return r
 
     def quit(self):
+        self.logged_in=False
         return self.server.quit()
 
     def send_mail(self, receiver_email, subject, txt, html):
@@ -39,7 +44,9 @@ class Mailer:
 
         msg = self.build_message()
 
-        return self.server.sendmail(self.sender_email, self.receiver_email, msg)
+        r = self.server.sendmail(self.sender_email, self.receiver_email, msg)
+        print('mail send:' + str(r))
+        return r
 
     def build_message(self):
 
@@ -67,11 +74,14 @@ class Mailer:
 
         print('sending mail to ' + om.recipient.email + ':' + om.subject)
         r = self.send_mail(om.recipient.email, om.subject, om.html, om.html)
-        print(str(r))
+
 
         om.status = 'notified'
         om.save()
 
         self.quit()
-        print('Success!!')
+
+        if r == True:
+            print('Success!!')
+
         return r

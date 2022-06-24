@@ -273,12 +273,13 @@ def flush(om):
 
         #send mail
         r = m.flush_outmail(om)
+        return r
 
     except Exception as e:
         logger.error('Could not send mail: ' + str(e))
         return False,
 
-    return True
+
 
 def register_old(request):
 

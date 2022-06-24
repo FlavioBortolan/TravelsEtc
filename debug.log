@@ -295,3 +295,432 @@ INFO 2022-06-04 02:33:14,328 views GET:end_date: 2022-08-04
 INFO 2022-06-04 02:33:15,587 views The user does not have this ticket
 INFO 2022-06-04 02:33:15,590 views The user is not queued to the event
 INFO 2022-06-04 02:33:15,595 views The guy cannot have his money back as:2022-06-03 15:00:00<2022-06-04 02:33:15.595459
+INFO 2022-06-17 00:40:10,854 views Site under maintenance:False
+INFO 2022-06-17 00:40:21,269 views ***get_context_data: kwargs{}***
+INFO 2022-06-17 00:40:21,272 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-17 00:40:21,273 views GET:start_date: 2022-06-17
+INFO 2022-06-17 00:40:21,274 views GET:end_date: 2022-08-17
+INFO 2022-06-17 00:43:23,173 views Site under maintenance:False
+INFO 2022-06-17 00:43:24,746 views ***get_context_data: kwargs{}***
+INFO 2022-06-17 00:43:24,748 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-17 00:43:24,749 views GET:start_date: 2022-06-17
+INFO 2022-06-17 00:43:24,750 views GET:end_date: 2022-08-17
+INFO 2022-06-17 00:43:25,596 views The user already has this ticket
+INFO 2022-06-17 00:43:25,599 views The user is not queued to the event
+INFO 2022-06-17 00:43:25,600 views The guy can have his money back as:2022-06-17 15:00:00>2022-06-17 00:43:25.600968
+ERROR 2022-06-17 00:44:12,458 views Could not send mail: (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials s6-20020a1cf206000000b0039c975aa553sm3673236wmc.25 - gsmtp')
+ERROR 2022-06-17 00:44:17,988 views Could not send mail: (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials h18-20020a5d4312000000b002167efdd549sm2983916wrq.38 - gsmtp')
+ERROR 2022-06-17 00:44:23,399 views Could not send mail: (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials j13-20020adfea4d000000b00219e77e489fsm2939233wrn.17 - gsmtp')
+ERROR 2022-06-17 00:44:28,922 views Could not send mail: (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials e18-20020adfe7d2000000b00219f9829b71sm2863737wrn.56 - gsmtp')
+ERROR 2022-06-17 00:44:34,356 views Could not send mail: (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials o15-20020a05600c4fcf00b0039c811077d3sm3700955wmq.22 - gsmtp')
+ERROR 2022-06-17 00:44:39,904 views Could not send mail: (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials o18-20020a5d6852000000b0021552eebde6sm2909845wrw.32 - gsmtp')
+INFO 2022-06-17 00:45:13,559 views ***get_context_data: kwargs{}***
+INFO 2022-06-17 00:45:13,560 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-17 00:45:13,561 views GET:start_date: 2022-06-17
+INFO 2022-06-17 00:45:13,561 views GET:end_date: 2022-08-17
+ERROR 2022-06-17 00:45:48,411 views Could not send mail: (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials r184-20020a1c2bc1000000b0039749b01ea7sm4550948wmr.32 - gsmtp')
+ERROR 2022-06-17 00:45:53,737 views Could not send mail: (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials m42-20020a05600c3b2a00b003973435c517sm3821885wms.0 - gsmtp')
+ERROR 2022-06-17 00:51:18,352 views Could not send mail: (535, b'5.7.8 Username and Password not accepted. Learn more at\n5.7.8  https://support.google.com/mail/?p=BadCredentials a7-20020a5d4d47000000b002100e86319asm3017797wru.78 - gsmtp')
+INFO 2022-06-17 01:08:09,635 views Site under maintenance:False
+ERROR 2022-06-17 01:09:12,451 views Could not send mail: [Errno 11001] getaddrinfo failed
+ERROR 2022-06-17 01:10:33,039 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 01:19:42,507 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 01:20:54,592 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 01:23:20,192 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:11:23,401 views Could not send mail: (554, b'6.6.0 Error sending message for delivery.')
+ERROR 2022-06-17 13:11:28,687 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:11:34,042 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:11:39,403 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:11:44,841 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:11:50,283 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:11:55,640 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:12:01,080 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:12:06,522 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:12:11,883 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:12:17,163 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:12:22,567 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:12:27,963 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:12:33,321 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:12:38,927 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:12:49,482 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:12:54,923 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:13:00,287 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:13:05,804 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:13:11,243 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:13:16,683 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:13:22,042 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:13:27,453 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:13:32,768 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:13:38,122 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:13:43,407 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:13:48,766 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:13:54,205 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:13:59,660 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:14:05,242 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:14:10,605 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:14:16,044 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:14:21,564 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:14:26,927 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:14:32,287 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:14:37,725 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:14:43,163 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:14:48,610 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:14:54,045 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:14:59,406 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:15:04,765 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:15:10,045 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:16:24,286 views Could not send mail: (554, b'6.6.0 Error sending message for delivery.')
+ERROR 2022-06-17 13:16:29,785 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:16:35,175 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:16:40,554 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:16:45,825 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:16:51,168 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:16:56,607 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 13:17:03,007 views Could not send mail: Connection unexpectedly closed
+INFO 2022-06-17 22:38:48,174 views Site under maintenance:False
+ERROR 2022-06-17 22:49:32,300 views Could not send mail: (554, b'6.6.0 Error sending message for delivery.')
+ERROR 2022-06-17 22:49:37,675 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:49:43,099 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:49:48,481 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:49:53,748 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:49:59,270 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:50:04,651 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:50:09,993 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:51:23,428 views Could not send mail: (554, b'6.6.0 Error sending message for delivery.')
+ERROR 2022-06-17 22:51:28,789 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:51:34,143 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:51:39,519 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:51:44,781 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:51:50,071 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:51:55,427 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:52:00,786 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:52:06,147 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:52:11,430 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:52:16,700 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:52:21,988 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:52:27,346 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:52:32,633 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:52:38,073 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:52:43,429 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:52:48,944 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:52:54,301 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:52:59,676 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:53:04,948 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:53:10,307 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:53:15,741 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:53:21,025 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:53:26,385 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:53:31,672 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:53:36,958 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:53:42,316 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:53:47,749 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:53:53,031 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:53:58,305 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:54:03,686 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:54:09,103 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:54:14,393 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:54:19,834 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:54:25,190 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 22:54:30,553 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:12:17,932 views Could not send mail: (554, b'6.6.0 Error sending message for delivery.')
+ERROR 2022-06-17 23:12:23,205 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:12:28,489 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:12:33,922 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:12:39,363 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:12:44,733 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:12:50,088 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:12:55,450 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:13:00,963 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:13:06,318 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:13:11,696 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:13:17,047 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:13:22,319 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:13:27,683 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:13:33,040 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:13:38,329 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:13:43,691 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:13:49,044 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:13:54,406 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:13:59,761 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:14:05,134 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:14:10,559 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:14:15,844 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:14:21,210 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:14:26,559 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:14:31,929 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:14:37,357 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:14:42,735 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:14:48,086 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:14:53,525 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:14:58,885 views Could not send mail: Connection unexpectedly closed
+ERROR 2022-06-17 23:15:04,165 views Could not send mail: Connection unexpectedly closed
+INFO 2022-06-18 14:49:25,542 views Site under maintenance:False
+INFO 2022-06-18 14:49:27,778 views ***get_context_data: kwargs{}***
+INFO 2022-06-18 14:49:27,781 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-18 14:49:27,782 views GET:start_date: 2022-06-18
+INFO 2022-06-18 14:49:27,783 views GET:end_date: 2022-08-18
+INFO 2022-06-18 14:50:07,778 views Site under maintenance:False
+INFO 2022-06-18 14:50:09,939 views ***get_context_data: kwargs{}***
+INFO 2022-06-18 14:50:09,939 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-18 14:50:09,941 views GET:start_date: 2022-06-18
+INFO 2022-06-18 14:50:09,944 views GET:end_date: 2022-08-18
+INFO 2022-06-18 14:50:18,248 views The user already has this ticket
+INFO 2022-06-18 14:50:18,249 views The user is not queued to the event
+INFO 2022-06-18 14:50:18,251 views The guy cannot have his money back as:2022-06-17 15:00:00<2022-06-18 14:50:18.251829
+INFO 2022-06-18 15:13:05,338 views Site under maintenance:False
+INFO 2022-06-18 16:17:47,321 views Site under maintenance:False
+INFO 2022-06-18 16:17:50,258 views ***get_context_data: kwargs{}***
+INFO 2022-06-18 16:17:50,259 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-18 16:17:50,260 views GET:start_date: 2022-06-18
+INFO 2022-06-18 16:17:50,261 views GET:end_date: 2022-08-18
+INFO 2022-06-18 16:17:55,792 views The user already has this ticket
+INFO 2022-06-18 16:17:55,794 views The user is not queued to the event
+INFO 2022-06-18 16:17:55,797 views The guy can have his money back as:2022-07-01 15:00:00>2022-06-18 16:17:55.797163
+ERROR 2022-06-18 16:19:26,667 views Could not send mail: name 'false' is not defined
+ERROR 2022-06-18 16:19:26,677 views Could not send mail: name 'false' is not defined
+ERROR 2022-06-18 16:19:26,689 views Could not send mail: name 'false' is not defined
+ERROR 2022-06-18 16:19:26,699 views Could not send mail: name 'false' is not defined
+ERROR 2022-06-18 16:19:26,713 views Could not send mail: name 'false' is not defined
+ERROR 2022-06-18 16:19:26,724 views Could not send mail: name 'false' is not defined
+ERROR 2022-06-18 16:19:26,735 views Could not send mail: name 'false' is not defined
+ERROR 2022-06-18 16:19:26,745 views Could not send mail: name 'false' is not defined
+ERROR 2022-06-18 16:19:26,755 views Could not send mail: name 'false' is not defined
+INFO 2022-06-18 16:24:13,312 views Site under maintenance:False
+INFO 2022-06-18 16:24:16,678 views ***get_context_data: kwargs{}***
+INFO 2022-06-18 16:24:16,681 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-18 16:24:16,682 views GET:start_date: 2022-06-18
+INFO 2022-06-18 16:24:16,683 views GET:end_date: 2022-08-18
+INFO 2022-06-18 16:24:17,712 views The user already has this ticket
+INFO 2022-06-18 16:24:17,713 views The user is not queued to the event
+INFO 2022-06-18 16:24:17,715 views The guy can have his money back as:2022-07-01 15:00:00>2022-06-18 16:24:17.715182
+INFO 2022-06-18 16:24:24,221 views *** get_refund_coices ***
+INFO 2022-06-18 16:24:24,223 views Ticket id = 170, price = 0, tot_card = 0
+INFO 2022-06-18 16:24:24,223 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
+INFO 2022-06-18 16:24:25,399 views Post: refund requested: credits
+INFO 2022-06-18 16:24:25,405 views *** get_refund_coices ***
+INFO 2022-06-18 16:24:25,408 views Ticket id = 170, price = 0, tot_card = 0
+INFO 2022-06-18 16:24:25,409 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
+INFO 2022-06-18 16:24:26,526 views ***get_context_data: kwargs{}***
+INFO 2022-06-18 16:24:26,526 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-18 16:24:26,528 views GET:start_date: 2022-06-18
+INFO 2022-06-18 16:24:26,531 views GET:end_date: 2022-08-18
+INFO 2022-06-18 16:24:27,442 views The user does not have this ticket
+INFO 2022-06-18 16:24:27,444 views The user is not queued to the event
+INFO 2022-06-18 16:24:27,447 views The guy cannot have his money back as:2022-07-01 15:00:00<2022-06-18 16:24:27.447286
+INFO 2022-06-18 16:24:29,491 views BuyTicket POST was called
+INFO 2022-06-18 16:24:29,491 views buy_step=conditions_acceptance
+INFO 2022-06-18 16:24:29,492 views cmd=acceptance_for_me
+INFO 2022-06-18 16:24:29,495 views pk=30
+INFO 2022-06-18 16:24:29,495 views context:{'pk': 30, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_me', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001CCCDA2C970>}
+INFO 2022-06-18 16:25:38,157 views BuyTicket POST was called
+INFO 2022-06-18 16:25:38,157 views buy_step=conditions_acceptance
+INFO 2022-06-18 16:25:38,158 views cmd=acceptance_for_me
+INFO 2022-06-18 16:25:38,161 views pk=30
+INFO 2022-06-18 16:25:38,162 views context:{'pk': 30, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_me', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001CCCDC05070>}
+INFO 2022-06-18 16:32:39,044 views BuyTicket POST was called
+INFO 2022-06-18 16:32:39,045 views buy_step=conditions_acceptance
+INFO 2022-06-18 16:32:39,047 views cmd=acceptance_for_me
+INFO 2022-06-18 16:32:39,053 views pk=30
+INFO 2022-06-18 16:32:39,053 views context:{'pk': 30, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_me', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000028EB4B2DD30>}
+INFO 2022-06-18 16:32:45,151 views BuyTicket GET was called
+INFO 2022-06-18 16:32:45,151 views BuyTicket.get:partecipant_selection init
+INFO 2022-06-18 16:32:45,152 views cmd=init
+INFO 2022-06-18 16:32:46,516 views BuyTicket POST was called
+INFO 2022-06-18 16:32:46,516 views cmd=receive_user_selected
+INFO 2022-06-18 16:32:46,522 views BuyTicket GET was called
+INFO 2022-06-18 16:32:46,523 views BuyTicket.get:confirmation init
+INFO 2022-06-18 16:32:46,545 views BuyTicketView: confirmation, context = {'pk': 30, 'buy_step': 'confirmation', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 197, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000028EB4A7F580>, 'subs_exp_date': datetime.date(2022, 8, 16), 'subscription_expired': False, 'year_subscription_price': 20, 'sub_total': 0, 'event': <Event: ID: 30, Date: 2022-07-03Sentiero del Silenzio Gallio(VI)>}
+INFO 2022-06-18 16:32:50,939 views BuyTicket GET was called
+INFO 2022-06-18 16:32:50,940 views BuyTicket.get:confirmed init
+INFO 2022-06-18 16:32:50,941 views Closing order from -confirmed-
+INFO 2022-06-18 16:32:50,984 views Creating mail for order confirmation
+INFO 2022-06-18 16:32:59,804 views ***get_context_data: kwargs{}***
+INFO 2022-06-18 16:32:59,807 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-18 16:32:59,808 views GET:start_date: 2022-06-18
+INFO 2022-06-18 16:32:59,812 views GET:end_date: 2022-08-18
+INFO 2022-06-23 00:07:03,024 views Site under maintenance:False
+INFO 2022-06-23 00:07:11,000 views ***get_context_data: kwargs{}***
+INFO 2022-06-23 00:07:11,003 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-23 00:07:11,004 views GET:start_date: 2022-06-23
+INFO 2022-06-23 00:07:11,006 views GET:end_date: 2022-08-23
+INFO 2022-06-23 00:07:12,506 views The user already has this ticket
+INFO 2022-06-23 00:07:12,508 views The user is not queued to the event
+INFO 2022-06-23 00:07:12,510 views The guy can have his money back as:2022-07-01 15:00:00>2022-06-23 00:07:12.510959
+INFO 2022-06-23 00:07:15,052 views *** get_refund_coices ***
+INFO 2022-06-23 00:07:15,057 views Ticket id = 171, price = 0, tot_card = 0
+INFO 2022-06-23 00:07:15,057 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
+INFO 2022-06-23 00:07:17,084 views Post: refund requested: credits
+INFO 2022-06-23 00:07:17,093 views *** get_refund_coices ***
+INFO 2022-06-23 00:07:17,095 views Ticket id = 171, price = 0, tot_card = 0
+INFO 2022-06-23 00:07:17,096 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
+INFO 2022-06-23 00:07:18,480 views ***get_context_data: kwargs{}***
+INFO 2022-06-23 00:07:18,480 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-23 00:07:18,482 views GET:start_date: 2022-06-23
+INFO 2022-06-23 00:07:18,484 views GET:end_date: 2022-08-23
+INFO 2022-06-23 00:07:19,579 views The user does not have this ticket
+INFO 2022-06-23 00:07:19,580 views The user is not queued to the event
+INFO 2022-06-23 00:07:19,582 views The guy cannot have his money back as:2022-07-01 15:00:00<2022-06-23 00:07:19.582626
+INFO 2022-06-23 00:07:21,662 views BuyTicket POST was called
+INFO 2022-06-23 00:07:21,662 views buy_step=conditions_acceptance
+INFO 2022-06-23 00:07:21,664 views cmd=acceptance_for_me
+INFO 2022-06-23 00:07:21,667 views pk=30
+INFO 2022-06-23 00:07:21,667 views context:{'pk': 30, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_me', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000020E474EDE50>}
+INFO 2022-06-23 00:07:23,946 views BuyTicket GET was called
+INFO 2022-06-23 00:07:23,946 views BuyTicket.get:partecipant_selection init
+INFO 2022-06-23 00:07:23,948 views cmd=init
+INFO 2022-06-23 00:07:25,540 views BuyTicket POST was called
+INFO 2022-06-23 00:07:25,540 views cmd=receive_user_selected
+INFO 2022-06-23 00:07:25,546 views BuyTicket GET was called
+INFO 2022-06-23 00:07:25,547 views BuyTicket.get:confirmation init
+INFO 2022-06-23 00:07:25,570 views BuyTicketView: confirmation, context = {'pk': 30, 'buy_step': 'confirmation', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 198, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000020E486F8400>, 'subs_exp_date': datetime.date(2022, 8, 16), 'subscription_expired': False, 'year_subscription_price': 20, 'sub_total': 0, 'event': <Event: ID: 30, Date: 2022-07-03Sentiero del Silenzio Gallio(VI)>}
+INFO 2022-06-23 00:07:27,342 views BuyTicket GET was called
+INFO 2022-06-23 00:07:27,343 views BuyTicket.get:confirmed init
+INFO 2022-06-23 00:07:27,344 views Closing order from -confirmed-
+INFO 2022-06-23 00:07:27,391 views Creating mail for order confirmation
+INFO 2022-06-24 00:30:05,394 views Site under maintenance:False
+INFO 2022-06-24 00:30:07,522 views ***get_context_data: kwargs{}***
+INFO 2022-06-24 00:30:07,526 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-24 00:30:07,528 views GET:start_date: 2022-06-24
+INFO 2022-06-24 00:30:07,530 views GET:end_date: 2022-08-24
+INFO 2022-06-24 00:36:04,730 views Site under maintenance:False
+INFO 2022-06-24 00:36:06,901 views ***get_context_data: kwargs{}***
+INFO 2022-06-24 00:36:06,902 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-24 00:36:06,903 views GET:start_date: 2022-06-24
+INFO 2022-06-24 00:36:06,904 views GET:end_date: 2022-08-24
+INFO 2022-06-24 00:36:08,545 views The user already has this ticket
+INFO 2022-06-24 00:36:08,548 views The user is not queued to the event
+INFO 2022-06-24 00:36:08,552 views The guy can have his money back as:2022-07-01 15:00:00>2022-06-24 00:36:08.552708
+INFO 2022-06-24 00:36:11,743 views *** get_refund_coices ***
+INFO 2022-06-24 00:36:11,750 views Ticket id = 172, price = 0, tot_card = 0
+INFO 2022-06-24 00:36:11,751 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
+INFO 2022-06-24 00:36:13,013 views Post: refund requested: credits
+INFO 2022-06-24 00:36:13,023 views *** get_refund_coices ***
+INFO 2022-06-24 00:36:13,028 views Ticket id = 172, price = 0, tot_card = 0
+INFO 2022-06-24 00:36:13,029 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
+INFO 2022-06-24 00:36:14,511 views ***get_context_data: kwargs{}***
+INFO 2022-06-24 00:36:14,512 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-24 00:36:14,514 views GET:start_date: 2022-06-24
+INFO 2022-06-24 00:36:14,517 views GET:end_date: 2022-08-24
+INFO 2022-06-24 00:36:18,954 views The user does not have this ticket
+INFO 2022-06-24 00:36:18,958 views The user is not queued to the event
+INFO 2022-06-24 00:36:18,961 views The guy cannot have his money back as:2022-07-01 15:00:00<2022-06-24 00:36:18.961990
+INFO 2022-06-24 00:36:23,477 views BuyTicket POST was called
+INFO 2022-06-24 00:36:23,479 views buy_step=conditions_acceptance
+INFO 2022-06-24 00:36:23,481 views cmd=acceptance_for_me
+INFO 2022-06-24 00:36:23,485 views pk=30
+INFO 2022-06-24 00:36:23,487 views context:{'pk': 30, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_me', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001DB5248D640>}
+INFO 2022-06-24 00:36:25,728 views BuyTicket GET was called
+INFO 2022-06-24 00:36:25,728 views BuyTicket.get:partecipant_selection init
+INFO 2022-06-24 00:36:25,730 views cmd=init
+INFO 2022-06-24 00:36:29,003 views BuyTicket POST was called
+INFO 2022-06-24 00:36:29,004 views cmd=receive_user_selected
+INFO 2022-06-24 00:36:29,014 views BuyTicket GET was called
+INFO 2022-06-24 00:36:29,015 views BuyTicket.get:confirmation init
+INFO 2022-06-24 00:36:29,051 views BuyTicketView: confirmation, context = {'pk': 30, 'buy_step': 'confirmation', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 199, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001DB5352C520>, 'subs_exp_date': datetime.date(2022, 8, 16), 'subscription_expired': False, 'year_subscription_price': 20, 'sub_total': 0, 'event': <Event: ID: 30, Date: 2022-07-03Sentiero del Silenzio Gallio(VI)>}
+INFO 2022-06-24 00:36:30,515 views BuyTicket GET was called
+INFO 2022-06-24 00:36:30,515 views BuyTicket.get:confirmed init
+INFO 2022-06-24 00:36:30,518 views Closing order from -confirmed-
+INFO 2022-06-24 00:36:30,644 views Creating mail for order confirmation
+INFO 2022-06-24 00:36:33,824 views BuyTicket GET was called
+INFO 2022-06-24 00:36:33,825 views BuyTicket.get:confirmed init
+INFO 2022-06-24 00:36:33,828 views Closing order from -confirmed-
+ERROR 2022-06-24 01:05:13,426 views Could not send mail: [WinError 10060] Impossibile stabilire la connessione. Risposta non corretta della parte connessa dopo l'intervallo di tempo oppure mancata risposta dall'host collegato
+ERROR 2022-06-24 01:10:18,316 views Could not send mail: [WinError 10060] Impossibile stabilire la connessione. Risposta non corretta della parte connessa dopo l'intervallo di tempo oppure mancata risposta dall'host collegato
+INFO 2022-06-24 01:15:56,990 views Site under maintenance:False
+INFO 2022-06-24 01:16:02,663 views Site under maintenance:False
+INFO 2022-06-24 01:16:04,489 views registration_step = registration_step
+INFO 2022-06-24 01:16:37,687 views *** create_profile ***: <tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="flavio" class="w3-input" required="True" maxlength="150" id="id_first_name"></td></tr>
+<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="libero" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
+<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="justwalksinfo@libero.it" class="w3-input" maxlength="254" id="id_email"></td></tr>
+<tr><th><label for="id_password">Password:</label></th><td><input type="password" name="password" class="w3-input" maxlength="128" required id="id_password"></td></tr>
+<tr><th><label for="id_repeat_password">Repeat password:</label></th><td><input type="password" name="repeat_password" class="w3-input" required id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
+<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" value="3401461537" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
+<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
+INFO 2022-06-24 01:16:37,688 views +++ user_form cleaned_data:{'first_name': 'flavio', 'last_name': 'libero', 'email': 'justwalksinfo@libero.it', 'password': 'Margherita1', 'repeat_password': 'Margherita1'}
+INFO 2022-06-24 01:16:37,693 views cleaned mail field value =justwalksinfo@libero.it
+INFO 2022-06-24 01:16:37,694 views create_profile:data is ok
+INFO 2022-06-24 01:16:37,695 views Supplied mail is:justwalksinfo@libero.it
+INFO 2022-06-24 01:16:37,697 views No duplicate users found
+INFO 2022-06-24 01:16:37,714 views new user saved with mail: justwalksinfo@libero.it
+INFO 2022-06-24 01:16:37,986 views password saved
+INFO 2022-06-24 01:16:38,000 views Saving profile info for:
+INFO 2022-06-24 01:16:38,001 views flavio
+INFO 2022-06-24 01:16:38,002 views libero
+INFO 2022-06-24 01:16:38,003 views justwalksinfo@libero.it
+INFO 2022-06-24 01:16:38,004 views Creating mail with activation link
+INFO 2022-06-24 01:16:43,139 views registration_step = registration_step
+INFO 2022-06-24 01:17:13,972 views registration_step = registration_completed
+INFO 2022-06-24 01:17:13,973 views registration_step = registration_step
+INFO 2022-06-24 01:17:24,509 views Site under maintenance:False
+INFO 2022-06-24 01:17:29,520 views ***get_context_data: kwargs{}***
+INFO 2022-06-24 01:17:29,524 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-24 01:17:29,525 views GET:start_date: 2022-06-24
+INFO 2022-06-24 01:17:29,528 views GET:end_date: 2022-08-24
+INFO 2022-06-24 01:17:32,477 views The user does not have this ticket
+INFO 2022-06-24 01:17:32,480 views The user is not queued to the event
+INFO 2022-06-24 01:17:32,485 views The guy cannot have his money back as:2022-07-01 15:00:00<2022-06-24 01:17:32.485412
+INFO 2022-06-24 01:17:35,088 views BuyTicket POST was called
+INFO 2022-06-24 01:17:35,089 views buy_step=conditions_acceptance
+INFO 2022-06-24 01:17:35,092 views cmd=acceptance_for_me
+INFO 2022-06-24 01:17:35,099 views pk=30
+INFO 2022-06-24 01:17:35,100 views context:{'pk': 30, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_me', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000022AD2A11910>}
+INFO 2022-06-24 01:17:37,766 views BuyTicket GET was called
+INFO 2022-06-24 01:17:37,766 views BuyTicket.get:partecipant_selection init
+INFO 2022-06-24 01:17:37,769 views cmd=init
+INFO 2022-06-24 01:17:39,301 views BuyTicket POST was called
+INFO 2022-06-24 01:17:39,302 views cmd=receive_user_selected
+INFO 2022-06-24 01:17:39,314 views BuyTicket GET was called
+INFO 2022-06-24 01:17:39,315 views BuyTicket.get:confirmation init
+INFO 2022-06-24 01:17:39,374 views BuyTicketView: confirmation, context = {'pk': 30, 'buy_step': 'confirmation', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 200, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000022AD2A11A60>, 'subs_exp_date': datetime.date(2023, 6, 24), 'subscription_expired': False, 'year_subscription_price': 20, 'sub_total': 0, 'event': <Event: ID: 30, Date: 2022-07-03Sentiero del Silenzio Gallio(VI)>}
+INFO 2022-06-24 01:17:41,087 views BuyTicket GET was called
+INFO 2022-06-24 01:17:41,088 views BuyTicket.get:confirmed init
+INFO 2022-06-24 01:17:41,096 views Closing order from -confirmed-
+INFO 2022-06-24 01:17:41,185 views Creating mail for order confirmation
+INFO 2022-06-24 13:44:54,184 views Site under maintenance:False
+INFO 2022-06-24 13:44:58,085 views ***get_context_data: kwargs{}***
+INFO 2022-06-24 13:44:58,089 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-24 13:44:58,090 views GET:start_date: 2022-06-24
+INFO 2022-06-24 13:44:58,093 views GET:end_date: 2022-08-24
+INFO 2022-06-24 13:45:00,737 views The user already has this ticket
+INFO 2022-06-24 13:45:00,739 views The user is not queued to the event
+INFO 2022-06-24 13:45:00,741 views The guy can have his money back as:2022-07-01 15:00:00>2022-06-24 13:45:00.741065
+INFO 2022-06-24 13:45:09,431 views Site under maintenance:False
+INFO 2022-06-24 13:45:15,172 views Site under maintenance:False
+INFO 2022-06-24 13:45:24,360 views ***get_context_data: kwargs{}***
+INFO 2022-06-24 13:45:24,361 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-24 13:45:24,363 views GET:start_date: 2022-06-24
+INFO 2022-06-24 13:45:24,365 views GET:end_date: 2022-08-24
+INFO 2022-06-24 13:45:25,418 views The user already has this ticket
+INFO 2022-06-24 13:45:25,419 views The user is not queued to the event
+INFO 2022-06-24 13:45:25,421 views The guy can have his money back as:2022-07-01 15:00:00>2022-06-24 13:45:25.421212
+INFO 2022-06-24 13:45:28,299 views *** get_refund_coices ***
+INFO 2022-06-24 13:45:28,302 views Ticket id = 173, price = 0, tot_card = 0
+INFO 2022-06-24 13:45:28,303 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
+INFO 2022-06-24 13:45:29,603 views Post: refund requested: credits
+INFO 2022-06-24 13:45:29,609 views *** get_refund_coices ***
+INFO 2022-06-24 13:45:29,611 views Ticket id = 173, price = 0, tot_card = 0
+INFO 2022-06-24 13:45:29,612 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
+INFO 2022-06-24 13:45:30,584 views ***get_context_data: kwargs{}***
+INFO 2022-06-24 13:45:30,585 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-24 13:45:30,586 views GET:start_date: 2022-06-24
+INFO 2022-06-24 13:45:30,590 views GET:end_date: 2022-08-24
+INFO 2022-06-24 13:45:31,915 views The user does not have this ticket
+INFO 2022-06-24 13:45:31,916 views The user is not queued to the event
+INFO 2022-06-24 13:45:31,919 views The guy cannot have his money back as:2022-07-01 15:00:00<2022-06-24 13:45:31.919163
+INFO 2022-06-24 13:45:34,060 views BuyTicket POST was called
+INFO 2022-06-24 13:45:34,061 views buy_step=conditions_acceptance
+INFO 2022-06-24 13:45:34,065 views cmd=acceptance_for_me
+INFO 2022-06-24 13:45:34,066 views pk=30
+INFO 2022-06-24 13:45:34,066 views context:{'pk': 30, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_me', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x000001509749D910>}
+INFO 2022-06-24 13:45:35,757 views BuyTicket GET was called
+INFO 2022-06-24 13:45:35,758 views BuyTicket.get:partecipant_selection init
+INFO 2022-06-24 13:45:35,760 views cmd=init
+INFO 2022-06-24 13:45:37,083 views BuyTicket POST was called
+INFO 2022-06-24 13:45:37,083 views cmd=receive_user_selected
+INFO 2022-06-24 13:45:37,089 views BuyTicket GET was called
+INFO 2022-06-24 13:45:37,089 views BuyTicket.get:confirmation init
+INFO 2022-06-24 13:45:37,113 views BuyTicketView: confirmation, context = {'pk': 30, 'buy_step': 'confirmation', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 201, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000015097481A00>, 'subs_exp_date': datetime.date(2022, 8, 16), 'subscription_expired': False, 'year_subscription_price': 20, 'sub_total': 0, 'event': <Event: ID: 30, Date: 2022-07-03Sentiero del Silenzio Gallio(VI)>}
+INFO 2022-06-24 13:45:38,176 views BuyTicket GET was called
+INFO 2022-06-24 13:45:38,177 views BuyTicket.get:confirmed init
+INFO 2022-06-24 13:45:38,178 views Closing order from -confirmed-
+INFO 2022-06-24 13:45:38,219 views Creating mail for order confirmation

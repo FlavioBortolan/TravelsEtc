@@ -3,7 +3,9 @@ from datetime import datetime
 from random import seed
 from random import randint
 import sys
+from TravelsApp.mailer import *
 
+from django.shortcuts import render
 
 # Configure settings for project
 # Need to run this before calling models from application!
@@ -47,24 +49,7 @@ def test_open_order():
     print(context)
 '''
 
-def test_mail():
 
-    e=Event.objects.all()[0]
-    user = User.objects.filter(email='flavio.bortolan@gmail.com')[0]
-
-    company_mail = Settings.get_setting('company_email')
-    smtp_server = Settings.get_setting('company_email_smtp_server')
-    pw          = Settings.get_setting('company_email_password')
-
-    #m = Mailer(sender='roberto.ferro1996@gmail.com', smtp_server = "smtp.gmail.com", password = 'margherita1')
-    m = Mailer(sender=company_mail, smtp_server = smtp_server, password = pw)
-    m.login()
-
-    response = render(None, 'TravelsApp/free_ticket_message.html', {'event':e, 'user': user})
-    html=str(response.content.decode('UTF-8'))
-
-    m.send_mail(user.email, "buongiorno da mailer", html, html)
-    m.quit()
 
 def test_Order_open_close():
 
@@ -253,6 +238,25 @@ def populate_dummy_users(users_count = 10):
         print('UserProfileInfo saved')
         id=id+1
 
+def test_mail():
+
+    e=Event.objects.all()[0]
+    user = User.objects.filter(email='flavio.bortolan@gmail.com')[0]
+
+    company_mail = Setting.get_setting('company_email')
+    smtp_server = Setting.get_setting('company_email_smtp_server')
+    pw          = Setting.get_setting('company_email_password')
+
+    #m = Mailer(sender='roberto.ferro1996@gmail.com', smtp_server = "smtp.gmail.com", password = 'margherita1')
+    m = mailer.Mailer(sender_email=company_mail, smtp_server = smtp_server, password = pw)
+    m.login()
+
+    response = render(None, 'TravelsApp/free_ticket_message.html', {'event':e, 'user': user})
+    html=str(response.content.decode('UTF-8'))
+
+    m.send_mail(user.email, "buongiorno da mailer", html, html)
+    m.quit()
+
 def test_OutMail_create_from_event_change(id, target_type):
 
     event = Event.objects.get(id=id)
@@ -268,7 +272,17 @@ def test_OutMail_create_from_event_change(id, target_type):
 
     for user in tgt:
         om = OutMail.create_from_event_change(user, event, "https://flaviobortolan.pythonanywhere.com/", 'event_incoming', '', '', "")
-        r=flush(om)
+
+        try:
+            #setup mailer component
+            m = Mailer(sender_email=Setting.get_setting('company_email'), smtp_server = Setting.get_setting('company_email_smtp_server'), password = Setting.get_setting('company_email_password'))
+
+            #send mail
+            r = m.flush_outmail(om)
+
+        except Exception as e:
+            print('Could not send mail: ' + str(e))
+            return False,
 
     #print(om.subject)
     #print(om.html)
@@ -287,4 +301,4 @@ if __name__ == '__main__':
     #test_request('http://127.0.0.1:8000/TravelsApp/events/all/')
     #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
     #test_logging("ciao ciao")
-    test_OutMail_create_from_event_change(27, 'all')
+    test_OutMail_create_from_event_change(30, 'event_partecipants')
