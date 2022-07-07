@@ -724,3 +724,69 @@ INFO 2022-06-24 13:45:38,176 views BuyTicket GET was called
 INFO 2022-06-24 13:45:38,177 views BuyTicket.get:confirmed init
 INFO 2022-06-24 13:45:38,178 views Closing order from -confirmed-
 INFO 2022-06-24 13:45:38,219 views Creating mail for order confirmation
+INFO 2022-06-24 23:12:34,485 views ***get_context_data: kwargs{}***
+INFO 2022-06-24 23:12:34,489 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-24 23:12:34,490 views GET:start_date: 2022-06-24
+INFO 2022-06-24 23:12:34,490 views GET:end_date: 2022-08-24
+INFO 2022-06-24 23:34:04,141 views Site under maintenance:False
+INFO 2022-06-24 23:35:53,584 views Site under maintenance:False
+INFO 2022-06-24 23:44:49,664 views Site under maintenance:False
+INFO 2022-06-24 23:44:51,976 views ***get_context_data: kwargs{}***
+INFO 2022-06-24 23:44:51,980 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-24 23:44:51,981 views GET:start_date: 2022-06-24
+INFO 2022-06-24 23:44:51,982 views GET:end_date: 2022-08-24
+INFO 2022-06-24 23:44:53,737 views The user already has this ticket
+INFO 2022-06-24 23:44:53,739 views The user is not queued to the event
+INFO 2022-06-24 23:44:53,745 views The guy can have his money back as:2022-07-01 15:00:00>2022-06-24 23:44:53.745604
+INFO 2022-06-24 23:44:55,030 views *** get_refund_coices ***
+INFO 2022-06-24 23:44:55,033 views Ticket id = 183, price = 0, tot_card = 0
+INFO 2022-06-24 23:44:55,033 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
+INFO 2022-06-24 23:44:57,182 views Post: refund requested: credits
+INFO 2022-06-24 23:44:57,188 views *** get_refund_coices ***
+INFO 2022-06-24 23:44:57,191 views Ticket id = 183, price = 0, tot_card = 0
+INFO 2022-06-24 23:44:57,191 views {'choices': 'credits', 'max_amount_card': 0, 'price': 0}
+INFO 2022-06-24 23:44:58,088 views ***get_context_data: kwargs{}***
+INFO 2022-06-24 23:44:58,089 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-24 23:44:58,090 views GET:start_date: 2022-06-24
+INFO 2022-06-24 23:44:58,094 views GET:end_date: 2022-08-24
+INFO 2022-06-24 23:44:59,703 views The user does not have this ticket
+INFO 2022-06-24 23:44:59,705 views The user is not queued to the event
+INFO 2022-06-24 23:44:59,707 views The guy cannot have his money back as:2022-07-01 15:00:00<2022-06-24 23:44:59.707168
+INFO 2022-06-24 23:45:00,986 views BuyTicket POST was called
+INFO 2022-06-24 23:45:00,987 views buy_step=conditions_acceptance
+INFO 2022-06-24 23:45:00,988 views cmd=acceptance_for_me
+INFO 2022-06-24 23:45:00,988 views pk=30
+INFO 2022-06-24 23:45:00,991 views context:{'pk': 30, 'buy_step': 'conditions_acceptance', 'cmd': 'acceptance_for_me', 'total': 0, 'credits_to_use': 0, 'order_id': 0, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000021A99FEA7F0>}
+INFO 2022-06-24 23:45:02,655 views BuyTicket GET was called
+INFO 2022-06-24 23:45:02,656 views BuyTicket.get:partecipant_selection init
+INFO 2022-06-24 23:45:02,657 views cmd=init
+INFO 2022-06-24 23:45:03,437 views BuyTicket POST was called
+INFO 2022-06-24 23:45:03,438 views cmd=receive_user_selected
+INFO 2022-06-24 23:45:03,446 views BuyTicket GET was called
+INFO 2022-06-24 23:45:03,446 views BuyTicket.get:confirmation init
+INFO 2022-06-24 23:45:03,469 views BuyTicketView: confirmation, context = {'pk': 30, 'buy_step': 'confirmation', 'cmd': 'init', 'total': 0, 'credits_to_use': 0, 'order_id': 210, 'friend_id': '-1', 'view': <TravelsApp.views.BuyTicketView object at 0x0000021A9A1817C0>, 'subs_exp_date': datetime.date(2022, 8, 16), 'subscription_expired': False, 'year_subscription_price': 20, 'sub_total': 0, 'event': <Event: ID: 30, Date: 2022-07-03Sentiero del Silenzio Gallio(VI)>}
+INFO 2022-06-24 23:45:04,755 views BuyTicket GET was called
+INFO 2022-06-24 23:45:04,755 views BuyTicket.get:confirmed init
+INFO 2022-06-24 23:45:04,756 views Closing order from -confirmed-
+INFO 2022-06-24 23:45:04,797 views Creating mail for order confirmation
+INFO 2022-06-24 23:45:11,011 views ***get_context_data: kwargs{}***
+INFO 2022-06-24 23:45:11,012 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-24 23:45:11,013 views GET:start_date: 2022-06-24
+INFO 2022-06-24 23:45:11,016 views GET:end_date: 2022-08-24
+INFO 2022-06-28 00:33:27,949 views Site under maintenance:False
+INFO 2022-06-28 00:33:30,667 views ***get_context_data: kwargs{}***
+INFO 2022-06-28 00:33:30,669 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-28 00:33:30,670 views GET:start_date: 2022-06-28
+INFO 2022-06-28 00:33:30,671 views GET:end_date: 2022-08-28
+INFO 2022-06-28 00:33:37,666 views The user already has this ticket
+INFO 2022-06-28 00:33:37,668 views The user is not queued to the event
+INFO 2022-06-28 00:33:37,671 views The guy can have his money back as:2022-07-01 15:00:00>2022-06-28 00:33:37.671612
+INFO 2022-06-28 00:34:30,592 views Site under maintenance:False
+INFO 2022-06-28 00:34:32,328 views ***get_context_data: kwargs{}***
+INFO 2022-06-28 00:34:32,329 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-06-28 00:34:32,331 views GET:start_date: 2022-06-28
+INFO 2022-06-28 00:34:32,331 views GET:end_date: 2022-08-28
+INFO 2022-06-28 00:34:33,618 views The user already has this ticket
+INFO 2022-06-28 00:34:33,619 views The user is not queued to the event
+INFO 2022-06-28 00:34:33,621 views The guy can have his money back as:2022-07-01 15:00:00>2022-06-28 00:34:33.621622
+INFO 2022-07-07 23:36:39,968 views Site under maintenance:False

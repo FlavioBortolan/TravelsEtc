@@ -26,9 +26,9 @@
     {% if change_type != 'event_incoming' %}
       Ti informiamo che{{ change_reason }} l'evento in oggetto
     {% else %}
-      E' in arrivo l'evento "{{ event.activity.name }}" in data {{ event.date }}<br>
+      E' in arrivo l'evento "{{ event.activity.name }}" in data {{ event.date }} alle ore {{ event.time }}<br>
       {{ event.activity.description }}<br>
-      Ci sono ancora posti a disposizione, se non vuoi perdertelo accedi al sito e inscriviti!<br>
+      Ci sono ancora posti a disposizione, se non vuoi perdertelo accedi al sito ed iscriviti!<br>
     {% endif %}
 
     {% if change_type == 'event_date_changed' %}

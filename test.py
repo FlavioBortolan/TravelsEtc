@@ -261,28 +261,42 @@ def test_OutMail_create_from_event_change(id, target_type):
 
     event = Event.objects.get(id=id)
 
+    from os import listdir
+    from os.path import isfile, join
+    mypath = 'C:\\tmp\\attachements'
+    attachements = [mypath + '\\'+ f for f in listdir(mypath) if isfile(join(mypath, f))]
+    #attachements = ['C:\\tmp\\a.jpeg']
+    print(attachements)
+
     if target_type == "event_partecipants":
 
-        tgt = event.partecipants.all()
+        tgt = event.partecipants.filter(userprofileinfo__is_minor = False)
 
     elif target_type=="all":
 
-        tgt = User.objects.all()
+        tgt = User.objects.filter(userprofileinfo__is_minor = False)
         #tgt = User.objects.get(email ="flavio.bortolan@gmail.com")
+
+    skip=True
 
     for user in tgt:
         om = OutMail.create_from_event_change(user, event, "https://flaviobortolan.pythonanywhere.com/", 'event_incoming', '', '', "")
 
         try:
             #setup mailer component
-            m = Mailer(sender_email=Setting.get_setting('company_email'), smtp_server = Setting.get_setting('company_email_smtp_server'), password = Setting.get_setting('company_email_password'))
-
-            #send mail
-            r = m.flush_outmail(om)
+            if skip==False:
+                print('sendig mail to:' + user.email)
+                m = Mailer(sender_email=Setting.get_setting('company_email'), smtp_server = Setting.get_setting('company_email_smtp_server'), password = Setting.get_setting('company_email_password'))
+                #send mail
+                r = m.flush_outmail(om, attachements)
+            else:
+                print('NOT sendig mail to:' + user.email)
+                if user.email == 'folletto.dei_boschi_10@foresta.magica.com':
+                    skip=False
 
         except Exception as e:
             print('Could not send mail: ' + str(e))
-            return False,
+            #return False,
 
     #print(om.subject)
     #print(om.html)
@@ -301,4 +315,4 @@ if __name__ == '__main__':
     #test_request('http://127.0.0.1:8000/TravelsApp/events/all/')
     #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
     #test_logging("ciao ciao")
-    test_OutMail_create_from_event_change(30, 'event_partecipants')
+    test_OutMail_create_from_event_change(30, 'all')
