@@ -161,9 +161,13 @@ def print_event_partecipants_mail_name_surname(event_id):
     print()
     print("Partecipanti:" + str(evt.partecipants.all().count()))
     print()
-
-    for usr in evt.partecipants.all():
+    usrs = evt.partecipants.all()
+    for usr in usrs:
         print ( "Mail: " + usr.username + " Nome: " + usr.first_name + " Cognome: " + usr.last_name)
+
+    import pandas as pd
+    df = pd.DataFrame(list(evt.partecipants.all().values( 'last_name', 'first_name', 'email'))).sort_values('last_name')
+    df.to_excel('C:\\tmp\\' + evt.activity.name + '.xls')
 
 def print_users():
 
@@ -304,15 +308,16 @@ def test_OutMail_create_from_event_change(id, target_type):
 # Create your tests here.
 if __name__ == '__main__':
 
+    #print_users()
     #populate_dummy_users(users_count = 10)
     #test_mail()
     #test_Order_open_close()
     #test_OutMail_create_from_site_subscription_completed()
-    #print_event_partecipants_mail_name_surname(21)
+    print_event_partecipants_mail_name_surname(31)
     #print_event_partecipants_name_surname(27)
     #print_users()
     #print_outmail_name_surname(19)
     #test_request('http://127.0.0.1:8000/TravelsApp/events/all/')
     #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
     #test_logging("ciao ciao")
-    test_OutMail_create_from_event_change(30, 'all')
+    #test_OutMail_create_from_event_change(31, 'all')

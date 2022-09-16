@@ -225,7 +225,7 @@ def register(request, code):
             else:
 
                 # One of the forms was invalid if this else gets called.
-                logger.info(user_form.errors,profile_form.errors)
+                logger.info(user_form.errors, profile_form.errors)
                 registration_step = 'registration_errors'
 
 

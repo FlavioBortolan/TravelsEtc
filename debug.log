@@ -790,3 +790,40 @@ INFO 2022-06-28 00:34:33,618 views The user already has this ticket
 INFO 2022-06-28 00:34:33,619 views The user is not queued to the event
 INFO 2022-06-28 00:34:33,621 views The guy can have his money back as:2022-07-01 15:00:00>2022-06-28 00:34:33.621622
 INFO 2022-07-07 23:36:39,968 views Site under maintenance:False
+INFO 2022-07-08 13:25:40,795 views Site under maintenance:False
+INFO 2022-07-08 13:25:42,870 views ***get_context_data: kwargs{}***
+INFO 2022-07-08 13:25:42,875 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-07-08 13:25:42,877 views GET:start_date: 2022-07-08
+INFO 2022-07-08 13:25:42,878 views GET:end_date: 2022-09-08
+INFO 2022-07-11 17:37:06,471 views Site under maintenance:False
+INFO 2022-07-11 17:56:55,003 views registration_step = registration_step
+INFO 2022-07-11 17:57:29,592 views 
+INFO 2022-07-11 17:57:29,593 views registration_step = registration_step
+INFO 2022-07-11 17:58:14,319 views registration_step = registration_step
+INFO 2022-07-11 17:58:31,151 views *** create_profile ***: <tr><th><label for="id_first_name">Nome:</label></th><td><input type="text" name="first_name" value="flavio" class="w3-input" required="True" maxlength="150" id="id_first_name"></td></tr>
+<tr><th><label for="id_last_name">Cognome:</label></th><td><input type="text" name="last_name" value="libero ddd" class="w3-input" required="True" maxlength="150" id="id_last_name"></td></tr>
+<tr><th><label for="id_email">Email:</label></th><td><input type="email" name="email" value="justwalksinfo@libero.it" class="w3-input" maxlength="254" id="id_email"></td></tr>
+<tr><th><label for="id_password">Password:</label></th><td><input type="password" name="password" class="w3-input" maxlength="128" required id="id_password"></td></tr>
+<tr><th><label for="id_repeat_password">Repeat password:</label></th><td><input type="password" name="repeat_password" class="w3-input" required id="id_repeat_password"></td></tr><tr><th><label for="id_profile_pic">Immagine di profilo:</label></th><td><input type="file" name="profile_pic" class="w3-btn w3-blue w3-block w3-round-large" accept="image/*" id="id_profile_pic"></td></tr>
+<tr><th><label for="id_phone_number">Telefono:</label></th><td><input type="text" name="phone_number" value="3401461537" class="w3-input" required="True" maxlength="64" id="id_phone_number"></td></tr>
+<tr><th><label for="id_exp_date">Scadenza iscrizione:</label></th><td><input type="text" name="exp_date" class="w3-input" disabled="True" required="False" id="id_exp_date"></td></tr>
+INFO 2022-07-11 17:58:31,159 views +++ user_form cleaned_data:{'first_name': 'flavio', 'last_name': 'libero ddd', 'email': 'justwalksinfo@libero.it', 'password': 'Margherita1', 'repeat_password': 'Margherita1'}
+INFO 2022-07-11 17:58:31,160 views cleaned mail field value =justwalksinfo@libero.it
+INFO 2022-07-11 17:58:31,161 views create_profile:data is ok
+INFO 2022-07-11 17:58:31,161 views Supplied mail is:justwalksinfo@libero.it
+INFO 2022-07-11 17:58:31,163 views No duplicate users found
+INFO 2022-07-11 17:58:31,197 views new user saved with mail: justwalksinfo@libero.it
+INFO 2022-07-11 17:58:31,427 views password saved
+INFO 2022-07-11 17:58:31,436 views Saving profile info for:
+INFO 2022-07-11 17:58:31,437 views flavio
+INFO 2022-07-11 17:58:31,438 views libero ddd
+INFO 2022-07-11 17:58:31,438 views justwalksinfo@libero.it
+INFO 2022-07-11 17:58:31,439 views Creating mail with activation link
+INFO 2022-07-11 17:58:52,482 views registration_step = registration_step
+ERROR 2022-07-11 17:58:52,547 views Could not send mail: [WinError 10060] Impossibile stabilire la connessione. Risposta non corretta della parte connessa dopo l'intervallo di tempo oppure mancata risposta dall'host collegato
+INFO 2022-07-11 17:58:52,549 views registration_step = registration_step
+INFO 2022-07-14 00:08:02,399 views Site under maintenance:False
+INFO 2022-07-14 00:10:06,763 views ***get_context_data: kwargs{}***
+INFO 2022-07-14 00:10:06,765 views filter_mode:all, verranno mostrate tutte le attivita
+INFO 2022-07-14 00:10:06,767 views GET:start_date: 2022-07-14
+INFO 2022-07-14 00:10:06,768 views GET:end_date: 2022-09-14
