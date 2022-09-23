@@ -225,7 +225,7 @@ def register(request, code):
             else:
 
                 # One of the forms was invalid if this else gets called.
-                logger.info(user_form.errors, profile_form.errors)
+                logger.info("Registration errors: user_form:" + str(user_form.errors) + "profile_form:" + str(profile_form.errors))
                 registration_step = 'registration_errors'
 
 
@@ -363,8 +363,7 @@ def register_old(request):
                 logger.info("Duplicate users where found: There are " + str(duplicate_users) + " users with email " + supplied_email)
         else:
             # One of the forms was invalid if this else gets called.
-            logger.info(user_form.errors,profile_form.errors)
-
+            logger.info("Registration errors: user_form:" + str(user_form.errors) + "profile_form:" + str(profile_form.errors))
     #GET
     else:
 
@@ -419,8 +418,7 @@ def my_account(request):
 
         else:
             # One of the forms was invalid if this else gets called.
-            logger.info(user_form.errors,profile_form.errors)
-
+            logger.info("Registration errors: user_form:" + str(user_form.errors) + "profile_form:" + str(profile_form.errors))
     #GET
     else:
         # Just render the forms as blank.
@@ -474,7 +472,7 @@ def change_password(request):
 
         else:
             # One of the forms was invalid if this else gets called.
-            logger.info(user_form.errors)
+            logger.info(str(user_form.errors))
     else:
         user_form = UserForm()
 

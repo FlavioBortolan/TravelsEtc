@@ -279,13 +279,13 @@ def test_OutMail_create_from_event_change(id, target_type):
     elif target_type=="all":
 
         tgt = User.objects.filter(userprofileinfo__is_minor = False)
-        #tgt = User.objects.get(email ="flavio.bortolan@gmail.com")
+        #tgt = User.objects.filter(email ="flavio.bortolan@gmail.com")
 
     skip=True
 
     for user in tgt:
-        om = OutMail.create_from_event_change(user, event, "https://flaviobortolan.pythonanywhere.com/", 'event_incoming', '', '', "")
-
+        #om = OutMail.create_from_event_change(user, event, "https://flaviobortolan.pythonanywhere.com/", 'event_incoming', '', '', "")
+        om = OutMail.create_from_event_change(user, event, "https://www.justwalks.it", 'event_incoming', '', '', "")
         try:
             #setup mailer component
             if skip==False:
@@ -313,11 +313,11 @@ if __name__ == '__main__':
     #test_mail()
     #test_Order_open_close()
     #test_OutMail_create_from_site_subscription_completed()
-    print_event_partecipants_mail_name_surname(31)
+    #print_event_partecipants_mail_name_surname(32)
     #print_event_partecipants_name_surname(27)
     #print_users()
     #print_outmail_name_surname(19)
     #test_request('http://127.0.0.1:8000/TravelsApp/events/all/')
     #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
     #test_logging("ciao ciao")
-    #test_OutMail_create_from_event_change(31, 'all')
+    test_OutMail_create_from_event_change(32, 'all')
