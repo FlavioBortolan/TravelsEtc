@@ -297,7 +297,7 @@ def test_OutMail_create_from_event_change(id, target_type):
                 print('NOT sendig mail to:' + user.email)
                 if user.email == 'folletto.dei_boschi_10@foresta.magica.com':
                     skip=False
-
+ 
         except Exception as e:
             print('Could not send mail: ' + str(e))
             #return False,

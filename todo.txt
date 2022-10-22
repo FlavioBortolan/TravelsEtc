@@ -1,8 +1,5 @@
 
 
--testare fino a generazione link su mail
-
--creare link nella mail che acceda ad attivazione dell'account.
 
 - aggiungere:
 
