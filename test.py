@@ -281,26 +281,46 @@ def test_OutMail_create_from_event_change(id, target_type):
         tgt = User.objects.filter(userprofileinfo__is_minor = False)
         #tgt = User.objects.filter(email ="flavio.bortolan@gmail.com")
 
-    skip=True
+
+    with open("C:\\tmp\\sent.txt") as file:
+        lines = [line.rstrip() for line in file]
+    sent_list= "-".join(lines)
+
+    skip=False
+    simulate = False
 
     for user in tgt:
-        #om = OutMail.create_from_event_change(user, event, "https://flaviobortolan.pythonanywhere.com/", 'event_incoming', '', '', "")
-        om = OutMail.create_from_event_change(user, event, "https://www.justwalks.it", 'event_incoming', '', '', "")
-        try:
-            #setup mailer component
-            if skip==False:
-                print('sendig mail to:' + user.email)
-                m = Mailer(sender_email=Setting.get_setting('company_email'), smtp_server = Setting.get_setting('company_email_smtp_server'), password = Setting.get_setting('company_email_password'))
-                #send mail
-                r = m.flush_outmail(om, attachements)
+
+        if ("folletto" in user.email):
+            skip = True
+        elif  'flavio.bortolan' in  user.email:
+            skip = False
+
+        elif user.email in sent_list:
+            print(user.email + "already received mail, not sending")
+            skip = True
+        else:
+            skip=False
+
+        #om = OutMail.create_from_event_change(user, event, "https://www.justwalks.it", 'event_incoming', '', '', "")
+        om = OutMail.create_from_event_change(user, event, "https://www.justwalks.it", 'event_confirmed', '', '', "")
+
+        if skip == False:
+
+            if simulate == False:
+                try:
+                    print('sendig mail to:' + user.email)
+                    m = Mailer(sender_email=Setting.get_setting('company_email'), smtp_server = Setting.get_setting('company_email_smtp_server'), password = Setting.get_setting('company_email_password'))
+                    #send mail
+                    r = m.flush_outmail(om, attachements)
+                except Exception as e:
+                    print('Could not send mail: ' + str(e))
+
             else:
-                print('NOT sendig mail to:' + user.email)
-                if user.email == 'folletto.dei_boschi_10@foresta.magica.com':
-                    skip=False
- 
-        except Exception as e:
-            print('Could not send mail: ' + str(e))
-            #return False,
+                print("simulating mail to :" + user.email)
+        else:
+            print('SKIPPING sendig mail to:' + user.email)
+
 
     #print(om.subject)
     #print(om.html)
@@ -320,4 +340,4 @@ if __name__ == '__main__':
     #test_request('http://127.0.0.1:8000/TravelsApp/events/all/')
     #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
     #test_logging("ciao ciao")
-    test_OutMail_create_from_event_change(32, 'all')
+    test_OutMail_create_from_event_change(35, 'event_partecipants')
