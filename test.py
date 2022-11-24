@@ -281,20 +281,24 @@ def test_OutMail_create_from_event_change(id, target_type):
         tgt = User.objects.filter(userprofileinfo__is_minor = False)
         #tgt = User.objects.filter(email ="flavio.bortolan@gmail.com")
 
-
+    '''
     with open("C:\\tmp\\sent.txt") as file:
         lines = [line.rstrip() for line in file]
-    sent_list= "-".join(lines)
+    sent_list = "-".join(lines)
+    '''
+    sent_list = []
 
-    skip=False
-    simulate = False
 
     for user in tgt:
+
+        skip=False
+        simulate = False
 
         if ("folletto" in user.email):
             skip = True
         elif  'flavio.bortolan' in  user.email:
             skip = False
+            simulate = False
 
         elif user.email in sent_list:
             print(user.email + "already received mail, not sending")
@@ -303,7 +307,15 @@ def test_OutMail_create_from_event_change(id, target_type):
             skip=False
 
         #om = OutMail.create_from_event_change(user, event, "https://www.justwalks.it", 'event_incoming', '', '', "")
-        om = OutMail.create_from_event_change(user, event, "https://www.justwalks.it", 'event_confirmed', '', '', "")
+        om = OutMail.create_from_event_change(  user = user,\
+                                                event = event,\
+                                                delta_meet_start = 30,\
+                                                recipient = user,\
+                                                server_address = 'https://www.justwalks.it',\
+                                                change_type = 'event_incoming',\
+                                                new_date_or_time = '',\
+                                                change_reason = '')
+        #om = OutMail.create_from_event_change(user, event, "https://www.justwalks.it", 'event_confirmed', '', '', "")
 
         if skip == False:
 
@@ -333,11 +345,11 @@ if __name__ == '__main__':
     #test_mail()
     #test_Order_open_close()
     #test_OutMail_create_from_site_subscription_completed()
-    #print_event_partecipants_mail_name_surname(32)
+    #print_event_partecipants_mail_name_surname(36)
     #print_event_partecipants_name_surname(27)
     #print_users()
     #print_outmail_name_surname(19)
     #test_request('http://127.0.0.1:8000/TravelsApp/events/all/')
     #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
     #test_logging("ciao ciao")
-    test_OutMail_create_from_event_change(35, 'event_partecipants')
+    test_OutMail_create_from_event_change( 38, 'all' )

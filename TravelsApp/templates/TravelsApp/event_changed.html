@@ -26,7 +26,12 @@
     {% if change_type != 'event_incoming' %}
       Ti informiamo che{{ change_reason }} l'evento in oggetto
     {% else %}
-                       E' in arrivo l'evento "{{ event.activity.name }}" in data {{ event.date }} alle ore {{ event.time }}<br>
+                       E' in arrivo l'evento "{{ event.activity.name }}" in data {{ event.date }}<br>
+
+      Il ritrovo è previsto per le ore {{ event.time }}<br>
+      <b>La partenza dell'escursione è alle ore  {{ start_time }}</b><br>
+      Si raccomanda la massima puntualità.<br>
+
       {{ event.activity.description }}<br>
       Ci sono ancora posti a disposizione, se non vuoi perdertelo accedi al sito ed iscriviti!<br>
     {% endif %}

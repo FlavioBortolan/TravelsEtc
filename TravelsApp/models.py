@@ -9,9 +9,11 @@ import time
 from dateutil.relativedelta import *
 from dateutil.rrule import *
 
+
 import datetime
 from datetime import datetime
 from  datetime import date
+from datetime import timedelta
 
 import ast
 
@@ -226,12 +228,19 @@ class Event(models.Model):
 
     activity = models.ForeignKey(Activity, on_delete=models.CASCADE)
     date = models.DateField(default = timezone.now)
+    #meet time
     time = models.TimeField(default = timezone.now)
     partecipants = models.ManyToManyField(User, blank=True)
     queued_partecipants = models.ManyToManyField(User, related_name='my_queued_events', blank=True)
     confirmed = models.BooleanField(default=False)
     #how may hours prior to event begin user can still ask refund
     refund_limit_delta_hours =  models.PositiveIntegerField(default = 48)
+
+    def start_time(self, delta):
+
+        #inject the tour start time calculated from meet time + 30 mins
+        st = datetime.combine(self.date, self.time) + timedelta(minutes = delta)
+        return st.time
 
     def __str__(self):
         return "ID: " + str(self.id) + ", Date: " + str(self.date) + str(self.activity)
@@ -296,7 +305,26 @@ class OutMail(models.Model):
         return om
 
     @classmethod
-    def create_from_event_change(cls, user, event,  server_address, change_type, change_reason, new_date_or_time, notes=''):
+    def create_from_event_change(cls, **kwargs):
+
+        '''
+        #required fields in the args dict:
+        'user'
+        'recipient'
+        'event'
+        'server_address'
+        'change_type'
+        'new_date_or_time'
+        'change_reason'
+        '''
+        kwargs['start_time'] = kwargs['event'].start_time(kwargs['delta_meet_start'])
+        kwargs['template']  = 'event_changed.html'
+
+        om = cls.create( kwargs )
+        return om
+
+    @classmethod
+    def create_from_event_change_old(cls, user, event,  server_address, change_type, change_reason, new_date_or_time, notes=''):
 
         dict              = {}
         dict['template']  = 'event_changed.html'
