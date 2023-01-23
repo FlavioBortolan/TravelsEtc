@@ -1,3 +1,4 @@
+import time
 import os
 from datetime import datetime
 from random import seed
@@ -261,6 +262,10 @@ def test_mail():
     m.send_mail(user.email, "buongiorno da mailer", html, html)
     m.quit()
 
+def add_to_sent_file(sent_list_file, email):
+    with open(sent_list_file, 'a') as the_file:
+        the_file.write(email + '\n')
+
 def test_OutMail_create_from_event_change(id, target_type):
 
     event = Event.objects.get(id=id)
@@ -280,21 +285,24 @@ def test_OutMail_create_from_event_change(id, target_type):
 
         tgt = User.objects.filter(userprofileinfo__is_minor = False)
         #tgt = User.objects.filter(email ="flavio.bortolan@gmail.com")
+    else:
+        return
 
-    '''
-    with open("C:\\tmp\\sent.txt") as file:
-        lines = [line.rstrip() for line in file]
-    sent_list = "-".join(lines)
-    '''
     sent_list = []
 
+    sent_list_file = "C:\\tmp\\sent.txt"
+    with open(sent_list_file) as file:
+        lines = [line.rstrip() for line in file]
+    sent_list = "-".join(lines)
+
+    delay = 60
 
     for user in tgt:
 
-        skip=False
+        skip = False
         simulate = False
 
-        if ("folletto" in user.email):
+        if ( "folletto" in user.email ):
             skip = True
         elif  'flavio.bortolan' in  user.email:
             skip = False
@@ -304,17 +312,19 @@ def test_OutMail_create_from_event_change(id, target_type):
             print(user.email + "already received mail, not sending")
             skip = True
         else:
-            skip=False
+            skip = False
 
-        #om = OutMail.create_from_event_change(user, event, "https://www.justwalks.it", 'event_incoming', '', '', "")
+        om = OutMail.create_from_event_change(user=user, event=event, server_address= "https://www.justwalks.it", change_type='event_incoming', delta_meet_start=30, recipient=user)
+        '''
         om = OutMail.create_from_event_change(  user = user,\
                                                 event = event,\
                                                 delta_meet_start = 30,\
                                                 recipient = user,\
                                                 server_address = 'https://www.justwalks.it',\
-                                                change_type = 'event_incoming',\
+                                                change_type = 'event_cancelled',\
                                                 new_date_or_time = '',\
-                                                change_reason = '')
+                                                change_reason = ' a causa delle condizioni meteo')
+        '''
         #om = OutMail.create_from_event_change(user, event, "https://www.justwalks.it", 'event_confirmed', '', '', "")
 
         if skip == False:
@@ -325,6 +335,12 @@ def test_OutMail_create_from_event_change(id, target_type):
                     m = Mailer(sender_email=Setting.get_setting('company_email'), smtp_server = Setting.get_setting('company_email_smtp_server'), password = Setting.get_setting('company_email_password'))
                     #send mail
                     r = m.flush_outmail(om, attachements)
+
+                    if str(r)=="{}":
+                        add_to_sent_file(sent_list_file, user.email)
+
+                    time.sleep(delay)
+
                 except Exception as e:
                     print('Could not send mail: ' + str(e))
 
@@ -332,6 +348,7 @@ def test_OutMail_create_from_event_change(id, target_type):
                 print("simulating mail to :" + user.email)
         else:
             print('SKIPPING sendig mail to:' + user.email)
+
 
 
     #print(om.subject)
@@ -352,4 +369,4 @@ if __name__ == '__main__':
     #test_request('http://127.0.0.1:8000/TravelsApp/events/all/')
     #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
     #test_logging("ciao ciao")
-    test_OutMail_create_from_event_change( 38, 'all' )
+    test_OutMail_create_from_event_change( 41, 'all' )
