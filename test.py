@@ -289,18 +289,22 @@ def test_OutMail_create_from_event_change(id, target_type):
         return
 
     sent_list = []
+    try:
 
-    sent_list_file = "C:\\tmp\\sent.txt"
-    with open(sent_list_file) as file:
-        lines = [line.rstrip() for line in file]
-    sent_list = "-".join(lines)
+        sent_list_file = "C:\\tmp\\sent.txt"
+        with open(sent_list_file) as file:
+            lines = [line.rstrip() for line in file]
+        sent_list = "-".join(lines)
+
+    except:
+        print('no sent list available')
 
     delay = 60
 
     for user in tgt:
 
         skip = False
-        simulate = False
+        simulate = False   
 
         if ( "folletto" in user.email ):
             skip = True
@@ -369,4 +373,4 @@ if __name__ == '__main__':
     #test_request('http://127.0.0.1:8000/TravelsApp/events/all/')
     #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
     #test_logging("ciao ciao")
-    test_OutMail_create_from_event_change( 41, 'all' )
+    test_OutMail_create_from_event_change( 42, 'all' )
