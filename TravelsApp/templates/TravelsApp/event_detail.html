@@ -293,6 +293,37 @@
 
       </div>
 
+      {% if user.is_staff %}
+      <div class="w3-row " >
+        <div class="w3-container w3-card-4 w3-pale-blue w3-mobile w3-round-xxlarge">
+
+          <p><b>Partecipanti:</b></p>
+
+          <table class="w3-table w3-striped w3-bordered">
+            <tr>
+              <th>ID</th>
+              <th>Cognome</th>
+              <th>Nome</th>
+              <th>Telefono</th>
+              <th>Email</th>
+            </tr>
+            {% for participant in event.partecipants.all|dictsort:"last_name"  %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ participant.last_name }}</td>
+                <td>{{ participant.first_name }}</td>
+                <td><a href="tel:{{ participant.userprofileinfo.phone_number }}">{{ participant.userprofileinfo.phone_number }}</a></td>
+                <td>{{ participant.email }}</td>
+              </tr>
+            {% endfor %}
+        </table>
+        <br>
+
+
+
+        </div>
+      </div>
+      {% endif %}
 
   </div>
 

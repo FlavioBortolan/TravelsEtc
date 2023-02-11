@@ -304,7 +304,7 @@ def test_OutMail_create_from_event_change(id, target_type):
     for user in tgt:
 
         skip = False
-        simulate = False   
+        simulate = False
 
         if ( "folletto" in user.email ):
             skip = True
@@ -373,4 +373,4 @@ if __name__ == '__main__':
     #test_request('http://127.0.0.1:8000/TravelsApp/events/all/')
     #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
     #test_logging("ciao ciao")
-    test_OutMail_create_from_event_change( 42, 'all' )
+    test_OutMail_create_from_event_change( 43, 'all' )
