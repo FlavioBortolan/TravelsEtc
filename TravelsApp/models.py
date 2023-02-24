@@ -307,18 +307,10 @@ class OutMail(models.Model):
     @classmethod
     def create_from_event_change(cls, **kwargs):
 
-        '''
-        #required fields in the args dict:
-        'user'
-        'recipient'
-        'event'
-        'server_address'
-        'change_type'
-        'new_date_or_time'
-        'change_reason'
-        '''
+
         kwargs['start_time'] = kwargs['event'].start_time(kwargs['delta_meet_start'])
         kwargs['template']  = 'event_changed.html'
+
 
         om = cls.create( kwargs )
         return om

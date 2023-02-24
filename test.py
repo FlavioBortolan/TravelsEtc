@@ -266,7 +266,13 @@ def add_to_sent_file(sent_list_file, email):
     with open(sent_list_file, 'a') as the_file:
         the_file.write(email + '\n')
 
-def test_OutMail_create_from_event_change(id, target_type):
+def test_OutMail_create_from_event_change(**kwargs):
+
+    id = kwargs['id']
+    change_type = kwargs['change_type']
+    target_type =  kwargs['target_type']
+    simulate =  kwargs['simulate']
+    extra_text = kwargs['extra_text']
 
     event = Event.objects.get(id=id)
 
@@ -304,13 +310,13 @@ def test_OutMail_create_from_event_change(id, target_type):
     for user in tgt:
 
         skip = False
-        simulate = False
+        simulate_ = simulate
 
         if ( "folletto" in user.email ):
             skip = True
         elif  'flavio.bortolan' in  user.email:
             skip = False
-            simulate = False
+            simulate_ = False
 
         elif user.email in sent_list:
             print(user.email + "already received mail, not sending")
@@ -318,22 +324,26 @@ def test_OutMail_create_from_event_change(id, target_type):
         else:
             skip = False
 
-        om = OutMail.create_from_event_change(user=user, event=event, server_address= "https://www.justwalks.it", change_type='event_incoming', delta_meet_start=30, recipient=user)
-        '''
-        om = OutMail.create_from_event_change(  user = user,\
-                                                event = event,\
-                                                delta_meet_start = 30,\
-                                                recipient = user,\
-                                                server_address = 'https://www.justwalks.it',\
-                                                change_type = 'event_cancelled',\
-                                                new_date_or_time = '',\
-                                                change_reason = ' a causa delle condizioni meteo')
-        '''
+        if change_type == "event_incoming":
+
+            om = OutMail.create_from_event_change(user=user, event=event, server_address= "https://www.justwalks.it", change_type='event_incoming', delta_meet_start=30, recipient=user, extra_text = extra_text)
+
+        elif change_type == "event_change":
+
+            om = OutMail.create_from_event_change(  user = user,\
+                                                    event = event,\
+                                                    delta_meet_start = 30,\
+                                                    recipient = user,\
+                                                    server_address = 'https://www.justwalks.it',\
+                                                    change_type = 'event_cancelled',\
+                                                    new_date_or_time = '',\
+                                                    change_reason = ' a causa delle condizioni meteo')
+
         #om = OutMail.create_from_event_change(user, event, "https://www.justwalks.it", 'event_confirmed', '', '', "")
 
         if skip == False:
 
-            if simulate == False:
+            if simulate_ == False:
                 try:
                     print('sendig mail to:' + user.email)
                     m = Mailer(sender_email=Setting.get_setting('company_email'), smtp_server = Setting.get_setting('company_email_smtp_server'), password = Setting.get_setting('company_email_password'))
@@ -373,4 +383,9 @@ if __name__ == '__main__':
     #test_request('http://127.0.0.1:8000/TravelsApp/events/all/')
     #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
     #test_logging("ciao ciao")
-    test_OutMail_create_from_event_change( 43, 'all' )
+
+    test_OutMail_create_from_event_change( id = 44,\
+                                           change_type='event_incoming',\
+                                           target_type='all',\
+                                           simulate=False,\
+                                           extra_text='ATTENZIONE: La precedente mail riportava una data errata per cui vi preghiamo di ignorarla.')

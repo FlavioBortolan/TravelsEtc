@@ -14,10 +14,10 @@
       <p  id="Subject" hidden> Cambio orario evento {{ event.activity.name }}, data: {{  event.date }}</p>
 
     {% elif change_type == 'event_confirmed' %}
-      <p  id="Subject" hidden> Conferma evento {{ event.activity.name }}, data: {{  event.date }}</p>
+      <p  id="Subject" hidden> Conferma evento {{ event.activity.name }}, data: {{  event.date|date:"d F Y" }}</p>
 
     {% elif change_type == 'event_incoming' %}
-        <p  id="Subject" hidden> Evento in arrivo: "{{ event.activity.name }}", in data {{  event.date }}</p>
+        <p  id="Subject" hidden> Evento in arrivo: "{{ event.activity.name }}", in data {{  event.date|date:"d F Y" }}</p>
 
     {% endif %}
 
@@ -26,8 +26,16 @@
     {% if change_type != 'event_incoming' %}
       Ti informiamo che{{ change_reason }} l'evento in oggetto
     {% else %}
-                       E' in arrivo l'evento "{{ event.activity.name }}", a {{ event.activity.place }} in data {{ event.date }}<br>
+                       E' in arrivo l'evento "{{ event.activity.name }}", a {{ event.activity.place }} in data {{ event.date|date:"d F Y" }}<br>
       {{ event.activity.description }}<br><br>
+
+      {% if extra_text != '' %}
+      <b>{{ extra_text }}</b>
+      <br>
+      <br>
+      {% endif %}
+
+
       Il ritrovo è previsto per le ore {{ event.time }}<br><br>
 
       Indicazioni:<br>
