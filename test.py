@@ -26,7 +26,9 @@ from TravelsApp.models import OutMail
 from TravelsApp.models import UserProfileInfo
 
 from TravelsApp.views import flush
+import subprocess
 
+notepad_path = r"C:\Program Files\Notepad++\notepad++.exe"
 
 #views.save_setting(name='subscription_duration_months', description = 'Duration of subscription', value=13)
 
@@ -266,6 +268,8 @@ def add_to_sent_file(sent_list_file, email):
     with open(sent_list_file, 'a') as the_file:
         the_file.write(email + '\n')
 
+
+
 def test_OutMail_create_from_event_change(**kwargs):
 
     id = kwargs['id']
@@ -367,9 +371,135 @@ def test_OutMail_create_from_event_change(**kwargs):
 
     #print(om.subject)
     #print(om.html)
+def add_newline(string):
+    # Replace any occurrence of ". " with "." to remove the space after the period
+    string = string.replace(". ", ".")
+    string = string.replace(". ", ".")
+
+    # Add a newline character after each period
+    string = string.replace(".", ".\n")
+
+    return string
+
+
+def create_FB_Page_event_post(**kwargs):
+
+    id = kwargs['id']
+    path = kwargs['path']
+    event = Event.objects.get(id=id)
+
+    str_ = add_newline(event.activity.activityDetail)
+    str_ = str_ + "\n\n"
+    str_ = str_+\
+    "\
+Evento gratuito aperto al pubblico.\n\
+Per iscriversi è necessario:\n\
+  1)Registrarsi al sito www.justwalks.it tramite il menu Accesso->Register (o Accesso->Login per chi ha già un account)\n\
+  2)Prenotare il biglietto per l'evento(gratuito) all'evento tramite il menu Eventi->Eventi accedere all'evento indicato e seguire la procedura per l'acquisto del biglietto\
+\n\
+\n\
+Per info: 3401461537\n\
+Chat whatsapp del gruppo: https://chat.whatsapp.com/CINf8I3ereiBEXqsiePWuP\n\
+\n\
+A presto!"
+
+    #save FB JustWalks Page event post
+    filepath = path + "FB_Page_event_post for " + event.activity.name + ".txt"
+    save_and_open(filepath, str_)
+
+def create_FB_groups_share_event_post(**kwargs):
+
+    id = kwargs['id']
+    path = kwargs['path']
+    delta_meet_start = kwargs['delta_meet_start']
+
+    event = Event.objects.get(id=id)
+    start_time = event.start_time(delta_meet_start)
+    str_=\
+    "\
+Ciao a tutti!\n\
+Vi segnaliamo questo evento a " + event.activity.place + " in data " +str(event.date) +".\n\n"+\
+event.activity.description + "\n\
+\n\
+Qualche dettaglio in piu:\n\
+\n\
+Data: "+ str(event.date) + "\n\
+Ritrovo: "+ event.time.strftime('%H:%M') + "\n\
+Partenza: "+ start_time.strftime('%H:%M') + "\n\
+Luogo: "+ str(event.activity.place) + "\n\
+Link al luogo: "+ str(event.activity.meetPlaceLink) + "\n\
+\n\
+Dislivello: "+ str(event.activity.gradient) + "\n\
+Lunghezza: "+ str(event.activity.length) + "Km\n\
+Durata: "+ str(event.activity.duration) + "\n\
+\n\
+Per info:\n\
+\n\
+Mail:justwalksinfo@libero.it\
+\n\
+\n\
+A presto!"
+    #save FB JustWalks Page event post
+    filepath = path + "FB_groups_share_event_post for " + event.activity.name + ".txt"
+    save_and_open(filepath, str_)
+
+
+
+def create_twitter_post(**kwargs):
+
+    id = kwargs['id']
+    path = kwargs['path']
+    delta_meet_start = kwargs['delta_meet_start']
+
+    event = Event.objects.get(id=id)
+    start_time = event.start_time(delta_meet_start)
+    str_="\
+Trekking in arrivo!:"+"\n\
+\n"+\
+event.activity.name + "\n\
+\n\
+Data: "+ str(event.date) + "\n\
+Luogo: "+ str(event.activity.place) + "\n\
+\n\
+Ritrovo: "+ event.time.strftime('%H:%M') + "\n\
+Partenza: "+ start_time.strftime('%H:%M') + "\n\
+\n\
+Prezzo:Gratuito\
+\n\
+Dislivello: "+ str(event.activity.gradient) + "\n\
+Lunghezza: "+ str(event.activity.length) + "Km\n\
+Durata: "+ str(event.activity.duration) + "\n\
+\n\
+Per info:\n\
+Facebook: https://www.facebook.com/groups/221065716882364\
+"
+    l = len(str_)
+    if l>280:
+        print("Warning: Twitter post length is:" + str(l) + "(limit is 280)")
+    else:
+        print("Twitter post length is:" + str(l) + "(limit is 280)")
+
+    filepath = path + "TWITTER_post for " + event.activity.name + ".txt"
+    save_and_open(filepath, str_)
+
+def save_and_open(filepath, str_):
+    #save FB JustWalks Page event post
+    with open(filepath, 'w') as file:
+       file.write(str_)
+
+    subprocess.Popen([notepad_path, filepath])
+
+
+def create_posts(**kwargs):
+
+    create_FB_Page_event_post(**kwargs)
+    create_FB_groups_share_event_post(**kwargs)
+    create_twitter_post(**kwargs)
+
 
 # Create your tests here.
 if __name__ == '__main__':
+    create_posts( id = 45, path="C:\\tmp\\posts\\", delta_meet_start=30)
 
     #print_users()
     #populate_dummy_users(users_count = 10)
@@ -384,8 +514,8 @@ if __name__ == '__main__':
     #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
     #test_logging("ciao ciao")
 
-    test_OutMail_create_from_event_change( id = 44,\
-                                           change_type='event_incoming',\
-                                           target_type='all',\
-                                           simulate=False,\
-                                           extra_text='ATTENZIONE: La precedente mail riportava una data errata per cui vi preghiamo di ignorarla.')
+#    test_OutMail_create_from_event_change( id = 45,\
+#                                           change_type='event_incoming',\
+#                                           target_type='all',\
+#                                           simulate=False,\
+#                                           extra_text='')

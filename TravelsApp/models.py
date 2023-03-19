@@ -240,7 +240,7 @@ class Event(models.Model):
 
         #inject the tour start time calculated from meet time + 30 mins
         st = datetime.combine(self.date, self.time) + timedelta(minutes = delta)
-        return st.time
+        return st.time()
 
     def __str__(self):
         return "ID: " + str(self.id) + ", Date: " + str(self.date) + str(self.activity)
