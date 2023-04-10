@@ -332,15 +332,15 @@ def test_OutMail_create_from_event_change(**kwargs):
 
             om = OutMail.create_from_event_change(user=user, event=event, server_address= "https://www.justwalks.it", change_type='event_incoming', delta_meet_start=30, recipient=user, extra_text = extra_text)
 
-        elif change_type == "event_change":
+        elif change_type == "event_date_changed":
 
             om = OutMail.create_from_event_change(  user = user,\
                                                     event = event,\
                                                     delta_meet_start = 30,\
                                                     recipient = user,\
                                                     server_address = 'https://www.justwalks.it',\
-                                                    change_type = 'event_cancelled',\
-                                                    new_date_or_time = '',\
+                                                    change_type = change_type,\
+                                                    new_date_or_time = 'Domenica 2 Aprile',\
                                                     change_reason = ' a causa delle condizioni meteo')
 
         #om = OutMail.create_from_event_change(user, event, "https://www.justwalks.it", 'event_confirmed', '', '', "")
@@ -382,6 +382,47 @@ def add_newline(string):
     return string
 
 
+from datetime import datetime
+
+def formatted_date(date):
+
+    # define the Italian month names
+    month_names = {
+        1: "Gennaio",
+        2: "Febbraio",
+        3: "Marzo",
+        4: "Aprile",
+        5: "Maggio",
+        6: "Giugno",
+        7: "Luglio",
+        8: "Agosto",
+        9: "Settembre",
+        10: "Ottobre",
+        11: "Novembre",
+        12: "Dicembre"
+    }
+
+    # format the date as "DD Month YYYY"
+    formatted_date = date.strftime("%d %B %Y")
+
+    # replace the English month name with the Italian equivalent
+    formatted_date = formatted_date.replace('May', 'Maggio')
+    formatted_date = formatted_date.replace('June', 'Giugno')
+    formatted_date = formatted_date.replace('July', 'Luglio')
+    formatted_date = formatted_date.replace('August', 'Agosto')
+    formatted_date = formatted_date.replace('September', 'Settembre')
+    formatted_date = formatted_date.replace('October', 'Ottobre')
+    formatted_date = formatted_date.replace('November', 'Novembre')
+    formatted_date = formatted_date.replace('December', 'Dicembre')
+    formatted_date = formatted_date.replace('January', 'Gennaio')
+    formatted_date = formatted_date.replace('February', 'Febbraio')
+    formatted_date = formatted_date.replace('March', 'Marzo')
+    formatted_date = formatted_date.replace('April', 'Aprile')
+
+    # print the formatted date
+    return formatted_date
+
+
 def create_FB_Page_event_post(**kwargs):
 
     id = kwargs['id']
@@ -418,12 +459,12 @@ def create_FB_groups_share_event_post(**kwargs):
     str_=\
     "\
 Ciao a tutti!\n\
-Vi segnaliamo questo evento a " + event.activity.place + " in data " +str(event.date) +".\n\n"+\
+Vi segnaliamo il prossimo evento in arrivo a " + event.activity.place + " in data " + formatted_date(event.date) +".\n\n"+\
 event.activity.description + "\n\
 \n\
 Qualche dettaglio in piu:\n\
 \n\
-Data: "+ str(event.date) + "\n\
+Data: "+ formatted_date(event.date) + "\n\
 Ritrovo: "+ event.time.strftime('%H:%M') + "\n\
 Partenza: "+ start_time.strftime('%H:%M') + "\n\
 Luogo: "+ str(event.activity.place) + "\n\
@@ -443,6 +484,41 @@ A presto!"
     filepath = path + "FB_groups_share_event_post for " + event.activity.name + ".txt"
     save_and_open(filepath, str_)
 
+def create_WHATSAPP_post(**kwargs):
+
+    id = kwargs['id']
+    path = kwargs['path']
+    delta_meet_start = kwargs['delta_meet_start']
+
+    event = Event.objects.get(id=id)
+    start_time = event.start_time(delta_meet_start)
+    str_=\
+    "\
+Ciao a tutti!\n\
+Vi segnaliamo il prossimo evento in arrivo a " + event.activity.place + " in data " +formatted_date(event.date) +".\n\n"+\
+event.activity.description + "\n\
+\n\
+Qualche dettaglio in piu:\n\
+\n\
+Data: "+ formatted_date(event.date) + "\n\
+Ritrovo: "+ event.time.strftime('%H:%M') + "\n\
+Partenza: "+ start_time.strftime('%H:%M') + "\n\
+Luogo: "+ str(event.activity.place) + "\n\
+Link al luogo: "+ str(event.activity.meetPlaceLink) + "\n\
+\n\
+Dislivello: "+ str(event.activity.gradient) + "\n\
+Lunghezza: "+ str(event.activity.length) + "Km\n\
+Durata: "+ str(event.activity.duration) + "\n\
+\n\
+Maggiori dettagli su:\n\
+\n\
+https://www.justwalks.it/TravelsApp/SingleActivity/"+ str(event.id)+"\
+\n\
+\n\
+A presto!"
+    #save FB JustWalks Page event post
+    filepath = path + "WHATSAPP_post for " + event.activity.name + ".txt"
+    save_and_open(filepath, str_)
 
 
 def create_twitter_post(**kwargs):
@@ -458,7 +534,7 @@ Trekking in arrivo!:"+"\n\
 \n"+\
 event.activity.name + "\n\
 \n\
-Data: "+ str(event.date) + "\n\
+Data: "+ formatted_date(event.date) + "\n\
 Luogo: "+ str(event.activity.place) + "\n\
 \n\
 Ritrovo: "+ event.time.strftime('%H:%M') + "\n\
@@ -495,11 +571,12 @@ def create_posts(**kwargs):
     create_FB_Page_event_post(**kwargs)
     create_FB_groups_share_event_post(**kwargs)
     create_twitter_post(**kwargs)
+    create_WHATSAPP_post(**kwargs)
 
 
 # Create your tests here.
 if __name__ == '__main__':
-    create_posts( id = 45, path="C:\\tmp\\posts\\", delta_meet_start=30)
+    #create_posts( id = 47, path="C:\\tmp\\posts\\", delta_meet_start=30)
 
     #print_users()
     #populate_dummy_users(users_count = 10)
@@ -514,8 +591,14 @@ if __name__ == '__main__':
     #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
     #test_logging("ciao ciao")
 
-#    test_OutMail_create_from_event_change( id = 45,\
+#    test_OutMail_create_from_event_change( id = 46,\
 #                                           change_type='event_incoming',\
 #                                           target_type='all',\
 #                                           simulate=False,\
 #                                           extra_text='')
+
+    test_OutMail_create_from_event_change( id = 46,\
+                                           change_type='event_date_changed',\
+                                           target_type='event_partecipants',\
+                                           simulate=False,\
+                                           extra_text='')
