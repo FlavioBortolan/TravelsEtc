@@ -576,7 +576,7 @@ def create_posts(**kwargs):
 
 # Create your tests here.
 if __name__ == '__main__':
-    #create_posts( id = 47, path="C:\\tmp\\posts\\", delta_meet_start=30)
+    create_posts( id = 47, path="C:\\tmp\\posts\\", delta_meet_start=30)
 
     #print_users()
     #populate_dummy_users(users_count = 10)
@@ -597,8 +597,8 @@ if __name__ == '__main__':
 #                                           simulate=False,\
 #                                           extra_text='')
 
-    test_OutMail_create_from_event_change( id = 46,\
-                                           change_type='event_date_changed',\
-                                           target_type='event_partecipants',\
-                                           simulate=False,\
-                                           extra_text='')
+#    test_OutMail_create_from_event_change( id = 46,\
+#                                           change_type='event_date_changed',\
+#                                           target_type='event_partecipants',\
+#                                           simulate=False,\
+#                                           extra_text='')
