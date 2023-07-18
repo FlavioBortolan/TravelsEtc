@@ -282,7 +282,7 @@ def test_OutMail_create_from_event_change(**kwargs):
 
     from os import listdir
     from os.path import isfile, join
-    mypath = 'C:\\tmp\\attachements'
+    mypath = 'C:\\Users\\bortolanf\\Downloads\\attachements'
     attachements = [mypath + '\\'+ f for f in listdir(mypath) if isfile(join(mypath, f))]
     #attachements = ['C:\\tmp\\a.jpeg']
     print(attachements)
@@ -576,7 +576,7 @@ def create_posts(**kwargs):
 
 # Create your tests here.
 if __name__ == '__main__':
-    #create_posts( id = 48, path="C:\\tmp\\posts\\", delta_meet_start=30)
+    #create_posts( id = 49, path="C:\\tmp\\posts\\", delta_meet_start=30)
 
     #print_users()
     #populate_dummy_users(users_count = 10)
@@ -591,7 +591,7 @@ if __name__ == '__main__':
     #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
     #test_logging("ciao ciao")
 
-    test_OutMail_create_from_event_change( id = 48,\
+    test_OutMail_create_from_event_change( id = 49,\
                                            change_type='event_incoming',\
                                            target_type='all',\
                                            simulate=False,\
