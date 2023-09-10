@@ -309,7 +309,7 @@ def test_OutMail_create_from_event_change(**kwargs):
     except:
         print('no sent list available')
 
-    delay = 60
+    delay = 5
 
     for user in tgt:
 
@@ -574,10 +574,32 @@ def create_posts(**kwargs):
     create_WHATSAPP_post(**kwargs)
 
 
+import argparse
+
+#Examples:
+#python test.py --function create_posts --id 52
+#python test.py --function test_OutMail_create_from_event_change --id 52
 # Create your tests here.
 if __name__ == '__main__':
-#    create_posts( id = 51, path="C:\\tmp\\posts\\", delta_meet_start=30)
 
+    parser = argparse.ArgumentParser(description="Main function for test activation.")
+    parser.add_argument("--function", help="function to execute", required=True)
+    parser.add_argument("--id", help="function to execute", required=False)
+
+    args = parser.parse_args()
+
+    print("Function:", args.function)
+
+    if args.function == "create_posts":
+
+        create_posts( id = args.id, path="C:\\tmp\\posts\\", delta_meet_start=30)
+
+    elif  args.function == "test_OutMail_create_from_event_change":
+        test_OutMail_create_from_event_change( id = args.id,\
+                                               change_type='event_incoming',\
+                                               target_type='all',\
+                                               simulate=False,\
+                                               extra_text='')
     #print_users()
     #populate_dummy_users(users_count = 10)
     #test_mail()
@@ -590,15 +612,8 @@ if __name__ == '__main__':
     #test_request('http://127.0.0.1:8000/TravelsApp/events/all/')
     #test_mail_validation('Roberto_son_of_flavio.bortolan@gmail.com')
     #test_logging("ciao ciao")
-
-    test_OutMail_create_from_event_change( id = 51,\
-                                           change_type='event_incoming',\
-                                           target_type='all',\
-                                           simulate=False,\
-                                           extra_text='')
-
-#    test_OutMail_create_from_event_change( id = 46,\
-#                                           change_type='event_date_changed',\
-#                                           target_type='event_partecipants',\
-#                                           simulate=False,\
-#                                           extra_text='')
+    #    test_OutMail_create_from_event_change( id = 46,\
+    #                                           change_type='event_date_changed',\
+    #                                           target_type='event_partecipants',\
+    #                                           simulate=False,\
+    #                                           extra_text='')
