@@ -274,9 +274,14 @@ def test_OutMail_create_from_event_change(**kwargs):
 
     id = kwargs['id']
     change_type = kwargs['change_type']
-    target_type =  kwargs['target_type']
+    target_type =  str(kwargs['target_type']).strip()
     simulate =  kwargs['simulate']
     extra_text = kwargs['extra_text']
+
+    '*************FIX THIS SHIT'
+    target_type='all'
+    change_type = "event_incoming"
+    simulate = False 
 
     event = Event.objects.get(id=id)
 
@@ -287,15 +292,17 @@ def test_OutMail_create_from_event_change(**kwargs):
     #attachements = ['C:\\tmp\\a.jpeg']
     print(attachements)
 
-    if target_type == "event_partecipants":
-
-        tgt = event.partecipants.filter(userprofileinfo__is_minor = False)
-
-    elif target_type=="all":
-
+    if target_type=='all':
+        print("target_type:all")
         tgt = User.objects.filter(userprofileinfo__is_minor = False)
         #tgt = User.objects.filter(email ="flavio.bortolan@gmail.com")
+    elif target_type == "event_partecipants":
+        print("target_type:event_partecipants")
+        tgt = event.partecipants.filter(userprofileinfo__is_minor = False)
+
+
     else:
+        print("target_type:" + target_type)
         return
 
     sent_list = []
@@ -578,13 +585,17 @@ import argparse
 
 #Examples:
 #python test.py --function create_posts --id 52
-#python test.py --function test_OutMail_create_from_event_change --id 52
+#python test.py --function mail --id 53 --change_type 'event_incoming' --target_type 'all' --simulate True
 # Create your tests here.
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description="Main function for test activation.")
     parser.add_argument("--function", help="function to execute", required=True)
     parser.add_argument("--id", help="function to execute", required=False)
+    parser.add_argument("--change_type", help="reason for change", required=False)
+    parser.add_argument("--target_type", help="all/event", required=False)
+    parser.add_argument("--simulate", help="simulate sending of emails", required=False)
+
 
     args = parser.parse_args()
 
@@ -594,11 +605,11 @@ if __name__ == '__main__':
 
         create_posts( id = args.id, path="C:\\tmp\\posts\\", delta_meet_start=30)
 
-    elif  args.function == "test_OutMail_create_from_event_change":
+    elif  args.function == "mail":
         test_OutMail_create_from_event_change( id = args.id,\
-                                               change_type='event_incoming',\
-                                               target_type='all',\
-                                               simulate=False,\
+                                               change_type=args.change_type,\
+                                               target_type=args.target_type,\
+                                               simulate=args.simulate,\
                                                extra_text='')
     #print_users()
     #populate_dummy_users(users_count = 10)
