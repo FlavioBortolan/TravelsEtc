@@ -281,7 +281,7 @@ def test_OutMail_create_from_event_change(**kwargs):
     '*************FIX THIS SHIT'
     target_type='all'
     change_type = "event_incoming"
-    simulate = False 
+    simulate = False
 
     event = Event.objects.get(id=id)
 
@@ -584,7 +584,7 @@ def create_posts(**kwargs):
 import argparse
 
 #Examples:
-#python test.py --function create_posts --id 52
+#python test.py --function create_posts --id 54
 #python test.py --function mail --id 53 --change_type 'event_incoming' --target_type 'all' --simulate True
 # Create your tests here.
 if __name__ == '__main__':
