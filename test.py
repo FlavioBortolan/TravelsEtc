@@ -585,7 +585,7 @@ import argparse
 
 #Examples:
 #python test.py --function create_posts --id 54
-#python test.py --function mail --id 53 --change_type 'event_incoming' --target_type 'all' --simulate True
+#python test.py --function mail --id 55 --change_type 'event_incoming' --target_type 'all' --simulate True
 # Create your tests here.
 if __name__ == '__main__':
 
