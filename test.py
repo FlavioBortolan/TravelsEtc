@@ -279,7 +279,7 @@ def test_OutMail_create_from_event_change(**kwargs):
     extra_text = kwargs['extra_text']
 
     '*************FIX THIS SHIT'
-    target_type='all'
+    target_type='event_partecipants'
     change_type = "event_incoming"
     simulate = False
 
