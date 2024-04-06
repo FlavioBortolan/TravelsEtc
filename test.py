@@ -272,16 +272,22 @@ def add_to_sent_file(sent_list_file, email):
 
 def test_OutMail_create_from_event_change(**kwargs):
 
+    print("kwargs:" + str(kwargs))
+
     id = kwargs['id']
     change_type = kwargs['change_type']
     target_type =  str(kwargs['target_type']).strip()
-    simulate =  kwargs['simulate']
+    simulate =  kwargs['simulate'].lower() == 'true'
     extra_text = kwargs['extra_text']
 
+    print("+++++++++simulate:" + str(simulate))
+    print("+++++++++target_type:" + str(target_type))
+    print("+++++++++simulate:" + str(simulate))
+
     '*************FIX THIS SHIT'
-    target_type='event_partecipants'
-    change_type = "event_incoming"
-    simulate = False
+    #target_type='all'
+    #change_type = "event_incoming"
+    #simulate = False
 
     event = Event.objects.get(id=id)
 
@@ -291,19 +297,27 @@ def test_OutMail_create_from_event_change(**kwargs):
     attachements = [mypath + '\\'+ f for f in listdir(mypath) if isfile(join(mypath, f))]
     #attachements = ['C:\\tmp\\a.jpeg']
     print(attachements)
+    print("Debug - target_type:", repr(target_type))
+    print("Debug - simulate:", type(simulate))
 
-    if target_type=='all':
-        print("target_type:all")
-        tgt = User.objects.filter(userprofileinfo__is_minor = False)
-        #tgt = User.objects.filter(email ="flavio.bortolan@gmail.com")
-    elif target_type == "event_partecipants":
-        print("target_type:event_partecipants")
-        tgt = event.partecipants.filter(userprofileinfo__is_minor = False)
+    try:
+        if target_type=='all':
+            print("target_type:all")
+            tgt = User.objects.filter(userprofileinfo__is_minor = False)
+            #tgt = User.objects.filter(email ="flavio.bortolan@gmail.com")
+        elif target_type == "event_partecipants":
+            print("target_type:event_partecipants")
+            tgt = event.partecipants.filter(userprofileinfo__is_minor = False)
 
 
-    else:
-        print("target_type:" + target_type)
-        return
+        else:
+            print("target_type:" + target_type)
+            print("invalid target type")
+
+            return
+    except:
+        print('exception:xxxxxxxxx')
+
 
     sent_list = []
     try:
@@ -318,10 +332,15 @@ def test_OutMail_create_from_event_change(**kwargs):
 
     delay = 5
 
+    print('xxxxxxxxxx')
+
     for user in tgt:
+
+        print("processing USER: " + user.email)
 
         skip = False
         simulate_ = simulate
+        print('!!!!simulate:'+str(simulate))
 
         if ( "folletto" in user.email ):
             skip = True
@@ -371,6 +390,7 @@ def test_OutMail_create_from_event_change(**kwargs):
 
             else:
                 print("simulating mail to :" + user.email)
+                print("simulate_:" + str(simulate_))
         else:
             print('SKIPPING sendig mail to:' + user.email)
 
@@ -582,10 +602,10 @@ def create_posts(**kwargs):
 
 
 import argparse
-
+#cd C:\Flavio\Software\Django\MyProjects\TravelsEtc
 #Examples:
-#python test.py --function create_posts --id 54
-#python test.py --function mail --id 55 --change_type 'event_incoming' --target_type 'all' --simulate True
+#python test.py --function create_posts --id 64
+#python test.py --function mail --id 62 --change_type event_incoming --target_type all --simulate True
 # Create your tests here.
 if __name__ == '__main__':
 
@@ -606,6 +626,9 @@ if __name__ == '__main__':
         create_posts( id = args.id, path="C:\\tmp\\posts\\", delta_meet_start=30)
 
     elif  args.function == "mail":
+
+        print("args:" + str(args))
+
         test_OutMail_create_from_event_change( id = args.id,\
                                                change_type=args.change_type,\
                                                target_type=args.target_type,\
